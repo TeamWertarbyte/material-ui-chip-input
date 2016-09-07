@@ -1,0 +1,41 @@
+{
+  "name": "material-ui-chip-input",
+  "version": "0.0.0",
+  "description": "A chip input field using Material-UI.",
+  "main": "lib/ChipInput.js",
+  "scripts": {
+    "build": "babel src -d lib",
+    "prepublish": "babel src -d lib",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TeamWertarbyte/material-ui-chip-input.git"
+  },
+  "keywords": [
+    "react",
+    "material",
+    "chip",
+    "input",
+    "tags"
+  ],
+  "author": "Wertarbyte <kontakt@wertarbyte.com> (https://wertarbyte.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TeamWertarbyte/material-ui-chip-input/issues"
+  },
+  "homepage": "https://github.com/TeamWertarbyte/material-ui-chip-input#readme",
+  "devDependencies": {
+    "babel-cli": "^6.14.0",
+    "babel-core": "^6.8.0",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-react": "^6.11.1",
+    "babel-preset-stage-0": "^6.5.0",
+    "@kadira/storybook": "^2.5.2"
+  },
+  "peerDependencies": {
+    "material-ui": "~0.15.4",
+    "react": "~15.3.1"
+  }
+}
