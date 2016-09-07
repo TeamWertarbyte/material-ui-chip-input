@@ -3,12 +3,12 @@
  *         Copyright (c) 2014 Call-Em-All (https://github.com/callemall/material-ui)
  */
 import React from 'react'
-import ReactDOM from 'react-dom'
 import TextFieldUnderline from 'material-ui/TextField/TextFieldUnderline'
 import TextFieldHint from 'material-ui/TextField/TextFieldHint'
+import AutoComplete from 'material-ui/AutoComplete/AutoComplete'
 import transitions from 'material-ui/styles/transitions'
 import Chip from 'material-ui/Chip'
-import {blue300, indigo900} from 'material-ui/styles/colors'
+import {blue300} from 'material-ui/styles/colors'
 
 const getStyles = (props, context, state) => {
   const {
@@ -39,8 +39,8 @@ const getStyles = (props, context, state) => {
     },
     input: {
       padding: 0,
-      marginTop: 8,
-      marginBottom: 16,
+      marginTop: 0,
+      marginBottom: 24,
       lineHeight: '32px',
       height: 32,
       position: 'relative',
@@ -89,7 +89,7 @@ class ChipInput extends React.Component {
     isClean: true,
     chips: [],
     focusedChip: null,
-    hasValue: false
+    inputValue: ''
   }
 
   constructor (props) {
@@ -119,17 +119,12 @@ class ChipInput extends React.Component {
   }
 
   getInputNode() {
-    return (this.props.children || this.props.multiLine) ?
-      this.input.getInputNode() : ReactDOM.findDOMNode(this.input);
+    return this.input;
   }
 
   handleInputBlur = (event) => {
     this.setState({isFocused: false});
     if (this.props.onBlur) this.props.onBlur(event);
-  }
-
-  handleInputChange = (event) => {
-    this.setState({ hasValue: event.target.value !== '' });
   }
 
   handleInputFocus = (event) => {
@@ -144,24 +139,7 @@ class ChipInput extends React.Component {
 
   handleKeyDown = (event) => {
     if (event.keyCode === 13) { // enter
-      const input = event.target.value
-      const chips = this.props.value || this.state.chips
-      if (input.trim().length > 0) {
-        if (chips.indexOf(input) === -1) {
-          if (this.props.value) {
-            if (this.props.onRequestAdd) {
-              this.props.onRequestAdd(input)
-            }
-          } else {
-            this.setState({ chips: [ ...chips, input ] })
-            if (this.props.onChange) {
-              this.props.onChange([ ...chips, input ])
-            }
-          }
-        }
-        this.setState({ hasValue: false })
-        event.target.value = ''
-      }
+      this.handleAddChip(event.target.value)
     } else if (event.keyCode === 8 || event.keyCode === 46) {
       if (event.target.value === '') {
         const chips = this.props.value || this.state.chips
@@ -196,6 +174,25 @@ class ChipInput extends React.Component {
     }
   }
 
+  handleAddChip (chip) {
+    const chips = this.props.value || this.state.chips
+
+    if (chip.trim().length > 0 && chips.indexOf(chip) === -1) {
+      if (this.props.value) {
+        if (this.props.onRequestAdd) {
+          this.props.onRequestAdd(chip)
+        }
+      } else {
+        this.setState({ chips: [ ...this.state.chips, chip ] })
+        if (this.props.onChange) {
+          this.props.onChange([ ...this.state.chips, chip ])
+        }
+      }
+
+      this.setState({ inputValue: '' })
+    }
+  }
+
   handleDeleteChip (chip) {
     if (this.props.value) {
       if (this.props.onRequestDelete) {
@@ -208,7 +205,9 @@ class ChipInput extends React.Component {
           chips,
           focusedChip: this.state.focusedChip === chip ? null : this.state.focusedChip
         })
-        this.props.onChange(chips)
+        if (this.props.onChange) {
+          this.props.onChange(chips)
+        }
       }
     }
   }
@@ -234,6 +233,7 @@ class ChipInput extends React.Component {
       underlineStyle,
       defaultValue = [],
       value,
+      dataSource,
       ...other,
     } = this.props;
 
@@ -241,7 +241,6 @@ class ChipInput extends React.Component {
       ref: (elem) => this.input = elem,
       disabled: this.props.disabled,
       onBlur: this.handleInputBlur,
-      onChange: this.handleInputChange,
       onFocus: this.handleInputFocus,
       onKeyDown: this.handleKeyDown
     }
@@ -270,17 +269,29 @@ class ChipInput extends React.Component {
         {hintText ?
           <TextFieldHint
             muiTheme={this.context.muiTheme}
-            show={(this.state.chips || this.props.chips).length === 0 && !this.state.hasValue}
+            show={(this.props.value || this.state.chips).length === 0 && this.state.inputValue.length === 0}
             style={Object.assign({ bottom: 20, pointerEvents: 'none' }, hintStyle)}
             text={hintText}
           /> :
           null
         }
-        <input
+        <AutoComplete
           {...other}
           {...inputProps}
-          style={prepareStyles(inputStyleMerged)}
-          type="text"
+          style={inputStyleMerged}
+          dataSource={dataSource || []}
+          menuProps={{
+            onChange: (event, input) => {
+              setTimeout(() => this.focus())
+              setTimeout(() => {
+                this.handleAddChip(input)
+                this.setState({ inputValue: '' })
+              }, (other.menuCloseDelay || 300) + 10) // menuCloseDelay + 10
+            }
+          }}
+          searchText={this.state.inputValue}
+          underlineShow={false}
+          onKeyUp={(event) => this.setState({ inputValue: event.target.value })}
         />
         <TextFieldUnderline
           disabled={disabled}

@@ -32,6 +32,16 @@ storiesOf('ChipInput', module)
       />
     </MuiThemeProvider>
   ))
+  .add('with auto complete', () => (
+    <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+      <ChipInput
+        defaultValue={['foo', 'bar']}
+        style={{ width: '100%' }}
+        dataSource={['alpha', 'beta']}
+        hintText="Try typing a..."
+      />
+    </MuiThemeProvider>
+  ))
   .add('controlled input', () => (
     <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
       <ControlledChipInput />
