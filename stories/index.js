@@ -42,6 +42,16 @@ storiesOf('ChipInput', module)
       />
     </MuiThemeProvider>
   ))
+  .add('with floating label', () => (
+    <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+      <ChipInput
+        defaultValue={['foo', 'bar']}
+        floatingLabelText="Some chips"
+        hintText="Try typing a..."
+        style={{ width: '100%' }}
+      />
+    </MuiThemeProvider>
+  ))
   .add('controlled input', () => (
     <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
       <ControlledChipInput />

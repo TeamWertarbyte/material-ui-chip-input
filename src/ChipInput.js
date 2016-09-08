@@ -5,6 +5,7 @@
 import React from 'react'
 import TextFieldUnderline from 'material-ui/TextField/TextFieldUnderline'
 import TextFieldHint from 'material-ui/TextField/TextFieldHint'
+import TextFieldLabel from 'material-ui/TextField/TextFieldLabel'
 import AutoComplete from 'material-ui/AutoComplete/AutoComplete'
 import transitions from 'material-ui/styles/transitions'
 import Chip from 'material-ui/Chip'
@@ -29,7 +30,6 @@ const getStyles = (props, context, state) => {
       fontSize: 16,
       lineHeight: '24px',
       width: props.fullWidth ? '100%' : 256,
-      height: (props.rows - 1) * 24 + (props.floatingLabelText ? 72 : 48),
       display: 'inline-block',
       position: 'relative',
       backgroundColor: backgroundColor,
@@ -54,15 +54,27 @@ const getStyles = (props, context, state) => {
       appearance: 'textfield', // Improve type search style.
       WebkitTapHighlightColor: 'rgba(0,0,0,0)', // Remove mobile color flashing (deprecated style).
       float: 'left',
+    },
+    floatingLabel: {
+      color: hintColor,
+      pointerEvents: 'none',
+      top: 28
+    },
+    floatingLabelFocusStyle: {
+      transform: 'scale(0.75) translate(0, -36px)'
     }
   };
 
+  if (state.hasValue) {
+    styles.floatingLabel.color = fade(props.disabled ? disabledTextColor : floatingLabelColor, 0.5);
+  }
+
+  if (state.isFocused) {
+    styles.floatingLabel.color = focusColor;
+  }
+
   if (props.floatingLabelText) {
     styles.input.boxSizing = 'border-box';
-
-    if (!props.multiLine) {
-      styles.input.marginTop = 14;
-    }
 
     if (state.errorText) {
       styles.error.bottom = !props.multiLine ? styles.error.fontSize + 3 : 3;
@@ -97,6 +109,18 @@ class ChipInput extends React.Component {
     if (props.defaultValue) {
       this.state.chips = props.defaultValue
     }
+  }
+
+  componentWillMount() {
+    const {
+      name,
+      hintText,
+      floatingLabelText
+    } = this.props;
+
+    const uniqueId = `${name}-${hintText}-${floatingLabelText}-${
+      Math.floor(Math.random() * 0xFFFF)}`;
+    this.uniqueId = uniqueId.replace(/[^A-Za-z0-9-]/gi, '');
   }
 
   blur() {
@@ -234,10 +258,19 @@ class ChipInput extends React.Component {
       defaultValue = [],
       value,
       dataSource,
+      floatingLabelFixed,
+      floatingLabelFocusStyle, // eslint-disable-line no-unused-vars
+      floatingLabelStyle, // eslint-disable-line no-unused-vars
+      floatingLabelText,
       ...other,
     } = this.props;
 
+    const {prepareStyles} = this.context.muiTheme;
+    const styles = getStyles(this.props, this.context, this.state);
+    const inputId = this.uniqueId;
+
     const inputProps = {
+      id: inputId,
       ref: (elem) => this.input = elem,
       disabled: this.props.disabled,
       onBlur: this.handleInputBlur,
@@ -245,31 +278,49 @@ class ChipInput extends React.Component {
       onKeyDown: this.handleKeyDown
     }
 
-    const styles = getStyles(this.props, this.context, this.state);
-    const {prepareStyles} = this.context.muiTheme;
     const inputStyleMerged = Object.assign(styles.input, inputStyle);
+
+    const showHintText = hintText && (this.props.value || this.state.chips).length === 0 && this.state.inputValue.length === 0
+
+    const floatingLabelTextElement = floatingLabelText && (
+      <TextFieldLabel
+        muiTheme={this.context.muiTheme}
+        style={Object.assign(styles.floatingLabel, this.props.floatingLabelStyle)}
+        shrinkStyle={Object.assign(styles.floatingLabelFocusStyle, this.props.floatingLabelFocusStyle)}
+        htmlFor={inputId}
+        shrink={!showHintText || this.state.isFocused}
+        disabled={disabled}
+      >
+        {floatingLabelText}
+      </TextFieldLabel>
+    )
+
+    const shrinkFloatingLabel = floatingLabelText && (!showHintText || this.state.isFocused)
 
     return (
       <div
         style={prepareStyles(Object.assign(styles.root, style))}
         onTouchTap={() => this.focus()}
       >
-      <div>
-        {(this.props.value || this.state.chips).map((tag) => (
-          <Chip
-            style={{ margin: '8px 8px 0 0', float: 'left' }}
-            backgroundColor={this.state.focusedChip === tag ? blue300 : null}
-            onTouchTap={() => { this.setState({ focusedChip: tag }) }}
-            onRequestDelete={() => this.handleDeleteChip(tag)}
-          >
-            {tag}
-          </Chip>
-        ))}
+        <div>
+          {floatingLabelTextElement}
+          <div style={{ marginTop: floatingLabelText ? 12 : 0 }}>
+            {(this.props.value || this.state.chips).map((tag) => (
+              <Chip
+                style={{ margin: '8px 8px 0 0', float: 'left' }}
+                backgroundColor={this.state.focusedChip === tag ? blue300 : null}
+                onTouchTap={() => { this.setState({ focusedChip: tag }) }}
+                onRequestDelete={() => this.handleDeleteChip(tag)}
+              >
+                {tag}
+              </Chip>
+            ))}
+          </div>
         </div>
         {hintText ?
           <TextFieldHint
             muiTheme={this.context.muiTheme}
-            show={(this.props.value || this.state.chips).length === 0 && this.state.inputValue.length === 0}
+            show={showHintText && !(floatingLabelText && !this.state.isFocused)}
             style={Object.assign({ bottom: 20, pointerEvents: 'none' }, hintStyle)}
             text={hintText}
           /> :
