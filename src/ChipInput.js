@@ -299,7 +299,7 @@ class ChipInput extends React.Component {
 
     return (
       <div
-        style={prepareStyles(Object.assign(styles.root, style))}
+        style={prepareStyles(Object.assign(styles.root, style, { marginTop: floatingLabelText ? 14 : undefined }))}
         onTouchTap={() => this.focus()}
       >
         <div>
