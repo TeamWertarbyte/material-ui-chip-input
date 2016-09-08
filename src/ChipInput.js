@@ -10,6 +10,7 @@ import AutoComplete from 'material-ui/AutoComplete/AutoComplete'
 import transitions from 'material-ui/styles/transitions'
 import Chip from 'material-ui/Chip'
 import {blue300} from 'material-ui/styles/colors'
+import {fade} from 'material-ui/utils/colorManipulator';
 
 const getStyles = (props, context, state) => {
   const {
@@ -65,7 +66,8 @@ const getStyles = (props, context, state) => {
     }
   };
 
-  if (state.hasValue) {
+  const hasValue = (props.value || state.chips).length > 0 || state.inputValue.length > 0
+  if (hasValue) {
     styles.floatingLabel.color = fade(props.disabled ? disabledTextColor : floatingLabelColor, 0.5);
   }
 
