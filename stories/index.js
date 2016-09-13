@@ -52,6 +52,14 @@ storiesOf('ChipInput', module)
       fullWidth
     />
   ))
+  .add('disabled', () => themed(
+    <ChipInput
+      defaultValue={['foo', 'bar']}
+      floatingLabelText="Disabled input"
+      disabled
+      fullWidth
+    />
+  ))
   .add('controlled input', () => themed(
     <ControlledChipInput />
-  ));
+  ))

@@ -125,6 +125,12 @@ class ChipInput extends React.Component {
     this.uniqueId = uniqueId.replace(/[^A-Za-z0-9-]/gi, '');
   }
 
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.disabled) {
+      this.setState({ focusedChip: null })
+    }
+  }
+
   blur() {
     if (this.input) this.getInputNode().blur();
   }
@@ -301,7 +307,7 @@ class ChipInput extends React.Component {
 
     return (
       <div
-        style={prepareStyles(Object.assign(styles.root, style, { marginTop: floatingLabelText ? 14 : undefined, width: fullWidth ? '100%' : undefined }))}
+        style={prepareStyles(Object.assign(styles.root, style, { marginTop: floatingLabelText ? 14 : undefined, width: fullWidth ? '100%' : undefined, cursor: disabled ? 'not-allowed' : undefined }))}
         onTouchTap={() => this.focus()}
       >
         <div>
@@ -309,7 +315,7 @@ class ChipInput extends React.Component {
           <div style={{ marginTop: floatingLabelText ? 12 : 0 }}>
             {(this.props.value || this.state.chips).map((tag) => (
               <Chip
-                style={{ margin: '8px 8px 0 0', float: 'left' }}
+                style={{ margin: '8px 8px 0 0', float: 'left', pointerEvents: disabled ? 'none' : undefined }}
                 backgroundColor={this.state.focusedChip === tag ? blue300 : null}
                 onTouchTap={() => { this.setState({ focusedChip: tag }) }}
                 onRequestDelete={() => this.handleDeleteChip(tag)}
