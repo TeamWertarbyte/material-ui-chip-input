@@ -3,10 +3,6 @@ This project provides a [chip input field][chipspec] for [Material-UI][mui]. It 
 
 ![Demo](demo.gif)
 
-[chipspec]: https://material.google.com/components/chips.html#chips-behavior
-[mui]: http://www.material-ui.com/#/
-[angular-chips]: https://material.angularjs.org/latest/demo/chips
-
 ## Installation
 ```shell
 npm i --save material-ui-chip-input
@@ -33,10 +29,30 @@ import ChipInput from 'material-ui-chip-input'
 ```
 
 ## Properties
-Coming _very_ soon.
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| style | `object` | | Override the inline-styles of the root element. |
+| floatingLabelText | `node` | | The content of the floating label. |
+| hintText | `node` | | The hint text to display. |
+| disabled | `bool` | `false` | Disables the chip input if set to true. |
+| defaultValue | `string[]` | | The chips to display by default (for uncontrolled mode). |
+| onChange | `function` | | Callback function that is called when the chips change (in uncontrolled mode). |
+| value | `string[]` | | The chips to display (enables controlled mode if set). |
+| onRequestAdd | `function` | | Callback function that is called when a new chip was added (in controlled mode). |
+| onRequestDelete | `function` | | Callback function that is called when a new chip was removed (in controlled mode). |
+| dataSource | `array` | | Data source for auto complete. |
+| onUpdateInput | `function` | | Callback function that is called when the input changes (useful for auto complete). |
+
+Additionally, most other properties of Material UI's [Auto Complete][mui-auto-complete] and [Text Field][mui-text-field] should be supported. Please open an issue if something is missing or does not work as expected.
 
 ## Credits
-The code for the input component was adapted from Material UI's `TextField` that we all know and love.
+The code for the input component was adapted from Material UI's [Auto Complete][mui-auto-complete] and [Text Field][mui-text-field] that we all know and love.
 
 ## License
-The scripts included in this repository are licensed under the MIT.
+The files included in this repository are licensed under the MIT license.
+
+[chipspec]: https://material.google.com/components/chips.html#chips-behavior
+[mui]: http://www.material-ui.com/#/
+[angular-chips]: https://material.angularjs.org/latest/demo/chips
+[mui-text-field]: http://www.material-ui.com/#/components/text-field
+[mui-auto-complete]: http://www.material-ui.com/#/components/auto-complete
