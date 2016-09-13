@@ -38,7 +38,6 @@ storiesOf('ChipInput', module)
   ))
   .add('with auto complete', () => themed(
     <ChipInput
-      defaultValue={['foo', 'bar']}
       fullWidth
       dataSource={['alpha', 'beta']}
       hintText="Try typing a..."
