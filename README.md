@@ -3,6 +3,8 @@ This project provides a [chip input field][chipspec] for [Material-UI][mui]. It 
 
 ![Demo](demo.gif)
 
+If you want to try the component yourself instead of watching a gif, head over to [the storybook][gh-pages] for a live demo!
+
 ## Installation
 ```shell
 npm i --save material-ui-chip-input
@@ -56,3 +58,4 @@ The files included in this repository are licensed under the MIT license.
 [angular-chips]: https://material.angularjs.org/latest/demo/chips
 [mui-text-field]: http://www.material-ui.com/#/components/text-field
 [mui-auto-complete]: http://www.material-ui.com/#/components/auto-complete
+[gh-pages]: https://teamwertarbyte.github.io/material-ui-chip-input/
