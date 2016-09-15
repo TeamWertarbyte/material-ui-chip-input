@@ -317,6 +317,7 @@ class ChipInput extends React.Component {
           <div style={{ marginTop: floatingLabelText ? 12 : 0 }}>
             {(this.props.value || this.state.chips).map((tag) => (
               <Chip
+                key={tag}
                 style={{ margin: '8px 8px 0 0', float: 'left', pointerEvents: disabled ? 'none' : undefined }}
                 backgroundColor={this.state.focusedChip === tag ? blue300 : null}
                 onTouchTap={() => { this.setState({ focusedChip: tag }) }}
