@@ -30,9 +30,9 @@ storiesOf('ChipInput', module)
       fullWidth
     />
   ))
-  .add('empty with hintText', () => themed(
+  .add('with hintText', () => themed(
     <ChipInput
-      hintText="Insert your favorite tags here"
+      hintText="Hint text"
       fullWidth
     />
   ))
@@ -45,9 +45,14 @@ storiesOf('ChipInput', module)
   ))
   .add('with floating label', () => themed(
     <ChipInput
-      defaultValue={['foo', 'bar']}
-      floatingLabelText="Some chips"
-      hintText="Try typing a..."
+      floatingLabelText="Floating label"
+      fullWidth
+    />
+  ))
+  .add('with floating label and hint text', () => themed(
+    <ChipInput
+      floatingLabelText="Floating label"
+      hintText="Hint text"
       fullWidth
     />
   ))

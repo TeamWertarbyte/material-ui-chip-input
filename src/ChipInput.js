@@ -290,7 +290,9 @@ class ChipInput extends React.Component {
 
     const inputStyleMerged = Object.assign(styles.input, inputStyle);
 
-    const showHintText = hintText && (this.props.value || this.state.chips).length === 0 && this.state.inputValue.length === 0
+    const hasInput = (this.props.value || this.state.chips).length > 0 || this.state.inputValue.length > 0
+    const showHintText = hintText && !hasInput
+    const shrinkFloatingLabel = floatingLabelText && (hasInput || this.state.isFocused)
 
     const floatingLabelTextElement = floatingLabelText && (
       <TextFieldLabel
@@ -298,14 +300,12 @@ class ChipInput extends React.Component {
         style={Object.assign(styles.floatingLabel, this.props.floatingLabelStyle)}
         shrinkStyle={Object.assign(styles.floatingLabelFocusStyle, this.props.floatingLabelFocusStyle)}
         htmlFor={inputId}
-        shrink={!showHintText || this.state.isFocused}
+        shrink={shrinkFloatingLabel}
         disabled={disabled}
       >
         {floatingLabelText}
       </TextFieldLabel>
     )
-
-    const shrinkFloatingLabel = floatingLabelText && (!showHintText || this.state.isFocused)
 
     const overrideRootStyles = {}
     if (floatingLabelText) {
@@ -320,7 +320,7 @@ class ChipInput extends React.Component {
 
     return (
       <div
-        style={prepareStyles(Object.assign({}, styles.root, style, overrideRootStyles))}
+        style={prepareStyles(Object.assign(styles.root, style, overrideRootStyles))}
         onTouchTap={() => this.focus()}
       >
         <div>
