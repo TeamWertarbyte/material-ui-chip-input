@@ -2,7 +2,7 @@
  * Notice: Some code was adapted from Material-UI's text field.
  *         Copyright (c) 2014 Call-Em-All (https://github.com/callemall/material-ui)
  */
-import React from 'react'
+import React, { PropTypes } from 'react'
 import TextFieldUnderline from 'material-ui/TextField/TextFieldUnderline'
 import TextFieldHint from 'material-ui/TextField/TextFieldHint'
 import TextFieldLabel from 'material-ui/TextField/TextFieldLabel'
@@ -270,6 +270,8 @@ class ChipInput extends React.Component {
       floatingLabelFocusStyle, // eslint-disable-line no-unused-vars
       floatingLabelStyle, // eslint-disable-line no-unused-vars
       floatingLabelText,
+      onRequestAdd, // eslint-disable-line no-unused-vars
+      onRequestDelete, // eslint-disable-line no-unused-vars
       ...other,
     } = this.props;
 
@@ -368,8 +370,17 @@ class ChipInput extends React.Component {
 }
 
 ChipInput.propTypes = {
-  children: React.PropTypes.string.isRequired,
-  onClick: React.PropTypes.func,
+  style: PropTypes.object,
+  floatingLabelText: PropTypes.node,
+  hintText: PropTypes.node,
+  disabled: PropTypes.bool,
+  defaultValue: PropTypes.arrayOf(PropTypes.string),
+  onChange: PropTypes.func,
+  value: PropTypes.arrayOf(PropTypes.string),
+  onRequestAdd: PropTypes.func,
+  onRequestDelete: PropTypes.func,
+  dataSource: PropTypes.arrayOf(PropTypes.string),
+  onUpdateInput: PropTypes.func,
 }
 
 export default ChipInput
