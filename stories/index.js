@@ -59,6 +59,13 @@ storiesOf('ChipInput', module)
       fullWidth
     />
   ))
+  .add('with custom width', () => themed(
+    <ChipInput
+      defaultValue={['foo', 'bar']}
+      floatingLabelText="A chip input with a width of 321px"
+      style={{ width: 321 }}
+    />
+  ))
   .add('controlled input', () => themed(
     <ControlledChipInput />
   ))

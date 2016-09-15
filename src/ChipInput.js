@@ -307,9 +307,20 @@ class ChipInput extends React.Component {
 
     const shrinkFloatingLabel = floatingLabelText && (!showHintText || this.state.isFocused)
 
+    const overrideRootStyles = {}
+    if (floatingLabelText) {
+      overrideRootStyles.marginTop = 14
+    }
+    if (fullWidth) {
+      overrideRootStyles.width = '100%'
+    }
+    if (disabled) {
+      overrideRootStyles.cursor = 'not-allowed'
+    }
+
     return (
       <div
-        style={prepareStyles(Object.assign(styles.root, style, { marginTop: floatingLabelText ? 14 : undefined, width: fullWidth ? '100%' : undefined, cursor: disabled ? 'not-allowed' : undefined }))}
+        style={prepareStyles(Object.assign({}, styles.root, style, overrideRootStyles))}
         onTouchTap={() => this.focus()}
       >
         <div>
