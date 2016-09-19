@@ -43,7 +43,7 @@ storiesOf('ChipInput', module)
       hintText="Try typing a..."
     />
   ))
-  .addWithInfo('with auto complete, open on focus',``, () => themed(
+  .add('with auto complete, open on focus', () => themed(
     <ChipInput
       fullWidth
       openOnFocus
