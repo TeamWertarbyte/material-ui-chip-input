@@ -318,6 +318,9 @@ class ChipInput extends React.Component {
       overrideRootStyles.cursor = 'not-allowed'
     }
 
+    const chips = this.props.value || this.state.chips
+    const autoCompleteData = (dataSource || []).filter((value) => chips.indexOf(value) < 0)
+
     return (
       <div
         style={prepareStyles(Object.assign(styles.root, style, overrideRootStyles))}
@@ -326,7 +329,7 @@ class ChipInput extends React.Component {
         <div>
           {floatingLabelTextElement}
           <div style={{ marginTop: floatingLabelText ? 12 : 0 }}>
-            {(this.props.value || this.state.chips).map((tag) => (
+            {chips.map((tag) => (
               <Chip
                 key={tag}
                 style={{ margin: '8px 8px 0 0', float: 'left', pointerEvents: disabled ? 'none' : undefined }}
@@ -352,7 +355,7 @@ class ChipInput extends React.Component {
           {...other}
           {...inputProps}
           style={inputStyleMerged}
-          dataSource={dataSource || []}
+          dataSource={autoCompleteData}
           menuProps={{
             onChange: (event, input) => {
               setTimeout(() => this.focus())
