@@ -44,6 +44,7 @@ import ChipInput from 'material-ui-chip-input'
 | onRequestDelete | `function` | | Callback function that is called when a new chip was removed (in controlled mode). |
 | dataSource | `array` | | Data source for auto complete. |
 | onUpdateInput | `function` | | Callback function that is called when the input changes (useful for auto complete). |
+| openOnFocus | `bool` | `false` | Opens the auto complete list on focus if set to true. |
 
 Additionally, most other properties of Material UI's [Auto Complete][mui-auto-complete] and [Text Field][mui-text-field] should be supported. Please open an issue if something is missing or does not work as expected.
 

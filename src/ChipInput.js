@@ -396,6 +396,7 @@ ChipInput.propTypes = {
   onRequestDelete: PropTypes.func,
   dataSource: PropTypes.arrayOf(PropTypes.string),
   onUpdateInput: PropTypes.func,
+  openOnFocus: PropTypes.bool
 }
 
 export default ChipInput

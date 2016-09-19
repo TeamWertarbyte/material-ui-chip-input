@@ -43,6 +43,15 @@ storiesOf('ChipInput', module)
       hintText="Try typing a..."
     />
   ))
+  .addWithInfo('with auto complete, open on focus',``, () => themed(
+    <ChipInput
+      fullWidth
+      openOnFocus
+      dataSource={['alpha', 'beta']}
+      hintText="Try typing a..."
+      filter={(search, key) => search === '' || key.indexOf(search) >= 0}
+    />
+  ))
   .add('with floating label', () => themed(
     <ChipInput
       floatingLabelText="Floating label"
