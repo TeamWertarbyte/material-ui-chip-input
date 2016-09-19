@@ -360,8 +360,8 @@ class ChipInput extends React.Component {
             onChange: (event, input) => {
               setTimeout(() => this.focus())
               setTimeout(() => {
+                this.setState({ inputValue: ' ' }) // fix input value not being removed when using some filters
                 this.handleAddChip(input)
-                this.setState({ inputValue: '' })
               }, (other.menuCloseDelay || 300) + 10) // menuCloseDelay + 10
             }
           }}
