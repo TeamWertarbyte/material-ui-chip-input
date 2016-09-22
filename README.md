@@ -45,6 +45,7 @@ import ChipInput from 'material-ui-chip-input'
 | dataSource | `array` | | Data source for auto complete. |
 | onUpdateInput | `function` | | Callback function that is called when the input changes (useful for auto complete). |
 | openOnFocus | `bool` | `false` | Opens the auto complete list on focus if set to true. |
+| chipRenderer | 'function' | | A function of the type `({ value, isFocused, isDisabled, handleClick, handleRequestDelete }, key) => node` that returns a chip based on the given properties. This can be used to customize chip styles. |
 
 Additionally, most other properties of Material UI's [Auto Complete][mui-auto-complete] and [Text Field][mui-text-field] should be supported. Please open an issue if something is missing or does not work as expected.
 

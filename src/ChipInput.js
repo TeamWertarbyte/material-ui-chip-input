@@ -10,7 +10,7 @@ import AutoComplete from 'material-ui/AutoComplete/AutoComplete'
 import transitions from 'material-ui/styles/transitions'
 import Chip from 'material-ui/Chip'
 import {blue300} from 'material-ui/styles/colors'
-import {fade} from 'material-ui/utils/colorManipulator';
+import {fade} from 'material-ui/utils/colorManipulator'
 
 const getStyles = (props, context, state) => {
   const {
@@ -91,6 +91,18 @@ const getStyles = (props, context, state) => {
 
   return styles;
 };
+
+const defaultChipRenderer = ({ value, isFocused, isDisabled, handleClick, handleRequestDelete }, key) => (
+  <Chip
+    key={key}
+    style={{ margin: '8px 8px 0 0', float: 'left', pointerEvents: isDisabled ? 'none' : undefined }}
+    backgroundColor={isFocused ? blue300 : null}
+    onTouchTap={handleClick}
+    onRequestDelete={handleRequestDelete}
+  >
+    {value}
+  </Chip>
+)
 
 class ChipInput extends React.Component {
   static contextTypes = {
@@ -272,6 +284,7 @@ class ChipInput extends React.Component {
       floatingLabelText,
       onRequestAdd, // eslint-disable-line no-unused-vars
       onRequestDelete, // eslint-disable-line no-unused-vars
+      chipRenderer = defaultChipRenderer,
       ...other,
     } = this.props;
 
@@ -333,17 +346,14 @@ class ChipInput extends React.Component {
         <div>
           {floatingLabelTextElement}
           <div style={{ marginTop: floatingLabelText ? 12 : 0 }}>
-            {chips.map((tag) => (
-              <Chip
-                key={tag}
-                style={{ margin: '8px 8px 0 0', float: 'left', pointerEvents: disabled ? 'none' : undefined }}
-                backgroundColor={this.state.focusedChip === tag ? blue300 : null}
-                onTouchTap={() => { this.setState({ focusedChip: tag }) }}
-                onRequestDelete={() => this.handleDeleteChip(tag)}
-              >
-                {tag}
-              </Chip>
-            ))}
+            {chips.map((tag, i) => chipRenderer({
+              value: tag,
+              isDisabled: disabled,
+              isFocused: this.state.focusedChip === tag,
+              value: tag,
+              handleClick: () => this.setState({ focusedChip: tag }),
+              handleRequestDelete: () => this.handleDeleteChip(tag)
+            }, i))}
           </div>
         </div>
         {hintText ?
@@ -400,7 +410,8 @@ ChipInput.propTypes = {
   onRequestDelete: PropTypes.func,
   dataSource: PropTypes.arrayOf(PropTypes.string),
   onUpdateInput: PropTypes.func,
-  openOnFocus: PropTypes.bool
+  openOnFocus: PropTypes.bool,
+  chipRenderer: PropTypes.func
 }
 
 export default ChipInput
