@@ -49,7 +49,6 @@ storiesOf('ChipInput', module)
       openOnFocus
       dataSource={['alpha', 'beta']}
       hintText="Try typing a..."
-      filter={(search, key) => search === '' || key.indexOf(search) >= 0}
     />
   ))
   .add('with floating label', () => themed(

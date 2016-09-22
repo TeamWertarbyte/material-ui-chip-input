@@ -321,6 +321,10 @@ class ChipInput extends React.Component {
     const chips = this.props.value || this.state.chips
     const autoCompleteData = (dataSource || []).filter((value) => chips.indexOf(value) < 0)
 
+    if (other.openOnFocus) {
+      other.filter = (search, key) => search === '' || key.indexOf(search) >= 0
+    }
+
     return (
       <div
         style={prepareStyles(Object.assign(styles.root, style, overrideRootStyles))}
