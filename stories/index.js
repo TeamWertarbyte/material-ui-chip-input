@@ -24,6 +24,7 @@ storiesOf('ChipInput', module)
     <ChipInput
       defaultValue={['foo', 'bar']}
       fullWidth
+      onChange={action('onChange')}
     />
   ))
   .add('with many chips', () => themed(

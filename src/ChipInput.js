@@ -137,6 +137,36 @@ class ChipInput extends React.Component {
     this.uniqueId = uniqueId.replace(/[^A-Za-z0-9-]/gi, '');
   }
 
+  componentDidMount() {
+    const handleKeyDown = this.autoComplete.handleKeyDown
+    this.autoComplete.handleKeyDown = (event) => {
+      if (event.keyCode === 13) {
+        this.handleAddChip(event.target.value)
+        this.autoComplete.setState({ searchText: '' })
+        this.autoComplete.forceUpdate()
+      } else {
+        handleKeyDown(event)
+      }
+    }
+
+    this.autoComplete.handleItemTouchTap = (event, child) => {
+      const dataSource = this.autoComplete.props.dataSource;
+
+      const index = parseInt(child.key, 10);
+      const chosenRequest = dataSource[index];
+      const searchText = this.autoComplete.chosenRequestText(chosenRequest);
+  
+  
+      this.autoComplete.setState({
+        searchText: '',
+      });
+      this.autoComplete.forceUpdate()
+      this.autoComplete.close()
+
+      setTimeout(() => this.focus(), 1)
+    }
+  }
+
   componentWillReceiveProps (nextProps) {
     if (nextProps.disabled) {
       this.setState({ focusedChip: null })
@@ -148,7 +178,7 @@ class ChipInput extends React.Component {
   }
 
   focus() {
-    if (this.input) this.getInputNode().focus();
+    if (this.autoComplete) this.getInputNode().focus();
     if (this.state.focusedChip) {
       this.setState({ focusedChip: null })
     }
@@ -163,7 +193,7 @@ class ChipInput extends React.Component {
   }
 
   getInputNode() {
-    return this.input;
+    return this.autoComplete.refs.searchTextField.getInputNode();
   }
 
   handleInputBlur = (event) => {
@@ -232,8 +262,6 @@ class ChipInput extends React.Component {
           this.props.onChange([ ...this.state.chips, chip ])
         }
       }
-
-      this.setState({ inputValue: '' })
     }
   }
 
@@ -371,17 +399,12 @@ class ChipInput extends React.Component {
           style={inputStyleMerged}
           dataSource={autoCompleteData}
           menuProps={{
-            onChange: (event, input) => {
-              setTimeout(() => this.focus())
-              setTimeout(() => {
-                this.setState({ inputValue: ' ' }) // fix input value not being removed when using some filters
-                this.handleAddChip(input)
-              }, (other.menuCloseDelay || 300) + 10) // menuCloseDelay + 10
-            }
+            onChange: (event, input) => this.handleAddChip(input)
           }}
           searchText={this.state.inputValue}
           underlineShow={false}
           onKeyUp={(event) => this.setState({ inputValue: event.target.value })}
+          ref={(ref) => this.autoComplete = ref}
         />
         <TextFieldUnderline
           disabled={disabled}
