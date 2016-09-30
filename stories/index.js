@@ -5,6 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import Avatar from 'material-ui/Avatar'
 import Chip from 'material-ui/Chip'
+import AutoComplete from 'material-ui/AutoComplete'
 import {green800, green300} from 'material-ui/styles/colors'
 import ChipInput from '../src/ChipInput'
 import ControlledChipInput from './ControlledChipInput'
@@ -53,6 +54,15 @@ storiesOf('ChipInput', module)
       openOnFocus
       dataSource={['alpha', 'beta']}
       hintText="Try typing a..."
+    />
+  ))
+  .add('with auto complete, custom filter, open on focus', () => themed(
+    <ChipInput
+      fullWidth
+      openOnFocus
+      filter={AutoComplete.fuzzyFilter}
+      dataSource={['alpha', 'beta']}
+      hintText="Try typing apha..."
     />
   ))
   .add('with floating label', () => themed(

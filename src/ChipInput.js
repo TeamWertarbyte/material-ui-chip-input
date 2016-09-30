@@ -304,6 +304,7 @@ class ChipInput extends React.Component {
       underlineShow,
       underlineStyle,
       defaultValue = [],
+      filter,
       value,
       dataSource,
       floatingLabelFixed,
@@ -362,9 +363,7 @@ class ChipInput extends React.Component {
     const chips = this.props.value || this.state.chips
     const autoCompleteData = (dataSource || []).filter((value) => chips.indexOf(value) < 0)
 
-    if (other.openOnFocus) {
-      other.filter = (search, key) => search === '' || key.indexOf(search) >= 0
-    }
+    const actualFilter = other.openOnFocus ? (search, key) => (search === '' || filter(search, key)) : filter
 
     return (
       <div
@@ -378,7 +377,6 @@ class ChipInput extends React.Component {
               value: tag,
               isDisabled: disabled,
               isFocused: this.state.focusedChip === tag,
-              value: tag,
               handleClick: () => this.setState({ focusedChip: tag }),
               handleRequestDelete: () => this.handleDeleteChip(tag)
             }, i))}
@@ -396,6 +394,7 @@ class ChipInput extends React.Component {
         <AutoComplete
           {...other}
           {...inputProps}
+          filter={actualFilter}
           style={inputStyleMerged}
           dataSource={autoCompleteData}
           menuProps={{
@@ -435,6 +434,10 @@ ChipInput.propTypes = {
   onUpdateInput: PropTypes.func,
   openOnFocus: PropTypes.bool,
   chipRenderer: PropTypes.func
+}
+
+ChipInput.defaultProps = {
+  filter: AutoComplete.caseInsensitiveFilter
 }
 
 export default ChipInput
