@@ -155,8 +155,8 @@ class ChipInput extends React.Component {
       const index = parseInt(child.key, 10);
       const chosenRequest = dataSource[index];
       const searchText = this.autoComplete.chosenRequestText(chosenRequest);
-  
-  
+
+
       this.autoComplete.setState({
         searchText: '',
       });
@@ -397,6 +397,7 @@ class ChipInput extends React.Component {
           {...other}
           {...inputProps}
           style={inputStyleMerged}
+          fullWidth={fullWidth}
           dataSource={autoCompleteData}
           menuProps={{
             onChange: (event, input) => this.handleAddChip(input)
