@@ -193,12 +193,14 @@ class ChipInput extends React.Component {
   }
 
   getInputNode() {
-    return this.autoComplete.refs.searchTextField.getInputNode();
+    return this.autoComplete.refs.searchTextField.getInputNode()
   }
 
   handleInputBlur = (event) => {
-    this.setState({isFocused: false});
-    if (this.props.onBlur) this.props.onBlur(event);
+    if (!this.autoComplete.refs.menu) {
+      this.setState({ isFocused: false, inputValue: '' })
+      if (this.props.onBlur) this.props.onBlur(event)
+    }
   }
 
   handleInputFocus = (event) => {
