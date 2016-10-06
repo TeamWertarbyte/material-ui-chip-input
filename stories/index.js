@@ -114,3 +114,23 @@ storiesOf('ChipInput', module)
   .add('controlled input', () => themed(
     <ControlledChipInput />
   ))
+  .add('uncontrolled verbose log', () => themed(
+    <ChipInput
+      defaultValue={['foo', 'bar']}
+      onChange={action('onChange')}
+      onUpdateInput={action('onUpdateInput')}
+      onRequestDelete={action('onRequestDelete')}
+      onRequestAdd={action('onRequestAdd')}
+      onTouchTap={action('onTouchTap')}
+    />
+  ))
+  .add('controlled verbose log', () => themed(
+    <ChipInput
+      value={['foo', 'bar']}
+      onChange={action('onChange')}
+      onUpdateInput={action('onUpdateInput')}
+      onRequestDelete={action('onRequestDelete')}
+      onRequestAdd={action('onRequestAdd')}
+      onTouchTap={action('onTouchTap')}
+    />
+  ))
