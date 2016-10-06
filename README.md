@@ -42,7 +42,7 @@ import ChipInput from 'material-ui-chip-input'
 | onChange | `function` | | Callback function that is called when the chips change (in uncontrolled mode). |
 | onRequestAdd | `function` | | Callback function that is called when a new chip was added (in controlled mode). |
 | onRequestDelete | `function` | | Callback function that is called when a new chip was removed (in controlled mode). |
-| onTouchTap | `function` | | Callback function that is called when text input is selected. |
+| onTouchTap | `function` | | Callback function that is called when text input is clicked. |
 | onUpdateInput | `function` | | Callback function that is called when the input changes (useful for auto complete). |
 | openOnFocus | `bool` | `false` | Opens the auto complete list on focus if set to true. |
 | style | `object` | | Override the inline-styles of the root element. |
