@@ -56,6 +56,14 @@ const getStyles = (props, context, state) => {
       WebkitTapHighlightColor: 'rgba(0,0,0,0)', // Remove mobile color flashing (deprecated style).
       float: 'left',
     },
+    error: {
+      position: 'absolute',
+      bottom: -10,
+      fontSize: 12,
+      lineHeight: '12px',
+      color: errorColor,
+      transition: transitions.easeOut(),
+    },
     floatingLabel: {
       color: hintColor,
       pointerEvents: 'none',
@@ -77,10 +85,6 @@ const getStyles = (props, context, state) => {
 
   if (props.floatingLabelText) {
     styles.input.boxSizing = 'border-box';
-
-    if (state.errorText) {
-      styles.error.bottom = !props.multiLine ? styles.error.fontSize + 3 : 3;
-    }
   }
 
   if (state.errorText) {
@@ -132,8 +136,11 @@ class ChipInput extends React.Component {
       floatingLabelText
     } = this.props;
 
-    const uniqueId = `${name}-${hintText}-${floatingLabelText}-${
-      Math.floor(Math.random() * 0xFFFF)}`;
+    this.setState({
+      errorText: this.props.errorText
+    })
+
+    const uniqueId = `${name}-${hintText}-${floatingLabelText}-${Math.floor(Math.random() * 0xFFFF)}`;
     this.uniqueId = uniqueId.replace(/[^A-Za-z0-9-]/gi, '');
   }
 
@@ -170,6 +177,11 @@ class ChipInput extends React.Component {
   componentWillReceiveProps (nextProps) {
     if (nextProps.disabled) {
       this.setState({ focusedChip: null })
+    }
+    if (nextProps.errorText !== this.props.errorText) {
+      this.setState({
+        errorText: nextProps.errorText
+      })
     }
   }
 
@@ -338,6 +350,10 @@ class ChipInput extends React.Component {
     const showHintText = hintText && !hasInput
     const shrinkFloatingLabel = floatingLabelText && (hasInput || this.state.isFocused)
 
+    const errorTextElement = this.state.errorText && (
+      <div style={prepareStyles(styles.error)}>{this.state.errorText}</div>
+    )
+
     const floatingLabelTextElement = floatingLabelText && (
       <TextFieldLabel
         muiTheme={this.context.muiTheme}
@@ -417,6 +433,7 @@ class ChipInput extends React.Component {
           muiTheme={this.context.muiTheme}
           style={underlineStyle}
         />
+        {errorTextElement}
       </div>
     )
   }

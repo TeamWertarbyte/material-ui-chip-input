@@ -111,6 +111,11 @@ storiesOf('ChipInput', module)
       )}
     />
   ))
+  .add('with errorText', () => themed(
+    <ChipInput
+      errorText="This is an error."
+    />
+  ))
   .add('controlled input', () => themed(
     <ControlledChipInput />
   ))

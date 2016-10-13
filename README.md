@@ -37,6 +37,7 @@ import ChipInput from 'material-ui-chip-input'
 | dataSource | `array` | | Data source for auto complete. |
 | defaultValue | `string[]` | | The chips to display by default (for uncontrolled mode). |
 | disabled | `bool` | `false` | Disables the chip input if set to true. |
+| errorText | `node` | | The error text to display. |
 | floatingLabelText | `node` | | The content of the floating label. |
 | hintText | `node` | | The hint text to display. |
 | onChange | `function` | | Callback function that is called when the chips change (in uncontrolled mode). |
