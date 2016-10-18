@@ -34,6 +34,7 @@ import ChipInput from 'material-ui-chip-input'
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | chipRenderer | 'function' | | A function of the type `({ value, isFocused, isDisabled, handleClick, handleRequestDelete }, key) => node` that returns a chip based on the given properties. This can be used to customize chip styles. |
+| clearOnBlur | `bool` | `true` | Clear the input value after the Component looses focus |
 | dataSource | `array` | | Data source for auto complete. |
 | defaultValue | `string[]` | | The chips to display by default (for uncontrolled mode). |
 | disabled | `bool` | `false` | Disables the chip input if set to true. |
@@ -46,7 +47,6 @@ import ChipInput from 'material-ui-chip-input'
 | onTouchTap | `function` | | Callback function that is called when text input is clicked. |
 | onUpdateInput | `function` | | Callback function that is called when the input changes (useful for auto complete). |
 | openOnFocus | `bool` | `false` | Opens the auto complete list on focus if set to true. |
-| clearOnBlur | `bool` | `true` | Clear the input value after the Component looses focus |
 | style | `object` | | Override the inline-styles of the root element. |
 | value | `string[]` | | The chips to display (enables controlled mode if set). |
 
