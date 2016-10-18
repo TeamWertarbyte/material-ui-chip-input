@@ -210,7 +210,7 @@ class ChipInput extends React.Component {
 
   handleInputBlur = (event) => {
     if (!this.autoComplete.refs.menu) {
-      this.setState({ isFocused: false, inputValue: '' })
+      if (!this.props.persistInput) this.setState({ isFocused: false, inputValue: '' });
       if (this.props.onBlur) this.props.onBlur(event)
     }
   }
@@ -452,7 +452,8 @@ ChipInput.propTypes = {
   dataSource: PropTypes.arrayOf(PropTypes.string),
   onUpdateInput: PropTypes.func,
   openOnFocus: PropTypes.bool,
-  chipRenderer: PropTypes.func
+  chipRenderer: PropTypes.func,
+  persistInput: PropTypes.bool
 }
 
 ChipInput.defaultProps = {
