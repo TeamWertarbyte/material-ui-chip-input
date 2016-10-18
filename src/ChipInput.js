@@ -348,7 +348,7 @@ class ChipInput extends React.Component {
 
     const hasInput = (this.props.value || this.state.chips).length > 0 || this.state.inputValue.length > 0
     const showHintText = hintText && !hasInput
-    const shrinkFloatingLabel = floatingLabelText && (hasInput || this.state.isFocused)
+    const shrinkFloatingLabel = floatingLabelText && (hasInput || this.state.isFocused || floatingLabelFixed)
 
     const errorTextElement = this.state.errorText && (
       <div style={prepareStyles(styles.error)}>{this.state.errorText}</div>
@@ -404,7 +404,7 @@ class ChipInput extends React.Component {
         {hintText ?
           <TextFieldHint
             muiTheme={this.context.muiTheme}
-            show={showHintText && !(floatingLabelText && !this.state.isFocused)}
+            show={showHintText && !(floatingLabelText && !floatingLabelFixed && !this.state.isFocused)}
             style={Object.assign({ bottom: 20, pointerEvents: 'none' }, hintStyle)}
             text={hintText}
           /> :
