@@ -309,6 +309,7 @@ class ChipInput extends React.Component {
       hintText,
       hintStyle,
       inputStyle,
+      persistInput,
       onBlur, // eslint-disable-line no-unused-vars
       onChange, // eslint-disable-line no-unused-vars
       onFocus, // eslint-disable-line no-unused-vars
