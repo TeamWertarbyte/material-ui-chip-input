@@ -46,7 +46,7 @@ import ChipInput from 'material-ui-chip-input'
 | onTouchTap | `function` | | Callback function that is called when text input is clicked. |
 | onUpdateInput | `function` | | Callback function that is called when the input changes (useful for auto complete). |
 | openOnFocus | `bool` | `false` | Opens the auto complete list on focus if set to true. |
-| persistInput | `bool` | `false` | Persist the input value after the Component looses focus |
+| this.setState({ inputValue: '' }) | `bool` | `true` | Clear the input value after the Component looses focus |
 | style | `object` | | Override the inline-styles of the root element. |
 | value | `string[]` | | The chips to display (enables controlled mode if set). |
 

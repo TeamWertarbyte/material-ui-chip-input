@@ -210,8 +210,11 @@ class ChipInput extends React.Component {
 
   handleInputBlur = (event) => {
     if (!this.autoComplete.refs.menu) {
-      if (!this.props.persistInput) this.setState({ inputValue: '' });
-      this.setState({ isFocused: false });
+      if (this.props.clearOnBlur !== undefined && this.props.clearOnBlur) {
+        this.setState({ inputValue: '' })
+      }
+      
+      this.setState({ isFocused: false })
       
       if (this.props.onBlur) this.props.onBlur(event)
     }
@@ -311,7 +314,7 @@ class ChipInput extends React.Component {
       hintText,
       hintStyle,
       inputStyle,
-      persistInput,
+      clearOnBlur,
       onBlur, // eslint-disable-line no-unused-vars
       onChange, // eslint-disable-line no-unused-vars
       onFocus, // eslint-disable-line no-unused-vars
@@ -457,7 +460,7 @@ ChipInput.propTypes = {
   onUpdateInput: PropTypes.func,
   openOnFocus: PropTypes.bool,
   chipRenderer: PropTypes.func,
-  persistInput: PropTypes.bool
+  clearOnBlur: PropTypes.bool
 }
 
 ChipInput.defaultProps = {
