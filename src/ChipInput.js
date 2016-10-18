@@ -210,7 +210,7 @@ class ChipInput extends React.Component {
 
   handleInputBlur = (event) => {
     if (!this.autoComplete.refs.menu) {
-      if (this.props.clearOnBlur === undefined || this.props.clearOnBlur) {
+      if (this.props.clearOnBlur) {
         this.setState({ inputValue: '' })
       }
 
@@ -464,7 +464,8 @@ ChipInput.propTypes = {
 }
 
 ChipInput.defaultProps = {
-  filter: AutoComplete.caseInsensitiveFilter
+  filter: AutoComplete.caseInsensitiveFilter,
+  clearOnBlur: true
 }
 
 export default ChipInput
