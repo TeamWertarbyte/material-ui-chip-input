@@ -96,7 +96,7 @@ const getStyles = (props, context, state) => {
   return styles;
 };
 
-const defaultChipRenderer = ({ value, isFocused, isDisabled, handleClick, handleRequestDelete }, key) => (
+const defaultChipRenderer = ({ value, text, isFocused, isDisabled, handleClick, handleRequestDelete }, key) => (
   <Chip
     key={key}
     style={{ margin: '8px 8px 0 0', float: 'left', pointerEvents: isDisabled ? 'none' : undefined }}
@@ -104,7 +104,7 @@ const defaultChipRenderer = ({ value, isFocused, isDisabled, handleClick, handle
     onTouchTap={handleClick}
     onRequestDelete={handleRequestDelete}
   >
-    {value}
+    {text}
   </Chip>
 )
 
@@ -270,15 +270,33 @@ class ChipInput extends React.Component {
   handleAddChip (chip) {
     const chips = this.props.value || this.state.chips
 
-    if (chip.trim().length > 0 && chips.indexOf(chip) === -1) {
-      if (this.props.value) {
-        if (this.props.onRequestAdd) {
-          this.props.onRequestAdd(chip)
+    if (chip.trim().length > 0) {
+      if (this.props.dataSourceConfig) {
+        if (!chips.find((c) => c[this.props.dataSourceConfig.text] === chip)) {
+          const newChip = { [this.props.dataSourceConfig.text]: chip, [this.props.dataSourceConfig.value]: chip }
+          if (this.props.value) {
+            if (this.props.onRequestAdd) {
+              this.props.onRequestAdd(newChip)
+            }
+          } else {
+            this.setState({ chips: [ ...this.state.chips, newChip ] })
+            if (this.props.onChange) {
+              this.props.onChange([ ...this.state.chips, newChip ])
+            }
+          }
         }
       } else {
-        this.setState({ chips: [ ...this.state.chips, chip ] })
-        if (this.props.onChange) {
-          this.props.onChange([ ...this.state.chips, chip ])
+        if (chips.indexOf(chip) === -1) {
+          if (this.props.value) {
+            if (this.props.onRequestAdd) {
+              this.props.onRequestAdd(chip)
+            }
+          } else {
+            this.setState({ chips: [ ...this.state.chips, chip ] })
+            if (this.props.onChange) {
+              this.props.onChange([ ...this.state.chips, chip ])
+            }
+          }
         }
       }
     }
@@ -290,14 +308,27 @@ class ChipInput extends React.Component {
         this.props.onRequestDelete(chip)
       }
     } else {
-      const chips = this.state.chips.filter((c) => c !== chip)
-      if (chips.length !== this.state.chips.length) {
-        this.setState({
-          chips,
-          focusedChip: this.state.focusedChip === chip ? null : this.state.focusedChip
-        })
-        if (this.props.onChange) {
-          this.props.onChange(chips)
+      if (this.props.dataSourceConfig) {
+        const chips = this.state.chips.filter((c) => c[this.props.dataSourceConfig.value] !== chip)
+        if (chips.length !== this.state.chips.length) {
+          this.setState({
+            chips,
+            focusedChip: this.state.focusedChip && this.state.focusedChip[this.props.dataSourceConfig.value] === chip ? null : this.state.focusedChip
+          })
+          if (this.props.onChange) {
+            this.props.onChange(chips)
+          }
+        }
+      } else {
+        const chips = this.state.chips.filter((c) => c !== chip)
+        if (chips.length !== this.state.chips.length) {
+          this.setState({
+            chips,
+            focusedChip: this.state.focusedChip === chip ? null : this.state.focusedChip
+          })
+          if (this.props.onChange) {
+            this.props.onChange(chips)
+          }
         }
       }
     }
@@ -307,6 +338,7 @@ class ChipInput extends React.Component {
     const {
       children,
       className,
+      dataSourceConfig,
       disabled,
       errorStyle,
       errorText, // eslint-disable-line no-unused-vars
@@ -398,13 +430,17 @@ class ChipInput extends React.Component {
         <div>
           {floatingLabelTextElement}
           <div style={{ marginTop: floatingLabelText ? 12 : 0 }}>
-            {chips.map((tag, i) => chipRenderer({
-              value: tag,
-              isDisabled: disabled,
-              isFocused: this.state.focusedChip === tag,
-              handleClick: () => this.setState({ focusedChip: tag }),
-              handleRequestDelete: () => this.handleDeleteChip(tag)
-            }, i))}
+            {chips.map((tag, i) => {
+              const value = dataSourceConfig ? tag[dataSourceConfig.value] : tag
+              return chipRenderer({
+                value,
+                text: dataSourceConfig ? tag[dataSourceConfig.text] : tag,
+                isDisabled: disabled,
+                isFocused: this.state.focusedChip === value,
+                handleClick: () => this.setState({ focusedChip: value }),
+                handleRequestDelete: () => this.handleDeleteChip(value)
+              }, i)
+            })}
           </div>
         </div>
         {hintText ?
@@ -450,13 +486,26 @@ ChipInput.propTypes = {
   style: PropTypes.object,
   floatingLabelText: PropTypes.node,
   hintText: PropTypes.node,
+  dataSourceConfig: PropTypes.shape({
+    text: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired
+  }),
   disabled: PropTypes.bool,
-  defaultValue: PropTypes.arrayOf(PropTypes.string),
+  defaultValue: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.string),
+    PropTypes.arrayOf(PropTypes.object)
+  ]),
   onChange: PropTypes.func,
-  value: PropTypes.arrayOf(PropTypes.string),
+  value: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.string),
+    PropTypes.arrayOf(PropTypes.object)
+  ]),
   onRequestAdd: PropTypes.func,
   onRequestDelete: PropTypes.func,
-  dataSource: PropTypes.arrayOf(PropTypes.string),
+  dataSource: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.string),
+    PropTypes.arrayOf(PropTypes.object)
+  ]),
   onUpdateInput: PropTypes.func,
   openOnFocus: PropTypes.bool,
   chipRenderer: PropTypes.func,

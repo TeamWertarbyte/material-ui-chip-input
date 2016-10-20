@@ -139,3 +139,26 @@ storiesOf('ChipInput', module)
       onTouchTap={action('onTouchTap')}
     />
   ))
+  .add('objects as chips, uncontrolled', () => themed(
+    <ChipInput
+      dataSource={[{ text: 'Chip 1', value: 'one' }, { text: 'Chip 2', value: 'two' }]}
+      dataSourceConfig={{ text: 'text', value: 'value' }}
+      defaultValue={[{ text: 'Chip 1', value: 'one' }, { text: 'Chip 2', value: 'two' }]}
+      onChange={action('onChange')}
+      onUpdateInput={action('onUpdateInput')}
+      onRequestDelete={action('onRequestDelete')}
+      onRequestAdd={action('onRequestAdd')}
+      onTouchTap={action('onTouchTap')}
+    />
+  ))
+  .add('objects as chips, controlled', () => themed(
+    <ChipInput
+      dataSourceConfig={{ text: 'text', value: 'value' }}
+      value={[{ text: 'Chip 1', value: 'one' }, { text: 'Chip 2', value: 'two' }]}
+      onChange={action('onChange')}
+      onUpdateInput={action('onUpdateInput')}
+      onRequestDelete={action('onRequestDelete')}
+      onRequestAdd={action('onRequestAdd')}
+      onTouchTap={action('onTouchTap')}
+    />
+  ))
