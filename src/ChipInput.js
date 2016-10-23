@@ -161,8 +161,7 @@ class ChipInput extends React.Component {
 
       const index = parseInt(child.key, 10);
       const chosenRequest = dataSource[index];
-      const searchText = this.autoComplete.chosenRequestText(chosenRequest);
-  
+      this.handleAddChip(chosenRequest)
   
       this.autoComplete.setState({
         searchText: '',
@@ -270,22 +269,28 @@ class ChipInput extends React.Component {
   handleAddChip (chip) {
     const chips = this.props.value || this.state.chips
 
-    if (chip.trim().length > 0) {
-      if (this.props.dataSourceConfig) {
-        if (!chips.find((c) => c[this.props.dataSourceConfig.text] === chip)) {
-          const newChip = { [this.props.dataSourceConfig.text]: chip, [this.props.dataSourceConfig.value]: chip }
-          if (this.props.value) {
-            if (this.props.onRequestAdd) {
-              this.props.onRequestAdd(newChip)
-            }
-          } else {
-            this.setState({ chips: [ ...this.state.chips, newChip ] })
-            if (this.props.onChange) {
-              this.props.onChange([ ...this.state.chips, newChip ])
-            }
+    if (this.props.dataSourceConfig) {
+      if (typeof chip === 'string') {
+        chip = {
+          [this.props.dataSourceConfig.text]: chip,
+          [this.props.dataSourceConfig.value]: chip,
+        }
+      }
+
+      if (!chips.find((c) => c[this.props.dataSourceConfig.value] === chip[this.props.dataSourceConfig.value])) {
+        if (this.props.value) {
+          if (this.props.onRequestAdd) {
+            this.props.onRequestAdd(chip)
+          }
+        } else {
+          this.setState({ chips: [ ...this.state.chips, chip ] })
+          if (this.props.onChange) {
+            this.props.onChange([ ...this.state.chips, chip ])
           }
         }
-      } else {
+      }
+    } else {
+      if (chip.trim().length > 0) {
         if (chips.indexOf(chip) === -1) {
           if (this.props.value) {
             if (this.props.onRequestAdd) {
@@ -417,7 +422,9 @@ class ChipInput extends React.Component {
     }
 
     const chips = this.props.value || this.state.chips
-    const autoCompleteData = (dataSource || []).filter((value) => chips.indexOf(value) < 0)
+    const autoCompleteData = dataSourceConfig
+      ? (dataSource || []).filter((value) => !chips.some((c) => c[dataSourceConfig.value] === value[dataSourceConfig.value]))
+      : (dataSource || []).filter((value) => chips.indexOf(value) < 0)
 
     const actualFilter = other.openOnFocus ? (search, key) => (search === '' || filter(search, key)) : filter
 
@@ -458,6 +465,7 @@ class ChipInput extends React.Component {
           filter={actualFilter}
           style={inputStyleMerged}
           dataSource={autoCompleteData}
+          dataSourceConfig={dataSourceConfig}
           menuProps={{
             onChange: (event, input) => this.handleAddChip(input)
           }}

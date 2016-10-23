@@ -141,9 +141,9 @@ storiesOf('ChipInput', module)
   ))
   .add('objects as chips, uncontrolled', () => themed(
     <ChipInput
-      dataSource={[{ text: 'Chip 1', value: 'one' }, { text: 'Chip 2', value: 'two' }]}
-      dataSourceConfig={{ text: 'text', value: 'value' }}
-      defaultValue={[{ text: 'Chip 1', value: 'one' }, { text: 'Chip 2', value: 'two' }]}
+      dataSource={[{ label: 'Chip 1', id: 'one' }, { label: 'Chip 2', id: 'two' }]}
+      dataSourceConfig={{ text: 'label', value: 'id' }}
+      defaultValue={[{ label: 'Chip 1', id: 'one' }]}
       onChange={action('onChange')}
       onUpdateInput={action('onUpdateInput')}
       onRequestDelete={action('onRequestDelete')}
@@ -153,8 +153,9 @@ storiesOf('ChipInput', module)
   ))
   .add('objects as chips, controlled', () => themed(
     <ChipInput
-      dataSourceConfig={{ text: 'text', value: 'value' }}
-      value={[{ text: 'Chip 1', value: 'one' }, { text: 'Chip 2', value: 'two' }]}
+      dataSource={[{ label: 'Chip 1', id: 'one' }, { label: 'Chip 2', id: 'two' }]}
+      dataSourceConfig={{ text: 'label', value: 'id' }}
+      value={[{ label: 'Chip 1', id: 'one' }]}
       onChange={action('onChange')}
       onUpdateInput={action('onUpdateInput')}
       onRequestDelete={action('onRequestDelete')}
