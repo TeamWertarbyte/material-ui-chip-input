@@ -36,6 +36,7 @@ import ChipInput from 'material-ui-chip-input'
 | chipRenderer | 'function' | | A function of the type `({ value, text, isFocused, isDisabled, handleClick, handleRequestDelete }, key) => node` that returns a chip based on the given properties. This can be used to customize chip styles. |
 | clearOnBlur | `bool` | `true` | Clears the input value after the component looses focus if set to true. |
 | dataSource | `array` | | Data source for auto complete. |
+| dataSourceConfig | `object` | | Config for objects list dataSource, e.g. `{ text: 'text', value: 'value' }`. If not specified, the `dataSource` must be a flat array of strings. |
 | defaultValue | `string[]` | | The chips to display by default (for uncontrolled mode). |
 | disabled | `bool` | `false` | Disables the chip input if set to true. |
 | errorText | `node` | | The error text to display. |
