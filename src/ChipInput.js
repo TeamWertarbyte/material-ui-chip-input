@@ -147,7 +147,7 @@ class ChipInput extends React.Component {
   componentDidMount() {
     const handleKeyDown = this.autoComplete.handleKeyDown
     this.autoComplete.handleKeyDown = (event) => {
-      if (event.keyCode === this.props.newChipKeyCode) {
+      if (this.props.newChipKeyCodes.indexOf(event.keyCode) >= 0) {
         this.handleAddChip(event.target.value)
         this.autoComplete.setState({ searchText: '' })
         this.autoComplete.forceUpdate()
@@ -230,7 +230,7 @@ class ChipInput extends React.Component {
   }
 
   handleKeyDown = (event) => {
-    if (event.keyCode === this.props.newChipKeyCode) { // default 13/enter
+    if (this.props.newChipKeyCodes.indexOf(event.keyCode) >= 0) {
       this.handleAddChip(event.target.value)
     } else if (event.keyCode === 8 || event.keyCode === 46) {
       if (event.target.value === '') {
@@ -266,7 +266,15 @@ class ChipInput extends React.Component {
     }
   }
 
+  handleKeyUp = (event) => {
+    if (this.props.newChipKeyCodes.indexOf(event.keyCode) < 0) {
+      this.setState({ inputValue: event.target.value })
+    } else {
+      this.setState({ inputValue: '' })}
+  }
+
   handleAddChip (chip) {
+    this.autoComplete.setState({ searchText: '' })
     const chips = this.props.value || this.state.chips
 
     if (this.props.dataSourceConfig) {
@@ -371,6 +379,7 @@ class ChipInput extends React.Component {
       onRequestAdd, // eslint-disable-line no-unused-vars
       onRequestDelete, // eslint-disable-line no-unused-vars
       chipRenderer = defaultChipRenderer,
+      newChipKeyCodes, // eslint-disable-line no-unused-vars
       ...other,
     } = this.props;
 
@@ -471,7 +480,7 @@ class ChipInput extends React.Component {
           }}
           searchText={this.state.inputValue}
           underlineShow={false}
-          onKeyUp={(event) => this.setState({ inputValue: event.target.value })}
+          onKeyUp={this.handleKeyUp}
           ref={(ref) => this.autoComplete = ref}
         />
         <TextFieldUnderline
@@ -517,13 +526,13 @@ ChipInput.propTypes = {
   onUpdateInput: PropTypes.func,
   openOnFocus: PropTypes.bool,
   chipRenderer: PropTypes.func,
-  newChipKeyCode: PropTypes.number,
+  newChipKeyCodes: PropTypes.arrayOf(PropTypes.number),
   clearOnBlur: PropTypes.bool
 }
 
 ChipInput.defaultProps = {
   filter: AutoComplete.caseInsensitiveFilter,
-  newChipKeyCode: 13,
+  newChipKeyCodes: [13],
   clearOnBlur: true
 }
 

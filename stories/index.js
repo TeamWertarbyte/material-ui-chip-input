@@ -116,6 +116,11 @@ storiesOf('ChipInput', module)
       errorText="This is an error."
     />
   ))
+  .add('create tags with comma, space and enter', () => themed(
+    <ChipInput
+      newChipKeyCodes={[13, 188, 32]}
+    />
+  ))
   .add('controlled input', () => themed(
     <ControlledChipInput />
   ))

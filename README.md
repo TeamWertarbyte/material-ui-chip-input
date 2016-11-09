@@ -42,7 +42,7 @@ import ChipInput from 'material-ui-chip-input'
 | errorText | `node` | | The error text to display. |
 | floatingLabelText | `node` | | The content of the floating label. |
 | hintText | `node` | | The hint text to display. |
-| newChipKeyCode | `number` | `13` (enter key) | The key code used to determine when to create a new chip. |
+| newChipKeyCodes | `number[]` | `[13]` (enter key) | The key codes used to determine when to create a new chip. |
 | onChange | `function` | | Callback function that is called when the chips change (in uncontrolled mode). |
 | onRequestAdd | `function` | | Callback function that is called when a new chip was added (in controlled mode). |
 | onRequestDelete | `function` | | Callback function that is called when a new chip was removed (in controlled mode). |
