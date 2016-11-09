@@ -230,7 +230,7 @@ class ChipInput extends React.Component {
   }
 
   handleKeyDown = (event) => {
-    if (event.keyCode === 13) { // enter
+    if (event.keyCode === this.props.newChipKeyCode) { // default 13/enter
       this.handleAddChip(event.target.value)
     } else if (event.keyCode === 8 || event.keyCode === 46) {
       if (event.target.value === '') {
@@ -517,11 +517,13 @@ ChipInput.propTypes = {
   onUpdateInput: PropTypes.func,
   openOnFocus: PropTypes.bool,
   chipRenderer: PropTypes.func,
+  newChipKeyCode: PropTypes.number,
   clearOnBlur: PropTypes.bool
 }
 
 ChipInput.defaultProps = {
   filter: AutoComplete.caseInsensitiveFilter,
+  newChipKeyCode: 13,
   clearOnBlur: true
 }
 
