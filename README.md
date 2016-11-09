@@ -33,7 +33,7 @@ import ChipInput from 'material-ui-chip-input'
 ## Properties
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| chipRenderer | 'function' | | A function of the type `({ value, text, isFocused, isDisabled, handleClick, handleRequestDelete }, key) => node` that returns a chip based on the given properties. This can be used to customize chip styles. |
+| chipRenderer | `function` | | A function of the type `({ value, text, isFocused, isDisabled, handleClick, handleRequestDelete }, key) => node` that returns a chip based on the given properties. This can be used to customize chip styles. |
 | clearOnBlur | `bool` | `true` | Clears the input value after the component looses focus if set to true. |
 | dataSource | `array` | | Data source for auto complete. |
 | dataSourceConfig | `object` | | Config for objects list dataSource, e.g. `{ text: 'text', value: 'value' }`. If not specified, the `dataSource` must be a flat array of strings. |
@@ -42,7 +42,7 @@ import ChipInput from 'material-ui-chip-input'
 | errorText | `node` | | The error text to display. |
 | floatingLabelText | `node` | | The content of the floating label. |
 | hintText | `node` | | The hint text to display. |
-| newChipKeyCode | `number` | `13` | The key code used to determine when to create a new chip. |
+| newChipKeyCode | `number` | `13` (enter key) | The key code used to determine when to create a new chip. |
 | onChange | `function` | | Callback function that is called when the chips change (in uncontrolled mode). |
 | onRequestAdd | `function` | | Callback function that is called when a new chip was added (in controlled mode). |
 | onRequestDelete | `function` | | Callback function that is called when a new chip was removed (in controlled mode). |
