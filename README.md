@@ -42,6 +42,7 @@ import ChipInput from 'material-ui-chip-input'
 | errorText | `node` | | The error text to display. |
 | floatingLabelText | `node` | | The content of the floating label. |
 | hintText | `node` | | The hint text to display. |
+| newChipKeyCode | `number` | `13` | The key code used to determine when to create a new chip. |
 | onChange | `function` | | Callback function that is called when the chips change (in uncontrolled mode). |
 | onRequestAdd | `function` | | Callback function that is called when a new chip was added (in controlled mode). |
 | onRequestDelete | `function` | | Callback function that is called when a new chip was removed (in controlled mode). |
@@ -50,7 +51,6 @@ import ChipInput from 'material-ui-chip-input'
 | openOnFocus | `bool` | `false` | Opens the auto complete list on focus if set to true. |
 | style | `object` | | Override the inline-styles of the root element. |
 | value | `string[]` | | The chips to display (enables controlled mode if set). |
-| newChipKeyCode | `number` | `13` | The key code used to determine when to create a new chip. |
 
 
 Additionally, most other properties of Material UI's [Auto Complete][mui-auto-complete] and [Text Field][mui-text-field] should be supported. Please open an issue if something is missing or does not work as expected.
