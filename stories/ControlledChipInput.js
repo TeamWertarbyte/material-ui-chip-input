@@ -1,7 +1,6 @@
 import React from 'react'
 import ChipInput from '../src/ChipInput'
 
-
 class ControlledChipInput extends React.Component {
   constructor(props) {
     super(props)
@@ -11,9 +10,8 @@ class ControlledChipInput extends React.Component {
   }
 
   handleRequestAdd(chip) {
-    const newChips = chip.split(',').filter((c) => c.trim().length > 0)
     this.setState({
-      chips: [...this.state.chips, ...newChips]
+      chips: [...this.state.chips, chip]
     })
   }
 
@@ -29,6 +27,7 @@ class ControlledChipInput extends React.Component {
 
   render() {
     return <ChipInput
+      {...this.props}
       value={this.state.chips}
       onRequestAdd={(chip) => this.handleRequestAdd(chip)}
       onRequestDelete={(deletedChip) => this.handleRequestDelete(deletedChip)}

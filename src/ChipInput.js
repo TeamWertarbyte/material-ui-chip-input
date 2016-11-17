@@ -475,9 +475,6 @@ class ChipInput extends React.Component {
           style={inputStyleMerged}
           dataSource={autoCompleteData}
           dataSourceConfig={dataSourceConfig}
-          menuProps={{
-            onChange: (event, input) => this.handleAddChip(input)
-          }}
           searchText={this.state.inputValue}
           underlineShow={false}
           onKeyUp={this.handleKeyUp}

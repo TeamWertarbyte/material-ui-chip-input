@@ -168,3 +168,9 @@ storiesOf('ChipInput', module)
       onTouchTap={action('onTouchTap')}
     />
   ))
+  .add('controlled input with auto complete', () => themed(
+    <ControlledChipInput
+      openOnFocus
+      dataSource={['foo', 'bar']}
+    />
+  ))
