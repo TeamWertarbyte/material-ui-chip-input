@@ -355,7 +355,8 @@ class ChipInput extends React.Component {
       disabled,
       errorStyle,
       errorText, // eslint-disable-line no-unused-vars
-      fullWidth, // eslint-disable-line no-unused-vars
+      fullWidth,
+      fullWidthInput,
       hintText,
       hintStyle,
       inputStyle,
@@ -390,10 +391,11 @@ class ChipInput extends React.Component {
     const inputProps = {
       id: inputId,
       ref: (elem) => this.input = elem,
-      disabled: this.props.disabled,
+      disabled: !!this.props.disabled,
       onBlur: this.handleInputBlur,
       onFocus: this.handleInputFocus,
-      onKeyDown: this.handleKeyDown
+      onKeyDown: this.handleKeyDown,
+      fullWidth: !!fullWidthInput
     }
 
     const inputStyleMerged = Object.assign(styles.input, inputStyle);

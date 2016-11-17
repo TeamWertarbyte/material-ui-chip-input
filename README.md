@@ -41,6 +41,8 @@ import ChipInput from 'material-ui-chip-input'
 | disabled | `bool` | `false` | Disables the chip input if set to true. |
 | errorText | `node` | | The error text to display. |
 | floatingLabelText | `node` | | The content of the floating label. |
+| fullWidth | `bool` | `false` | If true, the chip input will fill the available width. |
+| fullWidthInput | `bool` | `false` | If true, the input field will always be below the chips and fill the available space. By default, it will try to be beside the chips. |
 | hintText | `node` | | The hint text to display. |
 | newChipKeyCodes | `number[]` | `[13]` (enter key) | The key codes used to determine when to create a new chip. |
 | onChange | `function` | | Callback function that is called when the chips change (in uncontrolled mode). |

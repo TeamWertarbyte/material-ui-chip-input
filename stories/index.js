@@ -172,5 +172,13 @@ storiesOf('ChipInput', module)
     <ControlledChipInput
       openOnFocus
       dataSource={['foo', 'bar']}
+      inputProps={{ fullWidth: true, }}
+    />
+  ))
+  .add('with fullWidthInput', () => themed(
+    <ChipInput
+      floatingLabelText='The input is always full-width here'
+      fullWidth
+      fullWidthInput
     />
   ))
