@@ -482,16 +482,19 @@ class ChipInput extends React.Component {
           onKeyUp={this.handleKeyUp}
           ref={(ref) => this.autoComplete = ref}
         />
-        <TextFieldUnderline
-          disabled={disabled}
-          disabledStyle={underlineDisabledStyle}
-          error={!!this.state.errorText}
-          errorStyle={errorStyle}
-          focus={this.state.isFocused}
-          focusStyle={underlineFocusStyle}
-          muiTheme={this.context.muiTheme}
-          style={underlineStyle}
-        />
+        {underlineShow ?
+          <TextFieldUnderline
+            disabled={disabled}
+            disabledStyle={underlineDisabledStyle}
+            error={!!this.state.errorText}
+            errorStyle={errorStyle}
+            focus={this.state.isFocused}
+            focusStyle={underlineFocusStyle}
+            muiTheme={this.context.muiTheme}
+            style={underlineStyle}
+          /> :
+          null
+        }
         {errorTextElement}
       </div>
     )
@@ -532,7 +535,8 @@ ChipInput.propTypes = {
 ChipInput.defaultProps = {
   filter: AutoComplete.caseInsensitiveFilter,
   newChipKeyCodes: [13],
-  clearOnBlur: true
+  clearOnBlur: true,
+  underlineShow: true
 }
 
 export default ChipInput

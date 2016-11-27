@@ -116,6 +116,13 @@ storiesOf('ChipInput', module)
       errorText="This is an error."
     />
   ))
+  .add('without underline', () => themed(
+    <ChipInput
+      defaultValue={['foo', 'bar']}
+      fullWidth
+      underlineShow={false}
+    />
+  ))
   .add('create tags with comma, space and enter', () => themed(
     <ChipInput
       newChipKeyCodes={[13, 188, 32]}
