@@ -1,5 +1,5 @@
 import React from 'react'
-import { storiesOf, action, linkTo } from '@kadira/storybook'
+import {storiesOf, action, linkTo} from '@kadira/storybook'
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
@@ -9,11 +9,12 @@ import AutoComplete from 'material-ui/AutoComplete'
 import {green800, green300} from 'material-ui/styles/colors'
 import ChipInput from '../src/ChipInput'
 import ControlledChipInput from './ControlledChipInput'
+import ClipboardExample from './ClipboardExample'
 
-function themed (children) {
+function themed(children) {
   return (
     <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
-      <div style={{ fontFamily: 'Roboto, sans-serif' }}>
+      <div style={{fontFamily: 'Roboto, sans-serif'}}>
         {children}
       </div>
     </MuiThemeProvider>
@@ -90,17 +91,17 @@ storiesOf('ChipInput', module)
     <ChipInput
       defaultValue={['foo', 'bar']}
       floatingLabelText="A chip input with a width of 321px"
-      style={{ width: 321 }}
+      style={{width: 321}}
     />
   ))
   .add('with custom chips', () => themed(
     <ChipInput
       defaultValue={['foo', 'bar']}
       fullWidth
-      chipRenderer={({ value, isFocused, isDisabled, handleClick, handleRequestDelete }, key) => (
+      chipRenderer={({value, isFocused, isDisabled, handleClick, handleRequestDelete}, key) => (
         <Chip
           key={key}
-          style={{ margin: '8px 8px 0 0', float: 'left', pointerEvents: isDisabled ? 'none' : undefined }}
+          style={{margin: '8px 8px 0 0', float: 'left', pointerEvents: isDisabled ? 'none' : undefined}}
           backgroundColor={isFocused ? green800 : green300}
           onTouchTap={handleClick}
           onRequestDelete={handleRequestDelete}
@@ -153,9 +154,9 @@ storiesOf('ChipInput', module)
   ))
   .add('objects as chips, uncontrolled', () => themed(
     <ChipInput
-      dataSource={[{ label: 'Chip 1', id: 'one' }, { label: 'Chip 2', id: 'two' }]}
-      dataSourceConfig={{ text: 'label', value: 'id' }}
-      defaultValue={[{ label: 'Chip 1', id: 'one' }]}
+      dataSource={[{label: 'Chip 1', id: 'one'}, {label: 'Chip 2', id: 'two'}]}
+      dataSourceConfig={{text: 'label', value: 'id'}}
+      defaultValue={[{label: 'Chip 1', id: 'one'}]}
       onChange={action('onChange')}
       onUpdateInput={action('onUpdateInput')}
       onRequestDelete={action('onRequestDelete')}
@@ -165,9 +166,9 @@ storiesOf('ChipInput', module)
   ))
   .add('objects as chips, controlled', () => themed(
     <ChipInput
-      dataSource={[{ label: 'Chip 1', id: 'one' }, { label: 'Chip 2', id: 'two' }]}
-      dataSourceConfig={{ text: 'label', value: 'id' }}
-      value={[{ label: 'Chip 1', id: 'one' }]}
+      dataSource={[{label: 'Chip 1', id: 'one'}, {label: 'Chip 2', id: 'two'}]}
+      dataSourceConfig={{text: 'label', value: 'id'}}
+      value={[{label: 'Chip 1', id: 'one'}]}
       onChange={action('onChange')}
       onUpdateInput={action('onUpdateInput')}
       onRequestDelete={action('onRequestDelete')}
@@ -179,7 +180,7 @@ storiesOf('ChipInput', module)
     <ControlledChipInput
       openOnFocus
       dataSource={['foo', 'bar']}
-      inputProps={{ fullWidth: true, }}
+      inputProps={{fullWidth: true,}}
     />
   ))
   .add('with fullWidthInput', () => themed(
@@ -187,5 +188,15 @@ storiesOf('ChipInput', module)
       floatingLabelText='The input is always full-width here'
       fullWidth
       fullWidthInput
+    />
+  ))
+  .add('with clipboard manipulation', () => themed(
+    <ClipboardExample
+      onPaste={action('onPaste')}
+      onChange={action('onChange')}
+      onUpdateInput={action('onUpdateInput')}
+      onRequestDelete={action('onRequestDelete')}
+      onRequestAdd={action('onRequestAdd')}
+      onTouchTap={action('onTouchTap')}
     />
   ))
