@@ -23,28 +23,26 @@ class ClipboardExample extends React.Component {
 
   render() {
     return (
-      <div>
-        <ChipInput
-          {...this.props}
-          hintText="Paste anything here (try with line breaks)"
+      <ChipInput
+        {...this.props}
+        hintText="Paste anything here (try with line breaks)"
 
-          value={this.state.chips}
-          onPaste={(event) => {
-            const clipboardText = event.clipboardData.getData('Text')
+        value={this.state.chips}
+        onPaste={(event) => {
+          const clipboardText = event.clipboardData.getData('Text')
 
-            event.preventDefault()
+          event.preventDefault()
 
-            this.handleRequestAdd(...clipboardText.split('\n').filter((t) => t.length > 0))
+          this.handleRequestAdd(...clipboardText.split('\n').filter((t) => t.length > 0))
 
-            if (this.props.onPaste) {
-              this.props.onPaste(event)
-            }
-          }}
-          onRequestAdd={(chip) => this.handleRequestAdd(chip)}
-          onRequestDelete={(deletedChip) => this.handleRequestDelete(deletedChip)}
-          fullWidth
-        />
-      </div>
+          if (this.props.onPaste) {
+            this.props.onPaste(event)
+          }
+        }}
+        onRequestAdd={(chip) => this.handleRequestAdd(chip)}
+        onRequestDelete={(deletedChip) => this.handleRequestDelete(deletedChip)}
+        fullWidth
+      />
     )
   }
 }
