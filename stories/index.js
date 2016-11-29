@@ -6,11 +6,12 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import Avatar from 'material-ui/Avatar'
 import Chip from 'material-ui/Chip'
 import AutoComplete from 'material-ui/AutoComplete'
-import {green800, green300} from 'material-ui/styles/colors'
+import { green800, green300 } from 'material-ui/styles/colors'
 import ChipInput from '../src/ChipInput'
 import ControlledChipInput from './ControlledChipInput'
+import ClipboardExample from './ClipboardExample'
 
-function themed (children) {
+function themed(children) {
   return (
     <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
       <div style={{ fontFamily: 'Roboto, sans-serif' }}>
@@ -187,5 +188,15 @@ storiesOf('ChipInput', module)
       floatingLabelText='The input is always full-width here'
       fullWidth
       fullWidthInput
+    />
+  ))
+  .add('with clipboard manipulation', () => themed(
+    <ClipboardExample
+      onPaste={action('onPaste')}
+      onChange={action('onChange')}
+      onUpdateInput={action('onUpdateInput')}
+      onRequestDelete={action('onRequestDelete')}
+      onRequestAdd={action('onRequestAdd')}
+      onTouchTap={action('onTouchTap')}
     />
   ))
