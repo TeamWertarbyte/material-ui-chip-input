@@ -239,7 +239,8 @@ class ChipInput extends React.Component {
           this.setState({ focusedChip: chips[chips.length - 1] })
         } else if (this.state.focusedChip) {
           const index = chips.indexOf(this.state.focusedChip)
-          this.handleDeleteChip(this.state.focusedChip)
+          const value = this.props.dataSourceConfig ? this.state.focusedChip[this.props.dataSourceConfig.value] : this.state.focusedChip
+          this.handleDeleteChip(value)
           if (event.keyCode === 8 && index > 0) {
             this.setState({ focusedChip: chips[index - 1] })
           } else if (event.keyCode === 46 && index < chips.length - 1) {
