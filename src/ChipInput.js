@@ -21,7 +21,6 @@ const getStyles = (props, context, state) => {
       textColor,
       disabledTextColor,
       backgroundColor,
-      hintColor,
       errorColor,
     },
   } = context.muiTheme;
@@ -65,7 +64,7 @@ const getStyles = (props, context, state) => {
       transition: transitions.easeOut(),
     },
     floatingLabel: {
-      color: hintColor,
+      color: props.disabled ? disabledTextColor : floatingLabelColor,
       pointerEvents: 'none',
       top: 28
     },
@@ -73,11 +72,6 @@ const getStyles = (props, context, state) => {
       transform: 'scale(0.75) translate(0, -36px)'
     }
   };
-
-  const hasValue = (props.value || state.chips).length > 0 || state.inputValue.length > 0
-  if (hasValue) {
-    styles.floatingLabel.color = fade(props.disabled ? disabledTextColor : floatingLabelColor, 0.5);
-  }
 
   if (state.isFocused) {
     styles.floatingLabel.color = focusColor;
