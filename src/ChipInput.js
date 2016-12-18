@@ -352,6 +352,7 @@ class ChipInput extends React.Component {
       fullWidthInput,
       hintText,
       hintStyle,
+      id,
       inputStyle,
       clearOnBlur,
       onBlur, // eslint-disable-line no-unused-vars
@@ -379,7 +380,7 @@ class ChipInput extends React.Component {
 
     const {prepareStyles} = this.context.muiTheme;
     const styles = getStyles(this.props, this.context, this.state);
-    const inputId = this.uniqueId;
+    const inputId = id || this.uniqueId;
 
     const inputProps = {
       id: inputId,
@@ -498,6 +499,7 @@ ChipInput.propTypes = {
   style: PropTypes.object,
   floatingLabelText: PropTypes.node,
   hintText: PropTypes.node,
+  id: PropTypes.string,
   dataSourceConfig: PropTypes.shape({
     text: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired

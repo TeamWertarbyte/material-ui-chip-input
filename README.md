@@ -44,6 +44,7 @@ import ChipInput from 'material-ui-chip-input'
 | fullWidth | `bool` | `false` | If true, the chip input will fill the available width. |
 | fullWidthInput | `bool` | `false` | If true, the input field will always be below the chips and fill the available space. By default, it will try to be beside the chips. |
 | hintText | `node` | | The hint text to display. |
+| id | `string` | _a unique id_ | The id prop for the text field, should be set to some deteministic value if you use server-side rendering. |
 | newChipKeyCodes | `number[]` | `[13]` (enter key) | The key codes used to determine when to create a new chip. |
 | onChange | `function` | | Callback function that is called when the chips change (in uncontrolled mode). |
 | onRequestAdd | `function` | | Callback function that is called when a new chip was added (in controlled mode). |
