@@ -165,6 +165,9 @@ class ChipInput extends React.Component {
 
       setTimeout(() => this.focus(), 1)
     }
+
+    // force update autocomplete to ensure that it uses the new handlers
+    this.autoComplete.forceUpdate()
   }
 
   componentWillReceiveProps (nextProps) {
