@@ -186,7 +186,13 @@ class ChipInput extends React.Component {
   }
 
   focus() {
-    if (this.autoComplete) this.getInputNode().focus();
+    if (this.autoComplete) {
+      this.getInputNode().focus();
+      if (this.props.openOnFocus) {
+        this.autoComplete.setState({ open: true })
+        this.autoComplete.forceUpdate()
+      }
+    }
     if (this.state.focusedChip) {
       this.setState({ focusedChip: null })
     }
