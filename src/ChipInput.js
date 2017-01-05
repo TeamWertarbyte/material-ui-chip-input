@@ -290,7 +290,7 @@ class ChipInput extends React.Component {
       if (!chips.find((c) => c[this.props.dataSourceConfig.value] === chip[this.props.dataSourceConfig.value])) {
         if (this.props.value) {
           if (this.props.onRequestAdd) {
-            this.props.onRequestAdd(chip)
+            this.props.onRequestAdd(chip, chips.length)
           }
         } else {
           this.setState({ chips: [ ...this.state.chips, chip ] })
@@ -304,7 +304,7 @@ class ChipInput extends React.Component {
         if (chips.indexOf(chip) === -1) {
           if (this.props.value) {
             if (this.props.onRequestAdd) {
-              this.props.onRequestAdd(chip)
+              this.props.onRequestAdd(chip, chips.length)
             }
           } else {
             this.setState({ chips: [ ...this.state.chips, chip ] })
@@ -317,10 +317,10 @@ class ChipInput extends React.Component {
     }
   }
 
-  handleDeleteChip (chip) {
+  handleDeleteChip (chip, i) {
     if (this.props.value) {
       if (this.props.onRequestDelete) {
-        this.props.onRequestDelete(chip)
+        this.props.onRequestDelete(chip, i)
       }
     } else {
       if (this.props.dataSourceConfig) {
@@ -459,7 +459,7 @@ class ChipInput extends React.Component {
                 isDisabled: disabled,
                 isFocused: this.state.focusedChip === value,
                 handleClick: () => this.setState({ focusedChip: value }),
-                handleRequestDelete: () => this.handleDeleteChip(value)
+                handleRequestDelete: () => this.handleDeleteChip(value, i)
               }, i)
             })}
           </div>
