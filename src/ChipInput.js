@@ -290,7 +290,7 @@ class ChipInput extends React.Component {
       if (!chips.find((c) => c[this.props.dataSourceConfig.value] === chip[this.props.dataSourceConfig.value])) {
         if (this.props.value) {
           if (this.props.onRequestAdd) {
-            this.props.onRequestAdd(chip, chips.length)
+            this.props.onRequestAdd(chip)
           }
         } else {
           this.setState({ chips: [ ...this.state.chips, chip ] })
@@ -304,7 +304,7 @@ class ChipInput extends React.Component {
         if (chips.indexOf(chip) === -1) {
           if (this.props.value) {
             if (this.props.onRequestAdd) {
-              this.props.onRequestAdd(chip, chips.length)
+              this.props.onRequestAdd(chip)
             }
           } else {
             this.setState({ chips: [ ...this.state.chips, chip ] })
