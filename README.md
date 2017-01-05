@@ -26,7 +26,7 @@ import ChipInput from 'material-ui-chip-input'
 <ChipInput
   value={yourChips}
   onRequestAdd={(chip) => handleAddChip(chip)}
-  onRequestDelete={(chip) => handleDeleteChip(chip)}
+  onRequestDelete={(chip, index) => handleDeleteChip(chip, index)}
 />
 ```
 
