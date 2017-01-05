@@ -241,7 +241,7 @@ class ChipInput extends React.Component {
         } else if (this.state.focusedChip) {
           const index = chips.indexOf(this.state.focusedChip)
           const value = this.props.dataSourceConfig ? this.state.focusedChip[this.props.dataSourceConfig.value] : this.state.focusedChip
-          this.handleDeleteChip(value)
+          this.handleDeleteChip(value, index)
           if (event.keyCode === 8 && index > 0) {
             this.setState({ focusedChip: chips[index - 1] })
           } else if (event.keyCode === 46 && index < chips.length - 1) {
@@ -317,10 +317,10 @@ class ChipInput extends React.Component {
     }
   }
 
-  handleDeleteChip (chip) {
+  handleDeleteChip (chip, i) {
     if (this.props.value) {
       if (this.props.onRequestDelete) {
-        this.props.onRequestDelete(chip)
+        this.props.onRequestDelete(chip, i)
       }
     } else {
       if (this.props.dataSourceConfig) {
@@ -459,7 +459,7 @@ class ChipInput extends React.Component {
                 isDisabled: disabled,
                 isFocused: this.state.focusedChip === value,
                 handleClick: () => this.setState({ focusedChip: value }),
-                handleRequestDelete: () => this.handleDeleteChip(value)
+                handleRequestDelete: () => this.handleDeleteChip(value, i)
               }, i)
             })}
           </div>
