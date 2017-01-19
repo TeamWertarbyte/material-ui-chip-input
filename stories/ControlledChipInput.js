@@ -31,6 +31,11 @@ class ControlledChipInput extends React.Component {
       value={this.state.chips}
       onRequestAdd={(chip) => this.handleRequestAdd(chip)}
       onRequestDelete={(deletedChip) => this.handleRequestDelete(deletedChip)}
+      onBlur={(event) => {
+        if (this.props.addOnBlur && event.target.value) {
+          this.handleRequestAdd(event.target.value)
+        }
+      }}
       fullWidth
     />
   }

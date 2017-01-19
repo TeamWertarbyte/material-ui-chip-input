@@ -200,3 +200,8 @@ storiesOf('ChipInput', module)
       onTouchTap={action('onTouchTap')}
     />
   ))
+  .add('add text input value on blur', () => themed(
+    <ControlledChipInput
+      addOnBlur
+    />
+  ))
