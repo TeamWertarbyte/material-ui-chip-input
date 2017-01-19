@@ -215,24 +215,15 @@ class ChipInput extends React.Component {
   }
 
   handleInputBlur = (event) => {
-    if (!this.autoComplete.state.open || this.autoComplete.requestsList.length === 0) {
-      if (this.props.blurBehavior || this.props.clearOnBlur) {
-        if ((this.props.blurBehavior === 'add' || this.props.blurBehavior === 'addFirstSuggestion') && event.target.value) {
-          this.handleAddChip(event.target.value)
-        }
-        this.setState({ inputValue: '' })
-      }
-      this.setState({ isFocused: false })
-      if (this.props.onBlur) this.props.onBlur(event)
-    } else if (this.props.blurBehavior === 'addFirstSuggestion' && this.autoComplete.requestsList.length !== 0) {
-      const chipIndex = parseInt(this.autoComplete.requestsList[0].value.key, 10)
-      this.handleAddChip(this.props.dataSource[chipIndex])
-      this.setState({
-        isFocused: false,
-        inputValue: ''
-      })
-      if (this.props.onBlur) this.props.onBlur(event)
+    if (this.props.onBlur) {
+      this.props.onBlur(event)
     }
+    if (!this.autoComplete.state.open || this.autoComplete.requestsList.length === 0) {
+        if (this.props.clearOnBlur) {
+          this.setState({ inputValue: '' })
+        }
+        this.setState({ isFocused: false })
+      }
   }
 
   handleInputFocus = (event) => {
@@ -379,7 +370,6 @@ class ChipInput extends React.Component {
       id,
       inputStyle,
       clearOnBlur,
-      blurBehavior,
       onBlur, // eslint-disable-line no-unused-vars
       onChange, // eslint-disable-line no-unused-vars
       onFocus, // eslint-disable-line no-unused-vars
@@ -549,19 +539,13 @@ ChipInput.propTypes = {
   openOnFocus: PropTypes.bool,
   chipRenderer: PropTypes.func,
   newChipKeyCodes: PropTypes.arrayOf(PropTypes.number),
-  clearOnBlur: PropTypes.bool, // kept for compatibility
-  blurBehavior: PropTypes.oneOf([
-    'clear',
-    'add',
-    'addFirstSuggestion',
-    null
-  ])
+  clearOnBlur: PropTypes.bool
 }
 
 ChipInput.defaultProps = {
   filter: AutoComplete.caseInsensitiveFilter,
   newChipKeyCodes: [13],
-  blurBehavior: 'clear',
+  clearOnBlur: true,
   underlineShow: true
 }
 
