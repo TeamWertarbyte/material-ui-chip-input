@@ -156,7 +156,7 @@ class ChipInput extends React.Component {
       const index = parseInt(child.key, 10);
       const chosenRequest = dataSource[index];
       this.handleAddChip(chosenRequest)
-  
+
       this.autoComplete.setState({
         searchText: '',
       });
@@ -353,6 +353,20 @@ class ChipInput extends React.Component {
     }
   }
 
+  /**
+   * Sets a reference to the AutoComplete instance.
+   *
+   * Using a bound class method here to set `autoComplete` to avoid it being set 
+   * to null by an inline ref callback.
+   *
+   * See [Isuue #71](https://github.com/TeamWertarbyte/material-ui-chip-input/issues/71)
+   *
+   * @param {Object} autoComplete - The AutoComplete DOM element or null
+   */
+  setAutoComplete = (autoComplete) => {
+    this.autoComplete = autoComplete
+  }
+
   render () {
     const {
       children,
@@ -487,7 +501,7 @@ class ChipInput extends React.Component {
           searchText={this.state.inputValue}
           underlineShow={false}
           onKeyUp={this.handleKeyUp}
-          ref={(ref) => this.autoComplete = ref}
+          ref={this.setAutoComplete}
         />
         {underlineShow ?
           <TextFieldUnderline
