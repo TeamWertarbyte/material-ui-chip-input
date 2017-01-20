@@ -46,12 +46,12 @@ import ChipInput from 'material-ui-chip-input'
 | hintText | `node` | | The hint text to display. |
 | id | `string` | _a unique id_ | The id prop for the text field, should be set to some deteministic value if you use server-side rendering. |
 | newChipKeyCodes | `number[]` | `[13]` (enter key) | The key codes used to determine when to create a new chip. |
+| onBlur | `function` | | Callback function that is called with `event` when the input loses focus, where `event.target.value` is the current value of the text input. |
 | onChange | `function` | | Callback function that is called when the chips change (in uncontrolled mode). |
 | onRequestAdd | `function` | | Callback function that is called when a new chip was added (in controlled mode). |
 | onRequestDelete | `function` | | Callback function that is called when a new chip was removed (in controlled mode). |
 | onTouchTap | `function` | | Callback function that is called when text input is clicked. |
 | onUpdateInput | `function` | | Callback function that is called when the input changes (useful for auto complete). |
-| onBlur | `function` | | Callback function that is called with `event` when the input loses focus, where `event.target.value` is the current value of the text input. |
 | openOnFocus | `bool` | `false` | Opens the auto complete list on focus if set to true. |
 | style | `object` | | Override the inline-styles of the root element. |
 | value | `string[]` | | The chips to display (enables controlled mode if set). |

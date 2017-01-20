@@ -41,4 +41,8 @@ class ControlledChipInput extends React.Component {
   }
 }
 
+ControlledChipInput.propTypes = {
+  addOnBlur: React.PropTypes.bool
+}
+
 export default ControlledChipInput
