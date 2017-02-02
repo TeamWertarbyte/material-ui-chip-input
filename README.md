@@ -33,10 +33,10 @@ import ChipInput from 'material-ui-chip-input'
 ## Properties
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| chipRenderer | `function` | | A function of the type `({ value, text, isFocused, isDisabled, handleClick, handleRequestDelete }, key) => node` that returns a chip based on the given properties. This can be used to customize chip styles. |
+| chipRenderer | `function` | | A function of the type `({ value, text, isFocused, isDisabled, handleClick, handleRequestDelete }, key) => node` that returns a chip based on the given properties. This can be used to customize chip styles. Each item in the `dataSource` array will be passed to `chipRenderer` as arguments `value` and `text`. If `dataSource` is an array of objects and `dataSourceConfig` is present, then `value` and `text` will instead correspond to the object values defined in `dataSourceConfig`. If `dataSourceConfig` is not set and `dataSource` is an array of objects, then a custom `chipRenderer` must be set.|
 | clearOnBlur | `bool` | `true` | If true, clears the input value after the component loses focus. |
-| dataSource | `array` | | Data source for auto complete. |
-| dataSourceConfig | `object` | | Config for objects list dataSource, e.g. `{ text: 'text', value: 'value' }`. If not specified, the `dataSource` must be a flat array of strings. |
+| dataSource | `array` | | Data source for auto complete. This should be an array of strings or objects.|
+| dataSourceConfig | `object` | | Config for objects list dataSource, e.g. `{ text: 'text', value: 'value' }`. If not specified, the `dataSource` must be a flat array of strings or a custom `chipRenderer` must be set to handle the objects. |
 | defaultValue | `string[]` | | The chips to display by default (for uncontrolled mode). |
 | disabled | `bool` | `false` | Disables the chip input if set to true. |
 | errorText | `node` | | The error text to display. |
