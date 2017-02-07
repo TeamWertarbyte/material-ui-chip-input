@@ -70,6 +70,9 @@ const getStyles = (props, context, state) => {
     },
     floatingLabelFocusStyle: {
       transform: 'scale(0.75) translate(0, -36px)'
+    },
+    defaultChip: {
+      margin: '8px 8px 0 0', float: 'left'
     }
   };
 
@@ -90,10 +93,10 @@ const getStyles = (props, context, state) => {
   return styles;
 };
 
-const defaultChipRenderer = ({ value, text, isFocused, isDisabled, handleClick, handleRequestDelete }, key) => (
+const defaultChipRenderer = ({ value, text, isFocused, isDisabled, handleClick, handleRequestDelete, defaultStyle }, key) => (
   <Chip
     key={key}
-    style={{ margin: '8px 8px 0 0', float: 'left', pointerEvents: isDisabled ? 'none' : undefined }}
+    style={{...defaultStyle, pointerEvents: isDisabled ? 'none' : undefined }}
     backgroundColor={isFocused ? blue300 : null}
     onTouchTap={handleClick}
     onRequestDelete={handleRequestDelete}
@@ -222,10 +225,12 @@ class ChipInput extends React.Component {
     //A momentary delay is required to support openOnFocus. We must give time for the autocomplete
     //menu to close before checking the current status. Otherwise, tabbing off the input while the
     //menu is open results in the input keeping its focus styles.
+    // The this.autoComplete check was added to prevent an error, because this.autoComplete can be
+    // null
     setTimeout(() => {
-      if (!this.autoComplete.state.open || this.autoComplete.requestsList.length === 0) {
+      if (this.autoComplete && (!this.autoComplete.state.open || this.autoComplete.requestsList.length === 0)) {
         if (this.props.clearOnBlur) {
-          this.setState({ inputValue: '' })
+          this.clearInput()
         }
         this.setState({ isFocused: false })
       }
@@ -284,7 +289,8 @@ class ChipInput extends React.Component {
     if (this.props.newChipKeyCodes.indexOf(event.keyCode) < 0) {
       this.setState({ inputValue: event.target.value })
     } else {
-      this.setState({ inputValue: '' })}
+      this.clearInput()
+    }
   }
 
   handleAddChip (chip) {
@@ -361,10 +367,14 @@ class ChipInput extends React.Component {
     }
   }
 
+  clearInput (){
+    this.setState({ inputValue: '' })
+  }
+
   /**
    * Sets a reference to the AutoComplete instance.
    *
-   * Using a bound class method here to set `autoComplete` to avoid it being set 
+   * Using a bound class method here to set `autoComplete` to avoid it being set
    * to null by an inline ref callback.
    *
    * See [Isuue #71](https://github.com/TeamWertarbyte/material-ui-chip-input/issues/71)
@@ -485,7 +495,8 @@ class ChipInput extends React.Component {
                 isDisabled: disabled,
                 isFocused: this.state.focusedChip === value,
                 handleClick: () => this.setState({ focusedChip: value }),
-                handleRequestDelete: () => this.handleDeleteChip(value, i)
+                handleRequestDelete: () => this.handleDeleteChip(value, i),
+                defaultStyle: styles.defaultChip
               }, i)
             })}
           </div>
