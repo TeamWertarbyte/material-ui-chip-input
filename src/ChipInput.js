@@ -225,7 +225,7 @@ class ChipInput extends React.Component {
     setTimeout(() => {
       if (!this.autoComplete.state.open || this.autoComplete.requestsList.length === 0) {
         if (this.props.clearOnBlur) {
-          this.setState({ inputValue: '' })
+          this.clearInput()
         }
         this.setState({ isFocused: false })
       }
@@ -284,7 +284,8 @@ class ChipInput extends React.Component {
     if (this.props.newChipKeyCodes.indexOf(event.keyCode) < 0) {
       this.setState({ inputValue: event.target.value })
     } else {
-      this.setState({ inputValue: '' })}
+      this.clearInput()
+    }
   }
 
   handleAddChip (chip) {
@@ -359,6 +360,10 @@ class ChipInput extends React.Component {
         }
       }
     }
+  }
+
+  clearInput (){
+    this.setState({ inputValue: '' })
   }
 
   /**
