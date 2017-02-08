@@ -222,8 +222,10 @@ class ChipInput extends React.Component {
     //A momentary delay is required to support openOnFocus. We must give time for the autocomplete
     //menu to close before checking the current status. Otherwise, tabbing off the input while the
     //menu is open results in the input keeping its focus styles.
+    // The this.autoComplete check was added to prevent an error, because this.autoComplete can be
+    // null
     setTimeout(() => {
-      if (!this.autoComplete.state.open || this.autoComplete.requestsList.length === 0) {
+      if (this.autoComplete && (!this.autoComplete.state.open || this.autoComplete.requestsList.length === 0)) {
         if (this.props.clearOnBlur) {
           this.setState({ inputValue: '' })
         }
