@@ -98,10 +98,10 @@ storiesOf('ChipInput', module)
     <ChipInput
       defaultValue={['foo', 'bar']}
       fullWidth
-      chipRenderer={({ value, isFocused, isDisabled, handleClick, handleRequestDelete }, key) => (
+      chipRenderer={({ value, isFocused, isDisabled, handleClick, handleRequestDelete, defaultStyle }, key) => (
         <Chip
           key={key}
-          style={{ margin: '8px 8px 0 0', float: 'left', pointerEvents: isDisabled ? 'none' : undefined }}
+          style={{ ...defaultStyle, pointerEvents: isDisabled ? 'none' : undefined }}
           backgroundColor={isFocused ? green800 : green300}
           onTouchTap={handleClick}
           onRequestDelete={handleRequestDelete}
