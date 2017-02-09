@@ -70,6 +70,10 @@ const getStyles = (props, context, state) => {
     },
     floatingLabelFocusStyle: {
       transform: 'scale(0.75) translate(0, -36px)'
+    },
+    defaultChip: {
+      margin: '8px 8px 0 0',
+      float: 'left'
     }
   };
 
@@ -90,10 +94,10 @@ const getStyles = (props, context, state) => {
   return styles;
 };
 
-const defaultChipRenderer = ({ value, text, isFocused, isDisabled, handleClick, handleRequestDelete }, key) => (
+const defaultChipRenderer = ({ value, text, isFocused, isDisabled, handleClick, handleRequestDelete, defaultStyle }, key) => (
   <Chip
     key={key}
-    style={{ margin: '8px 8px 0 0', float: 'left', pointerEvents: isDisabled ? 'none' : undefined }}
+    style={{ ...defaultStyle, pointerEvents: isDisabled ? 'none' : undefined }}
     backgroundColor={isFocused ? blue300 : null}
     onTouchTap={handleClick}
     onRequestDelete={handleRequestDelete}
@@ -370,10 +374,10 @@ class ChipInput extends React.Component {
   /**
    * Sets a reference to the AutoComplete instance.
    *
-   * Using a bound class method here to set `autoComplete` to avoid it being set 
+   * Using a bound class method here to set `autoComplete` to avoid it being set
    * to null by an inline ref callback.
    *
-   * See [Isuue #71](https://github.com/TeamWertarbyte/material-ui-chip-input/issues/71)
+   * See [Issue #71](https://github.com/TeamWertarbyte/material-ui-chip-input/issues/71)
    *
    * @param {Object} autoComplete - The AutoComplete DOM element or null
    */
@@ -491,7 +495,8 @@ class ChipInput extends React.Component {
                 isDisabled: disabled,
                 isFocused: this.state.focusedChip === value,
                 handleClick: () => this.setState({ focusedChip: value }),
-                handleRequestDelete: () => this.handleDeleteChip(value, i)
+                handleRequestDelete: () => this.handleDeleteChip(value, i),
+                defaultStyle: styles.defaultChip
               }, i)
             })}
           </div>
