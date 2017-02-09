@@ -97,7 +97,7 @@ const getStyles = (props, context, state) => {
 const defaultChipRenderer = ({ value, text, isFocused, isDisabled, handleClick, handleRequestDelete, defaultStyle }, key) => (
   <Chip
     key={key}
-    style={{...defaultStyle, pointerEvents: isDisabled ? 'none' : undefined }}
+    style={{ ...defaultStyle, pointerEvents: isDisabled ? 'none' : undefined }}
     backgroundColor={isFocused ? blue300 : null}
     onTouchTap={handleClick}
     onRequestDelete={handleRequestDelete}
