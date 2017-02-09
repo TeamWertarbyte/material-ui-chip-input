@@ -362,7 +362,7 @@ class ChipInput extends React.Component {
     }
   }
 
-  clearInput (){
+  clearInput () {
     this.setState({ inputValue: '' })
   }
 
