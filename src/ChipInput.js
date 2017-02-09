@@ -72,7 +72,8 @@ const getStyles = (props, context, state) => {
       transform: 'scale(0.75) translate(0, -36px)'
     },
     defaultChip: {
-      margin: '8px 8px 0 0', float: 'left'
+      margin: '8px 8px 0 0',
+      float: 'left'
     }
   };
 
