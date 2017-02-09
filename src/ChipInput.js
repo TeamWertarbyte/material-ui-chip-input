@@ -371,7 +371,7 @@ class ChipInput extends React.Component {
    * Using a bound class method here to set `autoComplete` to avoid it being set
    * to null by an inline ref callback.
    *
-   * See [Isuue #71](https://github.com/TeamWertarbyte/material-ui-chip-input/issues/71)
+   * See [Issue #71](https://github.com/TeamWertarbyte/material-ui-chip-input/issues/71)
    *
    * @param {Object} autoComplete - The AutoComplete DOM element or null
    */
