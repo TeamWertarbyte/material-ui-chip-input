@@ -2,7 +2,8 @@
  * Notice: Some code was adapted from Material-UI's text field.
  *         Copyright (c) 2014 Call-Em-All (https://github.com/callemall/material-ui)
  */
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import TextFieldUnderline from 'material-ui/TextField/TextFieldUnderline'
 import TextFieldHint from 'material-ui/TextField/TextFieldHint'
 import TextFieldLabel from 'material-ui/TextField/TextFieldLabel'

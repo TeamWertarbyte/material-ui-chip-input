@@ -45,5 +45,8 @@
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-tap-event-plugin": "^1.0.0 || ^2.0.0"
+  },
+  "dependencies": {
+    "prop-types": "^15.5.7"
   }
 }
