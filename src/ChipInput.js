@@ -109,7 +109,7 @@ const defaultChipRenderer = ({ value, text, isFocused, isDisabled, handleClick, 
 
 class ChipInput extends React.Component {
   static contextTypes = {
-    muiTheme: React.PropTypes.object.isRequired,
+    muiTheme: PropTypes.object.isRequired,
   };
 
   state = {

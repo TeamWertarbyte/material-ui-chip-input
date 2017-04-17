@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import ChipInput from '../src/ChipInput'
 
 class ControlledChipInput extends React.Component {
@@ -42,7 +43,7 @@ class ControlledChipInput extends React.Component {
 }
 
 ControlledChipInput.propTypes = {
-  addOnBlur: React.PropTypes.bool
+  addOnBlur: PropTypes.bool
 }
 
 export default ControlledChipInput
