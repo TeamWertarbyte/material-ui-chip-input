@@ -15,7 +15,9 @@ function themed(children) {
   return (
     <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
       <div style={{ fontFamily: 'Roboto, sans-serif' }}>
-        {children}
+        <form>
+          {children}
+        </form>
       </div>
     </MuiThemeProvider>
   )
