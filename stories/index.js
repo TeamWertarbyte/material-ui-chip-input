@@ -15,9 +15,7 @@ function themed(children) {
   return (
     <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
       <div style={{ fontFamily: 'Roboto, sans-serif' }}>
-        <form>
-          {children}
-        </form>
+        {children}
       </div>
     </MuiThemeProvider>
   )
@@ -206,4 +204,12 @@ storiesOf('ChipInput', module)
     <ControlledChipInput
       addOnBlur
     />
+  ))
+  .add('single form field', () => themed(
+    <form>
+      <ChipInput
+        onChange={action('onChange')}
+        fullWidth
+      />
+    </form>
   ))
