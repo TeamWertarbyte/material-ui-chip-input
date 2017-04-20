@@ -205,3 +205,12 @@ storiesOf('ChipInput', module)
       addOnBlur
     />
   ))
+  .add('in a form', () => themed(
+    <form>
+      <ChipInput
+        onChange={action('onChange')}
+        floatingLabelText="This is a single chip input inside a <code>form</code>. Note that pressing Enter in the chip input does not submit the form."
+        fullWidth
+      />
+    </form>
+  ))
