@@ -307,7 +307,7 @@ class ChipInput extends React.Component {
         }
       }
 
-      if (!chips.find((c) => c[this.props.dataSourceConfig.value] === chip[this.props.dataSourceConfig.value])) {
+      if (!chips.some((c) => c[this.props.dataSourceConfig.value] === chip[this.props.dataSourceConfig.value])) {
         if (this.props.value) {
           if (this.props.onRequestAdd) {
             this.props.onRequestAdd(chip)
