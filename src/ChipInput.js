@@ -258,7 +258,14 @@ class ChipInput extends React.Component {
         if (this.state.focusedChip == null && event.keyCode === 8) {
           this.setState({ focusedChip: chips[chips.length - 1] })
         } else if (this.state.focusedChip) {
-          const index = chips.indexOf(this.state.focusedChip)
+
+          let index;
+          if (this.props.getChipIndex) {
+            index = this.props.getChipIndex(chips, this.state.focusedChip)
+          }else{
+            index = chips.indexOf(this.state.focusedChip)
+          }
+
           const value = this.props.dataSourceConfig ? this.state.focusedChip[this.props.dataSourceConfig.value] : this.state.focusedChip
           this.handleDeleteChip(value, index)
           if (event.keyCode === 8 && index > 0) {
@@ -369,7 +376,7 @@ class ChipInput extends React.Component {
     }
   }
 
-  clearInput () {
+  clearInput (){
     this.setState({ inputValue: '' })
   }
 
@@ -422,6 +429,7 @@ class ChipInput extends React.Component {
       onRequestDelete, // eslint-disable-line no-unused-vars
       chipRenderer = defaultChipRenderer,
       newChipKeyCodes, // eslint-disable-line no-unused-vars
+      getChipIndex, // eslint-disable-line no-unused-vars
       ...other,
     } = this.props;
 
@@ -572,7 +580,8 @@ ChipInput.propTypes = {
   openOnFocus: PropTypes.bool,
   chipRenderer: PropTypes.func,
   newChipKeyCodes: PropTypes.arrayOf(PropTypes.number),
-  clearOnBlur: PropTypes.bool
+  clearOnBlur: PropTypes.bool,
+  getChipIndex: PropTypes.func
 }
 
 ChipInput.defaultProps = {

@@ -166,14 +166,15 @@ storiesOf('ChipInput', module)
   ))
   .add('objects as chips, controlled', () => themed(
     <ChipInput
-      dataSource={[{ label: 'Chip 1', id: 'one' }, { label: 'Chip 2', id: 'two' }]}
+      dataSource={[{ label: 'Chip 1', id: 'one' }, { label: 'Chip 2', id: 'two' }, { label: 'Chip 3', id: 'three' }]}
       dataSourceConfig={{ text: 'label', value: 'id' }}
-      value={[{ label: 'Chip 1', id: 'one' }]}
+      value={[{ label: 'Chip 1', id: 'one' }, { label: 'Chip 2', id: 'two' }]}
       onChange={action('onChange')}
       onUpdateInput={action('onUpdateInput')}
       onRequestDelete={action('onRequestDelete')}
       onRequestAdd={action('onRequestAdd')}
       onTouchTap={action('onTouchTap')}
+      getChipIndex={(values, valuesElement) => values.map(value => value.id).indexOf(valuesElement.id)}
     />
   ))
   .add('controlled input with auto complete', () => themed(
