@@ -215,6 +215,7 @@ storiesOf('ChipInput', module)
     </form>
   )).add('allows duplicates', () => themed(
     <ChipInput
+        defaultValue={['foo','bar','foo','bar']}
         allowDuplicates
     />
 ))
