@@ -213,4 +213,8 @@ storiesOf('ChipInput', module)
         fullWidth
       />
     </form>
-  ))
+  )).add('allows duplicates', () => themed(
+    <ChipInput
+        allowDuplicates
+    />
+))

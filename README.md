@@ -44,7 +44,7 @@ import ChipInput from 'material-ui-chip-input'
 | fullWidth | `bool` | `false` | If true, the chip input will fill the available width. |
 | fullWidthInput | `bool` | `false` | If true, the input field will always be below the chips and fill the available space. By default, it will try to be beside the chips. |
 | hintText | `node` | | The hint text to display. |
-| id | `string` | _a unique id_ | The id prop for the text field, should be set to some deteministic value if you use server-side rendering. |
+| id | `string` | _a unique id_ | The id prop for the text field, should be set to some deterministic value if you use server-side rendering. |
 | newChipKeyCodes | `number[]` | `[13]` (enter key) | The key codes used to determine when to create a new chip. |
 | onBlur | `function` | | Callback function that is called with `event` when the input loses focus, where `event.target.value` is the current value of the text input. |
 | onChange | `function` | | Callback function that is called when the chips change (in uncontrolled mode). |
@@ -55,7 +55,7 @@ import ChipInput from 'material-ui-chip-input'
 | openOnFocus | `bool` | `false` | Opens the auto complete list on focus if set to true. |
 | style | `object` | | Override the inline-styles of the root element. |
 | value | `string[]` | | The chips to display (enables controlled mode if set). |
-
+| allowDuplicates | `bool` | | If true allows duplicate chips (default false) |
 
 Additionally, most other properties of Material UI's [Auto Complete][mui-auto-complete] and [Text Field][mui-text-field] should be supported. Please open an issue if something is missing or does not work as expected.
 
