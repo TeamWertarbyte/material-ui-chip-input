@@ -33,6 +33,7 @@ import ChipInput from 'material-ui-chip-input'
 ## Properties
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
+| allowDuplicates | `bool` | `false` | If true allows duplicate chips. |
 | chipRenderer | `function` | | A function of the type `({ value, text, isFocused, isDisabled, handleClick, handleRequestDelete, defaultStyle }, key) => node` that returns a chip based on the given properties. This can be used to customize chip styles. |
 | clearOnBlur | `bool` | `true` | If true, clears the input value after the component loses focus. |
 | dataSource | `array` | | Data source for auto complete. |
@@ -55,7 +56,7 @@ import ChipInput from 'material-ui-chip-input'
 | openOnFocus | `bool` | `false` | Opens the auto complete list on focus if set to true. |
 | style | `object` | | Override the inline-styles of the root element. |
 | value | `string[]` | | The chips to display (enables controlled mode if set). |
-| allowDuplicates | `bool` | | If true allows duplicate chips (default false) |
+
 
 Additionally, most other properties of Material UI's [Auto Complete][mui-auto-complete] and [Text Field][mui-text-field] should be supported. Please open an issue if something is missing or does not work as expected.
 
