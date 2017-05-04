@@ -1,5 +1,5 @@
 import React from 'react'
-import { storiesOf, action, linkTo } from '@kadira/storybook'
+import { storiesOf, action } from '@kadira/storybook'
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
@@ -11,7 +11,7 @@ import ChipInput from '../src/ChipInput'
 import ControlledChipInput from './ControlledChipInput'
 import ClipboardExample from './ClipboardExample'
 
-function themed(children) {
+function themed (children) {
   return (
     <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
       <div style={{ fontFamily: 'Roboto, sans-serif' }}>
@@ -38,7 +38,7 @@ storiesOf('ChipInput', module)
   ))
   .add('with hintText', () => themed(
     <ChipInput
-      hintText="Hint text"
+      hintText='Hint text'
       fullWidth
     />
   ))
@@ -46,7 +46,7 @@ storiesOf('ChipInput', module)
     <ChipInput
       fullWidth
       dataSource={['alpha', 'beta']}
-      hintText="Try typing a..."
+      hintText='Try typing a...'
     />
   ))
   .add('with auto complete, open on focus', () => themed(
@@ -54,7 +54,7 @@ storiesOf('ChipInput', module)
       fullWidth
       openOnFocus
       dataSource={['alpha', 'beta']}
-      hintText="Try typing a..."
+      hintText='Try typing a...'
     />
   ))
   .add('with auto complete, custom filter, open on focus', () => themed(
@@ -63,26 +63,26 @@ storiesOf('ChipInput', module)
       openOnFocus
       filter={AutoComplete.fuzzyFilter}
       dataSource={['alpha', 'beta']}
-      hintText="Try typing apha..."
+      hintText='Try typing apha...'
     />
   ))
   .add('with floating label', () => themed(
     <ChipInput
-      floatingLabelText="Floating label"
+      floatingLabelText='Floating label'
       fullWidth
     />
   ))
   .add('with floating label and hint text', () => themed(
     <ChipInput
-      floatingLabelText="Floating label"
-      hintText="Hint text"
+      floatingLabelText='Floating label'
+      hintText='Hint text'
       fullWidth
     />
   ))
   .add('disabled', () => themed(
     <ChipInput
       defaultValue={['foo', 'bar']}
-      floatingLabelText="Disabled input"
+      floatingLabelText='Disabled input'
       disabled
       fullWidth
     />
@@ -90,7 +90,7 @@ storiesOf('ChipInput', module)
   .add('with custom width', () => themed(
     <ChipInput
       defaultValue={['foo', 'bar']}
-      floatingLabelText="A chip input with a width of 321px"
+      floatingLabelText='A chip input with a width of 321px'
       style={{ width: 321 }}
     />
   ))
@@ -114,7 +114,7 @@ storiesOf('ChipInput', module)
   ))
   .add('with errorText', () => themed(
     <ChipInput
-      errorText="This is an error."
+      errorText='This is an error.'
     />
   ))
   .add('without underline', () => themed(
@@ -180,7 +180,7 @@ storiesOf('ChipInput', module)
     <ControlledChipInput
       openOnFocus
       dataSource={['foo', 'bar']}
-      inputProps={{ fullWidth: true, }}
+      inputProps={{ fullWidth: true }}
     />
   ))
   .add('with fullWidthInput', () => themed(
@@ -209,7 +209,7 @@ storiesOf('ChipInput', module)
     <form>
       <ChipInput
         onChange={action('onChange')}
-        floatingLabelText="This is a single chip input inside a <code>form</code>. Note that pressing Enter in the chip input does not submit the form."
+        floatingLabelText='This is a single chip input inside a <code>form</code>. Note that pressing Enter in the chip input does not submit the form.'
         fullWidth
       />
     </form>

@@ -11,7 +11,6 @@ import AutoComplete from 'material-ui/AutoComplete/AutoComplete'
 import transitions from 'material-ui/styles/transitions'
 import Chip from 'material-ui/Chip'
 import {blue300} from 'material-ui/styles/colors'
-import {fade} from 'material-ui/utils/colorManipulator'
 
 const getStyles = (props, context, state) => {
   const {
@@ -22,9 +21,9 @@ const getStyles = (props, context, state) => {
       textColor,
       disabledTextColor,
       backgroundColor,
-      errorColor,
-    },
-  } = context.muiTheme;
+      errorColor
+    }
+  } = context.muiTheme
 
   const styles = {
     root: {
@@ -54,7 +53,7 @@ const getStyles = (props, context, state) => {
       font: 'inherit',
       appearance: 'none', // Remove border in Safari, doesn't seem to break anything in other browsers
       WebkitTapHighlightColor: 'rgba(0,0,0,0)', // Remove mobile color flashing (deprecated style).
-      float: 'left',
+      float: 'left'
     },
     error: {
       position: 'absolute',
@@ -62,7 +61,7 @@ const getStyles = (props, context, state) => {
       fontSize: 12,
       lineHeight: '12px',
       color: errorColor,
-      transition: transitions.easeOut(),
+      transition: transitions.easeOut()
     },
     floatingLabel: {
       color: props.disabled ? disabledTextColor : floatingLabelColor,
@@ -76,24 +75,24 @@ const getStyles = (props, context, state) => {
       margin: '8px 8px 0 0',
       float: 'left'
     }
-  };
+  }
 
   if (state.isFocused) {
-    styles.floatingLabel.color = focusColor;
+    styles.floatingLabel.color = focusColor
   }
 
   if (props.floatingLabelText) {
-    styles.input.boxSizing = 'border-box';
+    styles.input.boxSizing = 'border-box'
   }
 
   if (state.errorText) {
     if (state.isFocused) {
-      styles.floatingLabel.color = styles.error.color;
+      styles.floatingLabel.color = styles.error.color
     }
   }
 
-  return styles;
-};
+  return styles
+}
 
 const defaultChipRenderer = ({ value, text, isFocused, isDisabled, handleClick, handleRequestDelete, defaultStyle }, key) => (
   <Chip
@@ -109,7 +108,7 @@ const defaultChipRenderer = ({ value, text, isFocused, isDisabled, handleClick, 
 
 class ChipInput extends React.Component {
   static contextTypes = {
-    muiTheme: PropTypes.object.isRequired,
+    muiTheme: PropTypes.object.isRequired
   };
 
   state = {
@@ -128,22 +127,22 @@ class ChipInput extends React.Component {
     }
   }
 
-  componentWillMount() {
+  componentWillMount () {
     const {
       name,
       hintText,
       floatingLabelText
-    } = this.props;
+    } = this.props
 
     this.setState({
       errorText: this.props.errorText
     })
 
-    const uniqueId = `${name}-${hintText}-${floatingLabelText}-${Math.floor(Math.random() * 0xFFFF)}`;
-    this.uniqueId = uniqueId.replace(/[^A-Za-z0-9-]/gi, '');
+    const uniqueId = `${name}-${hintText}-${floatingLabelText}-${Math.floor(Math.random() * 0xFFFF)}`
+    this.uniqueId = uniqueId.replace(/[^A-Za-z0-9-]/gi, '')
   }
 
-  componentDidMount() {
+  componentDidMount () {
     const handleKeyDown = this.autoComplete.handleKeyDown
     this.autoComplete.handleKeyDown = (event) => {
       if (this.props.newChipKeyCodes.indexOf(event.keyCode) >= 0) {
@@ -157,15 +156,15 @@ class ChipInput extends React.Component {
     }
 
     this.autoComplete.handleItemTouchTap = (event, child) => {
-      const dataSource = this.autoComplete.props.dataSource;
+      const dataSource = this.autoComplete.props.dataSource
 
-      const index = parseInt(child.key, 10);
-      const chosenRequest = dataSource[index];
+      const index = parseInt(child.key, 10)
+      const chosenRequest = dataSource[index]
       this.handleAddChip(chosenRequest)
 
       this.autoComplete.setState({
-        searchText: '',
-      });
+        searchText: ''
+      })
       this.autoComplete.forceUpdate()
       this.autoComplete.close()
 
@@ -187,17 +186,17 @@ class ChipInput extends React.Component {
     }
   }
 
-  blur() {
-    if (this.input) this.getInputNode().blur();
+  blur () {
+    if (this.input) this.getInputNode().blur()
   }
 
-  focus() {
+  focus () {
     if (this.autoComplete) {
-      this.getInputNode().focus();
+      this.getInputNode().focus()
       if (this.props.openOnFocus) {
         this.autoComplete.setState({
           open: true,
-          anchorEl: this.getInputNode(),
+          anchorEl: this.getInputNode()
         })
 
         this.autoComplete.forceUpdate()
@@ -208,15 +207,15 @@ class ChipInput extends React.Component {
     }
   }
 
-  select() {
-    if (this.input) this.getInputNode().select();
+  select () {
+    if (this.input) this.getInputNode().select()
   }
 
-  getValue() {
-    return this.input ? this.getInputNode().value : undefined;
+  getValue () {
+    return this.input ? this.getInputNode().value : undefined
   }
 
-  getInputNode() {
+  getInputNode () {
     return this.autoComplete.refs.searchTextField.getInputNode()
   }
 
@@ -236,16 +235,16 @@ class ChipInput extends React.Component {
         }
         this.setState({ isFocused: false })
       }
-    }, 0);
+    }, 0)
   }
 
   handleInputFocus = (event) => {
     if (this.props.disabled) {
-      return;
+      return
     }
-    this.setState({isFocused: true});
+    this.setState({isFocused: true})
     if (this.props.onFocus) {
-      this.props.onFocus(event);
+      this.props.onFocus(event)
     }
   }
 
@@ -303,7 +302,7 @@ class ChipInput extends React.Component {
       if (typeof chip === 'string') {
         chip = {
           [this.props.dataSourceConfig.text]: chip,
-          [this.props.dataSourceConfig.value]: chip,
+          [this.props.dataSourceConfig.value]: chip
         }
       }
 
@@ -410,7 +409,7 @@ class ChipInput extends React.Component {
       underlineFocusStyle,
       underlineShow,
       underlineStyle,
-      defaultValue = [],
+      defaultValue = [], // eslint-disable-line no-unused-vars
       filter,
       value,
       dataSource,
@@ -422,16 +421,16 @@ class ChipInput extends React.Component {
       onRequestDelete, // eslint-disable-line no-unused-vars
       chipRenderer = defaultChipRenderer,
       newChipKeyCodes, // eslint-disable-line no-unused-vars
-      ...other,
-    } = this.props;
+      ...other
+    } = this.props
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context, this.state);
-    const inputId = id || this.uniqueId;
+    const {prepareStyles} = this.context.muiTheme
+    const styles = getStyles(this.props, this.context, this.state)
+    const inputId = id || this.uniqueId
 
     const inputProps = {
       id: inputId,
-      ref: (elem) => this.input = elem,
+      ref: (elem) => { this.input = elem },
       disabled: !!this.props.disabled,
       onBlur: this.handleInputBlur,
       onFocus: this.handleInputFocus,
@@ -439,7 +438,7 @@ class ChipInput extends React.Component {
       fullWidth: !!fullWidthInput
     }
 
-    const inputStyleMerged = Object.assign(styles.input, inputStyle);
+    const inputStyleMerged = Object.assign(styles.input, inputStyle)
 
     const hasInput = (this.props.value || this.state.chips).length > 0 || this.state.inputValue.length > 0
     const showHintText = hintText && !hasInput
@@ -482,7 +481,7 @@ class ChipInput extends React.Component {
 
     return (
       <div
-        className={ className }
+        className={className}
         style={prepareStyles(Object.assign(styles.root, style, overrideRootStyles))}
         onTouchTap={() => this.focus()}
       >
@@ -503,14 +502,14 @@ class ChipInput extends React.Component {
             })}
           </div>
         </div>
-        {hintText ?
-          <TextFieldHint
+        {hintText
+          ? <TextFieldHint
             muiTheme={this.context.muiTheme}
             show={showHintText && !(floatingLabelText && !floatingLabelFixed && !this.state.isFocused)}
             style={Object.assign({ bottom: 20, pointerEvents: 'none' }, hintStyle)}
             text={hintText}
-          /> :
-          null
+          />
+          : null
         }
         <AutoComplete
           {...other}
@@ -524,8 +523,8 @@ class ChipInput extends React.Component {
           onKeyUp={this.handleKeyUp}
           ref={this.setAutoComplete}
         />
-        {underlineShow ?
-          <TextFieldUnderline
+        {underlineShow
+          ? <TextFieldUnderline
             disabled={disabled}
             disabledStyle={underlineDisabledStyle}
             error={!!this.state.errorText}
@@ -534,8 +533,8 @@ class ChipInput extends React.Component {
             focusStyle={underlineFocusStyle}
             muiTheme={this.context.muiTheme}
             style={underlineStyle}
-          /> :
-          null
+          />
+          : null
         }
         {errorTextElement}
       </div>

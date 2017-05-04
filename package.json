@@ -5,6 +5,8 @@
   "main": "lib/ChipInput.js",
   "scripts": {
     "build": "babel src -d lib",
+    "test": "standard",
+    "lint": "standard",
     "prepublish": "babel src -d lib",
     "storybook": "start-storybook -p 6006",
     "deploy-storybook": "storybook-to-ghpages"
@@ -31,6 +33,7 @@
     "@kadira/storybook-deployer": "^1.2.0",
     "babel-cli": "^6.14.0",
     "babel-core": "^6.8.0",
+    "babel-eslint": "^7.2.3",
     "babel-plugin-transform-object-assign": "^6.8.0",
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-react": "^6.11.1",
@@ -38,7 +41,8 @@
     "material-ui": "^0.17.0",
     "react": "^15.4.0",
     "react-dom": "^15.4.0",
-    "react-tap-event-plugin": "^2.0.0"
+    "react-tap-event-plugin": "^2.0.0",
+    "standard": "^10.0.2"
   },
   "peerDependencies": {
     "material-ui": ">= 0.15.0 <= 0.17.x",
@@ -48,5 +52,8 @@
   },
   "dependencies": {
     "prop-types": "^15.5.7"
+  },
+  "standard": {
+    "parser": "babel-eslint"
   }
 }
