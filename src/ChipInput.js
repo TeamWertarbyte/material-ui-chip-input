@@ -344,7 +344,7 @@ class ChipInput extends React.Component {
       }
     } else {
       if (this.props.dataSourceConfig) {
-        const chips = this.state.chips;
+        const chips = this.state.chips.slice();
         let changed = chips.splice(i,1) // remove the chip at index i
         if (changed) {
           this.setState({
@@ -356,7 +356,7 @@ class ChipInput extends React.Component {
           }
         }
       } else {
-        const chips = this.state.chips
+        const chips = this.state.chips.slice();
         let changed = chips.splice(i,1) // remove the chip at index i
         if (changed) {
           this.setState({
