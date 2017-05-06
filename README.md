@@ -33,6 +33,7 @@ import ChipInput from 'material-ui-chip-input'
 ## Properties
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
+| allowDuplicates | `bool` | `false` | If true allows duplicate chips. |
 | chipRenderer | `function` | | A function of the type `({ value, text, isFocused, isDisabled, handleClick, handleRequestDelete, defaultStyle }, key) => node` that returns a chip based on the given properties. This can be used to customize chip styles. |
 | clearOnBlur | `bool` | `true` | If true, clears the input value after the component loses focus. |
 | dataSource | `array` | | Data source for auto complete. |
@@ -44,7 +45,7 @@ import ChipInput from 'material-ui-chip-input'
 | fullWidth | `bool` | `false` | If true, the chip input will fill the available width. |
 | fullWidthInput | `bool` | `false` | If true, the input field will always be below the chips and fill the available space. By default, it will try to be beside the chips. |
 | hintText | `node` | | The hint text to display. |
-| id | `string` | _a unique id_ | The id prop for the text field, should be set to some deteministic value if you use server-side rendering. |
+| id | `string` | _a unique id_ | The id prop for the text field, should be set to some deterministic value if you use server-side rendering. |
 | newChipKeyCodes | `number[]` | `[13]` (enter key) | The key codes used to determine when to create a new chip. |
 | onBlur | `function` | | Callback function that is called with `event` when the input loses focus, where `event.target.value` is the current value of the text input. |
 | onChange | `function` | | Callback function that is called when the chips change (in uncontrolled mode). |

@@ -306,7 +306,7 @@ class ChipInput extends React.Component {
         }
       }
 
-      if (!chips.some((c) => c[this.props.dataSourceConfig.value] === chip[this.props.dataSourceConfig.value])) {
+      if (this.props.allowDuplicates || !chips.some((c) => c[this.props.dataSourceConfig.value] === chip[this.props.dataSourceConfig.value])) {
         if (this.props.value) {
           if (this.props.onRequestAdd) {
             this.props.onRequestAdd(chip)
@@ -320,7 +320,7 @@ class ChipInput extends React.Component {
       }
     } else {
       if (chip.trim().length > 0) {
-        if (chips.indexOf(chip) === -1) {
+        if (this.props.allowDuplicates || chips.indexOf(chip) === -1) {
           if (this.props.value) {
             if (this.props.onRequestAdd) {
               this.props.onRequestAdd(chip)
@@ -343,8 +343,9 @@ class ChipInput extends React.Component {
       }
     } else {
       if (this.props.dataSourceConfig) {
-        const chips = this.state.chips.filter((c) => c[this.props.dataSourceConfig.value] !== chip)
-        if (chips.length !== this.state.chips.length) {
+        const chips = this.state.chips.slice();
+        let changed = chips.splice(i,1) // remove the chip at index i
+        if (changed) {
           this.setState({
             chips,
             focusedChip: this.state.focusedChip && this.state.focusedChip[this.props.dataSourceConfig.value] === chip ? null : this.state.focusedChip
@@ -354,8 +355,9 @@ class ChipInput extends React.Component {
           }
         }
       } else {
-        const chips = this.state.chips.filter((c) => c !== chip)
-        if (chips.length !== this.state.chips.length) {
+        const chips = this.state.chips.slice();
+        let changed = chips.splice(i,1) // remove the chip at index i
+        if (changed) {
           this.setState({
             chips,
             focusedChip: this.state.focusedChip === chip ? null : this.state.focusedChip
@@ -421,7 +423,8 @@ class ChipInput extends React.Component {
       onRequestDelete, // eslint-disable-line no-unused-vars
       chipRenderer = defaultChipRenderer,
       newChipKeyCodes, // eslint-disable-line no-unused-vars
-      ...other
+      allowDuplicates, // eslint-disable-line no-unused-vars
+      ...other,
     } = this.props
 
     const {prepareStyles} = this.context.muiTheme
