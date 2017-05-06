@@ -33,7 +33,7 @@ import ChipInput from 'material-ui-chip-input'
 ## Properties
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| allowDuplicates | `bool` | `false` | If true allows duplicate chips. |
+| allowDuplicates | `bool` | `false` | Allows duplicate chips if set to true. |
 | chipRenderer | `function` | | A function of the type `({ value, text, isFocused, isDisabled, handleClick, handleRequestDelete, defaultStyle }, key) => node` that returns a chip based on the given properties. This can be used to customize chip styles. |
 | clearOnBlur | `bool` | `true` | If true, clears the input value after the component loses focus. |
 | dataSource | `array` | | Data source for auto complete. |

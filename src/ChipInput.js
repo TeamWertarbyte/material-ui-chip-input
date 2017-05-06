@@ -343,8 +343,8 @@ class ChipInput extends React.Component {
       }
     } else {
       if (this.props.dataSourceConfig) {
-        const chips = this.state.chips.slice();
-        let changed = chips.splice(i,1) // remove the chip at index i
+        const chips = this.state.chips.slice()
+        let changed = chips.splice(i, 1) // remove the chip at index i
         if (changed) {
           this.setState({
             chips,
@@ -355,8 +355,8 @@ class ChipInput extends React.Component {
           }
         }
       } else {
-        const chips = this.state.chips.slice();
-        let changed = chips.splice(i,1) // remove the chip at index i
+        const chips = this.state.chips.slice()
+        let changed = chips.splice(i, 1) // remove the chip at index i
         if (changed) {
           this.setState({
             chips,
@@ -424,7 +424,7 @@ class ChipInput extends React.Component {
       chipRenderer = defaultChipRenderer,
       newChipKeyCodes, // eslint-disable-line no-unused-vars
       allowDuplicates, // eslint-disable-line no-unused-vars
-      ...other,
+      ...other
     } = this.props
 
     const {prepareStyles} = this.context.muiTheme
@@ -574,13 +574,15 @@ ChipInput.propTypes = {
   openOnFocus: PropTypes.bool,
   chipRenderer: PropTypes.func,
   newChipKeyCodes: PropTypes.arrayOf(PropTypes.number),
-  clearOnBlur: PropTypes.bool
+  clearOnBlur: PropTypes.bool,
+  allowDuplicates: PropTypes.bool
 }
 
 ChipInput.defaultProps = {
   filter: AutoComplete.caseInsensitiveFilter,
   newChipKeyCodes: [13],
   clearOnBlur: true,
+  allowDuplicates: false,
   underlineShow: true
 }
 
