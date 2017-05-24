@@ -145,7 +145,8 @@ class ChipInput extends React.Component {
   componentDidMount () {
     const handleKeyDown = this.autoComplete.handleKeyDown
     this.autoComplete.handleKeyDown = (event) => {
-      if (this.props.newChipKeyCodes.indexOf(event.keyCode) >= 0) {
+      const {newChipKeyCodes} = this.props
+      if (newChipKeyCodes.indexOf(event.keyCode) >= 0 && event.target.value) {
         event.preventDefault()
         this.handleAddChip(event.target.value)
         this.autoComplete.setState({ searchText: '' })
