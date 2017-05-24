@@ -206,10 +206,10 @@ storiesOf('ChipInput', module)
     />
   ))
   .add('in a form', () => themed(
-    <form>
+    <form onSubmit={e => {e.preventDefault(); action('onSubmit')()}}>
       <ChipInput
         onChange={action('onChange')}
-        floatingLabelText='This is a single chip input inside a <code>form</code>. Note that pressing Enter in the chip input does not submit the form.'
+        floatingLabelText='This is a single chip input inside a form. Note that pressing Enter does not submit the form if a chip is being added.'
         fullWidth
       />
     </form>
@@ -219,4 +219,15 @@ storiesOf('ChipInput', module)
        defaultValue={['foo', 'bar', 'foo', 'bar']}
        allowDuplicates
     />
-))
+  ))
+  .add('tabbing between fields', () => themed(
+    <form>
+      <ChipInput
+        floatingLabelText='"Tab" key selects the next field when there is no active chip.'
+        newChipKeyCodes={[9, 13]}
+        fullWidth
+      />
+      <br />
+      <input type="text" />
+    </form>
+  ))
