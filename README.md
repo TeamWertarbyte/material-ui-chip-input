@@ -55,6 +55,7 @@ import ChipInput from 'material-ui-chip-input'
 | onUpdateInput | `function` | | Callback function that is called when the input changes (useful for auto complete). |
 | openOnFocus | `bool` | `false` | Opens the auto complete list on focus if set to true. |
 | style | `object` | | Override the inline-styles of the root element. |
+| chipContainerStyle | `object` | | Override the inline-styles of the chip container element. |
 | value | `string[]` | | The chips to display (enables controlled mode if set). |
 
 
