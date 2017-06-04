@@ -214,7 +214,7 @@ storiesOf('ChipInput', module)
     />
   ))
   .add('in a form', () => themed(
-    <form onSubmit={e => {e.preventDefault(); action('onSubmit')()}}>
+    <form onSubmit={e => { e.preventDefault(); action('onSubmit')() }}>
       <ChipInput
         onChange={action('onChange')}
         floatingLabelText='This is a single chip input inside a form. Note that pressing Enter does not submit the form if a chip is being added.'
@@ -236,6 +236,6 @@ storiesOf('ChipInput', module)
         fullWidth
       />
       <br />
-      <input type="text" />
+      <input type='text' />
     </form>
   ))
