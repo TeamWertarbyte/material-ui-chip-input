@@ -34,6 +34,7 @@ import ChipInput from 'material-ui-chip-input'
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | allowDuplicates | `bool` | `false` | Allows duplicate chips if set to true. |
+| chipContainerStyle | `object` | | Override the inline-styles of the chip container element. |
 | chipRenderer | `function` | | A function of the type `({ value, text, isFocused, isDisabled, handleClick, handleRequestDelete, defaultStyle }, key) => node` that returns a chip based on the given properties. This can be used to customize chip styles. |
 | clearOnBlur | `bool` | `true` | If true, clears the input value after the component loses focus. |
 | dataSource | `array` | | Data source for auto complete. |
@@ -55,7 +56,6 @@ import ChipInput from 'material-ui-chip-input'
 | onUpdateInput | `function` | | Callback function that is called when the input changes (useful for auto complete). |
 | openOnFocus | `bool` | `false` | Opens the auto complete list on focus if set to true. |
 | style | `object` | | Override the inline-styles of the root element. |
-| chipContainerStyle | `object` | | Override the inline-styles of the chip container element. |
 | value | `string[]` | | The chips to display (enables controlled mode if set). |
 
 
