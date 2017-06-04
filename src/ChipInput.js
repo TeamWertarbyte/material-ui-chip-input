@@ -495,7 +495,7 @@ class ChipInput extends React.Component {
       >
         <div>
           {floatingLabelTextElement}
-          <div style={Object.assign(styles.chipContainer, chipContainerStyle)}>
+          <div style={{ ...styles.chipContainer, ...chipContainerStyle }}>
             {chips.map((tag, i) => {
               const value = dataSourceConfig ? tag[dataSourceConfig.value] : tag
               return chipRenderer({
