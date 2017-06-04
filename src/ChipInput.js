@@ -74,6 +74,9 @@ const getStyles = (props, context, state) => {
     defaultChip: {
       margin: '8px 8px 0 0',
       float: 'left'
+    },
+    chipContainer: {
+      marginTop: props.floatingLabelText ? 12 : 0
     }
   }
 
@@ -408,6 +411,7 @@ class ChipInput extends React.Component {
       onChange, // eslint-disable-line no-unused-vars
       onFocus, // eslint-disable-line no-unused-vars
       style,
+      chipContainerStyle,
       underlineDisabledStyle,
       underlineFocusStyle,
       underlineShow,
@@ -491,7 +495,7 @@ class ChipInput extends React.Component {
       >
         <div>
           {floatingLabelTextElement}
-          <div style={{ marginTop: floatingLabelText ? 12 : 0 }}>
+          <div style={Object.assign(styles.chipContainer, chipContainerStyle)}>
             {chips.map((tag, i) => {
               const value = dataSourceConfig ? tag[dataSourceConfig.value] : tag
               return chipRenderer({
@@ -548,6 +552,7 @@ class ChipInput extends React.Component {
 
 ChipInput.propTypes = {
   style: PropTypes.object,
+  chipContainerStyle: PropTypes.object,
   floatingLabelText: PropTypes.node,
   hintText: PropTypes.node,
   id: PropTypes.string,
