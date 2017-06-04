@@ -36,6 +36,14 @@ storiesOf('ChipInput', module)
       fullWidth
     />
   ))
+  .add('with custom chip container styles', () => themed(
+    <ChipInput
+      fullWidth
+      onChange={action('onChange')}
+      chipContainerStyle={{ overflow: 'auto', maxHeight: '56px' }}
+      defaultValue={[...Array(100).keys()].map((c) => `Chip ${c}`)}
+    />
+  ))
   .add('with hintText', () => themed(
     <ChipInput
       hintText='Hint text'
