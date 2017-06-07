@@ -490,7 +490,7 @@ class ChipInput extends React.Component {
     return (
       <div
         className={className}
-        style={prepareStyles(Object.assign(styles.root, style, overrideRootStyles))}
+        style={prepareStyles(Object.assign(styles.root, overrideRootStyles, style))}
         onTouchTap={() => this.focus()}
       >
         <div>
