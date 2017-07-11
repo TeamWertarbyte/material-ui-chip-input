@@ -448,6 +448,8 @@ class ChipInput extends React.Component {
       onBlur: this.handleInputBlur,
       onFocus: this.handleInputFocus,
       onKeyDown: this.handleKeyDown,
+      onKeyUp: this.handleKeyUp,
+      onKeyPress: this.handleKeyPress,
       fullWidth: !!fullWidthInput
     }
 
@@ -533,8 +535,6 @@ class ChipInput extends React.Component {
           dataSourceConfig={dataSourceConfig}
           searchText={this.state.inputValue}
           underlineShow={false}
-          onKeyUp={this.handleKeyUp}
-          onKeyPress={this.handleKeyPress}
           ref={this.setAutoComplete}
         />
         {underlineShow
