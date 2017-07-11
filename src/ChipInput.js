@@ -561,21 +561,12 @@ ChipInput.propTypes = {
     value: PropTypes.string.isRequired
   }),
   disabled: PropTypes.bool,
-  defaultValue: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.string),
-    PropTypes.arrayOf(PropTypes.object)
-  ]),
+  defaultValue: PropTypes.array,
   onChange: PropTypes.func,
-  value: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.string),
-    PropTypes.arrayOf(PropTypes.object)
-  ]),
+  value: PropTypes.array,
   onRequestAdd: PropTypes.func,
   onRequestDelete: PropTypes.func,
-  dataSource: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.string),
-    PropTypes.arrayOf(PropTypes.object)
-  ]),
+  dataSource: PropTypes.array,
   onUpdateInput: PropTypes.func,
   openOnFocus: PropTypes.bool,
   chipRenderer: PropTypes.func,
