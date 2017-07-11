@@ -1,5 +1,5 @@
 import React from 'react'
-import { storiesOf, action, linkTo } from '@kadira/storybook'
+import { storiesOf, action } from '@kadira/storybook'
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
@@ -11,7 +11,7 @@ import ChipInput from '../src/ChipInput'
 import ControlledChipInput from './ControlledChipInput'
 import ClipboardExample from './ClipboardExample'
 
-function themed(children) {
+function themed (children) {
   return (
     <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
       <div style={{ fontFamily: 'Roboto, sans-serif' }}>
@@ -36,9 +36,17 @@ storiesOf('ChipInput', module)
       fullWidth
     />
   ))
+  .add('with custom chip container styles', () => themed(
+    <ChipInput
+      fullWidth
+      onChange={action('onChange')}
+      chipContainerStyle={{ overflow: 'auto', maxHeight: '56px' }}
+      defaultValue={[...Array(100).keys()].map((c) => `Chip ${c}`)}
+    />
+  ))
   .add('with hintText', () => themed(
     <ChipInput
-      hintText="Hint text"
+      hintText='Hint text'
       fullWidth
     />
   ))
@@ -46,7 +54,7 @@ storiesOf('ChipInput', module)
     <ChipInput
       fullWidth
       dataSource={['alpha', 'beta']}
-      hintText="Try typing a..."
+      hintText='Try typing a...'
     />
   ))
   .add('with auto complete, open on focus', () => themed(
@@ -54,7 +62,7 @@ storiesOf('ChipInput', module)
       fullWidth
       openOnFocus
       dataSource={['alpha', 'beta']}
-      hintText="Try typing a..."
+      hintText='Try typing a...'
     />
   ))
   .add('with auto complete, custom filter, open on focus', () => themed(
@@ -63,26 +71,26 @@ storiesOf('ChipInput', module)
       openOnFocus
       filter={AutoComplete.fuzzyFilter}
       dataSource={['alpha', 'beta']}
-      hintText="Try typing apha..."
+      hintText='Try typing apha...'
     />
   ))
   .add('with floating label', () => themed(
     <ChipInput
-      floatingLabelText="Floating label"
+      floatingLabelText='Floating label'
       fullWidth
     />
   ))
   .add('with floating label and hint text', () => themed(
     <ChipInput
-      floatingLabelText="Floating label"
-      hintText="Hint text"
+      floatingLabelText='Floating label'
+      hintText='Hint text'
       fullWidth
     />
   ))
   .add('disabled', () => themed(
     <ChipInput
       defaultValue={['foo', 'bar']}
-      floatingLabelText="Disabled input"
+      floatingLabelText='Disabled input'
       disabled
       fullWidth
     />
@@ -90,7 +98,7 @@ storiesOf('ChipInput', module)
   .add('with custom width', () => themed(
     <ChipInput
       defaultValue={['foo', 'bar']}
-      floatingLabelText="A chip input with a width of 321px"
+      floatingLabelText='A chip input with a width of 321px'
       style={{ width: 321 }}
     />
   ))
@@ -98,10 +106,10 @@ storiesOf('ChipInput', module)
     <ChipInput
       defaultValue={['foo', 'bar']}
       fullWidth
-      chipRenderer={({ value, isFocused, isDisabled, handleClick, handleRequestDelete }, key) => (
+      chipRenderer={({ value, isFocused, isDisabled, handleClick, handleRequestDelete, defaultStyle }, key) => (
         <Chip
           key={key}
-          style={{ margin: '8px 8px 0 0', float: 'left', pointerEvents: isDisabled ? 'none' : undefined }}
+          style={{ ...defaultStyle, pointerEvents: isDisabled ? 'none' : undefined }}
           backgroundColor={isFocused ? green800 : green300}
           onTouchTap={handleClick}
           onRequestDelete={handleRequestDelete}
@@ -114,7 +122,7 @@ storiesOf('ChipInput', module)
   ))
   .add('with errorText', () => themed(
     <ChipInput
-      errorText="This is an error."
+      errorText='This is an error.'
     />
   ))
   .add('without underline', () => themed(
@@ -180,7 +188,7 @@ storiesOf('ChipInput', module)
     <ControlledChipInput
       openOnFocus
       dataSource={['foo', 'bar']}
-      inputProps={{ fullWidth: true, }}
+      inputProps={{ fullWidth: true }}
     />
   ))
   .add('with fullWidthInput', () => themed(
@@ -204,4 +212,30 @@ storiesOf('ChipInput', module)
     <ControlledChipInput
       addOnBlur
     />
+  ))
+  .add('in a form', () => themed(
+    <form onSubmit={e => { e.preventDefault(); action('onSubmit')() }}>
+      <ChipInput
+        onChange={action('onChange')}
+        floatingLabelText='This is a single chip input inside a form. Note that pressing Enter does not submit the form if a chip is being added.'
+        fullWidth
+      />
+    </form>
+  ))
+   .add('with duplicates allowed', () => themed(
+     <ChipInput
+       defaultValue={['foo', 'bar', 'foo', 'bar']}
+       allowDuplicates
+    />
+  ))
+  .add('tabbing between fields', () => themed(
+    <form>
+      <ChipInput
+        floatingLabelText='"Tab" key selects the next field when there is no active chip.'
+        newChipKeyCodes={[9, 13]}
+        fullWidth
+      />
+      <br />
+      <input type='text' />
+    </form>
   ))

@@ -2,30 +2,30 @@ import React from 'react'
 import ChipInput from '../src/ChipInput'
 
 class ClipboardExample extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       chips: []
     }
   }
 
-  handleRequestAdd(...chips) {
+  handleRequestAdd (...chips) {
     this.setState({
       chips: [...this.state.chips, ...chips]
     })
   }
 
-  handleRequestDelete(deletedChip) {
+  handleRequestDelete (deletedChip) {
     this.setState({
       chips: this.state.chips.filter((c) => c !== deletedChip)
     })
   }
 
-  render() {
+  render () {
     return (
       <ChipInput
         {...this.props}
-        hintText="Paste anything here (try with line breaks)"
+        hintText='Paste anything here (try with line breaks)'
 
         value={this.state.chips}
         onPaste={(event) => {

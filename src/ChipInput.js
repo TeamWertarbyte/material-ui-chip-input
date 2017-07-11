@@ -2,7 +2,8 @@
  * Notice: Some code was adapted from Material-UI's text field.
  *         Copyright (c) 2014 Call-Em-All (https://github.com/callemall/material-ui)
  */
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import TextFieldUnderline from 'material-ui/TextField/TextFieldUnderline'
 import TextFieldHint from 'material-ui/TextField/TextFieldHint'
 import TextFieldLabel from 'material-ui/TextField/TextFieldLabel'
@@ -10,7 +11,6 @@ import AutoComplete from 'material-ui/AutoComplete/AutoComplete'
 import transitions from 'material-ui/styles/transitions'
 import Chip from 'material-ui/Chip'
 import {blue300} from 'material-ui/styles/colors'
-import {fade} from 'material-ui/utils/colorManipulator'
 
 const getStyles = (props, context, state) => {
   const {
@@ -21,9 +21,9 @@ const getStyles = (props, context, state) => {
       textColor,
       disabledTextColor,
       backgroundColor,
-      errorColor,
-    },
-  } = context.muiTheme;
+      errorColor
+    }
+  } = context.muiTheme
 
   const styles = {
     root: {
@@ -53,7 +53,7 @@ const getStyles = (props, context, state) => {
       font: 'inherit',
       appearance: 'none', // Remove border in Safari, doesn't seem to break anything in other browsers
       WebkitTapHighlightColor: 'rgba(0,0,0,0)', // Remove mobile color flashing (deprecated style).
-      float: 'left',
+      float: 'left'
     },
     error: {
       position: 'absolute',
@@ -61,7 +61,7 @@ const getStyles = (props, context, state) => {
       fontSize: 12,
       lineHeight: '12px',
       color: errorColor,
-      transition: transitions.easeOut(),
+      transition: transitions.easeOut()
     },
     floatingLabel: {
       color: props.disabled ? disabledTextColor : floatingLabelColor,
@@ -70,30 +70,37 @@ const getStyles = (props, context, state) => {
     },
     floatingLabelFocusStyle: {
       transform: 'scale(0.75) translate(0, -36px)'
+    },
+    defaultChip: {
+      margin: '8px 8px 0 0',
+      float: 'left'
+    },
+    chipContainer: {
+      marginTop: props.floatingLabelText ? 12 : 0
     }
-  };
+  }
 
   if (state.isFocused) {
-    styles.floatingLabel.color = focusColor;
+    styles.floatingLabel.color = focusColor
   }
 
   if (props.floatingLabelText) {
-    styles.input.boxSizing = 'border-box';
+    styles.input.boxSizing = 'border-box'
   }
 
   if (state.errorText) {
     if (state.isFocused) {
-      styles.floatingLabel.color = styles.error.color;
+      styles.floatingLabel.color = styles.error.color
     }
   }
 
-  return styles;
-};
+  return styles
+}
 
-const defaultChipRenderer = ({ value, text, isFocused, isDisabled, handleClick, handleRequestDelete }, key) => (
+const defaultChipRenderer = ({ value, text, isFocused, isDisabled, handleClick, handleRequestDelete, defaultStyle }, key) => (
   <Chip
     key={key}
-    style={{ margin: '8px 8px 0 0', float: 'left', pointerEvents: isDisabled ? 'none' : undefined }}
+    style={{ ...defaultStyle, pointerEvents: isDisabled ? 'none' : undefined }}
     backgroundColor={isFocused ? blue300 : null}
     onTouchTap={handleClick}
     onRequestDelete={handleRequestDelete}
@@ -104,7 +111,7 @@ const defaultChipRenderer = ({ value, text, isFocused, isDisabled, handleClick, 
 
 class ChipInput extends React.Component {
   static contextTypes = {
-    muiTheme: React.PropTypes.object.isRequired,
+    muiTheme: PropTypes.object.isRequired
   };
 
   state = {
@@ -123,25 +130,27 @@ class ChipInput extends React.Component {
     }
   }
 
-  componentWillMount() {
+  componentWillMount () {
     const {
       name,
       hintText,
       floatingLabelText
-    } = this.props;
+    } = this.props
 
     this.setState({
       errorText: this.props.errorText
     })
 
-    const uniqueId = `${name}-${hintText}-${floatingLabelText}-${Math.floor(Math.random() * 0xFFFF)}`;
-    this.uniqueId = uniqueId.replace(/[^A-Za-z0-9-]/gi, '');
+    const uniqueId = `${name}-${hintText}-${floatingLabelText}-${Math.floor(Math.random() * 0xFFFF)}`
+    this.uniqueId = uniqueId.replace(/[^A-Za-z0-9-]/gi, '')
   }
 
-  componentDidMount() {
+  componentDidMount () {
     const handleKeyDown = this.autoComplete.handleKeyDown
     this.autoComplete.handleKeyDown = (event) => {
-      if (this.props.newChipKeyCodes.indexOf(event.keyCode) >= 0) {
+      const {newChipKeyCodes} = this.props
+      if (newChipKeyCodes.indexOf(event.keyCode) >= 0 && event.target.value) {
+        event.preventDefault()
         this.handleAddChip(event.target.value)
         this.autoComplete.setState({ searchText: '' })
         this.autoComplete.forceUpdate()
@@ -151,15 +160,15 @@ class ChipInput extends React.Component {
     }
 
     this.autoComplete.handleItemTouchTap = (event, child) => {
-      const dataSource = this.autoComplete.props.dataSource;
+      const dataSource = this.autoComplete.props.dataSource
 
-      const index = parseInt(child.key, 10);
-      const chosenRequest = dataSource[index];
+      const index = parseInt(child.key, 10)
+      const chosenRequest = dataSource[index]
       this.handleAddChip(chosenRequest)
 
       this.autoComplete.setState({
-        searchText: '',
-      });
+        searchText: ''
+      })
       this.autoComplete.forceUpdate()
       this.autoComplete.close()
 
@@ -181,17 +190,17 @@ class ChipInput extends React.Component {
     }
   }
 
-  blur() {
-    if (this.input) this.getInputNode().blur();
+  blur () {
+    if (this.input) this.getInputNode().blur()
   }
 
-  focus() {
+  focus () {
     if (this.autoComplete) {
-      this.getInputNode().focus();
+      this.getInputNode().focus()
       if (this.props.openOnFocus) {
         this.autoComplete.setState({
           open: true,
-          anchorEl: this.getInputNode(),
+          anchorEl: this.getInputNode()
         })
 
         this.autoComplete.forceUpdate()
@@ -202,15 +211,15 @@ class ChipInput extends React.Component {
     }
   }
 
-  select() {
-    if (this.input) this.getInputNode().select();
+  select () {
+    if (this.input) this.getInputNode().select()
   }
 
-  getValue() {
-    return this.input ? this.getInputNode().value : undefined;
+  getValue () {
+    return this.input ? this.getInputNode().value : undefined
   }
 
-  getInputNode() {
+  getInputNode () {
     return this.autoComplete.refs.searchTextField.getInputNode()
   }
 
@@ -219,30 +228,32 @@ class ChipInput extends React.Component {
       this.props.onBlur(event)
     }
 
-    //A momentary delay is required to support openOnFocus. We must give time for the autocomplete
-    //menu to close before checking the current status. Otherwise, tabbing off the input while the
-    //menu is open results in the input keeping its focus styles.
+    // A momentary delay is required to support openOnFocus. We must give time for the autocomplete
+    // menu to close before checking the current status. Otherwise, tabbing off the input while the
+    // menu is open results in the input keeping its focus styles. Note that the ref might not be set
+    // yet, so this.autocomplete might be null.
     setTimeout(() => {
-      if (!this.autoComplete.state.open || this.autoComplete.requestsList.length === 0) {
+      if (this.autoComplete && (!this.autoComplete.state.open || this.autoComplete.requestsList.length === 0)) {
         if (this.props.clearOnBlur) {
-          this.setState({ inputValue: '' })
+          this.clearInput()
         }
         this.setState({ isFocused: false })
       }
-    }, 0);
+    }, 0)
   }
 
   handleInputFocus = (event) => {
     if (this.props.disabled) {
-      return;
+      return
     }
-    this.setState({isFocused: true});
+    this.setState({isFocused: true})
     if (this.props.onFocus) {
-      this.props.onFocus(event);
+      this.props.onFocus(event)
     }
   }
 
   handleKeyDown = (event) => {
+    this.setState({keyPressed: false})
     if (this.props.newChipKeyCodes.indexOf(event.keyCode) >= 0) {
       this.handleAddChip(event.target.value)
     } else if (event.keyCode === 8 || event.keyCode === 46) {
@@ -281,10 +292,15 @@ class ChipInput extends React.Component {
   }
 
   handleKeyUp = (event) => {
-    if (this.props.newChipKeyCodes.indexOf(event.keyCode) < 0) {
+    if (this.props.newChipKeyCodes.indexOf(event.keyCode) < 0 && this.state.keyPressed) {
       this.setState({ inputValue: event.target.value })
     } else {
-      this.setState({ inputValue: '' })}
+      this.clearInput()
+    }
+  }
+
+  handleKeyPress = (event) => {
+    this.setState({keyPressed: true})
   }
 
   handleAddChip (chip) {
@@ -295,11 +311,11 @@ class ChipInput extends React.Component {
       if (typeof chip === 'string') {
         chip = {
           [this.props.dataSourceConfig.text]: chip,
-          [this.props.dataSourceConfig.value]: chip,
+          [this.props.dataSourceConfig.value]: chip
         }
       }
 
-      if (!chips.find((c) => c[this.props.dataSourceConfig.value] === chip[this.props.dataSourceConfig.value])) {
+      if (this.props.allowDuplicates || !chips.some((c) => c[this.props.dataSourceConfig.value] === chip[this.props.dataSourceConfig.value])) {
         if (this.props.value) {
           if (this.props.onRequestAdd) {
             this.props.onRequestAdd(chip)
@@ -313,7 +329,7 @@ class ChipInput extends React.Component {
       }
     } else {
       if (chip.trim().length > 0) {
-        if (chips.indexOf(chip) === -1) {
+        if (this.props.allowDuplicates || chips.indexOf(chip) === -1) {
           if (this.props.value) {
             if (this.props.onRequestAdd) {
               this.props.onRequestAdd(chip)
@@ -336,8 +352,9 @@ class ChipInput extends React.Component {
       }
     } else {
       if (this.props.dataSourceConfig) {
-        const chips = this.state.chips.filter((c) => c[this.props.dataSourceConfig.value] !== chip)
-        if (chips.length !== this.state.chips.length) {
+        const chips = this.state.chips.slice()
+        let changed = chips.splice(i, 1) // remove the chip at index i
+        if (changed) {
           this.setState({
             chips,
             focusedChip: this.state.focusedChip && this.state.focusedChip[this.props.dataSourceConfig.value] === chip ? null : this.state.focusedChip
@@ -347,8 +364,9 @@ class ChipInput extends React.Component {
           }
         }
       } else {
-        const chips = this.state.chips.filter((c) => c !== chip)
-        if (chips.length !== this.state.chips.length) {
+        const chips = this.state.chips.slice()
+        let changed = chips.splice(i, 1) // remove the chip at index i
+        if (changed) {
           this.setState({
             chips,
             focusedChip: this.state.focusedChip === chip ? null : this.state.focusedChip
@@ -361,13 +379,17 @@ class ChipInput extends React.Component {
     }
   }
 
+  clearInput () {
+    this.setState({ inputValue: '' })
+  }
+
   /**
    * Sets a reference to the AutoComplete instance.
    *
-   * Using a bound class method here to set `autoComplete` to avoid it being set 
+   * Using a bound class method here to set `autoComplete` to avoid it being set
    * to null by an inline ref callback.
    *
-   * See [Isuue #71](https://github.com/TeamWertarbyte/material-ui-chip-input/issues/71)
+   * See [Issue #71](https://github.com/TeamWertarbyte/material-ui-chip-input/issues/71)
    *
    * @param {Object} autoComplete - The AutoComplete DOM element or null
    */
@@ -394,11 +416,12 @@ class ChipInput extends React.Component {
       onChange, // eslint-disable-line no-unused-vars
       onFocus, // eslint-disable-line no-unused-vars
       style,
+      chipContainerStyle,
       underlineDisabledStyle,
       underlineFocusStyle,
       underlineShow,
       underlineStyle,
-      defaultValue = [],
+      defaultValue = [], // eslint-disable-line no-unused-vars
       filter,
       value,
       dataSource,
@@ -410,16 +433,17 @@ class ChipInput extends React.Component {
       onRequestDelete, // eslint-disable-line no-unused-vars
       chipRenderer = defaultChipRenderer,
       newChipKeyCodes, // eslint-disable-line no-unused-vars
-      ...other,
-    } = this.props;
+      allowDuplicates, // eslint-disable-line no-unused-vars
+      ...other
+    } = this.props
 
-    const {prepareStyles} = this.context.muiTheme;
-    const styles = getStyles(this.props, this.context, this.state);
-    const inputId = id || this.uniqueId;
+    const {prepareStyles} = this.context.muiTheme
+    const styles = getStyles(this.props, this.context, this.state)
+    const inputId = id || this.uniqueId
 
     const inputProps = {
       id: inputId,
-      ref: (elem) => this.input = elem,
+      ref: (elem) => { this.input = elem },
       disabled: !!this.props.disabled,
       onBlur: this.handleInputBlur,
       onFocus: this.handleInputFocus,
@@ -427,7 +451,7 @@ class ChipInput extends React.Component {
       fullWidth: !!fullWidthInput
     }
 
-    const inputStyleMerged = Object.assign(styles.input, inputStyle);
+    const inputStyleMerged = Object.assign(styles.input, inputStyle)
 
     const hasInput = (this.props.value || this.state.chips).length > 0 || this.state.inputValue.length > 0
     const showHintText = hintText && !hasInput
@@ -470,34 +494,35 @@ class ChipInput extends React.Component {
 
     return (
       <div
-        className={ className }
+        className={className}
         style={prepareStyles(Object.assign(styles.root, style, overrideRootStyles))}
         onTouchTap={() => this.focus()}
       >
         <div>
           {floatingLabelTextElement}
-          <div style={{ marginTop: floatingLabelText ? 12 : 0 }}>
+          <div style={Object.assign(styles.chipContainer, chipContainerStyle)}>
             {chips.map((tag, i) => {
               const value = dataSourceConfig ? tag[dataSourceConfig.value] : tag
               return chipRenderer({
                 value,
                 text: dataSourceConfig ? tag[dataSourceConfig.text] : tag,
                 isDisabled: disabled,
-                isFocused: this.state.focusedChip === value,
+                isFocused: dataSourceConfig ? (this.state.focusedChip && this.state.focusedChip[dataSourceConfig.value] === value) : (this.state.focusedChip === value),
                 handleClick: () => this.setState({ focusedChip: value }),
-                handleRequestDelete: () => this.handleDeleteChip(value, i)
+                handleRequestDelete: () => this.handleDeleteChip(value, i),
+                defaultStyle: styles.defaultChip
               }, i)
             })}
           </div>
         </div>
-        {hintText ?
-          <TextFieldHint
+        {hintText
+          ? <TextFieldHint
             muiTheme={this.context.muiTheme}
             show={showHintText && !(floatingLabelText && !floatingLabelFixed && !this.state.isFocused)}
             style={Object.assign({ bottom: 20, pointerEvents: 'none' }, hintStyle)}
             text={hintText}
-          /> :
-          null
+          />
+          : null
         }
         <AutoComplete
           {...other}
@@ -509,10 +534,11 @@ class ChipInput extends React.Component {
           searchText={this.state.inputValue}
           underlineShow={false}
           onKeyUp={this.handleKeyUp}
+          onKeyPress={this.handleKeyPress}
           ref={this.setAutoComplete}
         />
-        {underlineShow ?
-          <TextFieldUnderline
+        {underlineShow
+          ? <TextFieldUnderline
             disabled={disabled}
             disabledStyle={underlineDisabledStyle}
             error={!!this.state.errorText}
@@ -521,8 +547,8 @@ class ChipInput extends React.Component {
             focusStyle={underlineFocusStyle}
             muiTheme={this.context.muiTheme}
             style={underlineStyle}
-          /> :
-          null
+          />
+          : null
         }
         {errorTextElement}
       </div>
@@ -532,6 +558,7 @@ class ChipInput extends React.Component {
 
 ChipInput.propTypes = {
   style: PropTypes.object,
+  chipContainerStyle: PropTypes.object,
   floatingLabelText: PropTypes.node,
   hintText: PropTypes.node,
   id: PropTypes.string,
@@ -540,32 +567,25 @@ ChipInput.propTypes = {
     value: PropTypes.string.isRequired
   }),
   disabled: PropTypes.bool,
-  defaultValue: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.string),
-    PropTypes.arrayOf(PropTypes.object)
-  ]),
+  defaultValue: PropTypes.array,
   onChange: PropTypes.func,
-  value: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.string),
-    PropTypes.arrayOf(PropTypes.object)
-  ]),
+  value: PropTypes.array,
   onRequestAdd: PropTypes.func,
   onRequestDelete: PropTypes.func,
-  dataSource: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.string),
-    PropTypes.arrayOf(PropTypes.object)
-  ]),
+  dataSource: PropTypes.array,
   onUpdateInput: PropTypes.func,
   openOnFocus: PropTypes.bool,
   chipRenderer: PropTypes.func,
   newChipKeyCodes: PropTypes.arrayOf(PropTypes.number),
-  clearOnBlur: PropTypes.bool
+  clearOnBlur: PropTypes.bool,
+  allowDuplicates: PropTypes.bool
 }
 
 ChipInput.defaultProps = {
   filter: AutoComplete.caseInsensitiveFilter,
   newChipKeyCodes: [13],
   clearOnBlur: true,
+  allowDuplicates: false,
   underlineShow: true
 }
 

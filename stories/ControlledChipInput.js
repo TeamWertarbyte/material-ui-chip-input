@@ -1,21 +1,23 @@
+/* global alert */
 import React from 'react'
+import PropTypes from 'prop-types'
 import ChipInput from '../src/ChipInput'
 
 class ControlledChipInput extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       chips: ['js']
     }
   }
 
-  handleRequestAdd(chip) {
+  handleRequestAdd (chip) {
     this.setState({
       chips: [...this.state.chips, chip]
     })
   }
 
-  handleRequestDelete(deletedChip) {
+  handleRequestDelete (deletedChip) {
     if (deletedChip !== 'js') {
       this.setState({
         chips: this.state.chips.filter((c) => c !== deletedChip)
@@ -25,7 +27,7 @@ class ControlledChipInput extends React.Component {
     }
   }
 
-  render() {
+  render () {
     return <ChipInput
       {...this.props}
       value={this.state.chips}
@@ -42,7 +44,7 @@ class ControlledChipInput extends React.Component {
 }
 
 ControlledChipInput.propTypes = {
-  addOnBlur: React.PropTypes.bool
+  addOnBlur: PropTypes.bool
 }
 
 export default ControlledChipInput
