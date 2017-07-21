@@ -292,10 +292,10 @@ class ChipInput extends React.Component {
   }
 
   handleKeyUp = (event) => {
-    if (this.props.newChipKeyCodes.indexOf(event.keyCode) < 0 && this.state.keyPressed) {
-      this.setState({ inputValue: event.target.value })
-    } else if (!this.state.keyPressed) {
+    if (this.props.newChipKeyCodes.indexOf(event.keyCode) > 0 && this.state.keyPressed) {
       this.clearInput()
+    } else{
+      this.setState({ inputValue: event.target.value })
     }
   }
 
