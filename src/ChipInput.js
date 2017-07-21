@@ -294,7 +294,7 @@ class ChipInput extends React.Component {
   handleKeyUp = (event) => {
     if (this.props.newChipKeyCodes.indexOf(event.keyCode) < 0 && this.state.keyPressed) {
       this.setState({ inputValue: event.target.value })
-    } else {
+    } else if (!this.state.keyPressed) {
       this.clearInput()
     }
   }
@@ -448,6 +448,8 @@ class ChipInput extends React.Component {
       onBlur: this.handleInputBlur,
       onFocus: this.handleInputFocus,
       onKeyDown: this.handleKeyDown,
+      onKeyUp: this.handleKeyUp,
+      onKeyPress: this.handleKeyPress,
       fullWidth: !!fullWidthInput
     }
 
@@ -533,8 +535,6 @@ class ChipInput extends React.Component {
           dataSourceConfig={dataSourceConfig}
           searchText={this.state.inputValue}
           underlineShow={false}
-          onKeyUp={this.handleKeyUp}
-          onKeyPress={this.handleKeyPress}
           ref={this.setAutoComplete}
         />
         {underlineShow
@@ -567,21 +567,12 @@ ChipInput.propTypes = {
     value: PropTypes.string.isRequired
   }),
   disabled: PropTypes.bool,
-  defaultValue: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.string),
-    PropTypes.arrayOf(PropTypes.object)
-  ]),
+  defaultValue: PropTypes.array,
   onChange: PropTypes.func,
-  value: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.string),
-    PropTypes.arrayOf(PropTypes.object)
-  ]),
+  value: PropTypes.array,
   onRequestAdd: PropTypes.func,
   onRequestDelete: PropTypes.func,
-  dataSource: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.string),
-    PropTypes.arrayOf(PropTypes.object)
-  ]),
+  dataSource: PropTypes.array,
   onUpdateInput: PropTypes.func,
   openOnFocus: PropTypes.bool,
   chipRenderer: PropTypes.func,
