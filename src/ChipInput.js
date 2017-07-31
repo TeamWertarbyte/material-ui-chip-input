@@ -508,6 +508,7 @@ class ChipInput extends React.Component {
               return chipRenderer({
                 value,
                 text: dataSourceConfig ? tag[dataSourceConfig.text] : tag,
+                chip: tag,
                 isDisabled: disabled,
                 isFocused: dataSourceConfig ? (this.state.focusedChip && this.state.focusedChip[dataSourceConfig.value] === value) : (this.state.focusedChip === value),
                 handleClick: () => this.setState({ focusedChip: value }),
