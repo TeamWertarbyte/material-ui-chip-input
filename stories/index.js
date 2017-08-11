@@ -125,6 +125,12 @@ storiesOf('ChipInput', module)
       errorText='This is an error.'
     />
   ))
+  .add('with errorStyle', () => themed(
+    <ChipInput
+      errorText='This is an error.'
+      errorStyle={{ color: 'purple' }}
+    />
+  ))
   .add('without underline', () => themed(
     <ChipInput
       defaultValue={['foo', 'bar']}

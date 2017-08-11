@@ -460,7 +460,7 @@ class ChipInput extends React.Component {
     const shrinkFloatingLabel = floatingLabelText && (hasInput || this.state.isFocused || floatingLabelFixed)
 
     const errorTextElement = this.state.errorText && (
-      <div style={prepareStyles(styles.error)}>{this.state.errorText}</div>
+      <div style={prepareStyles(Object.assign(styles.error, errorStyle))}>{this.state.errorText}</div>
     )
 
     const floatingLabelTextElement = floatingLabelText && (
