@@ -50,9 +50,9 @@ import ChipInput from 'material-ui-chip-input'
 | newChipKeyCodes | `number[]` | `[13]` (enter key) | The key codes used to determine when to create a new chip. |
 | onBlur | `function` | | Callback function that is called with `event` when the input loses focus, where `event.target.value` is the current value of the text input. |
 | onChange | `function` | | Callback function that is called when the chips change (in uncontrolled mode). |
+| onClick | `function` | | Callback function that is called when text input is clicked. |
 | onRequestAdd | `function` | | Callback function that is called when a new chip was added (in controlled mode). |
 | onRequestDelete | `function` | | Callback function that is called when a new chip was removed (in controlled mode). |
-| onTouchTap | `function` | | Callback function that is called when text input is clicked. |
 | onUpdateInput | `function` | | Callback function that is called when the input changes (useful for auto complete). |
 | openOnFocus | `bool` | `false` | Opens the auto complete list on focus if set to true. |
 | style | `object` | | Override the inline-styles of the root element. |

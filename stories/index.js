@@ -111,7 +111,7 @@ storiesOf('ChipInput', module)
           key={key}
           style={{ ...defaultStyle, pointerEvents: isDisabled ? 'none' : undefined }}
           backgroundColor={isFocused ? green800 : green300}
-          onTouchTap={handleClick}
+          onClick={handleClick}
           onRequestDelete={handleRequestDelete}
         >
           <Avatar size={32}>{value[0].toUpperCase()}</Avatar>
@@ -153,7 +153,7 @@ storiesOf('ChipInput', module)
       onUpdateInput={action('onUpdateInput')}
       onRequestDelete={action('onRequestDelete')}
       onRequestAdd={action('onRequestAdd')}
-      onTouchTap={action('onTouchTap')}
+      onClick={action('onClick')}
     />
   ))
   .add('controlled verbose log', () => themed(
@@ -163,7 +163,7 @@ storiesOf('ChipInput', module)
       onUpdateInput={action('onUpdateInput')}
       onRequestDelete={action('onRequestDelete')}
       onRequestAdd={action('onRequestAdd')}
-      onTouchTap={action('onTouchTap')}
+      onClick={action('onClick')}
     />
   ))
   .add('objects as chips, uncontrolled', () => themed(
@@ -175,7 +175,7 @@ storiesOf('ChipInput', module)
       onUpdateInput={action('onUpdateInput')}
       onRequestDelete={action('onRequestDelete')}
       onRequestAdd={action('onRequestAdd')}
-      onTouchTap={action('onTouchTap')}
+      onClick={action('onClick')}
     />
   ))
   .add('objects as chips, controlled', () => themed(
@@ -187,7 +187,7 @@ storiesOf('ChipInput', module)
       onUpdateInput={action('onUpdateInput')}
       onRequestDelete={action('onRequestDelete')}
       onRequestAdd={action('onRequestAdd')}
-      onTouchTap={action('onTouchTap')}
+      onClick={action('onClick')}
     />
   ))
   .add('controlled input with auto complete', () => themed(
@@ -211,7 +211,7 @@ storiesOf('ChipInput', module)
       onUpdateInput={action('onUpdateInput')}
       onRequestDelete={action('onRequestDelete')}
       onRequestAdd={action('onRequestAdd')}
-      onTouchTap={action('onTouchTap')}
+      onClick={action('onClick')}
     />
   ))
   .add('add text input value on blur', () => themed(
