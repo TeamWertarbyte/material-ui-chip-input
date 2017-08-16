@@ -102,7 +102,7 @@ const defaultChipRenderer = ({ value, text, isFocused, isDisabled, handleClick, 
     key={key}
     style={{ ...defaultStyle, pointerEvents: isDisabled ? 'none' : undefined }}
     backgroundColor={isFocused ? blue300 : null}
-    onTouchTap={handleClick}
+    onClick={handleClick}
     onRequestDelete={handleRequestDelete}
   >
     {text}
@@ -498,7 +498,7 @@ class ChipInput extends React.Component {
       <div
         className={className}
         style={prepareStyles(Object.assign(styles.root, style, overrideRootStyles))}
-        onTouchTap={() => this.focus()}
+        onClick={() => this.focus()}
       >
         <div>
           {floatingLabelTextElement}
