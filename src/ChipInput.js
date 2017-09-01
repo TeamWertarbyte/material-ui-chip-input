@@ -262,7 +262,11 @@ class ChipInput extends React.Component {
         if (this.state.focusedChip == null && event.keyCode === 8) {
           this.setState({ focusedChip: chips[chips.length - 1] })
         } else if (this.state.focusedChip) {
-          const index = chips.indexOf(this.state.focusedChip)
+          const index = chips.findIndex((chip) => {
+            return this.props.dataSourceConfig
+              ? this.state.focusedChip[this.props.dataSourceConfig.value] === chip[this.props.dataSourceConfig.value]
+              : this.state.focusedChip === chip
+          })
           const value = this.props.dataSourceConfig ? this.state.focusedChip[this.props.dataSourceConfig.value] : this.state.focusedChip
           this.handleDeleteChip(value, index)
           if (event.keyCode === 8 && index > 0) {
@@ -274,13 +278,21 @@ class ChipInput extends React.Component {
       }
     } else if (event.keyCode === 37) {
       const chips = this.props.value || this.state.chips
-      const index = chips.indexOf(this.state.focusedChip)
+      const index = chips.findIndex((chip) => {
+        return this.props.dataSourceConfig
+          ? this.state.focusedChip[this.props.dataSourceConfig.value] === chip[this.props.dataSourceConfig.value]
+          : this.state.focusedChip === chip
+      })
       if (index > 0) {
         this.setState({ focusedChip: chips[index - 1] })
       }
     } else if (event.keyCode === 39) {
       const chips = this.props.value || this.state.chips
-      const index = chips.indexOf(this.state.focusedChip)
+      const index = chips.findIndex((chip) => {
+        return this.props.dataSourceConfig
+          ? this.state.focusedChip[this.props.dataSourceConfig.value] === chip[this.props.dataSourceConfig.value]
+          : this.state.focusedChip === chip
+      })
       if (index >= 0 && index < chips.length - 1) {
         this.setState({ focusedChip: chips[index + 1] })
       } else {
