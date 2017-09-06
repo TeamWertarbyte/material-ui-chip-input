@@ -315,6 +315,14 @@ class ChipInput extends React.Component {
     this.setState({keyPressed: true})
   }
 
+  handleUpdateInput = (searchText, dataSource, params) => {
+    this.setState({ inputValue: searchText })
+
+    if (this.props.onUpdateInput) {
+      this.props.onUpdateInput(searchText, dataSource, params)
+    }
+  }
+
   handleAddChip (chip) {
     this.autoComplete.setState({ searchText: '' })
     const chips = this.props.value || this.state.chips
@@ -462,6 +470,7 @@ class ChipInput extends React.Component {
       onKeyDown: this.handleKeyDown,
       onKeyUp: this.handleKeyUp,
       onKeyPress: this.handleKeyPress,
+      onUpdateInput: this.handleUpdateInput,
       fullWidth: !!fullWidthInput
     }
 
