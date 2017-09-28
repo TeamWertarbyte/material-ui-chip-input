@@ -326,7 +326,7 @@ class ChipInput extends React.Component {
 
   handleAddChip (chip) {
     if (this.props.onBeforeRequestAdd && !this.props.onBeforeRequestAdd(chip)) {
-      return this.setState({ preventChipCreation })
+      return this.setState({ preventChipCreation: true })
     }
     this.autoComplete.setState({ searchText: '' })
     const chips = this.props.value || this.state.chips
