@@ -12,7 +12,7 @@ class ControlledChipInput extends React.Component {
   }
 
   onBeforeRequestAdd (chip) {
-    if (chip.length < 3) alert('you should add a chip at least 3 character!')
+    if (chip.length < 3) alert('The chip should have at least three characters.')
     return chip.length >= 3
   }
 
