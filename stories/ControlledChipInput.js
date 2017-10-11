@@ -12,7 +12,6 @@ class ControlledChipInput extends React.Component {
   }
 
   onBeforeRequestAdd (chip) {
-    if (chip.length < 3) alert('The chip should have at least three characters.')
     return chip.length >= 3
   }
 
@@ -45,6 +44,7 @@ class ControlledChipInput extends React.Component {
         }
       }}
       fullWidth
+      floatingLabelText='Some chips with at least three characters'
     />
   }
 }

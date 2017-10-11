@@ -253,7 +253,7 @@ class ChipInput extends React.Component {
   }
 
   handleKeyDown = (event) => {
-    this.setState({keyPressed: false, preventChipCreation: false})
+    this.setState({ keyPressed: false, preventChipCreation: false })
     if (this.props.newChipKeyCodes.indexOf(event.keyCode) >= 0) {
       this.handleAddChip(event.target.value)
     } else if (event.keyCode === 8 || event.keyCode === 46) {
@@ -304,8 +304,7 @@ class ChipInput extends React.Component {
   }
 
   handleKeyUp = (event) => {
-    if (this.state.preventChipCreation) return
-    if (this.props.newChipKeyCodes.indexOf(event.keyCode) > 0 && this.state.keyPressed) {
+    if (!this.state.preventChipCreation && this.props.newChipKeyCodes.indexOf(event.keyCode) > 0 && this.state.keyPressed) {
       this.clearInput()
     } else {
       this.setState({ inputValue: event.target.value })
@@ -326,7 +325,7 @@ class ChipInput extends React.Component {
 
   handleAddChip (chip) {
     if (this.props.onBeforeRequestAdd && !this.props.onBeforeRequestAdd(chip)) {
-      return this.setState({ preventChipCreation: true })
+      return this.setState({ preventChipCreation: true, inputValue: this.state.searchText })
     }
     this.autoComplete.setState({ searchText: '' })
     const chips = this.props.value || this.state.chips
