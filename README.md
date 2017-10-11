@@ -48,6 +48,7 @@ import ChipInput from 'material-ui-chip-input'
 | hintText | `node` | | The hint text to display. |
 | id | `string` | _a unique id_ | The id prop for the text field, should be set to some deterministic value if you use server-side rendering. |
 | newChipKeyCodes | `number[]` | `[13]` (enter key) | The key codes used to determine when to create a new chip. |
+| onBeforeRequestAdd | `function` | | Callback function that is called with the chip to be added and should return true to add the chip or false to prevent the chip from being added without clearing the text input. |
 | onBlur | `function` | | Callback function that is called with `event` when the input loses focus, where `event.target.value` is the current value of the text input. |
 | onChange | `function` | | Callback function that is called when the chips change (in uncontrolled mode). |
 | onClick | `function` | | Callback function that is called when text input is clicked. |

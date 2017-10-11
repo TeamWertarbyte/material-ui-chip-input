@@ -11,6 +11,11 @@ class ControlledChipInput extends React.Component {
     }
   }
 
+  onBeforeRequestAdd (chip) {
+    if (chip.length < 3) alert('The chip should have at least three characters.')
+    return chip.length >= 3
+  }
+
   handleRequestAdd (chip) {
     this.setState({
       chips: [...this.state.chips, chip]
@@ -31,6 +36,7 @@ class ControlledChipInput extends React.Component {
     return <ChipInput
       {...this.props}
       value={this.state.chips}
+      onBeforeRequestAdd={(chip) => this.onBeforeRequestAdd(chip)}
       onRequestAdd={(chip) => this.handleRequestAdd(chip)}
       onRequestDelete={(deletedChip) => this.handleRequestDelete(deletedChip)}
       onBlur={(event) => {
