@@ -278,7 +278,7 @@ class ChipInput extends React.Component {
       }
     } else if (event.keyCode === 37) {
       const chips = this.props.value || this.state.chips
-      if (this.state.focusedChip == null && event.target.value === '') {
+      if (this.state.focusedChip == null && event.target.value === '' && chips.length) {
         return this.setState({ focusedChip: chips[chips.length - 1] })
       }
       const index = chips.findIndex((chip) => {
