@@ -278,8 +278,11 @@ class ChipInput extends React.Component {
       }
     } else if (event.keyCode === 37) {
       const chips = this.props.value || this.state.chips
+      if (this.state.focusedChip == null && event.target.value === '' && chips.length) {
+        return this.setState({ focusedChip: chips[chips.length - 1] })
+      }
       const index = chips.findIndex((chip) => {
-        return this.props.dataSourceConfig
+        return this.props.dataSourceConfig && this.state.focusedChip
           ? this.state.focusedChip[this.props.dataSourceConfig.value] === chip[this.props.dataSourceConfig.value]
           : this.state.focusedChip === chip
       })
@@ -289,7 +292,7 @@ class ChipInput extends React.Component {
     } else if (event.keyCode === 39) {
       const chips = this.props.value || this.state.chips
       const index = chips.findIndex((chip) => {
-        return this.props.dataSourceConfig
+        return this.props.dataSourceConfig && this.state.focusedChip
           ? this.state.focusedChip[this.props.dataSourceConfig.value] === chip[this.props.dataSourceConfig.value]
           : this.state.focusedChip === chip
       })
