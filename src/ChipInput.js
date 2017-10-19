@@ -328,7 +328,7 @@ class ChipInput extends React.Component {
 
   handleAddChip (chip) {
     if (this.props.onBeforeRequestAdd && !this.props.onBeforeRequestAdd(chip)) {
-      return this.setState({ preventChipCreation: true, inputValue: this.state.searchText })
+      return this.setState({ preventChipCreation: true, inputValue: this.autoComplete.state.searchText })
     }
     this.autoComplete.setState({ searchText: '' })
     const chips = this.props.value || this.state.chips
@@ -455,6 +455,7 @@ class ChipInput extends React.Component {
       floatingLabelFocusStyle, // eslint-disable-line no-unused-vars
       floatingLabelStyle, // eslint-disable-line no-unused-vars
       floatingLabelText,
+      onBeforeRequestAdd,
       onRequestAdd, // eslint-disable-line no-unused-vars
       onRequestDelete, // eslint-disable-line no-unused-vars
       chipRenderer = defaultChipRenderer,
