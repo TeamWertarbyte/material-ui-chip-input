@@ -3,6 +3,12 @@
   "version": "0.18.1",
   "description": "A chip input field using Material-UI.",
   "main": "lib/ChipInput.js",
+  "files": [
+    "lib/**/*.js",
+    "README.md",
+    "LICENSE",
+    "demo.gif"
+  ],
   "scripts": {
     "build": "babel src -d lib",
     "test": "standard",
