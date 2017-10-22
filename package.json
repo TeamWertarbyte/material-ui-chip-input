@@ -9,7 +9,7 @@
     "lint": "standard",
     "prepublish": "babel src -d lib",
     "storybook": "start-storybook -p 6006",
-    "deploy-storybook": "storybook-to-ghpages"
+    "deploy-storybook": "build-storybook -o storybook && gh-pages -d storybook && rm -r storybook"
   },
   "repository": {
     "type": "git",
@@ -29,8 +29,8 @@
   },
   "homepage": "https://github.com/TeamWertarbyte/material-ui-chip-input#readme",
   "devDependencies": {
-    "@kadira/storybook": "2.15.1",
-    "@kadira/storybook-deployer": "^1.2.0",
+    "@storybook/addon-actions": "^3.2.13",
+    "@storybook/react": "^3.2.13",
     "babel-cli": "^6.14.0",
     "babel-core": "^6.8.0",
     "babel-eslint": "^7.2.3",
@@ -38,9 +38,10 @@
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-0": "^6.5.0",
+    "gh-pages": "^1.0.0",
     "material-ui": "^0.19.1",
-    "react": "^15.4.0",
-    "react-dom": "^15.4.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
     "standard": "^10.0.2"
   },
   "peerDependencies": {
