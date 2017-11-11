@@ -152,7 +152,6 @@ class ChipInput extends React.Component {
       if (newChipKeyCodes.indexOf(event.keyCode) >= 0 && event.target.value) {
         event.preventDefault()
         this.handleAddChip(event.target.value)
-        this.autoComplete.setState({ searchText: '' })
         this.autoComplete.forceUpdate()
       } else {
         handleKeyDown(event)
@@ -165,10 +164,6 @@ class ChipInput extends React.Component {
       const index = parseInt(child.key, 10)
       const chosenRequest = dataSource[index]
       this.handleAddChip(chosenRequest)
-
-      this.autoComplete.setState({
-        searchText: ''
-      })
       this.autoComplete.forceUpdate()
       this.autoComplete.close()
 
@@ -328,7 +323,7 @@ class ChipInput extends React.Component {
 
   handleAddChip (chip) {
     if (this.props.onBeforeRequestAdd && !this.props.onBeforeRequestAdd(chip)) {
-      return this.setState({ preventChipCreation: true, inputValue: this.autoComplete.state.searchText })
+      return this.setState({ preventChipCreation: true })
     }
     this.autoComplete.setState({ searchText: '' })
     const chips = this.props.value || this.state.chips

@@ -232,6 +232,12 @@ storiesOf('ChipInput', module)
       allowDuplicates
     />
   )
+  .add('with onBeforeRequestAdd returning false', () =>
+    <ChipInput
+      defaultValue={['foo', 'bar', 'foo', 'bar']}
+      onBeforeRequestAdd={() => false}
+    />
+  )
   .add('tabbing between fields', () =>
     <form>
       <ChipInput
