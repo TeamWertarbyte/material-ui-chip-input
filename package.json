@@ -45,9 +45,9 @@
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-0": "^6.5.0",
     "gh-pages": "^1.0.0",
-    "material-ui": "^0.19.1",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
+    "material-ui": "^1.0.0-beta.21",
+    "react": "^16.1.1",
+    "react-dom": "^16.1.1",
     "standard": "^10.0.2"
   },
   "peerDependencies": {
@@ -56,6 +56,7 @@
     "react-dom": "^15.3.2 || ^16.0.0"
   },
   "dependencies": {
+    "classnames": "^2.2.5",
     "prop-types": "^15.5.7"
   },
   "standard": {

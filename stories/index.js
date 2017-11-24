@@ -1,24 +1,19 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
-import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
-import Avatar from 'material-ui/Avatar'
-import Chip from 'material-ui/Chip'
-import AutoComplete from 'material-ui/AutoComplete'
-import { green800, green300 } from 'material-ui/styles/colors'
+// import Avatar from 'material-ui/Avatar'
+// import Chip from 'material-ui/Chip'
+// import AutoComplete from 'material-ui/AutoComplete'
+// import { green800, green300 } from 'material-ui/styles/colors'
 import ChipInput from '../src/ChipInput'
-import ControlledChipInput from './ControlledChipInput'
-import ClipboardExample from './ClipboardExample'
+// import ControlledChipInput from './ControlledChipInput'
+// import ClipboardExample from './ClipboardExample'
 
 storiesOf('ChipInput', module)
   .addDecorator((story) =>
-    <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
-      <div style={{ fontFamily: 'Roboto, sans-serif' }}>
-        {story()}
-      </div>
-    </MuiThemeProvider>
+    <div style={{ fontFamily: 'Roboto, sans-serif' }}>
+      {story()}
+    </div>
   )
   .add('with some chips', () =>
     <ChipInput
@@ -34,6 +29,7 @@ storiesOf('ChipInput', module)
       fullWidth
     />
   )
+  /*
   .add('with custom chip container styles', () =>
     <ChipInput
       fullWidth
@@ -249,3 +245,4 @@ storiesOf('ChipInput', module)
       <input type='text' />
     </form>
   )
+  */
