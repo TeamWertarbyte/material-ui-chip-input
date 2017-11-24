@@ -104,7 +104,7 @@ class ChipInput extends React.Component {
   }
 
   blur () {
-    if (this.input) this.actualInput().blur()
+    if (this.input) this.actualInput.blur()
   }
 
   focus = () => {
@@ -115,14 +115,6 @@ class ChipInput extends React.Component {
     if (this.state.focusedChip) {
       this.setState({ focusedChip: null })
     }
-  }
-
-  select () {
-    if (this.input) this.getInputNode().select()
-  }
-
-  getValue () {
-    return this.input ? this.getInputNode().value : undefined
   }
 
   handleInputBlur = (event) => {
