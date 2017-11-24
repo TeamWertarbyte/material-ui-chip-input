@@ -103,10 +103,18 @@ class ChipInput extends React.Component {
     }
   }
 
+  /**
+   * Blurs this component.
+   * @public
+   */
   blur () {
     if (this.input) this.actualInput.blur()
   }
 
+  /**
+   * Focuses this component.
+   * @public
+   */
   focus = () => {
     this.actualInput.focus()
     // this.getInputNode().focus()
@@ -300,6 +308,10 @@ class ChipInput extends React.Component {
     }
   }
 
+  /**
+   * Clears the text field for adding new chips.
+   * @public
+   */
   clearInput () {
     this.setState({ inputValue: '' })
   }
@@ -325,32 +337,17 @@ class ChipInput extends React.Component {
       className,
       dataSourceConfig,
       disabled,
-      errorStyle,
-      errorText, // eslint-disable-line no-unused-vars
       fullWidth,
       fullWidthInput,
-      hintText,
-      hintStyle,
-      id,
-      inputStyle,
       clearOnBlur,
       onBlur, // eslint-disable-line no-unused-vars
       onChange, // eslint-disable-line no-unused-vars
       onFocus, // eslint-disable-line no-unused-vars
       style,
-      chipContainerStyle,
-      underlineDisabledStyle,
-      underlineFocusStyle,
-      underlineShow,
-      underlineStyle,
       defaultValue = [], // eslint-disable-line no-unused-vars
       filter,
       value,
       dataSource,
-      floatingLabelFixed,
-      floatingLabelFocusStyle, // eslint-disable-line no-unused-vars
-      floatingLabelStyle, // eslint-disable-line no-unused-vars
-      floatingLabelText,
       onBeforeRequestAdd,
       onRequestAdd, // eslint-disable-line no-unused-vars
       onRequestDelete, // eslint-disable-line no-unused-vars
@@ -413,9 +410,6 @@ class ChipInput extends React.Component {
 ChipInput.propTypes = {
   style: PropTypes.object,
   chipContainerStyle: PropTypes.object,
-  floatingLabelText: PropTypes.node,
-  hintText: PropTypes.node,
-  id: PropTypes.string,
   dataSourceConfig: PropTypes.shape({
     text: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired
@@ -439,8 +433,7 @@ ChipInput.propTypes = {
 ChipInput.defaultProps = {
   newChipKeyCodes: [13],
   clearOnBlur: true,
-  allowDuplicates: false,
-  underlineShow: true
+  allowDuplicates: false
 }
 
 export default withStyles(styles)(ChipInput)
