@@ -4,14 +4,15 @@
  */
 import React from 'react'
 import PropTypes from 'prop-types'
-import Input, { InputAdornment, InputLabel } from 'material-ui/Input'
+import Input, { InputLabel } from 'material-ui/Input'
 import Chip from 'material-ui/Chip'
 import withStyles from 'material-ui/styles/withStyles'
 import blue from 'material-ui/colors/blue'
 import FormControl from 'material-ui/Form/FormControl'
 import FormHelperText from 'material-ui/Form/FormHelperText'
+import cx from 'classnames'
 
-const styles = {
+const styles = (theme) => ({
   root: {
     fontSize: 16,
     lineHeight: '24px',
@@ -32,10 +33,67 @@ const styles = {
     WebkitTapHighlightColor: 'rgba(0,0,0,0)', // Remove mobile color flashing (deprecated style).
     float: 'left'
   },
-  defaultChip: {
-    margin: '8px 8px 0 0',
-    float: 'left'
+  chipContainer: {
+    cursor: 'text'
+  },
+  inkbar: {
+    '&:after': {
+      backgroundColor: theme.palette.primary[theme.palette.type === 'light' ? 'A700' : 'A200'],
+      left: 0,
+      bottom: 0,
+      // Doing the other way around crash on IE11 "''" https://github.com/cssinjs/jss/issues/242
+      content: '""',
+      height: 2,
+      position: 'absolute',
+      right: 0,
+      transform: 'scaleX(0)',
+      transition: theme.transitions.create('transform', {
+        duration: theme.transitions.duration.shorter,
+        easing: theme.transitions.easing.easeOut
+      }),
+      pointerEvents: 'none' // Transparent to the hover style.
+    },
+    '&$focused:after': {
+      transform: 'scaleX(1)'
+    }
+  },
+  focused: {},
+  disabled: {},
+  underline: {
+    '&:before': {
+      backgroundColor: theme.palette.input.bottomLine,
+      left: 0,
+      bottom: 0,
+      // Doing the other way around crash on IE11 "''" https://github.com/cssinjs/jss/issues/242
+      content: '""',
+      height: 1,
+      position: 'absolute',
+      right: 0,
+      transition: theme.transitions.create('background-color', {
+        duration: theme.transitions.duration.shorter,
+        easing: theme.transitions.easing.ease
+      }),
+      pointerEvents: 'none' // Transparent to the hover style.
+    },
+    '&:hover:not($disabled):before': {
+      backgroundColor: theme.palette.text.primary,
+      height: 2
+    },
+    '&$disabled:before': {
+      background: 'transparent',
+      backgroundImage: `linear-gradient(to right, ${
+        theme.palette.input.bottomLine
+      } 33%, transparent 0%)`,
+      backgroundPosition: 'left top',
+      backgroundRepeat: 'repeat-x',
+      backgroundSize: '5px 1px'
+    }
   }
+})
+
+const defaultChipStyle = {
+  margin: '0 8px 8px 0',
+  float: 'left'
 }
 
 const defaultChipRenderer = ({ value, text, isFocused, isDisabled, handleClick, handleRequestDelete, defaultStyle }, key) => (
@@ -347,6 +405,7 @@ class ChipInput extends React.Component {
       dataSource,
       dataSourceConfig,
       disabled,
+      disableUnderline,
       error,
       filter,
       FormHelperTextProps,
@@ -402,39 +461,46 @@ class ChipInput extends React.Component {
             {label}
           </InputLabel>
         )}
-        <Input
-          ref={this.setInputRef}
-          classes={{ input: classes.input, root: classes.inputRoot }}
-          className={className}
-          id={id}
-          startAdornment={
-            <InputAdornment position='start' onClick={this.focus} className={classes.chipContainer}>
-              {chips.map((tag, i) => {
-                const value = dataSourceConfig ? tag[dataSourceConfig.value] : tag
-                return chipRenderer({
-                  value,
-                  text: dataSourceConfig ? tag[dataSourceConfig.text] : tag,
-                  chip: tag,
-                  isDisabled: disabled,
-                  isFocused: dataSourceConfig ? (this.state.focusedChip && this.state.focusedChip[dataSourceConfig.value] === value) : (this.state.focusedChip === value),
-                  handleClick: () => this.setState({ focusedChip: value }),
-                  handleRequestDelete: () => this.handleDeleteChip(value, i),
-                  defaultStyle: styles.defaultChip
-                }, i)
-              })}
-            </InputAdornment>
-          }
-          value={this.state.inputValue}
-          onChange={this.handleUpdateInput}
-          onKeyDown={this.handleKeyDown}
-          onKeyPress={this.handleKeyPress}
-          onKeyUp={this.handleKeyUp}
-          onFocus={this.handleInputFocus}
-          onBlur={this.handleInputBlur}
-          inputRef={(ref) => { this.actualInput = ref }}
-          disabled={disabled}
-          {...other}
-        />
+        <div className={cx(
+          classes.chipContainer,
+          {
+            [classes.inkbar]: !disableUnderline,
+            [classes.focused]: this.state.isFocused,
+            [classes.underline]: !disableUnderline,
+            [classes.disabled]: disabled
+          })}
+        >
+          {chips.map((tag, i) => {
+            const value = dataSourceConfig ? tag[dataSourceConfig.value] : tag
+            return chipRenderer({
+              value,
+              text: dataSourceConfig ? tag[dataSourceConfig.text] : tag,
+              chip: tag,
+              isDisabled: disabled,
+              isFocused: dataSourceConfig ? (this.state.focusedChip && this.state.focusedChip[dataSourceConfig.value] === value) : (this.state.focusedChip === value),
+              handleClick: () => this.setState({ focusedChip: value }),
+              handleRequestDelete: () => this.handleDeleteChip(value, i),
+              defaultStyle: defaultChipStyle
+            }, i)
+          })}
+          <Input
+            ref={this.setInputRef}
+            classes={{ input: classes.input, root: classes.inputRoot }}
+            id={id}
+            value={this.state.inputValue}
+            onChange={this.handleUpdateInput}
+            onKeyDown={this.handleKeyDown}
+            onKeyPress={this.handleKeyPress}
+            onKeyUp={this.handleKeyUp}
+            onFocus={this.handleInputFocus}
+            onBlur={this.handleInputBlur}
+            inputRef={(ref) => { this.actualInput = ref }}
+            disabled={disabled}
+            disableUnderline
+            fullWidth={fullWidthInput}
+            {...other}
+          />
+        </div>
         {helperText && (
           <FormHelperText className={helperTextClassName} {...FormHelperTextProps}>
             {helperText}
