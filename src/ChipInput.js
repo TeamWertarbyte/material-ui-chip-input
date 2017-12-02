@@ -35,9 +35,13 @@ const styles = (theme) => ({
   },
   chipContainer: {
     cursor: 'text',
-    marginTop: 20,
-    minHeight: 44
+    marginBottom: -2,
+    minHeight: 40,
+    '&$labeled': {
+      marginTop: 18
+    }
   },
+  labeled: {},
   label: {
     top: 4
   },
@@ -476,7 +480,8 @@ class ChipInput extends React.Component {
             [classes.inkbar]: !disableUnderline,
             [classes.focused]: this.state.isFocused,
             [classes.underline]: !disableUnderline,
-            [classes.disabled]: disabled
+            [classes.disabled]: disabled,
+            [classes.labeled]: label != null
           })}
         >
           {chips.map((tag, i) => {

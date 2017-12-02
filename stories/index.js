@@ -195,6 +195,7 @@ storiesOf('ChipInput', module)
       inputProps={{ fullWidth: true }}
     />
   )
+  */
   .add('with fullWidthInput', () =>
     <ChipInput
       floatingLabelText='The input is always full-width here'
@@ -202,6 +203,7 @@ storiesOf('ChipInput', module)
       fullWidthInput
     />
   )
+  /*
   .add('with clipboard manipulation', () =>
     <ClipboardExample
       onPaste={action('onPaste')}
