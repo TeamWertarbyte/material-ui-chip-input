@@ -39,8 +39,7 @@ const styles = {
 const defaultChipRenderer = ({ value, text, isFocused, isDisabled, handleClick, handleRequestDelete, defaultStyle }, key) => (
   <Chip
     key={key}
-    style={{ ...defaultStyle, pointerEvents: isDisabled ? 'none' : undefined }}
-    backgroundColor={isFocused ? blue[300] : null}
+    style={{ ...defaultStyle, pointerEvents: isDisabled ? 'none' : undefined, backgroundColor: isFocused ? blue[300] : undefined }}
     onClick={handleClick}
     onRequestDelete={handleRequestDelete}
     label={text}
@@ -129,6 +128,9 @@ class ChipInput extends React.Component {
     if (this.props.onBlur) {
       this.props.onBlur(event)
     }
+    if (this.state.focusedChip) {
+      this.setState({ focusedChip: null })
+    }
 
     // A momentary delay is required to support openOnFocus. We must give time for the autocomplete
     // menu to close before checking the current status. Otherwise, tabbing off the input while the
@@ -148,7 +150,7 @@ class ChipInput extends React.Component {
     if (this.props.disabled) {
       return
     }
-    this.setState({isFocused: true})
+    this.setState({ isFocused: true })
     if (this.props.onFocus) {
       this.props.onFocus(event)
     }
@@ -217,7 +219,7 @@ class ChipInput extends React.Component {
   }
 
   handleKeyPress = (event) => {
-    this.setState({keyPressed: true})
+    this.setState({ keyPressed: true })
   }
 
   handleUpdateInput = (e) => {
@@ -399,6 +401,8 @@ class ChipInput extends React.Component {
           onKeyDown={this.handleKeyDown}
           onKeyPress={this.handleKeyPress}
           onKeyUp={this.handleKeyUp}
+          onFocus={this.handleInputFocus}
+          onBlur={this.handleInputBlur}
           inputProps={{ ref: (ref) => { this.actualInput = ref } }}
           {...other}
         />
