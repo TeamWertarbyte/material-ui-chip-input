@@ -436,6 +436,7 @@ class ChipInput extends React.Component {
       onBlur, // eslint-disable-line no-unused-vars
       onChange, // eslint-disable-line no-unused-vars
       onFocus, // eslint-disable-line no-unused-vars
+      placeholder,
       required,
       rootRef,
       value,
@@ -461,6 +462,7 @@ class ChipInput extends React.Component {
         error={error}
         required={required}
         onClick={this.focus}
+        disabled={disabled}
         {...other}
       >
         {label && (
@@ -469,6 +471,7 @@ class ChipInput extends React.Component {
             className={labelClassName}
             classes={{ root: classes.label, shrink: classes.labelShrink }}
             shrink={shrinkFloatingLabel}
+            focused={this.state.isFocused}
             {...InputLabelProps}
           >
             {label}
@@ -512,6 +515,7 @@ class ChipInput extends React.Component {
             disabled={disabled}
             disableUnderline
             fullWidth={fullWidthInput}
+            placeholder={!hasInput && (shrinkFloatingLabel || label == null) && placeholder}
             {...other}
           />
         </div>

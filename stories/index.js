@@ -38,12 +38,14 @@ storiesOf('ChipInput', module)
       defaultValue={[...Array(100).keys()].map((c) => `Chip ${c}`)}
     />
   )
-  .add('with hintText', () =>
+  */
+  .add('with placeholder', () =>
     <ChipInput
-      hintText='Hint text'
+      placeholder='Placeholder'
       fullWidth
     />
   )
+  /*
   .add('with auto complete', () =>
     <ChipInput
       fullWidth
@@ -75,19 +77,17 @@ storiesOf('ChipInput', module)
       fullWidth
     />
   )
-  /*
-  .add('with floating label and hint text', () =>
+  .add('with label and placeholder', () =>
     <ChipInput
-      floatingLabelText='Floating label'
-      hintText='Hint text'
+      label='Floating label'
+      placeholder='Placeholder'
       fullWidth
     />
   )
-  */
   .add('disabled', () =>
     <ChipInput
       defaultValue={['foo', 'bar']}
-      floatingLabelText='Disabled input'
+      label='Disabled input'
       disabled
       fullWidth
     />
@@ -95,7 +95,7 @@ storiesOf('ChipInput', module)
   .add('with custom width', () =>
     <ChipInput
       defaultValue={['foo', 'bar']}
-      floatingLabelText='A chip input with a width of 321px'
+      label='A chip input with a width of 321px'
       style={{ width: 321 }}
     />
   )
@@ -129,13 +129,15 @@ storiesOf('ChipInput', module)
       errorStyle={{ color: 'purple' }}
     />
   )
+  */
   .add('without underline', () =>
     <ChipInput
       defaultValue={['foo', 'bar']}
       fullWidth
-      underlineShow={false}
+      disableUnderline
     />
   )
+  /*
   .add('create tags with comma, space and enter', () =>
     <ChipInput
       newChipKeyCodes={[13, 188, 32]}
@@ -198,7 +200,7 @@ storiesOf('ChipInput', module)
   */
   .add('with fullWidthInput', () =>
     <ChipInput
-      floatingLabelText='The input is always full-width here'
+      label='The input is always full-width here'
       fullWidth
       fullWidthInput
     />
