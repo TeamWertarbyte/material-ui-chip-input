@@ -16,7 +16,6 @@ const styles = (theme) => ({
   root: {
     fontSize: 16,
     lineHeight: '24px',
-    // width: props.fullWidth ? '100%' : 256,
     display: 'inline-block',
     position: 'relative',
     cursor: 'text',
@@ -28,7 +27,6 @@ const styles = (theme) => ({
   },
   input: {
     display: 'inline-block',
-    // cursor: props.disabled ? 'not-allowed' : 'initial',
     appearance: 'none', // Remove border in Safari, doesn't seem to break anything in other browsers
     WebkitTapHighlightColor: 'rgba(0,0,0,0)', // Remove mobile color flashing (deprecated style).
     float: 'left'
@@ -191,7 +189,7 @@ class ChipInput extends React.Component {
     // this.getInputNode().focus()
     // if (this.props.openOnFocus && !this.props.disabled) {
     // }
-    if (this.state.focusedChip) {
+    if (this.state.focusedChip != null) {
       this.setState({ focusedChip: null })
     }
   }
@@ -201,8 +199,11 @@ class ChipInput extends React.Component {
       this.props.onBlur(event)
     }
     this.setState({ isFocused: false })
-    if (this.state.focusedChip) {
+    if (this.state.focusedChip != null) {
       this.setState({ focusedChip: null })
+    }
+    if (this.props.clearOnBlur) {
+      this.clearInput()
     }
 
     // A momentary delay is required to support openOnFocus. We must give time for the autocomplete
@@ -230,51 +231,39 @@ class ChipInput extends React.Component {
   }
 
   handleKeyDown = (event) => {
+    const { focusedChip } = this.state
     this.setState({ keyPressed: false, preventChipCreation: false })
+
     if (this.props.newChipKeyCodes.indexOf(event.keyCode) >= 0) {
       this.handleAddChip(event.target.value)
     } else if (event.keyCode === 8 || event.keyCode === 46) {
       if (event.target.value === '') {
         const chips = this.props.value || this.state.chips
-        if (this.state.focusedChip == null && event.keyCode === 8) {
-          this.setState({ focusedChip: chips[chips.length - 1] })
-        } else if (this.state.focusedChip) {
-          const index = chips.findIndex((chip) => {
-            return this.props.dataSourceConfig
-              ? this.state.focusedChip[this.props.dataSourceConfig.value] === chip[this.props.dataSourceConfig.value]
-              : this.state.focusedChip === chip
-          })
-          const value = this.props.dataSourceConfig ? this.state.focusedChip[this.props.dataSourceConfig.value] : this.state.focusedChip
-          this.handleDeleteChip(value, index)
-          if (event.keyCode === 8 && index > 0) {
-            this.setState({ focusedChip: chips[index - 1] })
-          } else if (event.keyCode === 46 && index < chips.length - 1) {
-            this.setState({ focusedChip: chips[index + 1] })
+        if (focusedChip == null && event.keyCode === 8) {
+          this.setState({ focusedChip: chips.length - 1 })
+        } else if (focusedChip != null) {
+          const chips = this.props.value || this.state.chips
+          const value = chips[focusedChip]
+          this.handleDeleteChip(value, focusedChip)
+          if (event.keyCode === 8 && focusedChip > 0) {
+            this.setState({ focusedChip: focusedChip - 1 })
+          } else if (event.keyCode === 46 && focusedChip <= chips.length - 1) {
+            this.setState({ focusedChip })
           }
         }
       }
     } else if (event.keyCode === 37) {
       const chips = this.props.value || this.state.chips
-      if (this.state.focusedChip == null && event.target.value === '' && chips.length) {
-        return this.setState({ focusedChip: chips[chips.length - 1] })
+      if (focusedChip == null && event.target.value === '' && chips.length) {
+        return this.setState({ focusedChip: chips.length - 1 })
       }
-      const index = chips.findIndex((chip) => {
-        return this.props.dataSourceConfig && this.state.focusedChip
-          ? this.state.focusedChip[this.props.dataSourceConfig.value] === chip[this.props.dataSourceConfig.value]
-          : this.state.focusedChip === chip
-      })
-      if (index > 0) {
-        this.setState({ focusedChip: chips[index - 1] })
+      if (focusedChip != null && focusedChip > 0) {
+        this.setState({ focusedChip: focusedChip - 1 })
       }
     } else if (event.keyCode === 39) {
       const chips = this.props.value || this.state.chips
-      const index = chips.findIndex((chip) => {
-        return this.props.dataSourceConfig && this.state.focusedChip
-          ? this.state.focusedChip[this.props.dataSourceConfig.value] === chip[this.props.dataSourceConfig.value]
-          : this.state.focusedChip === chip
-      })
-      if (index >= 0 && index < chips.length - 1) {
-        this.setState({ focusedChip: chips[index + 1] })
+      if (focusedChip != null && focusedChip < chips.length - 1) {
+        this.setState({ focusedChip: focusedChip + 1 })
       } else {
         this.setState({ focusedChip: null })
       }
@@ -320,10 +309,8 @@ class ChipInput extends React.Component {
       }
 
       if (this.props.allowDuplicates || !chips.some((c) => c[this.props.dataSourceConfig.value] === chip[this.props.dataSourceConfig.value])) {
-        if (this.props.value) {
-          if (this.props.onRequestAdd) {
-            this.props.onRequestAdd(chip)
-          }
+        if (this.props.value && this.props.onRequestAdd) {
+          this.props.onRequestAdd(chip)
         } else {
           this.setState({ chips: [ ...this.state.chips, chip ] })
           if (this.props.onChange) {
@@ -331,18 +318,14 @@ class ChipInput extends React.Component {
           }
         }
       }
-    } else {
-      if (chip.trim().length > 0) {
-        if (this.props.allowDuplicates || chips.indexOf(chip) === -1) {
-          if (this.props.value) {
-            if (this.props.onRequestAdd) {
-              this.props.onRequestAdd(chip)
-            }
-          } else {
-            this.setState({ chips: [ ...this.state.chips, chip ] })
-            if (this.props.onChange) {
-              this.props.onChange([ ...this.state.chips, chip ])
-            }
+    } else if (chip.trim().length > 0) {
+      if (this.props.allowDuplicates || chips.indexOf(chip) === -1) {
+        if (this.props.value && this.props.onRequestAdd) {
+          this.props.onRequestAdd(chip)
+        } else {
+          this.setState({ chips: [ ...this.state.chips, chip ] })
+          if (this.props.onChange) {
+            this.props.onChange([ ...this.state.chips, chip ])
           }
         }
       }
@@ -355,29 +338,18 @@ class ChipInput extends React.Component {
         this.props.onRequestDelete(chip, i)
       }
     } else {
-      if (this.props.dataSourceConfig) {
-        const chips = this.state.chips.slice()
-        let changed = chips.splice(i, 1) // remove the chip at index i
-        if (changed) {
-          this.setState({
-            chips,
-            focusedChip: this.state.focusedChip && this.state.focusedChip[this.props.dataSourceConfig.value] === chip ? null : this.state.focusedChip
-          })
-          if (this.props.onChange) {
-            this.props.onChange(chips)
-          }
+      const chips = this.state.chips.slice()
+      const changed = chips.splice(i, 1) // remove the chip at index i
+      if (changed) {
+        let focusedChip = this.state.focusedChip
+        if (this.state.focusedChip === i) {
+          focusedChip = null
+        } else if (this.state.focusedChip > i) {
+          focusedChip = this.state.focusedChip - 1
         }
-      } else {
-        const chips = this.state.chips.slice()
-        let changed = chips.splice(i, 1) // remove the chip at index i
-        if (changed) {
-          this.setState({
-            chips,
-            focusedChip: this.state.focusedChip === chip ? null : this.state.focusedChip
-          })
-          if (this.props.onChange) {
-            this.props.onChange(chips)
-          }
+        this.setState({ chips, focusedChip })
+        if (this.props.onChange) {
+          this.props.onChange(chips)
         }
       }
     }
@@ -494,8 +466,8 @@ class ChipInput extends React.Component {
               text: dataSourceConfig ? tag[dataSourceConfig.text] : tag,
               chip: tag,
               isDisabled: disabled,
-              isFocused: dataSourceConfig ? (this.state.focusedChip && this.state.focusedChip[dataSourceConfig.value] === value) : (this.state.focusedChip === value),
-              handleClick: () => this.setState({ focusedChip: value }),
+              isFocused: this.state.focusedChip === i,
+              handleClick: () => this.setState({ focusedChip: i }),
               handleRequestDelete: () => this.handleDeleteChip(value, i),
               defaultStyle: defaultChipStyle
             }, i)
