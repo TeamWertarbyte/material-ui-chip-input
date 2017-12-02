@@ -34,7 +34,15 @@ const styles = (theme) => ({
     float: 'left'
   },
   chipContainer: {
-    cursor: 'text'
+    cursor: 'text',
+    marginTop: 20,
+    minHeight: 44
+  },
+  label: {
+    top: 4
+  },
+  labelShrink: {
+    top: 0
   },
   inkbar: {
     '&:after': {
@@ -443,18 +451,19 @@ class ChipInput extends React.Component {
 
     return (
       <FormControl
+        ref={rootRef}
         fullWidth={fullWidth}
         className={className}
         error={error}
         required={required}
         onClick={this.focus}
         {...other}
-        ref={rootRef}
       >
         {label && (
           <InputLabel
             htmlFor={id}
             className={labelClassName}
+            classes={{ root: classes.label, shrink: classes.labelShrink }}
             shrink={shrinkFloatingLabel}
             {...InputLabelProps}
           >
