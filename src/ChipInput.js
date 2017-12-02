@@ -13,14 +13,6 @@ import FormHelperText from 'material-ui/Form/FormHelperText'
 import cx from 'classnames'
 
 const styles = (theme) => ({
-  root: {
-    fontSize: 16,
-    lineHeight: '24px',
-    display: 'inline-block',
-    position: 'relative',
-    cursor: 'text',
-    height: 'auto'
-  },
   inputRoot: {
     display: 'inline-block',
     marginTop: 0
@@ -45,6 +37,9 @@ const styles = (theme) => ({
   },
   labelShrink: {
     top: 0
+  },
+  helperText: {
+    marginBottom: -20
   },
   inkbar: {
     '&:after': {
@@ -97,6 +92,12 @@ const styles = (theme) => ({
       backgroundPosition: 'left top',
       backgroundRepeat: 'repeat-x',
       backgroundSize: '5px 1px'
+    }
+  },
+  error: {
+    '&:after': {
+      backgroundColor: theme.palette.error.A400,
+      transform: 'scaleX(1)' // error is always underlined in red
     }
   }
 })
@@ -456,7 +457,8 @@ class ChipInput extends React.Component {
             [classes.focused]: this.state.isFocused,
             [classes.underline]: !disableUnderline,
             [classes.disabled]: disabled,
-            [classes.labeled]: label != null
+            [classes.labeled]: label != null,
+            [classes.error]: error
           })}
         >
           {chips.map((tag, i) => {
@@ -492,7 +494,7 @@ class ChipInput extends React.Component {
           />
         </div>
         {helperText && (
-          <FormHelperText className={helperTextClassName} {...FormHelperTextProps}>
+          <FormHelperText className={cx(helperTextClassName, classes.helperText)} {...FormHelperTextProps}>
             {helperText}
           </FormHelperText>
         )}

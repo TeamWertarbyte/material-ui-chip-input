@@ -118,18 +118,19 @@ storiesOf('ChipInput', module)
       )}
     />
   )
-  .add('with errorText', () =>
-    <ChipInput
-      errorText='This is an error.'
-    />
-  )
-  .add('with errorStyle', () =>
-    <ChipInput
-      errorText='This is an error.'
-      errorStyle={{ color: 'purple' }}
-    />
-  )
   */
+  .add('with helperText', () =>
+    <ChipInput
+      helperText='This text is here to help you.'
+    />
+  )
+  .add('with error style', () =>
+    <ChipInput
+      value={['One', 'Two']}
+      helperText='At least three chips required.'
+      error
+    />
+  )
   .add('without underline', () =>
     <ChipInput
       defaultValue={['foo', 'bar']}
@@ -230,12 +231,14 @@ storiesOf('ChipInput', module)
       />
     </form>
   )
+  */
   .add('with duplicates allowed', () =>
     <ChipInput
       defaultValue={['foo', 'bar', 'foo', 'bar']}
       allowDuplicates
     />
   )
+  /*
   .add('with onBeforeRequestAdd returning false', () =>
     <ChipInput
       defaultValue={['foo', 'bar', 'foo', 'bar']}
