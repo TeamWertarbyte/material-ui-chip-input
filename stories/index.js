@@ -68,12 +68,14 @@ storiesOf('ChipInput', module)
       hintText='Try typing apha...'
     />
   )
+  */
   .add('with floating label', () =>
     <ChipInput
-      floatingLabelText='Floating label'
+      label='Floating label'
       fullWidth
     />
   )
+  /*
   .add('with floating label and hint text', () =>
     <ChipInput
       floatingLabelText='Floating label'
@@ -81,6 +83,7 @@ storiesOf('ChipInput', module)
       fullWidth
     />
   )
+  */
   .add('disabled', () =>
     <ChipInput
       defaultValue={['foo', 'bar']}
@@ -96,6 +99,7 @@ storiesOf('ChipInput', module)
       style={{ width: 321 }}
     />
   )
+  /*
   .add('with custom chips', () =>
     <ChipInput
       defaultValue={['foo', 'bar']}

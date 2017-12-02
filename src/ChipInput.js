@@ -4,11 +4,12 @@
  */
 import React from 'react'
 import PropTypes from 'prop-types'
-import Input, { InputAdornment } from 'material-ui/Input'
+import Input, { InputAdornment, InputLabel } from 'material-ui/Input'
 import Chip from 'material-ui/Chip'
 import withStyles from 'material-ui/styles/withStyles'
 import blue from 'material-ui/colors/blue'
-import cx from 'classnames'
+import FormControl from 'material-ui/Form/FormControl'
+import FormHelperText from 'material-ui/Form/FormHelperText'
 
 const styles = {
   root: {
@@ -21,7 +22,8 @@ const styles = {
     height: 'auto'
   },
   inputRoot: {
-    display: 'inline-block'
+    display: 'inline-block',
+    marginTop: 0
   },
   input: {
     display: 'inline-block',
@@ -128,6 +130,7 @@ class ChipInput extends React.Component {
     if (this.props.onBlur) {
       this.props.onBlur(event)
     }
+    this.setState({ isFocused: false })
     if (this.state.focusedChip) {
       this.setState({ focusedChip: null })
     }
@@ -136,14 +139,14 @@ class ChipInput extends React.Component {
     // menu to close before checking the current status. Otherwise, tabbing off the input while the
     // menu is open results in the input keeping its focus styles. Note that the ref might not be set
     // yet, so this.autocomplete might be null.
-    setTimeout(() => {
-      if (this.autoComplete && (!this.autoComplete.state.open || this.autoComplete.requestsList.length === 0)) {
-        if (this.props.clearOnBlur) {
-          this.clearInput()
-        }
-        this.setState({ isFocused: false })
-      }
-    }, 0)
+    // setTimeout(() => {
+    //   if (this.autoComplete && (!this.autoComplete.state.open || this.autoComplete.requestsList.length === 0)) {
+    //     if (this.props.clearOnBlur) {
+    //       this.clearInput()
+    //     }
+    //     this.setState({ isFocused: false })
+    //   }
+    // }, 0)
   }
 
   handleInputFocus = (event) => {
@@ -334,68 +337,93 @@ class ChipInput extends React.Component {
 
   render () {
     const {
-      classes,
+      allowDuplicates, // eslint-disable-line no-unused-vars
       children,
+      chipRenderer = defaultChipRenderer,
+      classes,
       className,
+      clearOnBlur,
+      defaultValue = [], // eslint-disable-line no-unused-vars
+      dataSource,
       dataSourceConfig,
       disabled,
+      error,
+      filter,
+      FormHelperTextProps,
       fullWidth,
       fullWidthInput,
-      clearOnBlur,
-      onBlur, // eslint-disable-line no-unused-vars
-      onChange, // eslint-disable-line no-unused-vars
-      onFocus, // eslint-disable-line no-unused-vars
-      style,
-      defaultValue = [], // eslint-disable-line no-unused-vars
-      filter,
-      value,
-      dataSource,
+      helperText,
+      helperTextClassName,
+      id,
+      InputLabelProps,
+      label,
+      labelClassName,
+      newChipKeyCodes, // eslint-disable-line no-unused-vars
       onBeforeRequestAdd,
       onRequestAdd, // eslint-disable-line no-unused-vars
       onRequestDelete, // eslint-disable-line no-unused-vars
-      chipRenderer = defaultChipRenderer,
-      newChipKeyCodes, // eslint-disable-line no-unused-vars
-      allowDuplicates, // eslint-disable-line no-unused-vars
+      onBlur, // eslint-disable-line no-unused-vars
+      onChange, // eslint-disable-line no-unused-vars
+      onFocus, // eslint-disable-line no-unused-vars
+      required,
+      rootRef,
+      value,
       ...other
     } = this.props
 
     const chips = this.props.value || this.state.chips
-    const autoCompleteData = dataSourceConfig
-      ? (dataSource || []).filter((value) => !chips.some((c) => c[dataSourceConfig.value] === value[dataSourceConfig.value]))
-      : (dataSource || []).filter((value) => chips.indexOf(value) < 0)
+    // const autoCompleteData = dataSourceConfig
+    //   ? (dataSource || []).filter((value) => !chips.some((c) => c[dataSourceConfig.value] === value[dataSourceConfig.value]))
+    //   : (dataSource || []).filter((value) => chips.indexOf(value) < 0)
 
-    const actualFilter = other.openOnFocus ? (search, key) => (search === '' || filter(search, key)) : filter
+    // const actualFilter = other.openOnFocus ? (search, key) => (search === '' || filter(search, key)) : filter
+
+    const hasInput = (this.props.value || this.state.chips).length > 0 || this.state.inputValue.length > 0
+    // const showPlaceholder = placeholder && !hasInput
+    const shrinkFloatingLabel = label != null && (hasInput || this.state.isFocused)
 
     return (
-      <div
-        className={cx(classes.root, className)}
+      <FormControl
+        fullWidth={fullWidth}
+        className={className}
+        error={error}
+        required={required}
         onClick={this.focus}
+        {...other}
+        ref={rootRef}
       >
+        {label && (
+          <InputLabel
+            htmlFor={id}
+            className={labelClassName}
+            shrink={shrinkFloatingLabel}
+            {...InputLabelProps}
+          >
+            {label}
+          </InputLabel>
+        )}
         <Input
           ref={this.setInputRef}
           classes={{ input: classes.input, root: classes.inputRoot }}
+          className={className}
+          id={id}
           startAdornment={
-            <InputAdornment position='start'>
-              <div className={classes.chipContainer}>
-                {chips.map((tag, i) => {
-                  const value = dataSourceConfig ? tag[dataSourceConfig.value] : tag
-                  return chipRenderer({
-                    value,
-                    text: dataSourceConfig ? tag[dataSourceConfig.text] : tag,
-                    chip: tag,
-                    isDisabled: disabled,
-                    isFocused: dataSourceConfig ? (this.state.focusedChip && this.state.focusedChip[dataSourceConfig.value] === value) : (this.state.focusedChip === value),
-                    handleClick: () => this.setState({ focusedChip: value }),
-                    handleRequestDelete: () => this.handleDeleteChip(value, i),
-                    defaultStyle: styles.defaultChip
-                  }, i)
-                })}
-              </div>
+            <InputAdornment position='start' onClick={this.focus} className={classes.chipContainer}>
+              {chips.map((tag, i) => {
+                const value = dataSourceConfig ? tag[dataSourceConfig.value] : tag
+                return chipRenderer({
+                  value,
+                  text: dataSourceConfig ? tag[dataSourceConfig.text] : tag,
+                  chip: tag,
+                  isDisabled: disabled,
+                  isFocused: dataSourceConfig ? (this.state.focusedChip && this.state.focusedChip[dataSourceConfig.value] === value) : (this.state.focusedChip === value),
+                  handleClick: () => this.setState({ focusedChip: value }),
+                  handleRequestDelete: () => this.handleDeleteChip(value, i),
+                  defaultStyle: styles.defaultChip
+                }, i)
+              })}
             </InputAdornment>
           }
-          filter={actualFilter}
-          dataSource={autoCompleteData}
-          dataSourceConfig={dataSourceConfig}
           value={this.state.inputValue}
           onChange={this.handleUpdateInput}
           onKeyDown={this.handleKeyDown}
@@ -403,10 +431,16 @@ class ChipInput extends React.Component {
           onKeyUp={this.handleKeyUp}
           onFocus={this.handleInputFocus}
           onBlur={this.handleInputBlur}
-          inputProps={{ ref: (ref) => { this.actualInput = ref } }}
+          inputRef={(ref) => { this.actualInput = ref }}
+          disabled={disabled}
           {...other}
         />
-      </div>
+        {helperText && (
+          <FormHelperText className={helperTextClassName} {...FormHelperTextProps}>
+            {helperText}
+          </FormHelperText>
+        )}
+      </FormControl>
     )
   }
 }
@@ -431,7 +465,9 @@ ChipInput.propTypes = {
   chipRenderer: PropTypes.func,
   newChipKeyCodes: PropTypes.arrayOf(PropTypes.number),
   clearOnBlur: PropTypes.bool,
-  allowDuplicates: PropTypes.bool
+  allowDuplicates: PropTypes.bool,
+  fullWidth: PropTypes.bool,
+  fullWidthInput: PropTypes.bool
 }
 
 ChipInput.defaultProps = {
