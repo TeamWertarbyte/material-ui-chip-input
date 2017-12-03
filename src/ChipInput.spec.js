@@ -72,6 +72,39 @@ describe('uncontrolled mode', () => {
     tree.find('Cancel').first().simulate('click')
     expect(handleChange).toBeCalledWith(['bar'])
   })
+
+  it('does not add empty chips', () => {
+    const handleChange = jest.fn()
+    const tree = mount(
+      <ChipInput onChange={handleChange} />
+    )
+
+    tree.find('input').getDOMNode().value = ' '
+    tree.find('input').simulate('keyDown', { keyCode: 13 }) // press enter
+    expect(handleChange).not.toBeCalled()
+  })
+
+  it('does not add duplicate chips by default', () => {
+    const handleChange = jest.fn()
+    const tree = mount(
+      <ChipInput defaultValue={['a']} onChange={handleChange} />
+    )
+
+    tree.find('input').getDOMNode().value = 'a'
+    tree.find('input').simulate('keyDown', { keyCode: 13 }) // press enter
+    expect(handleChange).not.toBeCalled()
+  })
+
+  it('does add duplicate chips if allowDuplicates is set to true', () => {
+    const handleChange = jest.fn()
+    const tree = mount(
+      <ChipInput defaultValue={['a']} onChange={handleChange} allowDuplicates />
+    )
+
+    tree.find('input').getDOMNode().value = 'a'
+    tree.find('input').simulate('keyDown', { keyCode: 13 }) // press enter
+    expect(handleChange).toBeCalledWith(['a', 'a'])
+  })
 })
 
 describe('chip focusing', () => {
@@ -148,7 +181,7 @@ describe('chip focusing', () => {
     tree.find('input').simulate('keyDown', { keyCode: 39 }) // arrow right
     expect(getFocusedChip(tree).text()).toBe('c')
 
-    // onfocus all chips if the right arrow key is pressed when focusing the last chip
+    // unfocus all chips if the right arrow key is pressed when focusing the last chip
     tree.find('input').simulate('keyDown', { keyCode: 39 }) // arrow right
     expect(getFocusedChip(tree).length).toBe(0)
   })
@@ -232,5 +265,14 @@ describe('floating label', () => {
     tree.find('input').getDOMNode().value = 'foo'
     tree.find('input').simulate('change')
     expect(tree.find('InputLabel').prop('shrink')).toBe(true)
+  })
+})
+
+describe('helper text', () => {
+  it('is displayed', () => {
+    const tree = mount(
+      <ChipInput helperText='Helper text' />
+    )
+    expect(tree.find('FormHelperText').text()).toBe('Helper text')
   })
 })
