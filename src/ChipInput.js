@@ -118,10 +118,6 @@ const defaultChipRenderer = ({ value, text, isFocused, isDisabled, handleClick, 
 )
 
 class ChipInput extends React.Component {
-  static contextTypes = {
-    muiTheme: PropTypes.object.isRequired
-  };
-
   state = {
     isFocused: false,
     errorText: undefined,
@@ -489,7 +485,7 @@ class ChipInput extends React.Component {
             disabled={disabled}
             disableUnderline
             fullWidth={fullWidthInput}
-            placeholder={!hasInput && (shrinkFloatingLabel || label == null) && placeholder}
+            placeholder={!hasInput && (shrinkFloatingLabel || label == null) ? placeholder : null}
             {...other}
           />
         </div>

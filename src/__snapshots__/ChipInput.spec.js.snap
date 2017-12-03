@@ -1,0 +1,346 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`uncontrolled mode matches the snapshot 1`] = `
+<withStyles(ChipInput)
+  defaultValue={
+    Array [
+      "foo",
+      "bar",
+    ]
+  }
+>
+  <ChipInput
+    allowDuplicates={false}
+    classes={
+      Object {
+        "chipContainer": "ChipInput-chipContainer-3",
+        "disabled": "ChipInput-disabled-10",
+        "error": "ChipInput-error-12",
+        "focused": "ChipInput-focused-9",
+        "helperText": "ChipInput-helperText-7",
+        "inkbar": "ChipInput-inkbar-8",
+        "input": "ChipInput-input-2",
+        "inputRoot": "ChipInput-inputRoot-1",
+        "label": "ChipInput-label-5",
+        "labelShrink": "ChipInput-labelShrink-6",
+        "labeled": "ChipInput-labeled-4",
+        "underline": "ChipInput-underline-11",
+      }
+    }
+    clearOnBlur={true}
+    defaultValue={
+      Array [
+        "foo",
+        "bar",
+      ]
+    }
+    newChipKeyCodes={
+      Array [
+        13,
+      ]
+    }
+  >
+    <withStyles(FormControl)
+      onClick={[Function]}
+    >
+      <FormControl
+        classes={
+          Object {
+            "fullWidth": "MuiFormControl-fullWidth-16",
+            "marginDense": "MuiFormControl-marginDense-15",
+            "marginNormal": "MuiFormControl-marginNormal-14",
+            "root": "MuiFormControl-root-13",
+          }
+        }
+        component="div"
+        disabled={false}
+        error={false}
+        fullWidth={false}
+        margin="none"
+        onClick={[Function]}
+        required={false}
+      >
+        <div
+          className="MuiFormControl-root-13"
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          required={false}
+        >
+          <div
+            className="ChipInput-chipContainer-3 ChipInput-inkbar-8 ChipInput-underline-11"
+          >
+            <withStyles(Chip)
+              key="0"
+              label="foo"
+              onClick={[Function]}
+              onRequestDelete={[Function]}
+              style={
+                Object {
+                  "backgroundColor": undefined,
+                  "float": "left",
+                  "margin": "0 8px 8px 0",
+                  "pointerEvents": undefined,
+                }
+              }
+            >
+              <Chip
+                classes={
+                  Object {
+                    "avatar": "MuiChip-avatar-20",
+                    "avatarChildren": "MuiChip-avatarChildren-21",
+                    "clickable": "MuiChip-clickable-18",
+                    "deletable": "MuiChip-deletable-19",
+                    "deleteIcon": "MuiChip-deleteIcon-23",
+                    "label": "MuiChip-label-22",
+                    "root": "MuiChip-root-17",
+                  }
+                }
+                label="foo"
+                onClick={[Function]}
+                onRequestDelete={[Function]}
+                style={
+                  Object {
+                    "backgroundColor": undefined,
+                    "float": "left",
+                    "margin": "0 8px 8px 0",
+                    "pointerEvents": undefined,
+                  }
+                }
+              >
+                <div
+                  className="MuiChip-root-17 MuiChip-clickable-18 MuiChip-deletable-19"
+                  onClick={[Function]}
+                  onKeyDown={[Function]}
+                  role="button"
+                  style={
+                    Object {
+                      "backgroundColor": undefined,
+                      "float": "left",
+                      "margin": "0 8px 8px 0",
+                      "pointerEvents": undefined,
+                    }
+                  }
+                  tabIndex={0}
+                >
+                  <span
+                    className="MuiChip-label-22"
+                  >
+                    foo
+                  </span>
+                  <pure(Cancel)
+                    className="MuiChip-deleteIcon-23"
+                    onClick={[Function]}
+                  >
+                    <Cancel
+                      className="MuiChip-deleteIcon-23"
+                      onClick={[Function]}
+                    >
+                      <withStyles(SvgIcon)
+                        className="MuiChip-deleteIcon-23"
+                        onClick={[Function]}
+                      >
+                        <SvgIcon
+                          className="MuiChip-deleteIcon-23"
+                          classes={
+                            Object {
+                              "root": "MuiSvgIcon-root-24",
+                            }
+                          }
+                          onClick={[Function]}
+                          viewBox="0 0 24 24"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            className="MuiSvgIcon-root-24 MuiChip-deleteIcon-23"
+                            focusable="false"
+                            onClick={[Function]}
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"
+                            />
+                          </svg>
+                        </SvgIcon>
+                      </withStyles(SvgIcon)>
+                    </Cancel>
+                  </pure(Cancel)>
+                </div>
+              </Chip>
+            </withStyles(Chip)>
+            <withStyles(Chip)
+              key="1"
+              label="bar"
+              onClick={[Function]}
+              onRequestDelete={[Function]}
+              style={
+                Object {
+                  "backgroundColor": undefined,
+                  "float": "left",
+                  "margin": "0 8px 8px 0",
+                  "pointerEvents": undefined,
+                }
+              }
+            >
+              <Chip
+                classes={
+                  Object {
+                    "avatar": "MuiChip-avatar-20",
+                    "avatarChildren": "MuiChip-avatarChildren-21",
+                    "clickable": "MuiChip-clickable-18",
+                    "deletable": "MuiChip-deletable-19",
+                    "deleteIcon": "MuiChip-deleteIcon-23",
+                    "label": "MuiChip-label-22",
+                    "root": "MuiChip-root-17",
+                  }
+                }
+                label="bar"
+                onClick={[Function]}
+                onRequestDelete={[Function]}
+                style={
+                  Object {
+                    "backgroundColor": undefined,
+                    "float": "left",
+                    "margin": "0 8px 8px 0",
+                    "pointerEvents": undefined,
+                  }
+                }
+              >
+                <div
+                  className="MuiChip-root-17 MuiChip-clickable-18 MuiChip-deletable-19"
+                  onClick={[Function]}
+                  onKeyDown={[Function]}
+                  role="button"
+                  style={
+                    Object {
+                      "backgroundColor": undefined,
+                      "float": "left",
+                      "margin": "0 8px 8px 0",
+                      "pointerEvents": undefined,
+                    }
+                  }
+                  tabIndex={0}
+                >
+                  <span
+                    className="MuiChip-label-22"
+                  >
+                    bar
+                  </span>
+                  <pure(Cancel)
+                    className="MuiChip-deleteIcon-23"
+                    onClick={[Function]}
+                  >
+                    <Cancel
+                      className="MuiChip-deleteIcon-23"
+                      onClick={[Function]}
+                    >
+                      <withStyles(SvgIcon)
+                        className="MuiChip-deleteIcon-23"
+                        onClick={[Function]}
+                      >
+                        <SvgIcon
+                          className="MuiChip-deleteIcon-23"
+                          classes={
+                            Object {
+                              "root": "MuiSvgIcon-root-24",
+                            }
+                          }
+                          onClick={[Function]}
+                          viewBox="0 0 24 24"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            className="MuiSvgIcon-root-24 MuiChip-deleteIcon-23"
+                            focusable="false"
+                            onClick={[Function]}
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"
+                            />
+                          </svg>
+                        </SvgIcon>
+                      </withStyles(SvgIcon)>
+                    </Cancel>
+                  </pure(Cancel)>
+                </div>
+              </Chip>
+            </withStyles(Chip)>
+            <withStyles(Input)
+              classes={
+                Object {
+                  "input": "ChipInput-input-2",
+                  "root": "ChipInput-inputRoot-1",
+                }
+              }
+              disableUnderline={true}
+              inputRef={[Function]}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyPress={[Function]}
+              onKeyUp={[Function]}
+              placeholder={null}
+              value=""
+            >
+              <Input
+                classes={
+                  Object {
+                    "disabled": "MuiInput-disabled-31",
+                    "error": "MuiInput-error-28",
+                    "focused": "MuiInput-focused-32",
+                    "formControl": "MuiInput-formControl-26",
+                    "fullWidth": "MuiInput-fullWidth-39",
+                    "inkbar": "MuiInput-inkbar-27",
+                    "input": "MuiInput-input-29 ChipInput-input-2",
+                    "inputDense": "MuiInput-inputDense-30",
+                    "inputDisabled": "MuiInput-inputDisabled-35",
+                    "inputMultiline": "MuiInput-inputMultiline-38",
+                    "inputSearch": "MuiInput-inputSearch-37",
+                    "inputSingleline": "MuiInput-inputSingleline-36",
+                    "multiline": "MuiInput-multiline-34",
+                    "root": "MuiInput-root-25 ChipInput-inputRoot-1",
+                    "underline": "MuiInput-underline-33",
+                  }
+                }
+                disableUnderline={true}
+                fullWidth={false}
+                inputRef={[Function]}
+                multiline={false}
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyPress={[Function]}
+                onKeyUp={[Function]}
+                placeholder={null}
+                type="text"
+                value=""
+              >
+                <div
+                  className="MuiInput-root-25 ChipInput-inputRoot-1 MuiInput-formControl-26"
+                  onBlur={[Function]}
+                  onFocus={[Function]}
+                  onKeyPress={[Function]}
+                >
+                  <input
+                    className="MuiInput-input-29 ChipInput-input-2 MuiInput-inputSingleline-36"
+                    disabled={false}
+                    onChange={[Function]}
+                    onKeyDown={[Function]}
+                    onKeyUp={[Function]}
+                    placeholder={null}
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </Input>
+            </withStyles(Input)>
+          </div>
+        </div>
+      </FormControl>
+    </withStyles(FormControl)>
+  </ChipInput>
+</withStyles(ChipInput)>
+`;

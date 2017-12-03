@@ -1,4 +1,8 @@
 # material-ui-chip-input
+
+[![Build Status](https://travis-ci.org/TeamWertarbyte/material-ui-chip-input.svg?branch=next)](https://travis-ci.org/TeamWertarbyte/material-ui-chip-input)
+[![Coverage Status](https://coveralls.io/repos/github/TeamWertarbyte/material-ui-chip-input/badge.svg?branch=next)](https://coveralls.io/github/TeamWertarbyte/material-ui-chip-input?branch=next)
+
 This project provides a [chip input field][chipspec] for [Material-UI][mui]. It is inspired by [Angular Material's chip input][angular-chips].
 
 ![Demo](demo.gif)

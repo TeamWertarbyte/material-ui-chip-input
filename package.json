@@ -11,7 +11,9 @@
   ],
   "scripts": {
     "build": "babel src -d lib",
-    "test": "standard",
+    "test": "standard && jest",
+    "test:coverage": "jest --coverage && cat ./coverage/lcov.info | coveralls",
+    "test:unit": "jest",
     "lint": "standard",
     "prepublish": "babel src -d lib",
     "storybook": "start-storybook -p 6006",
@@ -44,20 +46,41 @@
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-0": "^6.5.0",
+    "enzyme": "^3.2.0",
+    "enzyme-adapter-react-16": "^1.1.0",
+    "enzyme-to-json": "^3.2.2",
     "gh-pages": "^1.0.0",
+    "jest": "^21.2.1",
     "material-ui": "^1.0.0-beta.21",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
+    "react-test-renderer": "^16.2.0",
     "standard": "^10.0.2"
   },
   "peerDependencies": {
-    "material-ui": ">= 0.19.0 < 1.0.0",
-    "react": "^15.3.2 || ^16.0.0",
-    "react-dom": "^15.3.2 || ^16.0.0"
+    "material-ui": "^1.0.0-beta.20",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
   },
   "dependencies": {
     "classnames": "^2.2.5",
     "prop-types": "^15.5.7"
+  },
+  "jest": {
+    "setupFiles": [
+      "./test/shim.js",
+      "./test/jestsetup.js"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/test"
+    ],
+    "roots": [
+      "src",
+      "test"
+    ]
   },
   "standard": {
     "parser": "babel-eslint"
