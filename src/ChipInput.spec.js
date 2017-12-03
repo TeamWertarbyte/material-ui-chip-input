@@ -291,11 +291,11 @@ describe('custom chips', () => {
       value: 'a',
       text: 'a',
       chip: 'a',
+      className: expect.any(String),
       isDisabled: false,
       isFocused: false,
       handleClick: expect.any(Function),
-      handleRequestDelete: expect.any(Function),
-      defaultStyle: expect.any(Object)
+      handleRequestDelete: expect.any(Function)
     })
   })
 })

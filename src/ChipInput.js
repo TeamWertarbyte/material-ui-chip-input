@@ -13,6 +13,7 @@ import FormHelperText from 'material-ui/Form/FormHelperText'
 import cx from 'classnames'
 
 const styles = (theme) => ({
+  root: {},
   inputRoot: {
     display: 'inline-block',
     marginTop: 0
@@ -99,18 +100,18 @@ const styles = (theme) => ({
       backgroundColor: theme.palette.error.A400,
       transform: 'scaleX(1)' // error is always underlined in red
     }
+  },
+  chip: {
+    margin: '0 8px 8px 0',
+    float: 'left'
   }
 })
 
-const defaultChipStyle = {
-  margin: '0 8px 8px 0',
-  float: 'left'
-}
-
-const defaultChipRenderer = ({ value, text, isFocused, isDisabled, handleClick, handleRequestDelete, defaultStyle }, key) => (
+const defaultChipRenderer = ({ value, text, isFocused, isDisabled, handleClick, handleRequestDelete, className }, key) => (
   <Chip
     key={key}
-    style={{ ...defaultStyle, pointerEvents: isDisabled ? 'none' : undefined, backgroundColor: isFocused ? blue[300] : undefined }}
+    className={className}
+    style={{ pointerEvents: isDisabled ? 'none' : undefined, backgroundColor: isFocused ? blue[300] : undefined }}
     onClick={handleClick}
     onRequestDelete={handleRequestDelete}
     label={text}
@@ -424,7 +425,7 @@ class ChipInput extends React.Component {
       <FormControl
         ref={rootRef}
         fullWidth={fullWidth}
-        className={className}
+        className={cx(className, classes.root)}
         error={error}
         required={required}
         onClick={this.focus}
@@ -464,7 +465,7 @@ class ChipInput extends React.Component {
               isFocused: this.state.focusedChip === i,
               handleClick: () => this.setState({ focusedChip: i }),
               handleRequestDelete: () => this.handleDeleteChip(value, i),
-              defaultStyle: defaultChipStyle
+              className: classes.chip
             }, i)
           })}
           <Input

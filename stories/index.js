@@ -6,6 +6,7 @@ import Chip from 'material-ui/Chip'
 // import AutoComplete from 'material-ui/AutoComplete'
 import { green } from 'material-ui/colors'
 import ChipInput from '../src/ChipInput'
+import CustomizedChipInput from './CustomizedChipInput'
 // import ControlledChipInput from './ControlledChipInput'
 // import ClipboardExample from './ClipboardExample'
 
@@ -29,16 +30,9 @@ storiesOf('ChipInput', module)
       fullWidth
     />
   )
-  /*
-  .add('with custom chip container styles', () =>
-    <ChipInput
-      fullWidth
-      onChange={action('onChange')}
-      chipContainerStyle={{ overflow: 'auto', maxHeight: '56px' }}
-      defaultValue={[...Array(100).keys()].map((c) => `Chip ${c}`)}
-    />
+  .add('with custom styles', () =>
+    <CustomizedChipInput />
   )
-  */
   .add('with placeholder', () =>
     <ChipInput
       placeholder='Placeholder'
