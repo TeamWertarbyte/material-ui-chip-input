@@ -1,6 +1,7 @@
 /* eslint-env jest */
 import React from 'react'
 import { mount } from 'enzyme'
+import Chip from 'material-ui/Chip'
 import ChipInput from './ChipInput'
 
 describe('uncontrolled mode', () => {
@@ -274,5 +275,27 @@ describe('helper text', () => {
       <ChipInput helperText='Helper text' />
     )
     expect(tree.find('FormHelperText').text()).toBe('Helper text')
+  })
+})
+
+describe('custom chips', () => {
+  it('calls a chip renderer for every chip', () => {
+    const chipRenderer = jest.fn(({ text }, key) => <Chip key={key} label={text.toUpperCase()} />)
+    const tree = mount(
+      <ChipInput value={['a', 'b']} chipRenderer={chipRenderer} />
+    )
+    expect(chipRenderer).toHaveBeenCalledTimes(2)
+    expect(tree.find('Chip').map((chip) => chip.text())).toEqual(['A', 'B'])
+
+    expect(chipRenderer.mock.calls[0][0]).toEqual({
+      value: 'a',
+      text: 'a',
+      chip: 'a',
+      isDisabled: false,
+      isFocused: false,
+      handleClick: expect.any(Function),
+      handleRequestDelete: expect.any(Function),
+      defaultStyle: expect.any(Object)
+    })
   })
 })

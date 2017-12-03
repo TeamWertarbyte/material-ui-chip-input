@@ -1,10 +1,10 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
-// import Avatar from 'material-ui/Avatar'
-// import Chip from 'material-ui/Chip'
+import Avatar from 'material-ui/Avatar'
+import Chip from 'material-ui/Chip'
 // import AutoComplete from 'material-ui/AutoComplete'
-// import { green800, green300 } from 'material-ui/styles/colors'
+import { green } from 'material-ui/colors'
 import ChipInput from '../src/ChipInput'
 // import ControlledChipInput from './ControlledChipInput'
 // import ClipboardExample from './ClipboardExample'
@@ -99,7 +99,6 @@ storiesOf('ChipInput', module)
       style={{ width: 321 }}
     />
   )
-  /*
   .add('with custom chips', () =>
     <ChipInput
       defaultValue={['foo', 'bar']}
@@ -107,18 +106,15 @@ storiesOf('ChipInput', module)
       chipRenderer={({ value, isFocused, isDisabled, handleClick, handleRequestDelete, defaultStyle }, key) => (
         <Chip
           key={key}
-          style={{ ...defaultStyle, pointerEvents: isDisabled ? 'none' : undefined }}
-          backgroundColor={isFocused ? green800 : green300}
+          style={{ ...defaultStyle, pointerEvents: isDisabled ? 'none' : undefined, backgroundColor: isFocused ? green[800] : green[300] }}
           onClick={handleClick}
           onRequestDelete={handleRequestDelete}
-        >
-          <Avatar size={32}>{value[0].toUpperCase()}</Avatar>
-          {value}
-        </Chip>
+          label={value}
+          avatar={<Avatar size={32}>{value[0].toUpperCase()}</Avatar>}
+        />
       )}
     />
   )
-  */
   .add('with helperText', () =>
     <ChipInput
       helperText='This text is here to help you.'
