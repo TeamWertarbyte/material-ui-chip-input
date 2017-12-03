@@ -218,9 +218,6 @@ class ChipInput extends React.Component {
   }
 
   handleInputFocus = (event) => {
-    if (this.props.disabled) {
-      return
-    }
     this.setState({ isFocused: true })
     if (this.props.onFocus) {
       this.props.onFocus(event)

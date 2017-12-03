@@ -49,7 +49,7 @@ describe('uncontrolled mode', () => {
     )
 
     tree.find('input').simulate('keyDown', { keyCode: 8 }) // backspace (to focus the chip)
-    tree.find('input').simulate('keyDown', { keyCode: 46 }) // backspace (to remove the chip)
+    tree.find('input').simulate('keyDown', { keyCode: 8 }) // backspace (to remove the chip)
     expect(handleChange).toBeCalledWith(['foo'])
   })
 
@@ -60,7 +60,7 @@ describe('uncontrolled mode', () => {
     )
 
     tree.find('input').simulate('keyDown', { keyCode: 8 }) // backspace (to focus the chip)
-    tree.find('input').simulate('keyDown', { keyCode: 8 }) // delete (to remove the chip)
+    tree.find('input').simulate('keyDown', { keyCode: 46 }) // del (to remove the chip)
     expect(handleChange).toBeCalledWith(['foo'])
   })
 
@@ -71,6 +71,106 @@ describe('uncontrolled mode', () => {
     )
     tree.find('Cancel').first().simulate('click')
     expect(handleChange).toBeCalledWith(['bar'])
+  })
+})
+
+describe('chip focusing', () => {
+  function getFocusedChip (tree) {
+    return tree.find('Chip').filterWhere((chip) => chip.getDOMNode().style.backgroundColor !== '')
+  }
+
+  function focusChip (tree, name) {
+    tree.find('Chip').filterWhere((chip) => chip.text() === name).simulate('click')
+  }
+
+  it('focuses a chip on click', () => {
+    const tree = mount(
+      <ChipInput defaultValue={['foo', 'bar']} />
+    )
+    tree.find('Chip').at(1).simulate('click')
+    expect(getFocusedChip(tree).length).toBe(1)
+    expect(getFocusedChip(tree).text()).toBe('bar')
+  })
+
+  it('focuses the last chip when pressing backspace', () => {
+    const tree = mount(
+      <ChipInput defaultValue={['a', 'b', 'c']} />
+    )
+    tree.find('input').simulate('keyDown', { keyCode: 8 }) // backspace
+    expect(getFocusedChip(tree).text()).toBe('c')
+  })
+
+  it('unfocuses the focused chip while adding a new chip', () => {
+    const tree = mount(
+      <ChipInput defaultValue={['foo', 'bar']} />
+    )
+    focusChip(tree, 'foo')
+    tree.find('input').simulate('keyDown')
+    expect(getFocusedChip(tree).length).toBe(0)
+  })
+
+  it('unfocuses the focused chip on blur', () => {
+    const tree = mount(
+      <ChipInput defaultValue={['foo', 'bar']} />
+    )
+    focusChip(tree, 'foo')
+    tree.find('input').simulate('blur')
+    expect(getFocusedChip(tree).length).toBe(0)
+  })
+
+  it('unfocuses the focused chip when switching to disabled state', () => {
+    const tree = mount(
+      <ChipInput defaultValue={['foo', 'bar']} />
+    )
+    focusChip(tree, 'foo')
+    tree.setProps({ disabled: true })
+    expect(getFocusedChip(tree).length).toBe(0)
+  })
+
+  it('moves the focus to the left when pressing the left arrow key', () => {
+    const tree = mount(
+      <ChipInput defaultValue={['a', 'b', 'c']} />
+    )
+    focusChip(tree, 'b')
+    tree.find('input').simulate('keyDown', { keyCode: 37 }) // arrow left
+    expect(getFocusedChip(tree).text()).toBe('a')
+
+    // keep the first element focused when pressing left if the first element is already focused
+    tree.find('input').simulate('keyDown', { keyCode: 37 }) // arrow left
+    expect(getFocusedChip(tree).text()).toBe('a')
+  })
+
+  it('moves the focus to the right when pressing the right arrow key', () => {
+    const tree = mount(
+      <ChipInput defaultValue={['a', 'b', 'c']} />
+    )
+    focusChip(tree, 'b')
+    tree.find('input').simulate('keyDown', { keyCode: 39 }) // arrow right
+    expect(getFocusedChip(tree).text()).toBe('c')
+
+    // onfocus all chips if the right arrow key is pressed when focusing the last chip
+    tree.find('input').simulate('keyDown', { keyCode: 39 }) // arrow right
+    expect(getFocusedChip(tree).length).toBe(0)
+  })
+
+  it('focuses the chip to the left when removing a chip by pressing backspace', () => {
+    const tree = mount(
+      <ChipInput defaultValue={['a', 'b', 'c']} />
+    )
+    focusChip(tree, 'b')
+
+    tree.find('input').simulate('keyDown', { keyCode: 8 }) // backspace
+    expect(getFocusedChip(tree).text()).toBe('a')
+  })
+
+  it('focuses the chip at the previously focused position when removing a chip by pressing delete', () => {
+    const tree = mount(
+      <ChipInput defaultValue={['a', 'b', 'c']} />
+    )
+    focusChip(tree, 'b')
+
+    tree.find('input').simulate('keyDown', { keyCode: 46 }) // delete
+    expect(getFocusedChip(tree).text()).toBe('c')
   })
 })
 
