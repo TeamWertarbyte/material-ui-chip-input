@@ -134,6 +134,21 @@ describe('chip focusing', () => {
     expect(getFocusedChip(tree).text()).toBe('c')
   })
 
+  it('focuses the last chip when pressing the left arrow key if the input is empty', () => {
+    const tree = mount(
+      <ChipInput defaultValue={['a', 'b', 'c']} />
+    )
+    tree.find('input').simulate('keyDown', { keyCode: 37 }) // arrow left
+    expect(getFocusedChip(tree).text()).toBe('c')
+
+    // don't focus the chip if the input is not empty
+    tree.find('input').getDOMNode().value = 'd'
+    tree.find('input').simulate('keyDown')
+    expect(getFocusedChip(tree).length).toBe(0)
+    tree.find('input').simulate('keyDown', { keyCode: 37, target: { value: 'd' } }) // arrow left
+    expect(getFocusedChip(tree).length).toBe(0)
+  })
+
   it('unfocuses the focused chip while adding a new chip', () => {
     const tree = mount(
       <ChipInput defaultValue={['foo', 'bar']} />
