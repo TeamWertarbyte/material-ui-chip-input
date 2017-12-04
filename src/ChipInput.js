@@ -158,7 +158,7 @@ class ChipInput extends React.Component {
       }
     }
 
-    this.autoComplete.handleItemTouchTap = (event, child) => {
+    this.autoComplete.handleItemClick = (event, child) => {
       const dataSource = this.autoComplete.props.dataSource
 
       const index = parseInt(child.key, 10)
