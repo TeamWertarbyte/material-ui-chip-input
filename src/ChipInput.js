@@ -158,7 +158,7 @@ class ChipInput extends React.Component {
       }
     }
 
-    this.autoComplete.handleItemClick = (event, child) => {
+    const onAutocompleteItemClick =  (event, child) => {
       const dataSource = this.autoComplete.props.dataSource
 
       const index = parseInt(child.key, 10)
@@ -168,6 +168,12 @@ class ChipInput extends React.Component {
       this.autoComplete.close()
 
       setTimeout(() => this.focus(), 1)
+    }
+
+    if (this.autoComplete.handleItemClick) {
+      this.autoComplete.handleItemClick = onAutocompleteItemClick;
+    } else {
+      this.autoComplete.handleItemTouchTap = onAutocompleteItemClick
     }
 
     // force update autocomplete to ensure that it uses the new handlers

@@ -51,7 +51,7 @@
     "standard": "^10.0.2"
   },
   "peerDependencies": {
-    "material-ui": ">= 0.20.0 < 1.0.0",
+    "material-ui": ">= 0.19.1 < 1.0.0",
     "react": "^15.3.2 || ^16.0.0",
     "react-dom": "^15.3.2 || ^16.0.0"
   },
