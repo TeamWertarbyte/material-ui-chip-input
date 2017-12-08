@@ -158,7 +158,7 @@ class ChipInput extends React.Component {
       }
     }
 
-    this.autoComplete.handleItemTouchTap = (event, child) => {
+    const onAutocompleteItemClick =  (event, child) => {
       const dataSource = this.autoComplete.props.dataSource
 
       const index = parseInt(child.key, 10)
@@ -168,6 +168,13 @@ class ChipInput extends React.Component {
       this.autoComplete.close()
 
       setTimeout(() => this.focus(), 1)
+    }
+
+    // Ensuring that ChipInput works with with Material-UI 0.19.1 and 0.20.0
+    if (this.autoComplete.handleItemClick) {
+      this.autoComplete.handleItemClick = onAutocompleteItemClick;
+    } else {
+      this.autoComplete.handleItemTouchTap = onAutocompleteItemClick
     }
 
     // force update autocomplete to ensure that it uses the new handlers
