@@ -170,6 +170,7 @@ class ChipInput extends React.Component {
       setTimeout(() => this.focus(), 1)
     }
 
+    // Ensuring that ChipInput works with with Material-UI 0.19.1 and 0.20.0
     if (this.autoComplete.handleItemClick) {
       this.autoComplete.handleItemClick = onAutocompleteItemClick;
     } else {
