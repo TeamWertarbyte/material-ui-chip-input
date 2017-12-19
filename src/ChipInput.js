@@ -107,13 +107,13 @@ const styles = (theme) => ({
   }
 })
 
-const defaultChipRenderer = ({ value, text, isFocused, isDisabled, handleClick, handleRequestDelete, className }, key) => (
+const defaultChipRenderer = ({ value, text, isFocused, isDisabled, handleClick, handleDelete, className }, key) => (
   <Chip
     key={key}
     className={className}
     style={{ pointerEvents: isDisabled ? 'none' : undefined, backgroundColor: isFocused ? blue[300] : undefined }}
     onClick={handleClick}
-    onRequestDelete={handleRequestDelete}
+    onDelete={handleDelete}
     label={text}
   />
 )
@@ -289,7 +289,7 @@ class ChipInput extends React.Component {
   }
 
   handleAddChip (chip) {
-    if (this.props.onBeforeRequestAdd && !this.props.onBeforeRequestAdd(chip)) {
+    if (this.props.onBeforeAdd && !this.props.onBeforeAdd(chip)) {
       return this.setState({ preventChipCreation: true })
     }
     this.setState({ inputValue: '' })
@@ -304,8 +304,8 @@ class ChipInput extends React.Component {
       }
 
       if (this.props.allowDuplicates || !chips.some((c) => c[this.props.dataSourceConfig.value] === chip[this.props.dataSourceConfig.value])) {
-        if (this.props.value && this.props.onRequestAdd) {
-          this.props.onRequestAdd(chip)
+        if (this.props.value && this.props.onAdd) {
+          this.props.onAdd(chip)
         } else {
           this.setState({ chips: [ ...this.state.chips, chip ] })
           if (this.props.onChange) {
@@ -315,8 +315,8 @@ class ChipInput extends React.Component {
       }
     } else if (chip.trim().length > 0) {
       if (this.props.allowDuplicates || chips.indexOf(chip) === -1) {
-        if (this.props.value && this.props.onRequestAdd) {
-          this.props.onRequestAdd(chip)
+        if (this.props.value && this.props.onAdd) {
+          this.props.onAdd(chip)
         } else {
           this.setState({ chips: [ ...this.state.chips, chip ] })
           if (this.props.onChange) {
@@ -329,8 +329,8 @@ class ChipInput extends React.Component {
 
   handleDeleteChip (chip, i) {
     if (this.props.value) {
-      if (this.props.onRequestDelete) {
-        this.props.onRequestDelete(chip, i)
+      if (this.props.onDelete) {
+        this.props.onDelete(chip, i)
       }
     } else {
       const chips = this.state.chips.slice()
@@ -397,9 +397,9 @@ class ChipInput extends React.Component {
       label,
       labelClassName,
       newChipKeyCodes, // eslint-disable-line no-unused-vars
-      onBeforeRequestAdd,
-      onRequestAdd, // eslint-disable-line no-unused-vars
-      onRequestDelete, // eslint-disable-line no-unused-vars
+      onBeforeAdd,
+      onAdd, // eslint-disable-line no-unused-vars
+      onDelete, // eslint-disable-line no-unused-vars
       onBlur, // eslint-disable-line no-unused-vars
       onChange, // eslint-disable-line no-unused-vars
       onFocus, // eslint-disable-line no-unused-vars
@@ -464,7 +464,7 @@ class ChipInput extends React.Component {
               isDisabled: !!disabled,
               isFocused: this.state.focusedChip === i,
               handleClick: () => this.setState({ focusedChip: i }),
-              handleRequestDelete: () => this.handleDeleteChip(value, i),
+              handleDelete: () => this.handleDeleteChip(value, i),
               className: classes.chip
             }, i)
           })}
@@ -508,9 +508,9 @@ ChipInput.propTypes = {
   defaultValue: PropTypes.array,
   onChange: PropTypes.func,
   value: PropTypes.array,
-  onBeforeRequestAdd: PropTypes.func,
-  onRequestAdd: PropTypes.func,
-  onRequestDelete: PropTypes.func,
+  onBeforeAdd: PropTypes.func,
+  onAdd: PropTypes.func,
+  onDelete: PropTypes.func,
   dataSource: PropTypes.array,
   onUpdateInput: PropTypes.func,
   openOnFocus: PropTypes.bool,

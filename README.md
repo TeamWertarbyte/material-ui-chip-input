@@ -29,8 +29,8 @@ import ChipInput from 'material-ui-chip-input'
 // controlled input
 <ChipInput
   value={yourChips}
-  onRequestAdd={(chip) => handleAddChip(chip)}
-  onRequestDelete={(chip, index) => handleDeleteChip(chip, index)}
+  onAdd={(chip) => handleAddChip(chip)}
+  onDelete={(chip, index) => handleDeleteChip(chip, index)}
 />
 ```
 
@@ -38,7 +38,7 @@ import ChipInput from 'material-ui-chip-input'
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | allowDuplicates | `bool` | `false` | Allows duplicate chips if set to true. |
-| chipRenderer | `function` | | A function of the type `({ value, text, chip, isFocused, isDisabled, handleClick, handleRequestDelete, className }, key) => node` that returns a chip based on the given properties. This can be used to customize chip styles.  Each item in the `dataSource` array will be passed to `chipRenderer` as arguments `chip`, `value` and `text`. If `dataSource` is an array of objects and `dataSourceConfig` is present, then `value` and `text` will instead correspond to the object values defined in `dataSourceConfig`. If `dataSourceConfig` is not set and `dataSource` is an array of objects, then a custom `chipRenderer` must be set. `chip` is always the raw value from `dataSource`, either an object or a string.|
+| chipRenderer | `function` | | A function of the type `({ value, text, chip, isFocused, isDisabled, handleClick, handleDelete, className }, key) => node` that returns a chip based on the given properties. This can be used to customize chip styles.  Each item in the `dataSource` array will be passed to `chipRenderer` as arguments `chip`, `value` and `text`. If `dataSource` is an array of objects and `dataSourceConfig` is present, then `value` and `text` will instead correspond to the object values defined in `dataSourceConfig`. If `dataSourceConfig` is not set and `dataSource` is an array of objects, then a custom `chipRenderer` must be set. `chip` is always the raw value from `dataSource`, either an object or a string.|
 | classes | `object` | | Extends the styles applied to this component. |
 | clearOnBlur | `bool` | `true` | If true, clears the input value after the component loses focus. |
 | dataSource | `array` | | Data source for auto complete. This should be an array of strings or objects.|
@@ -50,11 +50,11 @@ import ChipInput from 'material-ui-chip-input'
 | fullWidthInput | `bool` | `false` | If true, the input field will always be below the chips and fill the available space. By default, it will try to be beside the chips. |
 | label | `node` | | The content of the floating label. |
 | newChipKeyCodes | `number[]` | `[13]` (enter key) | The key codes used to determine when to create a new chip. |
-| onBeforeRequestAdd | `function` | | Callback function that is called with the chip to be added and should return true to add the chip or false to prevent the chip from being added without clearing the text input. |
+| onBeforeAdd | `function` | | Callback function that is called with the chip to be added and should return true to add the chip or false to prevent the chip from being added without clearing the text input. |
 | onBlur | `function` | | Callback function that is called with `event` when the input loses focus, where `event.target.value` is the current value of the text input. |
 | onChange | `function` | | Callback function that is called when the chips change (in uncontrolled mode). |
-| onRequestAdd | `function` | | Callback function that is called when a new chip was added (in controlled mode). |
-| onRequestDelete | `function` | | Callback function that is called when a new chip was removed (in controlled mode). |
+| onAdd | `function` | | Callback function that is called when a new chip was added (in controlled mode). |
+| onDelete | `function` | | Callback function that is called when a new chip was removed (in controlled mode). |
 | onUpdateInput | `function` | | Callback function that is called when the input changes (useful for auto complete). |
 | openOnFocus | `bool` | `false` | Opens the auto complete list on focus if set to true. |
 | placeholder | `node` | | A short placeholder that is displayed if the input has no values. |

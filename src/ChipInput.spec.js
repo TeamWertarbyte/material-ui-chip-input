@@ -310,7 +310,7 @@ describe('custom chips', () => {
       isDisabled: false,
       isFocused: false,
       handleClick: expect.any(Function),
-      handleRequestDelete: expect.any(Function)
+      handleDelete: expect.any(Function)
     })
   })
 })

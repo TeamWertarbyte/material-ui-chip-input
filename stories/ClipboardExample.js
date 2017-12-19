@@ -9,13 +9,13 @@ class ClipboardExample extends React.Component {
     }
   }
 
-  handleRequestAdd (...chips) {
+  handleAdd (...chips) {
     this.setState({
       chips: [...this.state.chips, ...chips]
     })
   }
 
-  handleRequestDelete (deletedChip) {
+  handleDelete (deletedChip) {
     this.setState({
       chips: this.state.chips.filter((c) => c !== deletedChip)
     })
@@ -33,14 +33,14 @@ class ClipboardExample extends React.Component {
 
           event.preventDefault()
 
-          this.handleRequestAdd(...clipboardText.split('\n').filter((t) => t.length > 0))
+          this.handleAdd(...clipboardText.split('\n').filter((t) => t.length > 0))
 
           if (this.props.onPaste) {
             this.props.onPaste(event)
           }
         }}
-        onRequestAdd={(chip) => this.handleRequestAdd(chip)}
-        onRequestDelete={(deletedChip) => this.handleRequestDelete(deletedChip)}
+        onAdd={(chip) => this.handleAdd(chip)}
+        onDelete={(deletedChip) => this.handleDelete(deletedChip)}
         fullWidth
       />
     )

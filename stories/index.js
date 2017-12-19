@@ -97,12 +97,12 @@ storiesOf('ChipInput', module)
     <ChipInput
       defaultValue={['foo', 'bar']}
       fullWidth
-      chipRenderer={({ value, isFocused, isDisabled, handleClick, handleRequestDelete, defaultStyle }, key) => (
+      chipRenderer={({ value, isFocused, isDisabled, handleClick, handleDelete, defaultStyle }, key) => (
         <Chip
           key={key}
           style={{ ...defaultStyle, pointerEvents: isDisabled ? 'none' : undefined, backgroundColor: isFocused ? green[800] : green[300] }}
           onClick={handleClick}
-          onRequestDelete={handleRequestDelete}
+          onDelete={handleDelete}
           label={value}
           avatar={<Avatar size={32}>{value[0].toUpperCase()}</Avatar>}
         />
@@ -142,8 +142,8 @@ storiesOf('ChipInput', module)
       defaultValue={['foo', 'bar']}
       onChange={action('onChange')}
       onUpdateInput={action('onUpdateInput')}
-      onRequestDelete={action('onRequestDelete')}
-      onRequestAdd={action('onRequestAdd')}
+      onDelete={action('onDelete')}
+      onAdd={action('onAdd')}
       onClick={action('onClick')}
     />
   )
@@ -152,8 +152,8 @@ storiesOf('ChipInput', module)
       value={['foo', 'bar']}
       onChange={action('onChange')}
       onUpdateInput={action('onUpdateInput')}
-      onRequestDelete={action('onRequestDelete')}
-      onRequestAdd={action('onRequestAdd')}
+      onDelete={action('onDelete')}
+      onAdd={action('onAdd')}
       onClick={action('onClick')}
     />
   )
@@ -164,8 +164,8 @@ storiesOf('ChipInput', module)
       defaultValue={[{ label: 'Chip 1', id: 'one' }]}
       onChange={action('onChange')}
       onUpdateInput={action('onUpdateInput')}
-      onRequestDelete={action('onRequestDelete')}
-      onRequestAdd={action('onRequestAdd')}
+      onDelete={action('onDelete')}
+      onAdd={action('onAdd')}
       onClick={action('onClick')}
     />
   )
@@ -176,8 +176,8 @@ storiesOf('ChipInput', module)
       value={[{ label: 'Chip 1', id: 'one' }]}
       onChange={action('onChange')}
       onUpdateInput={action('onUpdateInput')}
-      onRequestDelete={action('onRequestDelete')}
-      onRequestAdd={action('onRequestAdd')}
+      onDelete={action('onDelete')}
+      onAdd={action('onAdd')}
       onClick={action('onClick')}
     />
   )
@@ -202,8 +202,8 @@ storiesOf('ChipInput', module)
       onPaste={action('onPaste')}
       onChange={action('onChange')}
       onUpdateInput={action('onUpdateInput')}
-      onRequestDelete={action('onRequestDelete')}
-      onRequestAdd={action('onRequestAdd')}
+      onDelete={action('onDelete')}
+      onAdd={action('onAdd')}
       onClick={action('onClick')}
     />
   )
@@ -229,10 +229,10 @@ storiesOf('ChipInput', module)
     />
   )
   /*
-  .add('with onBeforeRequestAdd returning false', () =>
+  .add('with onBeforeAdd returning false', () =>
     <ChipInput
       defaultValue={['foo', 'bar', 'foo', 'bar']}
-      onBeforeRequestAdd={() => false}
+      onBeforeAdd={() => false}
     />
   )
   .add('tabbing between fields', () =>

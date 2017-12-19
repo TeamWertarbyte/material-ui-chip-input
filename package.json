@@ -52,7 +52,7 @@
     "enzyme-to-json": "^3.2.2",
     "gh-pages": "^1.0.0",
     "jest": "^21.2.1",
-    "material-ui": "^1.0.0-beta.21",
+    "material-ui": "^1.0.0-beta.24",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-test-renderer": "^16.2.0",

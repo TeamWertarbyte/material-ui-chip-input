@@ -11,17 +11,17 @@ class ControlledChipInput extends React.Component {
     }
   }
 
-  onBeforeRequestAdd (chip) {
+  onBeforeAdd (chip) {
     return chip.length >= 3
   }
 
-  handleRequestAdd (chip) {
+  handleAdd (chip) {
     this.setState({
       chips: [...this.state.chips, chip]
     })
   }
 
-  handleRequestDelete (deletedChip) {
+  handleDelete (deletedChip) {
     if (deletedChip !== 'js') {
       this.setState({
         chips: this.state.chips.filter((c) => c !== deletedChip)
@@ -35,12 +35,12 @@ class ControlledChipInput extends React.Component {
     return <ChipInput
       {...this.props}
       value={this.state.chips}
-      onBeforeRequestAdd={(chip) => this.onBeforeRequestAdd(chip)}
-      onRequestAdd={(chip) => this.handleRequestAdd(chip)}
-      onRequestDelete={(deletedChip) => this.handleRequestDelete(deletedChip)}
+      onBeforeAdd={(chip) => this.onBeforeAdd(chip)}
+      onAdd={(chip) => this.handleAdd(chip)}
+      onDelete={(deletedChip) => this.handleDelete(deletedChip)}
       onBlur={(event) => {
         if (this.props.addOnBlur && event.target.value) {
-          this.handleRequestAdd(event.target.value)
+          this.handleAdd(event.target.value)
         }
       }}
       fullWidth
