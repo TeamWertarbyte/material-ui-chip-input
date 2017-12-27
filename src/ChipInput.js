@@ -344,6 +344,9 @@ class ChipInput extends React.Component {
       }
 
       if (typeof chip === 'object') {
+        if (chip[this.props.dataSourceConfig.text].length === 0 || chip[this.props.dataSourceConfig.value].length === 0) {
+          return;
+        }
         chip = {
           [this.props.dataSourceConfig.text]: chip[this.props.dataSourceConfig.text],
           [this.props.dataSourceConfig.value]: chip[this.props.dataSourceConfig.value]
