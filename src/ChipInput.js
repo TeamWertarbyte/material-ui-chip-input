@@ -618,8 +618,7 @@ ChipInput.propTypes = {
   chipRenderer: PropTypes.func,
   newChipKeyCodes: PropTypes.arrayOf(PropTypes.number),
   clearOnBlur: PropTypes.bool,
-  allowDuplicates: PropTypes.bool,
-  autoCompleteItemRenderer: PropTypes.func
+  allowDuplicates: PropTypes.bool
 }
 
 ChipInput.defaultProps = {
