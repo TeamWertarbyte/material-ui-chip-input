@@ -341,9 +341,7 @@ class ChipInput extends React.Component {
           [this.props.dataSourceConfig.text]: chip,
           [this.props.dataSourceConfig.value]: chip
         }
-      }
-
-      if (typeof chip === 'object') {
+      } else if (typeof chip === 'object') {
         if (chip[this.props.dataSourceConfig.text].length === 0 || chip[this.props.dataSourceConfig.value].length === 0) {
           return;
         }
@@ -620,7 +618,8 @@ ChipInput.propTypes = {
   chipRenderer: PropTypes.func,
   newChipKeyCodes: PropTypes.arrayOf(PropTypes.number),
   clearOnBlur: PropTypes.bool,
-  allowDuplicates: PropTypes.bool
+  allowDuplicates: PropTypes.bool,
+  autoCompleteItemRenderer: PropTypes.func
 }
 
 ChipInput.defaultProps = {
