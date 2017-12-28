@@ -7,11 +7,11 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import Avatar from 'material-ui/Avatar'
 import Chip from 'material-ui/Chip'
 import AutoComplete from 'material-ui/AutoComplete'
+import MenuItem from 'material-ui/MenuItem/MenuItem'
 import { green800, green300 } from 'material-ui/styles/colors'
 import ChipInput from '../src/ChipInput'
 import ControlledChipInput from './ControlledChipInput'
 import ClipboardExample from './ClipboardExample'
-import MenuItem from 'material-ui/MenuItem/MenuItem';
 
 storiesOf('ChipInput', module)
   .addDecorator((story) =>
@@ -259,7 +259,7 @@ storiesOf('ChipInput', module)
             primaryText='Foo'
             secondaryText='&#9786;'
           />
-        ),
+        )
       },
       {
         text: 'Bar',
@@ -268,13 +268,13 @@ storiesOf('ChipInput', module)
             primaryText='Bar'
             secondaryText='&#9786;'
           />
-        ),
-      },
-    ];
+        )
+      }
+    ]
     const dataSourceConfig = {
       text: 'text',
       value: 'value'
-    };
+    }
 
     return (
       <ChipInput
@@ -282,4 +282,4 @@ storiesOf('ChipInput', module)
         dataSourceConfig={dataSourceConfig}
       />
     )
-  });
+  })
