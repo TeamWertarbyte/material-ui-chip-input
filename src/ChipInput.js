@@ -229,12 +229,17 @@ class ChipInput extends React.Component {
     if (this.props.onBlur) {
       this.props.onBlur(event)
     }
-
+    if (this.autoComplete && (!this.autoComplete.state.open || this.autoComplete.requestsList.length === 0)) {
+      if(this.props.addOnBlur) {
+          this.handleAddChip (event.target.value)
+      }
+    }
     // A momentary delay is required to support openOnFocus. We must give time for the autocomplete
     // menu to close before checking the current status. Otherwise, tabbing off the input while the
     // menu is open results in the input keeping its focus styles. Note that the ref might not be set
     // yet, so this.autocomplete might be null.
     setTimeout(() => {
+      console.log(this.autoComplete && (!this.autoComplete.state.open || this.autoComplete.requestsList.length === 0))
       if (this.autoComplete && (!this.autoComplete.state.open || this.autoComplete.requestsList.length === 0)) {
         if (this.props.clearOnBlur) {
           this.clearInput()
@@ -471,6 +476,7 @@ class ChipInput extends React.Component {
       chipRenderer = defaultChipRenderer,
       newChipKeyCodes, // eslint-disable-line no-unused-vars
       allowDuplicates, // eslint-disable-line no-unused-vars
+      addOnBlur,
       ...other
     } = this.props
 
@@ -618,7 +624,8 @@ ChipInput.propTypes = {
   chipRenderer: PropTypes.func,
   newChipKeyCodes: PropTypes.arrayOf(PropTypes.number),
   clearOnBlur: PropTypes.bool,
-  allowDuplicates: PropTypes.bool
+  allowDuplicates: PropTypes.bool,
+  addOnBlur: PropTypes.bool
 }
 
 ChipInput.defaultProps = {
