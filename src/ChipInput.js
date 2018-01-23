@@ -12,100 +12,103 @@ import FormControl from 'material-ui/Form/FormControl'
 import FormHelperText from 'material-ui/Form/FormHelperText'
 import cx from 'classnames'
 
-const styles = (theme) => ({
-  root: {},
-  inputRoot: {
-    display: 'inline-block',
-    marginTop: 0
-  },
-  input: {
-    display: 'inline-block',
-    appearance: 'none', // Remove border in Safari, doesn't seem to break anything in other browsers
-    WebkitTapHighlightColor: 'rgba(0,0,0,0)', // Remove mobile color flashing (deprecated style).
-    float: 'left'
-  },
-  chipContainer: {
-    cursor: 'text',
-    marginBottom: -2,
-    minHeight: 40,
-    '&$labeled': {
-      marginTop: 18
-    }
-  },
-  labeled: {},
-  label: {
-    top: 4
-  },
-  labelShrink: {
-    top: 0
-  },
-  helperText: {
-    marginBottom: -20
-  },
-  inkbar: {
-    '&:after': {
-      backgroundColor: theme.palette.primary[theme.palette.type === 'light' ? 'A700' : 'A200'],
-      left: 0,
-      bottom: 0,
-      // Doing the other way around crash on IE11 "''" https://github.com/cssinjs/jss/issues/242
-      content: '""',
-      height: 2,
-      position: 'absolute',
-      right: 0,
-      transform: 'scaleX(0)',
-      transition: theme.transitions.create('transform', {
-        duration: theme.transitions.duration.shorter,
-        easing: theme.transitions.easing.easeOut
-      }),
-      pointerEvents: 'none' // Transparent to the hover style.
+const styles = (theme) => {
+  const light = theme.palette.type === 'light'
+  const bottomLineColor = light ? 'rgba(0, 0, 0, 0.42)' : 'rgba(255, 255, 255, 0.7)'
+
+  return {
+    root: {},
+    inputRoot: {
+      display: 'inline-block',
+      marginTop: 0
     },
-    '&$focused:after': {
-      transform: 'scaleX(1)'
-    }
-  },
-  focused: {},
-  disabled: {},
-  underline: {
-    '&:before': {
-      backgroundColor: theme.palette.input.bottomLine,
-      left: 0,
-      bottom: 0,
-      // Doing the other way around crash on IE11 "''" https://github.com/cssinjs/jss/issues/242
-      content: '""',
-      height: 1,
-      position: 'absolute',
-      right: 0,
-      transition: theme.transitions.create('background-color', {
-        duration: theme.transitions.duration.shorter,
-        easing: theme.transitions.easing.ease
-      }),
-      pointerEvents: 'none' // Transparent to the hover style.
+    input: {
+      display: 'inline-block',
+      appearance: 'none', // Remove border in Safari, doesn't seem to break anything in other browsers
+      WebkitTapHighlightColor: 'rgba(0,0,0,0)', // Remove mobile color flashing (deprecated style).
+      float: 'left'
     },
-    '&:hover:not($disabled):before': {
-      backgroundColor: theme.palette.text.primary,
-      height: 2
+    chipContainer: {
+      cursor: 'text',
+      marginBottom: -2,
+      minHeight: 40,
+      '&$labeled': {
+        marginTop: 18
+      }
     },
-    '&$disabled:before': {
-      background: 'transparent',
-      backgroundImage: `linear-gradient(to right, ${
-        theme.palette.input.bottomLine
-      } 33%, transparent 0%)`,
-      backgroundPosition: 'left top',
-      backgroundRepeat: 'repeat-x',
-      backgroundSize: '5px 1px'
+    labeled: {},
+    label: {
+      top: 4
+    },
+    labelShrink: {
+      top: 0
+    },
+    helperText: {
+      marginBottom: -20
+    },
+    inkbar: {
+      '&:after': {
+        backgroundColor: theme.palette.primary[light ? 'dark' : 'light'],
+        left: 0,
+        bottom: 0,
+        // Doing the other way around crash on IE11 "''" https://github.com/cssinjs/jss/issues/242
+        content: '""',
+        height: 2,
+        position: 'absolute',
+        right: 0,
+        transform: 'scaleX(0)',
+        transition: theme.transitions.create('transform', {
+          duration: theme.transitions.duration.shorter,
+          easing: theme.transitions.easing.easeOut
+        }),
+        pointerEvents: 'none' // Transparent to the hover style.
+      },
+      '&$focused:after': {
+        transform: 'scaleX(1)'
+      }
+    },
+    focused: {},
+    disabled: {},
+    underline: {
+      '&:before': {
+        backgroundColor: bottomLineColor,
+        left: 0,
+        bottom: 0,
+        // Doing the other way around crash on IE11 "''" https://github.com/cssinjs/jss/issues/242
+        content: '""',
+        height: 1,
+        position: 'absolute',
+        right: 0,
+        transition: theme.transitions.create('background-color', {
+          duration: theme.transitions.duration.shorter,
+          easing: theme.transitions.easing.ease
+        }),
+        pointerEvents: 'none' // Transparent to the hover style.
+      },
+      '&:hover:not($disabled):before': {
+        backgroundColor: theme.palette.text.primary,
+        height: 2
+      },
+      '&$disabled:before': {
+        background: 'transparent',
+        backgroundImage: `linear-gradient(to right, ${bottomLineColor} 33%, transparent 0%)`,
+        backgroundPosition: 'left top',
+        backgroundRepeat: 'repeat-x',
+        backgroundSize: '5px 1px'
+      }
+    },
+    error: {
+      '&:after': {
+        backgroundColor: theme.palette.error.A400,
+        transform: 'scaleX(1)' // error is always underlined in red
+      }
+    },
+    chip: {
+      margin: '0 8px 8px 0',
+      float: 'left'
     }
-  },
-  error: {
-    '&:after': {
-      backgroundColor: theme.palette.error.A400,
-      transform: 'scaleX(1)' // error is always underlined in red
-    }
-  },
-  chip: {
-    margin: '0 8px 8px 0',
-    float: 'left'
   }
-})
+}
 
 const defaultChipRenderer = ({ value, text, isFocused, isDisabled, handleClick, handleDelete, className }, key) => (
   <Chip
