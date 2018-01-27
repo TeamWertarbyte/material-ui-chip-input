@@ -406,6 +406,7 @@ class ChipInput extends React.Component {
       onBlur, // eslint-disable-line no-unused-vars
       onChange, // eslint-disable-line no-unused-vars
       onFocus, // eslint-disable-line no-unused-vars
+      onUpdateInput, // eslint-disable-line
       placeholder,
       required,
       rootRef,

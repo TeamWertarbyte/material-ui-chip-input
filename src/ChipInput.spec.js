@@ -106,6 +106,17 @@ describe('uncontrolled mode', () => {
     tree.find('input').simulate('keyDown', { keyCode: 13 }) // press enter
     expect(handleChange).toBeCalledWith(['a', 'a'])
   })
+
+  it('calls onUpdateInput when the input changes', () => {
+    const handleUpdateInput = jest.fn()
+    const tree = mount(
+      <ChipInput onUpdateInput={handleUpdateInput} />
+    )
+
+    tree.find('input').getDOMNode().value = 'foo'
+    tree.find('input').simulate('change', { target: tree.find('input').getDOMNode() })
+    expect(handleUpdateInput).toBeCalledWith('foo')
+  })
 })
 
 describe('chip focusing', () => {
