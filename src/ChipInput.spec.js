@@ -110,11 +110,11 @@ describe('uncontrolled mode', () => {
   it('calls inputRef when it set', () => {
     let inputRef
     mount(
-      <ChipInput inputRef={ref => inputRef = ref} />
+      <ChipInput inputRef={ref => { inputRef = ref }} />
     )
 
     expect(inputRef.tagName.toLowerCase()).toBe('input')
-  });
+  })
 })
 
 describe('chip focusing', () => {

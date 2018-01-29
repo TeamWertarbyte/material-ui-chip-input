@@ -524,7 +524,7 @@ ChipInput.propTypes = {
   allowDuplicates: PropTypes.bool,
   fullWidth: PropTypes.bool,
   fullWidthInput: PropTypes.bool,
-  inputRef: PropTypes.func,
+  inputRef: PropTypes.func
 }
 
 ChipInput.defaultProps = {
