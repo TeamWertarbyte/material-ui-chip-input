@@ -115,6 +115,17 @@ describe('uncontrolled mode', () => {
 
     expect(inputRef.tagName.toLowerCase()).toBe('input')
   })
+
+  it('calls onUpdateInput when the input changes', () => {
+    const handleUpdateInput = jest.fn()
+    const tree = mount(
+      <ChipInput onUpdateInput={handleUpdateInput} />
+    )
+
+    tree.find('input').getDOMNode().value = 'foo'
+    tree.find('input').simulate('change', { target: tree.find('input').getDOMNode() })
+    expect(handleUpdateInput).toBeCalledWith('foo')
+  })
 })
 
 describe('chip focusing', () => {
