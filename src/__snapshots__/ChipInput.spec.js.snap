@@ -36,6 +36,7 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
         "bar",
       ]
     }
+    inputRef={[Function]}
     newChipKeyCodes={
       Array [
         13,

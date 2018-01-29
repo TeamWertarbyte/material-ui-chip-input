@@ -106,6 +106,15 @@ describe('uncontrolled mode', () => {
     tree.find('input').simulate('keyDown', { keyCode: 13 }) // press enter
     expect(handleChange).toBeCalledWith(['a', 'a'])
   })
+
+  it('calls inputRef when it set', () => {
+    let inputRef
+    mount(
+      <ChipInput inputRef={ref => inputRef = ref} />
+    )
+
+    expect(inputRef.tagName.toLowerCase()).toBe('input')
+  });
 })
 
 describe('chip focusing', () => {

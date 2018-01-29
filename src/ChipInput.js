@@ -396,6 +396,7 @@ class ChipInput extends React.Component {
       helperText,
       helperTextClassName,
       id,
+      inputRef,
       InputLabelProps,
       label,
       labelClassName,
@@ -482,7 +483,7 @@ class ChipInput extends React.Component {
             onKeyUp={this.handleKeyUp}
             onFocus={this.handleInputFocus}
             onBlur={this.handleInputBlur}
-            inputRef={(ref) => { this.actualInput = ref }}
+            inputRef={(ref) => { this.actualInput = ref; inputRef(ref) }}
             disabled={disabled}
             disableUnderline
             fullWidth={fullWidthInput}
@@ -522,13 +523,15 @@ ChipInput.propTypes = {
   clearOnBlur: PropTypes.bool,
   allowDuplicates: PropTypes.bool,
   fullWidth: PropTypes.bool,
-  fullWidthInput: PropTypes.bool
+  fullWidthInput: PropTypes.bool,
+  inputRef: PropTypes.func,
 }
 
 ChipInput.defaultProps = {
   newChipKeyCodes: [13],
   clearOnBlur: true,
-  allowDuplicates: false
+  allowDuplicates: false,
+  inputRef: () => {}
 }
 
 export default withStyles(styles)(ChipInput)
