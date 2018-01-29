@@ -46,6 +46,7 @@ import ChipInput from 'material-ui-chip-input'
 | defaultValue | `string[]` | | The chips to display by default (for uncontrolled mode). |
 | disabled | `bool` | `false` | Disables the chip input if set to true. |
 | helperText | `node` | | The helper text to display. |
+| inputRef | `function` | Use that property to pass a ref callback to the native input component. |
 | fullWidth | `bool` | `false` | If true, the chip input will fill the available width. |
 | fullWidthInput | `bool` | `false` | If true, the input field will always be below the chips and fill the available space. By default, it will try to be beside the chips. |
 | label | `node` | | The content of the floating label. |
