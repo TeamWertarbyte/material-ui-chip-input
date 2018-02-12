@@ -337,6 +337,9 @@ class ChipInput extends React.Component {
 
     if (this.props.dataSourceConfig) {
       if (typeof chip === 'string') {
+        if (chip.length === 0) {
+          return
+        }
         chip = {
           [this.props.dataSourceConfig.text]: chip,
           [this.props.dataSourceConfig.value]: chip
