@@ -56,8 +56,7 @@ import ChipInput from 'material-ui-chip-input'
 | onChange | `function` | | Callback function that is called when the chips change (in uncontrolled mode). |
 | onAdd | `function` | | Callback function that is called when a new chip was added (in controlled mode). |
 | onDelete | `function` | | Callback function that is called when a new chip was removed (in controlled mode). |
-| onUpdateInput | `function` | | Callback function that is called when the input changes (useful for auto complete). |
-| openOnFocus | `bool` | `false` | Opens the auto complete list on focus if set to true. |
+| onUpdateInput | `function` | | Callback function that is called when the input changes. |
 | placeholder | `node` | | A short placeholder that is displayed if the input has no values. |
 | value | `string[]` | | The chips to display (enables controlled mode if set). |
 
