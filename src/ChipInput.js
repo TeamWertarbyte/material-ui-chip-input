@@ -408,6 +408,7 @@ class ChipInput extends React.Component {
       onChange, // eslint-disable-line no-unused-vars
       onFocus, // eslint-disable-line no-unused-vars
       onUpdateInput, // eslint-disable-line
+      // openOnFocus, // eslint-disable-line
       placeholder,
       required,
       rootRef,
@@ -420,7 +421,7 @@ class ChipInput extends React.Component {
     //   ? (dataSource || []).filter((value) => !chips.some((c) => c[dataSourceConfig.value] === value[dataSourceConfig.value]))
     //   : (dataSource || []).filter((value) => chips.indexOf(value) < 0)
 
-    // const actualFilter = other.openOnFocus ? (search, key) => (search === '' || filter(search, key)) : filter
+    // const actualFilter = openOnFocus ? (search, key) => (search === '' || filter(search, key)) : filter
 
     const hasInput = (this.props.value || this.state.chips).length > 0 || this.state.inputValue.length > 0
     // const showPlaceholder = placeholder && !hasInput
@@ -518,7 +519,7 @@ ChipInput.propTypes = {
   onDelete: PropTypes.func,
   dataSource: PropTypes.array,
   onUpdateInput: PropTypes.func,
-  openOnFocus: PropTypes.bool,
+  // openOnFocus: PropTypes.bool,
   chipRenderer: PropTypes.func,
   newChipKeyCodes: PropTypes.arrayOf(PropTypes.number),
   clearOnBlur: PropTypes.bool,
