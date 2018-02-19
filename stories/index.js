@@ -239,6 +239,15 @@ storiesOf('ChipInput', module)
       onBeforeRequestAdd={() => false}
     />
   )
+  .add('with chipStyle', () =>
+    <ChipInput
+      defaultValue={['foo', 'bar']}
+      chipStyle={{
+        borderRadius: '2px',
+        margin: '10px 10px 0 0'
+      }}
+    />
+  )
   .add('tabbing between fields', () =>
     <form>
       <ChipInput
