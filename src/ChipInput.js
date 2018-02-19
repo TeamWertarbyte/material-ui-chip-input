@@ -456,6 +456,7 @@ class ChipInput extends React.Component {
       onFocus, // eslint-disable-line no-unused-vars
       style,
       chipContainerStyle,
+      chipStyle,
       underlineDisabledStyle,
       underlineFocusStyle,
       underlineShow,
@@ -554,7 +555,7 @@ class ChipInput extends React.Component {
                 isFocused: dataSourceConfig ? (this.state.focusedChip && this.state.focusedChip[dataSourceConfig.value] === value) : (this.state.focusedChip === value),
                 handleClick: () => this.setState({ focusedChip: value }),
                 handleRequestDelete: () => this.handleDeleteChip(value, i),
-                defaultStyle: styles.defaultChip
+                defaultStyle: Object.assign(styles.defaultChip, chipStyle)
               }, i)
             })}
           </div>
@@ -601,6 +602,7 @@ class ChipInput extends React.Component {
 ChipInput.propTypes = {
   style: PropTypes.object,
   chipContainerStyle: PropTypes.object,
+  chipStyle: PropTypes.object,
   floatingLabelText: PropTypes.node,
   hintText: PropTypes.node,
   id: PropTypes.string,
