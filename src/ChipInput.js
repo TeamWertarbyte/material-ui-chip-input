@@ -552,7 +552,7 @@ class ChipInput extends React.Component {
                 chip: tag,
                 isDisabled: disabled,
                 isFocused: dataSourceConfig ? (this.state.focusedChip && this.state.focusedChip[dataSourceConfig.value] === value) : (this.state.focusedChip === value),
-                handleClick: () => this.setState({ focusedChip: value }),
+                handleClick: () => this.setState({ focusedChip: tag }),
                 handleRequestDelete: () => this.handleDeleteChip(value, i),
                 defaultStyle: styles.defaultChip
               }, i)
