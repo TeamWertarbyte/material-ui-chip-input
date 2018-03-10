@@ -230,8 +230,8 @@ class ChipInput extends React.Component {
       this.props.onBlur(event)
     }
     if (this.autoComplete && (!this.autoComplete.state.open || this.autoComplete.requestsList.length === 0)) {
-      if(this.props.addOnBlur) {
-          this.handleAddChip (event.target.value)
+      if (this.props.addOnBlur) {
+        this.handleAddChip(event.target.value)
       }
     }
     // A momentary delay is required to support openOnFocus. We must give time for the autocomplete
