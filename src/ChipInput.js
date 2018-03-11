@@ -396,6 +396,7 @@ class ChipInput extends React.Component {
   render () {
     const {
       allowDuplicates, // eslint-disable-line no-unused-vars
+      blurBehavior,
       children,
       chipRenderer = defaultChipRenderer,
       classes,
@@ -429,7 +430,6 @@ class ChipInput extends React.Component {
       placeholder,
       required,
       rootRef,
-      blurBehavior,
       value,
       ...other
     } = this.props
