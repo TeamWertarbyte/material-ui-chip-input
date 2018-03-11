@@ -70,6 +70,7 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
+          required={false}
         >
           <div
             className="ChipInput-chipContainer-4 ChipInput-inkbar-9 ChipInput-underline-12"
@@ -297,20 +298,21 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
               <Input
                 classes={
                   Object {
-                    "disabled": "MuiInput-disabled-35",
-                    "error": "MuiInput-error-37",
-                    "focused": "MuiInput-focused-34",
+                    "disabled": "MuiInput-disabled-37",
+                    "error": "MuiInput-error-35",
+                    "focused": "MuiInput-focused-36",
                     "formControl": "MuiInput-formControl-33",
-                    "fullWidth": "MuiInput-fullWidth-39",
-                    "input": "MuiInput-input-40 ChipInput-input-3",
-                    "inputDisabled": "MuiInput-inputDisabled-42",
-                    "inputMarginDense": "MuiInput-inputMarginDense-41",
-                    "inputMultiline": "MuiInput-inputMultiline-43",
-                    "inputType": "MuiInput-inputType-44",
-                    "inputTypeSearch": "MuiInput-inputTypeSearch-45",
-                    "multiline": "MuiInput-multiline-38",
+                    "fullWidth": "MuiInput-fullWidth-40",
+                    "inkbar": "MuiInput-inkbar-34",
+                    "input": "MuiInput-input-41 ChipInput-input-3",
+                    "inputDense": "MuiInput-inputDense-42",
+                    "inputDisabled": "MuiInput-inputDisabled-43",
+                    "inputMultiline": "MuiInput-inputMultiline-45",
+                    "inputSearch": "MuiInput-inputSearch-46",
+                    "inputSingleline": "MuiInput-inputSingleline-44",
+                    "multiline": "MuiInput-multiline-39",
                     "root": "MuiInput-root-32 ChipInput-inputRoot-2",
-                    "underline": "MuiInput-underline-36",
+                    "underline": "MuiInput-underline-38",
                   }
                 }
                 disableUnderline={true}
@@ -336,7 +338,7 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                   <input
                     aria-invalid={false}
                     aria-required={false}
-                    className="MuiInput-input-40 ChipInput-input-3"
+                    className="MuiInput-input-41 ChipInput-input-3 MuiInput-inputSingleline-44"
                     disabled={false}
                     onChange={[Function]}
                     onKeyDown={[Function]}
