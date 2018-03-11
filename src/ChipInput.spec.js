@@ -363,13 +363,13 @@ describe('blurBehavior modes', () => {
     tree.find('input').getDOMNode().value = 'blur'
     tree.find('input').simulate('blur')
 
+    jest.runAllTimers()
+
     expect(tree.find('input').getDOMNode().value).toBe('')
     expect(setTimeout).toHaveBeenCalledTimes(1)
 
     setTimeout(_ => {
       expect(tree.find('Chip').map((chip) => chip.text())).toEqual(['a', 'b', 'blur'])
     })
-
-    jest.runAllTimers()
   })
 })
