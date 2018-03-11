@@ -544,7 +544,7 @@ ChipInput.propTypes = {
   fullWidth: PropTypes.bool,
   fullWidthInput: PropTypes.bool,
   inputRef: PropTypes.func,
-  blurBehavior: PropTypes.oneOf(['clear', 'add', 'none'])
+  blurBehavior: PropTypes.oneOf(['clear', 'add', 'ignore'])
 }
 
 ChipInput.defaultProps = {

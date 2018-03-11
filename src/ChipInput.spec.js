@@ -345,9 +345,9 @@ describe('blurBehavior modes', () => {
       expect(tree.find('input').getDOMNode().value).toBe('')
     })
 
-    it('does not clear the input on blur with blurBehavior set to none', () => {
+    it('does not clear the input on blur with blurBehavior set to ignore', () => {
       const tree = mount(
-        <ChipInput value={['a', 'b']} blurBehavior="none" />
+        <ChipInput value={['a', 'b']} blurBehavior="ignore" />
       )
       tree.find('input').simulate('change', { target: { value: 'foo' } })
       tree.find('input').simulate('blur')
