@@ -207,11 +207,22 @@ storiesOf('ChipInput', module)
       onClick={action('onClick')}
     />
   )
+  */
   .add('add text input value on blur', () =>
-    <ControlledChipInput
-      addOnBlur
+    <ChipInput
+      blurBehavior='add'
     />
   )
+  .add('clear text input value on blur ', () =>
+    <ChipInput
+      blurBehavior='clear'
+    />
+  ).add('keep text input value on blur ', () =>
+    <ChipInput
+      blurBehavior='none'
+    />
+  )
+  /*
   .add('in a form', () =>
     <form onSubmit={e => { e.preventDefault(); action('onSubmit')() }}>
       <ChipInput
