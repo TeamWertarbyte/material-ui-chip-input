@@ -138,6 +138,10 @@ class ChipInput extends React.Component {
     }
   }
 
+  componentWillUnmount () {
+    clearTimeout(this.inputBlurTimeout)
+  }
+
   componentDidMount () {
     // const handleKeyDown = this.autoComplete.handleKeyDown
     // this.autoComplete.handleKeyDown = (event) => {
@@ -203,7 +207,21 @@ class ChipInput extends React.Component {
     if (this.state.focusedChip != null) {
       this.setState({ focusedChip: null })
     }
-    if (this.props.clearOnBlur) {
+    if (this.props.blurBehavior === 'add') {
+      // Lets assume that we only want to add the existing content as chip, when
+      // another event has not added a chip within 200ms .
+      // e.g. onSelection Callback in Autocomplete case
+      let numChipsBefore = (this.props.value || this.state.chips).length
+      let value = event.target.value
+      this.inputBlurTimeout = setTimeout(() => {
+        let numChipsAfter = (this.props.value || this.state.chips).length
+        if (numChipsBefore === numChipsAfter) {
+          this.handleAddChip(value)
+        } else {
+          this.clearInput()
+        }
+      }, 150)
+    } else if (this.props.blurBehavior === 'clear') {
       this.clearInput()
     }
 
@@ -378,11 +396,11 @@ class ChipInput extends React.Component {
   render () {
     const {
       allowDuplicates, // eslint-disable-line no-unused-vars
+      blurBehavior,
       children,
       chipRenderer = defaultChipRenderer,
       classes,
       className,
-      clearOnBlur,
       defaultValue = [], // eslint-disable-line no-unused-vars
       dataSource,
       dataSourceConfig,
@@ -522,16 +540,16 @@ ChipInput.propTypes = {
   // openOnFocus: PropTypes.bool,
   chipRenderer: PropTypes.func,
   newChipKeyCodes: PropTypes.arrayOf(PropTypes.number),
-  clearOnBlur: PropTypes.bool,
   allowDuplicates: PropTypes.bool,
   fullWidth: PropTypes.bool,
   fullWidthInput: PropTypes.bool,
-  inputRef: PropTypes.func
+  inputRef: PropTypes.func,
+  blurBehavior: PropTypes.oneOf(['clear', 'add', 'ignore'])
 }
 
 ChipInput.defaultProps = {
   newChipKeyCodes: [13],
-  clearOnBlur: true,
+  blurBehavior: 'clear',
   allowDuplicates: false,
   inputRef: () => {}
 }

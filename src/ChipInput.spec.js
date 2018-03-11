@@ -335,20 +335,41 @@ describe('custom chips', () => {
   })
 })
 
-it('clears the input on blur', () => {
-  const tree = mount(
-    <ChipInput value={['a', 'b']} />
-  )
-  tree.find('input').simulate('change', { target: { value: 'foo' } })
-  tree.find('input').simulate('blur')
-  expect(tree.find('input').getDOMNode().value).toBe('')
-})
+describe('blurBehavior modes', () => {
+  it('clears the input on blur', () => {
+    const tree = mount(
+      <ChipInput value={['a', 'b']} />
+      )
+    tree.find('input').simulate('change', { target: { value: 'foo' } })
+    tree.find('input').simulate('blur')
+    expect(tree.find('input').getDOMNode().value).toBe('')
+  })
 
-it('does not clear the input on blur with clearOnBlur set to false', () => {
-  const tree = mount(
-    <ChipInput value={['a', 'b']} clearOnBlur={false} />
-  )
-  tree.find('input').simulate('change', { target: { value: 'foo' } })
-  tree.find('input').simulate('blur')
-  expect(tree.find('input').getDOMNode().value).toBe('foo')
+  it('does not clear the input on blur with blurBehavior set to ignore', () => {
+    const tree = mount(
+      <ChipInput value={['a', 'b']} blurBehavior='ignore' />
+      )
+    tree.find('input').simulate('change', { target: { value: 'foo' } })
+    tree.find('input').simulate('blur')
+    expect(tree.find('input').getDOMNode().value).toBe('foo')
+  })
+
+  it('adds the input on blur with blurBehavior set to add', () => {
+    const handleChange = jest.fn()
+    jest.useFakeTimers()
+    const tree = mount(
+      <ChipInput defaultValue={['a', 'b']} blurBehavior='add' onChange={handleChange} />
+      )
+    tree.find('input').getDOMNode().value = 'blur'
+    tree.find('input').simulate('blur')
+
+    jest.runAllTimers()
+
+    expect(tree.find('input').getDOMNode().value).toBe('')
+    expect(setTimeout).toHaveBeenCalledTimes(1)
+
+    setTimeout(_ => {
+      expect(tree.find('Chip').map((chip) => chip.text())).toEqual(['a', 'b', 'blur'])
+    })
+  })
 })

@@ -11,6 +11,7 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
 >
   <ChipInput
     allowDuplicates={false}
+    blurBehavior="clear"
     classes={
       Object {
         "chip": "ChipInput-chip-14",
@@ -29,7 +30,6 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
         "underline": "ChipInput-underline-12",
       }
     }
-    clearOnBlur={true}
     defaultValue={
       Array [
         "foo",
