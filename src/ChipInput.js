@@ -239,7 +239,6 @@ class ChipInput extends React.Component {
     // menu is open results in the input keeping its focus styles. Note that the ref might not be set
     // yet, so this.autocomplete might be null.
     setTimeout(() => {
-      console.log(this.autoComplete && (!this.autoComplete.state.open || this.autoComplete.requestsList.length === 0))
       if (this.autoComplete && (!this.autoComplete.state.open || this.autoComplete.requestsList.length === 0)) {
         if (this.props.clearOnBlur) {
           this.clearInput()
