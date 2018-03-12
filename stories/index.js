@@ -9,6 +9,8 @@ import ChipInput from '../src/ChipInput'
 import CustomizedChipInput from './CustomizedChipInput'
 // import ControlledChipInput from './ControlledChipInput'
 // import ClipboardExample from './ClipboardExample'
+import AutoCompleteChipInputExample from './AutoCompleteChipInputExample'
+import RemoteAutoCompleteChipInputExample from './RemoteAutoCompleteChipInputExample'
 
 storiesOf('ChipInput', module)
   .addDecorator((story) =>
@@ -258,3 +260,25 @@ storiesOf('ChipInput', module)
     </form>
   )
   */
+  .add('with auto complete', () =>
+    <AutoCompleteChipInputExample
+      label='Country search'
+      placeholder='Search a country'
+      fullWidth
+    />
+  )
+  .add('with remote auto complete', () =>
+    <RemoteAutoCompleteChipInputExample
+      label='Remote country search.'
+      placeholder='Search a country'
+      fullWidth
+    />
+  )
+  .add('with remote auto complete and blur', () =>
+    <RemoteAutoCompleteChipInputExample
+      label='Remote country search.'
+      placeholder='Search a country'
+      blurBehavior='add'
+      fullWidth
+    />
+  )
