@@ -249,6 +249,15 @@ class ChipInput extends React.Component {
   handleKeyDown = (event) => {
     const { focusedChip } = this.state
     this.setState({ keyPressed: false, preventChipCreation: false })
+    if (this.props.onKeyDown) {
+      // Needed for arrow controls on menu in autocomplete scenario
+      this.props.onKeyDown(event)
+      // Check if the callback marked the event as isDefaultPrevented() and skip further actions
+      // enter key for example should not always add the current value of the inputField
+      if (event.isDefaultPrevented()) {
+        return
+      }
+    }
 
     if (this.props.newChipKeyCodes.indexOf(event.keyCode) >= 0) {
       this.handleAddChip(event.target.value)
@@ -294,10 +303,12 @@ class ChipInput extends React.Component {
     } else {
       this.setState({ inputValue: event.target.value })
     }
+    if (this.props.onKeyUp) { this.props.onKeyUp(event) }
   }
 
   handleKeyPress = (event) => {
     this.setState({ keyPressed: true })
+    if (this.props.onKeyPress) { this.props.onKeyPress(event) }
   }
 
   handleUpdateInput = (e) => {
@@ -427,6 +438,9 @@ class ChipInput extends React.Component {
       onFocus, // eslint-disable-line no-unused-vars
       onUpdateInput, // eslint-disable-line
       // openOnFocus, // eslint-disable-line
+      onKeyDown,
+      onKeyPress,
+      onKeyUp,
       placeholder,
       required,
       rootRef,
