@@ -432,15 +432,15 @@ class ChipInput extends React.Component {
       newChipKeyCodes, // eslint-disable-line no-unused-vars
       onBeforeAdd,
       onAdd, // eslint-disable-line no-unused-vars
-      onDelete, // eslint-disable-line no-unused-vars
       onBlur, // eslint-disable-line no-unused-vars
+      onDelete, // eslint-disable-line no-unused-vars
       onChange, // eslint-disable-line no-unused-vars
       onFocus, // eslint-disable-line no-unused-vars
-      onUpdateInput, // eslint-disable-line
       // openOnFocus, // eslint-disable-line
       onKeyDown,
       onKeyPress,
       onKeyUp,
+      onUpdateInput,
       placeholder,
       required,
       rootRef,
