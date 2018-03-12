@@ -124,7 +124,11 @@ describe('uncontrolled mode', () => {
 
     tree.find('input').getDOMNode().value = 'foo'
     tree.find('input').simulate('change', { target: tree.find('input').getDOMNode() })
-    expect(handleUpdateInput).toBeCalledWith('foo')
+    expect(handleUpdateInput).toBeCalledWith(
+     expect.objectContaining({
+       target: expect.anything()
+     })
+    )
   })
 })
 

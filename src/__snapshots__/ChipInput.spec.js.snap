@@ -30,6 +30,7 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
         "underline": "ChipInput-underline-12",
       }
     }
+    clearInputValueOnAdd={false}
     defaultValue={
       Array [
         "foo",
