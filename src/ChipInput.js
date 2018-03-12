@@ -176,6 +176,12 @@ class ChipInput extends React.Component {
     if (nextProps.disabled) {
       this.setState({ focusedChip: null })
     }
+
+    // Lets assume that if the chips have changed, the inputValue should be empty
+    // otherwise, we would need to make inputValue a controlled value. which is quite messy
+    if (nextProps.value && this.props.clearInputValueOnAdd && nextProps.value.length !== this.props.value.length) {
+      this.setState({ inputValue: '' })
+    }
   }
 
   /**
@@ -413,6 +419,7 @@ class ChipInput extends React.Component {
       chipRenderer = defaultChipRenderer,
       classes,
       className,
+      clearInputValueOnAdd,
       defaultValue = [], // eslint-disable-line no-unused-vars
       dataSource,
       dataSourceConfig,
@@ -559,6 +566,7 @@ ChipInput.propTypes = {
   fullWidth: PropTypes.bool,
   fullWidthInput: PropTypes.bool,
   inputRef: PropTypes.func,
+  clearInputValueOnAdd: PropTypes.bool,
   blurBehavior: PropTypes.oneOf(['clear', 'add', 'ignore'])
 }
 
@@ -566,7 +574,8 @@ ChipInput.defaultProps = {
   newChipKeyCodes: [13],
   blurBehavior: 'clear',
   allowDuplicates: false,
-  inputRef: () => {}
+  inputRef: () => {},
+  clearInputValueOnAdd: false
 }
 
 export default withStyles(styles)(ChipInput)
