@@ -317,7 +317,7 @@ class ChipInput extends React.Component {
 
     if (this.props.onUpdateInput) {
       // this.props.onUpdateInput(searchText, dataSource, params)
-      this.props.onUpdateInput(e.target.value)
+      this.props.onUpdateInput(e)
     }
   }
 
