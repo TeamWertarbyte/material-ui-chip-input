@@ -266,7 +266,8 @@ class ChipInput extends React.Component {
     }
 
     if (this.props.newChipKeyCodes.indexOf(event.keyCode) >= 0) {
-      this.handleAddChip(event.target.value)
+      let result = this.handleAddChip(event.target.value)
+      if (result !== false) event.preventDefault()
     } else if (event.keyCode === 8 || event.keyCode === 46) {
       if (event.target.value === '') {
         const chips = this.props.value || this.state.chips
@@ -362,6 +363,8 @@ class ChipInput extends React.Component {
           }
         }
       }
+    } else {
+      return false
     }
   }
 
