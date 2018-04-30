@@ -73,6 +73,13 @@ storiesOf('ChipInput', module)
       hintText='Try typing apha...'
     />
   )
+  .add('with auto complete with lots of options', () =>
+    <ChipInput
+      fullWidth
+      dataSource={['alpha', 'beta', 'gamma', 'delta', 'zeta', 'eta', 'theta', 'iota']}
+      hintText='Try typing a...'
+    />
+  )
   .add('with floating label', () =>
     <ChipInput
       floatingLabelText='Floating label'
