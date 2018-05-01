@@ -438,7 +438,7 @@ class ChipInput extends React.Component {
 
   render () {
     const {
-      autocompleteHeight,
+      autoCompleteListStyle,
       children,
       className,
       dataSourceConfig,
@@ -576,7 +576,7 @@ class ChipInput extends React.Component {
           style={inputStyleMerged}
           dataSource={autoCompleteData}
           dataSourceConfig={dataSourceConfig}
-          listStyle={{ maxHeight: autocompleteHeight || '300px', overflow: 'scroll' }}
+          listStyle={autoCompleteListStyle}
           searchText={this.state.inputValue}
           underlineShow={false}
           ref={this.setAutoComplete}
