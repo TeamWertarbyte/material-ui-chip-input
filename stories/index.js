@@ -73,6 +73,14 @@ storiesOf('ChipInput', module)
       hintText='Try typing apha...'
     />
   )
+  .add('with scrollable auto complete', () =>
+    <ChipInput
+      autoCompleteListStyle={{ maxHeight: '300px', overflow: 'scroll' }}
+      fullWidth
+      dataSource={['alpha', 'beta', 'gamma', 'delta', 'zeta', 'eta', 'theta', 'iota']}
+      hintText='Try typing a...'
+    />
+  )
   .add('with floating label', () =>
     <ChipInput
       floatingLabelText='Floating label'

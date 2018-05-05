@@ -438,6 +438,7 @@ class ChipInput extends React.Component {
 
   render () {
     const {
+      autoCompleteListStyle,
       children,
       className,
       dataSourceConfig,
@@ -575,6 +576,7 @@ class ChipInput extends React.Component {
           style={inputStyleMerged}
           dataSource={autoCompleteData}
           dataSourceConfig={dataSourceConfig}
+          listStyle={autoCompleteListStyle}
           searchText={this.state.inputValue}
           underlineShow={false}
           ref={this.setAutoComplete}
