@@ -129,7 +129,7 @@ storiesOf('ChipInput', module)
   )
   .add('with errorText', () =>
     <ChipInput
-      errorText='This is an error.'
+      errorText='The error text can be as long as you want, it will wrap as expected... no matter how long it is.'
     />
   )
   .add('with errorStyle', () =>

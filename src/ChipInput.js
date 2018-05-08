@@ -57,7 +57,7 @@ const getStyles = (props, context, state) => {
     },
     error: {
       position: 'absolute',
-      bottom: -10,
+      top: '100%',
       fontSize: 12,
       lineHeight: '12px',
       color: errorColor,
