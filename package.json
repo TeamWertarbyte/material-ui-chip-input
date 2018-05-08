@@ -1,6 +1,6 @@
 {
   "name": "material-ui-chip-input",
-  "version": "0.18.7",
+  "version": "0.18.8",
   "description": "A chip input field using Material-UI.",
   "main": "lib/ChipInput.js",
   "files": [
