@@ -110,7 +110,7 @@ const styles = (theme) => {
   }
 }
 
-const defaultChipRenderer = ({ value, text, isFocused, isDisabled, handleClick, handleDelete, className }, key) => (
+export const defaultChipRenderer = ({ value, text, isFocused, isDisabled, handleClick, handleDelete, className }, key) => (
   <Chip
     key={key}
     className={className}
