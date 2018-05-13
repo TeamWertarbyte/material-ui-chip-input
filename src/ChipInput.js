@@ -97,7 +97,7 @@ const getStyles = (props, context, state) => {
   return styles
 }
 
-const defaultChipRenderer = ({ value, text, isFocused, isDisabled, handleClick, handleRequestDelete, defaultStyle }, key) => (
+export const defaultChipRenderer = ({ value, text, isFocused, isDisabled, handleClick, handleRequestDelete, defaultStyle }, key) => (
   <Chip
     key={key}
     style={{ ...defaultStyle, pointerEvents: isDisabled ? 'none' : undefined }}
