@@ -59,7 +59,7 @@
     "standard": "^10.0.2"
   },
   "peerDependencies": {
-    "material-ui": "^1.0.0-beta.30",
+    "@material-ui/core": "^1.0.0-rc.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0"
   },
