@@ -1,7 +1,7 @@
 /* eslint-env jest */
 import React from 'react'
 import { mount } from 'enzyme'
-import Chip from 'material-ui/Chip'
+import Chip from '@material-ui/core/Chip'
 import ChipInput from './ChipInput'
 
 describe('uncontrolled mode', () => {

@@ -37,6 +37,7 @@
   },
   "homepage": "https://github.com/TeamWertarbyte/material-ui-chip-input#readme",
   "devDependencies": {
+    "@material-ui/core": "^1.0.0-rc.1",
     "@storybook/addon-actions": "^3.2.13",
     "@storybook/react": "^3.2.13",
     "babel-cli": "^6.14.0",
@@ -52,7 +53,6 @@
     "enzyme-to-json": "^3.2.2",
     "gh-pages": "^1.0.0",
     "jest": "^21.2.1",
-    "material-ui": "^1.0.0-beta.30",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-test-renderer": "^16.2.0",

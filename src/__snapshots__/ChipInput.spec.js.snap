@@ -70,7 +70,6 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          required={false}
         >
           <div
             className="ChipInput-chipContainer-4 ChipInput-inkbar-9 ChipInput-underline-12"
@@ -147,8 +146,8 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                           classes={
                             Object {
                               "colorAction": "MuiSvgIcon-colorAction-29",
-                              "colorDisabled": "MuiSvgIcon-colorDisabled-30",
-                              "colorError": "MuiSvgIcon-colorError-31",
+                              "colorDisabled": "MuiSvgIcon-colorDisabled-31",
+                              "colorError": "MuiSvgIcon-colorError-30",
                               "colorPrimary": "MuiSvgIcon-colorPrimary-27",
                               "colorSecondary": "MuiSvgIcon-colorSecondary-28",
                               "root": "MuiSvgIcon-root-26",
@@ -248,8 +247,8 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                           classes={
                             Object {
                               "colorAction": "MuiSvgIcon-colorAction-29",
-                              "colorDisabled": "MuiSvgIcon-colorDisabled-30",
-                              "colorError": "MuiSvgIcon-colorError-31",
+                              "colorDisabled": "MuiSvgIcon-colorDisabled-31",
+                              "colorError": "MuiSvgIcon-colorError-30",
                               "colorPrimary": "MuiSvgIcon-colorPrimary-27",
                               "colorSecondary": "MuiSvgIcon-colorSecondary-28",
                               "root": "MuiSvgIcon-root-26",
@@ -298,21 +297,19 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
               <Input
                 classes={
                   Object {
-                    "disabled": "MuiInput-disabled-37",
-                    "error": "MuiInput-error-35",
-                    "focused": "MuiInput-focused-36",
+                    "disabled": "MuiInput-disabled-35",
+                    "error": "MuiInput-error-37",
+                    "focused": "MuiInput-focused-34",
                     "formControl": "MuiInput-formControl-33",
-                    "fullWidth": "MuiInput-fullWidth-40",
-                    "inkbar": "MuiInput-inkbar-34",
-                    "input": "MuiInput-input-41 ChipInput-input-3",
-                    "inputDense": "MuiInput-inputDense-42",
-                    "inputDisabled": "MuiInput-inputDisabled-43",
-                    "inputMultiline": "MuiInput-inputMultiline-45",
-                    "inputSearch": "MuiInput-inputSearch-46",
-                    "inputSingleline": "MuiInput-inputSingleline-44",
-                    "multiline": "MuiInput-multiline-39",
+                    "fullWidth": "MuiInput-fullWidth-39",
+                    "input": "MuiInput-input-40 ChipInput-input-3",
+                    "inputMarginDense": "MuiInput-inputMarginDense-41",
+                    "inputMultiline": "MuiInput-inputMultiline-42",
+                    "inputType": "MuiInput-inputType-43",
+                    "inputTypeSearch": "MuiInput-inputTypeSearch-44",
+                    "multiline": "MuiInput-multiline-38",
                     "root": "MuiInput-root-32 ChipInput-inputRoot-2",
-                    "underline": "MuiInput-underline-38",
+                    "underline": "MuiInput-underline-36",
                   }
                 }
                 disableUnderline={true}
@@ -331,16 +328,16 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
               >
                 <div
                   className="MuiInput-root-32 ChipInput-inputRoot-2 MuiInput-formControl-33"
-                  onBlur={[Function]}
-                  onFocus={[Function]}
                   onKeyPress={[Function]}
                 >
                   <input
                     aria-invalid={false}
                     aria-required={false}
-                    className="MuiInput-input-41 ChipInput-input-3 MuiInput-inputSingleline-44"
+                    className="MuiInput-input-40 ChipInput-input-3"
                     disabled={false}
+                    onBlur={[Function]}
                     onChange={[Function]}
+                    onFocus={[Function]}
                     onKeyDown={[Function]}
                     onKeyUp={[Function]}
                     placeholder={null}
