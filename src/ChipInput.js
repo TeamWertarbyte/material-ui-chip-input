@@ -4,12 +4,13 @@
  */
 import React from 'react'
 import PropTypes from 'prop-types'
-import Input, { InputLabel } from 'material-ui/Input'
-import Chip from 'material-ui/Chip'
-import withStyles from 'material-ui/styles/withStyles'
-import blue from 'material-ui/colors/blue'
-import FormControl from 'material-ui/Form/FormControl'
-import FormHelperText from 'material-ui/Form/FormHelperText'
+import Input from '@material-ui/core/Input'
+import InputLabel from '@material-ui/core/InputLabel'
+import Chip from '@material-ui/core/Chip'
+import withStyles from '@material-ui/core/styles/withStyles'
+import blue from '@material-ui/core/colors/blue'
+import FormControl from '@material-ui/core/FormControl'
+import FormHelperText from '@material-ui/core/FormHelperText'
 import cx from 'classnames'
 
 const styles = (theme) => {
