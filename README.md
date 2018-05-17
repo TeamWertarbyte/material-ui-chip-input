@@ -7,8 +7,10 @@ If you want to try the component yourself instead of watching a gif, head over t
 
 ## Installation
 ```shell
-npm i --save material-ui-chip-input
+npm i --save material-ui-chip-input@legacy
 ```
+
+**Note:** This is the version for Material-UI 0.x. If you are using Material-UI 1.0.0-rc.0 or later, please use the [stable version][stable].
 
 ## Usage
 The component supports either controlled or uncontrolled input mode. If you use the controlled mode (by setting the `value` attribute), the `onChange` callback won't be called.
@@ -74,3 +76,4 @@ The files included in this repository are licensed under the MIT license.
 [mui-text-field]: http://www.material-ui.com/#/components/text-field
 [mui-auto-complete]: http://www.material-ui.com/#/components/auto-complete
 [gh-pages]: https://teamwertarbyte.github.io/material-ui-chip-input/
+[stable]: https://github.com/TeamWertarbyte/material-ui-chip-input/tree/master
