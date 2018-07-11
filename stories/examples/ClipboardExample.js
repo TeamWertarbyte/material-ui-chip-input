@@ -1,5 +1,5 @@
 import React from 'react'
-import ChipInput from '../src/ChipInput'
+import ChipInput from '../../src/ChipInput'
 
 class ClipboardExample extends React.Component {
   constructor (props) {

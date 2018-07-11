@@ -17,6 +17,8 @@
     "lint": "standard",
     "prepublish": "babel src -d lib",
     "storybook": "start-storybook -p 6006",
+    "storybook:build": "build-storybook -c stories",
+    "storybook:install": "cd stories && npm install",
     "deploy-storybook": "build-storybook -o storybook && gh-pages -d storybook && rm -r storybook"
   },
   "repository": {
@@ -55,7 +57,6 @@
     "gh-pages": "^1.0.0",
     "jest": "^21.2.1",
     "react": "^16.3.2",
-    "react-autosuggest": "^9.3.4",
     "react-dom": "^16.3.2",
     "react-test-renderer": "^16.2.0",
     "standard": "^10.0.2"

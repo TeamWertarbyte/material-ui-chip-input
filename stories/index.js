@@ -6,11 +6,11 @@ import Chip from '@material-ui/core/Chip'
 // import AutoComplete from '@material-ui/core/AutoComplete'
 import { green } from '@material-ui/core/colors'
 import ChipInput from '../src/ChipInput'
-import CustomizedChipInput from './CustomizedChipInput'
+import CustomizedChipInput from './examples/CustomizedChipInput'
 // import ControlledChipInput from './ControlledChipInput'
-// import ClipboardExample from './ClipboardExample'
-import AutoCompleteChipInputExample from './AutoCompleteChipInputExample'
-import RemoteAutoCompleteChipInputExample from './RemoteAutoCompleteChipInputExample'
+// import ClipboardExample from './examples/ClipboardExample'
+import AutoCompleteChipInputExample from './examples/AutoCompleteChipInputExample'
+import RemoteAutoCompleteChipInputExample from './examples/RemoteAutoCompleteChipInputExample'
 
 storiesOf('ChipInput', module)
   .addDecorator((story) =>

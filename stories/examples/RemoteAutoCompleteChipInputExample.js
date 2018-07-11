@@ -1,3 +1,4 @@
+/* global XMLHttpRequest */
 import React from 'react'
 import PropTypes from 'prop-types'
 import Autosuggest from 'react-autosuggest'
@@ -6,44 +7,7 @@ import parse from 'autosuggest-highlight/parse'
 import Paper from 'material-ui/Paper'
 import { MenuItem } from 'material-ui/Menu'
 import { withStyles } from 'material-ui/styles'
-import ChipInput from '../src/ChipInput'
-
-const suggestions = [
-  { label: 'Afghanistan' },
-  { label: 'Aland Islands' },
-  { label: 'Albania' },
-  { label: 'Algeria' },
-  { label: 'American Samoa' },
-  { label: 'Andorra' },
-  { label: 'Angola' },
-  { label: 'Anguilla' },
-  { label: 'Antarctica' },
-  { label: 'Antigua and Barbuda' },
-  { label: 'Argentina' },
-  { label: 'Armenia' },
-  { label: 'Aruba' },
-  { label: 'Australia' },
-  { label: 'Austria' },
-  { label: 'Azerbaijan' },
-  { label: 'Bahamas' },
-  { label: 'Bahrain' },
-  { label: 'Bangladesh' },
-  { label: 'Barbados' },
-  { label: 'Belarus' },
-  { label: 'Belgium' },
-  { label: 'Belize' },
-  { label: 'Benin' },
-  { label: 'Bermuda' },
-  { label: 'Bhutan' },
-  { label: 'Bolivia, Plurinational State of' },
-  { label: 'Bonaire, Sint Eustatius and Saba' },
-  { label: 'Bosnia and Herzegovina' },
-  { label: 'Botswana' },
-  { label: 'Bouvet Island' },
-  { label: 'Brazil' },
-  { label: 'British Indian Ocean Territory' },
-  { label: 'Brunei Darussalam' }
-]
+import ChipInput from '../../src/ChipInput'
 
 function renderInput (inputProps) {
   const { classes, autoFocus, value, onChange, onAdd, onDelete, chips, ref, ...other } = inputProps
@@ -62,8 +26,8 @@ function renderInput (inputProps) {
 }
 
 function renderSuggestion (suggestion, { query, isHighlighted }) {
-  const matches = match(suggestion.label, query)
-  const parts = parse(suggestion.label, matches)
+  const matches = match(suggestion.name, query)
+  const parts = parse(suggestion.name, matches)
 
   return (
     <MenuItem selected={isHighlighted} component='div'>
@@ -95,26 +59,7 @@ function renderSuggestionsContainer (options) {
 }
 
 function getSuggestionValue (suggestion) {
-  return suggestion.label
-}
-
-function getSuggestions (value) {
-  const inputValue = value.trim().toLowerCase()
-  const inputLength = inputValue.length
-  let count = 0
-
-  return inputLength === 0
-    ? []
-    : suggestions.filter(suggestion => {
-      const keep =
-          count < 5 && suggestion.label.toLowerCase().slice(0, inputLength) === inputValue
-
-      if (keep) {
-        count += 1
-      }
-
-      return keep
-    })
+  return suggestion.name
 }
 
 const styles = theme => ({
@@ -152,9 +97,15 @@ class AutoCompleteChipInputExample extends React.Component {
   };
 
   handleSuggestionsFetchRequested = ({ value }) => {
-    this.setState({
-      suggestions: getSuggestions(value)
+    var oReq = new XMLHttpRequest()
+    var that = this
+    oReq.addEventListener('load', function () {
+      that.setState({
+        suggestions: oReq.status === 200 ? JSON.parse(this.responseText) : []
+      })
     })
+    oReq.open('GET', 'https://restcountries.eu/rest/v2/name/' + value)
+    oReq.send()
   };
 
   handleSuggestionsClearRequested = () => {
@@ -170,10 +121,7 @@ class AutoCompleteChipInputExample extends React.Component {
   };
 
   handleAddChip (chip) {
-    this.setState({
-      value: [...this.state.value, chip],
-      textFieldInput: ''
-    })
+    this.setState({value: this.state.value.concat([chip])})
   }
   handleDeleteChip (chip, index) {
     let temp = this.state.value
