@@ -1,3 +1,4 @@
+/* global XMLHttpRequest */
 import React from 'react'
 import PropTypes from 'prop-types'
 import Autosuggest from 'react-autosuggest'
@@ -9,40 +10,40 @@ import { withStyles } from '@material-ui/core/styles'
 import ChipInput from '../../src/ChipInput'
 
 const suggestions = [
-  { label: 'Afghanistan' },
-  { label: 'Aland Islands' },
-  { label: 'Albania' },
-  { label: 'Algeria' },
-  { label: 'American Samoa' },
-  { label: 'Andorra' },
-  { label: 'Angola' },
-  { label: 'Anguilla' },
-  { label: 'Antarctica' },
-  { label: 'Antigua and Barbuda' },
-  { label: 'Argentina' },
-  { label: 'Armenia' },
-  { label: 'Aruba' },
-  { label: 'Australia' },
-  { label: 'Austria' },
-  { label: 'Azerbaijan' },
-  { label: 'Bahamas' },
-  { label: 'Bahrain' },
-  { label: 'Bangladesh' },
-  { label: 'Barbados' },
-  { label: 'Belarus' },
-  { label: 'Belgium' },
-  { label: 'Belize' },
-  { label: 'Benin' },
-  { label: 'Bermuda' },
-  { label: 'Bhutan' },
-  { label: 'Bolivia, Plurinational State of' },
-  { label: 'Bonaire, Sint Eustatius and Saba' },
-  { label: 'Bosnia and Herzegovina' },
-  { label: 'Botswana' },
-  { label: 'Bouvet Island' },
-  { label: 'Brazil' },
-  { label: 'British Indian Ocean Territory' },
-  { label: 'Brunei Darussalam' }
+  { name: 'Afghanistan' },
+  { name: 'Aland Islands' },
+  { name: 'Albania' },
+  { name: 'Algeria' },
+  { name: 'American Samoa' },
+  { name: 'Andorra' },
+  { name: 'Angola' },
+  { name: 'Anguilla' },
+  { name: 'Antarctica' },
+  { name: 'Antigua and Barbuda' },
+  { name: 'Argentina' },
+  { name: 'Armenia' },
+  { name: 'Aruba' },
+  { name: 'Australia' },
+  { name: 'Austria' },
+  { name: 'Azerbaijan' },
+  { name: 'Bahamas' },
+  { name: 'Bahrain' },
+  { name: 'Bangladesh' },
+  { name: 'Barbados' },
+  { name: 'Belarus' },
+  { name: 'Belgium' },
+  { name: 'Belize' },
+  { name: 'Benin' },
+  { name: 'Bermuda' },
+  { name: 'Bhutan' },
+  { name: 'Bolivia, Plurinational State of' },
+  { name: 'Bonaire, Sint Eustatius and Saba' },
+  { name: 'Bosnia and Herzegovina' },
+  { name: 'Botswana' },
+  { name: 'Bouvet Island' },
+  { name: 'Brazil' },
+  { name: 'British Indian Ocean Territory' },
+  { name: 'Brunei Darussalam' }
 ]
 
 function renderInput (inputProps) {
@@ -62,8 +63,8 @@ function renderInput (inputProps) {
 }
 
 function renderSuggestion (suggestion, { query, isHighlighted }) {
-  const matches = match(suggestion.label, query)
-  const parts = parse(suggestion.label, matches)
+  const matches = match(suggestion.name, query)
+  const parts = parse(suggestion.name, matches)
 
   return (
     <MenuItem selected={isHighlighted} component='div'>
@@ -95,7 +96,7 @@ function renderSuggestionsContainer (options) {
 }
 
 function getSuggestionValue (suggestion) {
-  return suggestion.label
+  return suggestion.name
 }
 
 function getSuggestions (value) {
@@ -107,7 +108,7 @@ function getSuggestions (value) {
     ? []
     : suggestions.filter(suggestion => {
       const keep =
-          count < 5 && suggestion.label.toLowerCase().slice(0, inputLength) === inputValue
+          count < 5 && suggestion.name.toLowerCase().slice(0, inputLength) === inputValue
 
       if (keep) {
         count += 1
@@ -143,7 +144,7 @@ const styles = theme => ({
   }
 })
 
-class AutoCompleteChipInputExample extends React.Component {
+class ReactAutosuggestExample extends React.Component {
   state = {
     // value: '',
     suggestions: [],
@@ -215,8 +216,88 @@ class AutoCompleteChipInputExample extends React.Component {
   }
 }
 
-AutoCompleteChipInputExample.propTypes = {
+ReactAutosuggestExample.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(AutoCompleteChipInputExample)
+exports.ReactAutosuggestExample = withStyles(styles)(ReactAutosuggestExample)
+
+class ReactAutosuggestRemoteExample extends React.Component {
+  state = {
+    // value: '',
+    suggestions: [],
+    value: [],
+    textFieldInput: ''
+  };
+
+  handleSuggestionsFetchRequested = ({ value }) => {
+    var oReq = new XMLHttpRequest()
+    var that = this
+    oReq.addEventListener('load', function () {
+      that.setState({
+        suggestions: oReq.status === 200 ? JSON.parse(this.responseText) : []
+      })
+    })
+    oReq.open('GET', 'https://restcountries.eu/rest/v2/name/' + value)
+    oReq.send()
+  };
+
+  handleSuggestionsClearRequested = () => {
+    this.setState({
+      suggestions: []
+    })
+  };
+
+  handletextFieldInputChange = (event, { newValue }) => {
+    this.setState({
+      textFieldInput: newValue
+    })
+  };
+
+  handleAddChip (chip) {
+    this.setState({value: this.state.value.concat([chip])})
+  }
+  handleDeleteChip (chip, index) {
+    let temp = this.state.value
+    temp.splice(index, 1)
+    this.setState({value: temp})
+  }
+
+  render () {
+    const { classes, ...rest } = this.props
+
+    return (
+      <Autosuggest
+        theme={{
+          container: classes.container,
+          suggestionsContainerOpen: classes.suggestionsContainerOpen,
+          suggestionsList: classes.suggestionsList,
+          suggestion: classes.suggestion
+        }}
+        renderInputComponent={renderInput}
+        suggestions={this.state.suggestions}
+        onSuggestionsFetchRequested={this.handleSuggestionsFetchRequested}
+        onSuggestionsClearRequested={this.handleSuggestionsClearRequested}
+        renderSuggestionsContainer={renderSuggestionsContainer}
+        getSuggestionValue={getSuggestionValue}
+        renderSuggestion={renderSuggestion}
+        onSuggestionSelected={(e, {suggestionValue}) => { this.handleAddChip(suggestionValue); e.preventDefault() }}
+        focusInputOnSuggestionClick={false}
+        inputProps={{
+          classes,
+          chips: this.state.value,
+          onChange: this.handletextFieldInputChange,
+          value: this.state.textFieldInput,
+          onAdd: (chip) => this.handleAddChip(chip),
+          onDelete: (chip, index) => this.handleDeleteChip(chip, index),
+          ...rest
+        }}
+      />
+    )
+  }
+}
+
+ReactAutosuggestRemoteExample.propTypes = {
+  classes: PropTypes.object.isRequired
+}
+exports.ReactAutosuggestRemoteExample = withStyles(styles)(ReactAutosuggestRemoteExample)
