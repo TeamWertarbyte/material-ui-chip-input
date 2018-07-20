@@ -67,9 +67,7 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
       >
         <div
           className="MuiFormControl-root-15 ChipInput-root-1"
-          onBlur={[Function]}
           onClick={[Function]}
-          onFocus={[Function]}
         >
           <div
             className="ChipInput-chipContainer-4 ChipInput-inkbar-9 ChipInput-underline-12"
@@ -100,6 +98,7 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                     "root": "MuiChip-root-19",
                   }
                 }
+                clickable={false}
                 component="div"
                 label="foo"
                 onClick={[Function]}
@@ -150,10 +149,13 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                               "colorError": "MuiSvgIcon-colorError-30",
                               "colorPrimary": "MuiSvgIcon-colorPrimary-27",
                               "colorSecondary": "MuiSvgIcon-colorSecondary-28",
+                              "fontSizeInherit": "MuiSvgIcon-fontSizeInherit-32",
                               "root": "MuiSvgIcon-root-26",
                             }
                           }
                           color="inherit"
+                          component="svg"
+                          fontSize="default"
                           onClick={[Function]}
                           viewBox="0 0 24 24"
                         >
@@ -201,6 +203,7 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                     "root": "MuiChip-root-19",
                   }
                 }
+                clickable={false}
                 component="div"
                 label="bar"
                 onClick={[Function]}
@@ -251,10 +254,13 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                               "colorError": "MuiSvgIcon-colorError-30",
                               "colorPrimary": "MuiSvgIcon-colorPrimary-27",
                               "colorSecondary": "MuiSvgIcon-colorSecondary-28",
+                              "fontSizeInherit": "MuiSvgIcon-fontSizeInherit-32",
                               "root": "MuiSvgIcon-root-26",
                             }
                           }
                           color="inherit"
+                          component="svg"
+                          fontSize="default"
                           onClick={[Function]}
                           viewBox="0 0 24 24"
                         >
@@ -297,19 +303,19 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
               <Input
                 classes={
                   Object {
-                    "disabled": "MuiInput-disabled-35",
-                    "error": "MuiInput-error-37",
-                    "focused": "MuiInput-focused-34",
-                    "formControl": "MuiInput-formControl-33",
-                    "fullWidth": "MuiInput-fullWidth-39",
-                    "input": "MuiInput-input-40 ChipInput-input-3",
-                    "inputMarginDense": "MuiInput-inputMarginDense-41",
-                    "inputMultiline": "MuiInput-inputMultiline-42",
-                    "inputType": "MuiInput-inputType-43",
-                    "inputTypeSearch": "MuiInput-inputTypeSearch-44",
-                    "multiline": "MuiInput-multiline-38",
-                    "root": "MuiInput-root-32 ChipInput-inputRoot-2",
-                    "underline": "MuiInput-underline-36",
+                    "disabled": "MuiInput-disabled-36",
+                    "error": "MuiInput-error-38",
+                    "focused": "MuiInput-focused-35",
+                    "formControl": "MuiInput-formControl-34",
+                    "fullWidth": "MuiInput-fullWidth-40",
+                    "input": "MuiInput-input-41 ChipInput-input-3",
+                    "inputMarginDense": "MuiInput-inputMarginDense-42",
+                    "inputMultiline": "MuiInput-inputMultiline-43",
+                    "inputType": "MuiInput-inputType-44",
+                    "inputTypeSearch": "MuiInput-inputTypeSearch-45",
+                    "multiline": "MuiInput-multiline-39",
+                    "root": "MuiInput-root-33 ChipInput-inputRoot-2",
+                    "underline": "MuiInput-underline-37",
                   }
                 }
                 disableUnderline={true}
@@ -327,13 +333,12 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                 value=""
               >
                 <div
-                  className="MuiInput-root-32 ChipInput-inputRoot-2 MuiInput-formControl-33"
+                  className="MuiInput-root-33 ChipInput-inputRoot-2 MuiInput-formControl-34"
                   onKeyPress={[Function]}
                 >
                   <input
                     aria-invalid={false}
-                    aria-required={false}
-                    className="MuiInput-input-40 ChipInput-input-3"
+                    className="MuiInput-input-41 ChipInput-input-3"
                     disabled={false}
                     onBlur={[Function]}
                     onChange={[Function]}
