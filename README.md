@@ -13,7 +13,7 @@ If you want to try the component yourself instead of watching a gif, head over t
 ```shell
 npm i --save material-ui-chip-input@next
 ```
-**Note:** This is the version for Material-UI 1.0.0-rc.0 or later. If you are using Material-UI 1.0.0-beta, you should update to the latest version. If you are still using Material-UI 0.x, you can use our [legacy version][legacy].
+**Note:** This is the version for Material-UI 1.0.0 or later. If you are still using Material-UI 0.x, you can use our [legacy version][legacy].
 
 ## Usage
 The component supports either controlled or uncontrolled input mode. If you use the controlled mode (by setting the `value` attribute), the `onChange` callback won't be called.
