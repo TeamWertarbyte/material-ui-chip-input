@@ -406,6 +406,7 @@ class ChipInput extends React.Component {
       fullWidthInput,
       helperText,
       id,
+      InputProps,
       inputRef,
       InputLabelProps,
       label,
@@ -500,7 +501,7 @@ class ChipInput extends React.Component {
             disableUnderline
             fullWidth={fullWidthInput}
             placeholder={!hasInput && (shrinkFloatingLabel || label == null) ? placeholder : null}
-            {...other}
+            {...InputProps}
           />
         </div>
         {helperText && (
@@ -546,6 +547,8 @@ ChipInput.propTypes = {
   helperText: PropTypes.node,
   /** Props to pass through to the `InputLabel`. */
   InputLabelProps: PropTypes.object,
+  /** Props to pass through to the `Input`. */
+  InputProps: PropTypes.object,
   /** Use this property to pass a ref callback to the native input component. */
   inputRef: PropTypes.func,
   /* The content of the floating label. */
