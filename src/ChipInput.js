@@ -143,38 +143,15 @@ class ChipInput extends React.Component {
     clearTimeout(this.inputBlurTimeout)
   }
 
-  componentDidMount () {
-    // const handleKeyDown = this.autoComplete.handleKeyDown
-    // this.autoComplete.handleKeyDown = (event) => {
-    //   const {newChipKeyCodes} = this.props
-    //   if (newChipKeyCodes.indexOf(event.keyCode) >= 0 && event.target.value) {
-    //     event.preventDefault()
-    //     this.handleAddChip(event.target.value)
-    //     this.autoComplete.forceUpdate()
-    //   } else {
-    //     handleKeyDown(event)
-    //   }
-    // }
-
-    // this.autoComplete.handleItemTouchTap = (event, child) => {
-    //   const dataSource = this.autoComplete.props.dataSource
-
-    //   const index = parseInt(child.key, 10)
-    //   const chosenRequest = dataSource[index]
-    //   this.handleAddChip(chosenRequest)
-    //   this.autoComplete.forceUpdate()
-    //   this.autoComplete.close()
-
-    //   setTimeout(() => this.focus(), 1)
-    // }
-
-    // // force update autocomplete to ensure that it uses the new handlers
-    // this.autoComplete.forceUpdate()
-  }
-
   componentWillReceiveProps (nextProps) {
     if (nextProps.disabled) {
       this.setState({ focusedChip: null })
+    }
+
+    // Lets assume that if the chips have changed, the inputValue should be empty
+    // otherwise, we would need to make inputValue a controlled value. which is quite messy
+    if (nextProps.value && this.props.clearInputValueOnChange && nextProps.value.length !== this.props.value.length) {
+      this.setState({ inputValue: '' })
     }
   }
 
@@ -225,19 +202,6 @@ class ChipInput extends React.Component {
     } else if (this.props.blurBehavior === 'clear') {
       this.clearInput()
     }
-
-    // A momentary delay is required to support openOnFocus. We must give time for the autocomplete
-    // menu to close before checking the current status. Otherwise, tabbing off the input while the
-    // menu is open results in the input keeping its focus styles. Note that the ref might not be set
-    // yet, so this.autocomplete might be null.
-    // setTimeout(() => {
-    //   if (this.autoComplete && (!this.autoComplete.state.open || this.autoComplete.requestsList.length === 0)) {
-    //     if (this.props.clearOnBlur) {
-    //       this.clearInput()
-    //     }
-    //     this.setState({ isFocused: false })
-    //   }
-    // }, 0)
   }
 
   handleInputFocus = (event) => {
@@ -250,9 +214,21 @@ class ChipInput extends React.Component {
   handleKeyDown = (event) => {
     const { focusedChip } = this.state
     this.setState({ keyPressed: false, preventChipCreation: false })
+    if (this.props.onKeyDown) {
+      // Needed for arrow controls on menu in autocomplete scenario
+      this.props.onKeyDown(event)
+      // Check if the callback marked the event as isDefaultPrevented() and skip further actions
+      // enter key for example should not always add the current value of the inputField
+      if (event.isDefaultPrevented()) {
+        return
+      }
+    }
 
     if (this.props.newChipKeyCodes.indexOf(event.keyCode) >= 0) {
-      this.handleAddChip(event.target.value)
+      let result = this.handleAddChip(event.target.value)
+      if (result !== false) {
+        event.preventDefault()
+      }
     } else if (event.keyCode === 8 || event.keyCode === 46) {
       if (event.target.value === '') {
         const chips = this.props.value || this.state.chips
@@ -295,24 +271,31 @@ class ChipInput extends React.Component {
     } else {
       this.setState({ inputValue: event.target.value })
     }
+    if (this.props.onKeyUp) { this.props.onKeyUp(event) }
   }
 
   handleKeyPress = (event) => {
     this.setState({ keyPressed: true })
+    if (this.props.onKeyPress) { this.props.onKeyPress(event) }
   }
 
   handleUpdateInput = (e) => {
     this.setState({ inputValue: e.target.value })
 
     if (this.props.onUpdateInput) {
-      // this.props.onUpdateInput(searchText, dataSource, params)
-      this.props.onUpdateInput(e.target.value)
+      this.props.onUpdateInput(e)
     }
   }
 
+  /**
+   * Handles adding a chip.
+   * @param {string|object} chip Value of the chip, either a string or an object (if dataSourceConfig is set)
+   * @returns True if the chip was added (or at least `onAdd` was called), false if adding the chip was prevented
+   */
   handleAddChip (chip) {
     if (this.props.onBeforeAdd && !this.props.onBeforeAdd(chip)) {
-      return this.setState({ preventChipCreation: true })
+      this.setState({ preventChipCreation: true })
+      return false
     }
     this.setState({ inputValue: '' })
     const chips = this.props.value || this.state.chips
@@ -346,7 +329,10 @@ class ChipInput extends React.Component {
           }
         }
       }
+    } else {
+      return false
     }
+    return true
   }
 
   handleDeleteChip (chip, i) {
@@ -381,28 +367,34 @@ class ChipInput extends React.Component {
   }
 
   /**
-   * Sets a reference to the AutoComplete instance.
-   *
-   * Using a bound class method here to set `autoComplete` to avoid it being set
-   * to null by an inline ref callback.
-   *
-   * See [Issue #71](https://github.com/TeamWertarbyte/material-ui-chip-input/issues/71)
-   *
-   * @param {Object} autoComplete - The AutoComplete DOM element or null
+   * Sets a reference to the Material-UI Input component.
+   * @param {object} input - The Input reference
    */
   setInputRef = (input) => {
     this.input = input
   }
 
+  /**
+   * Set the reference to the actual input, that is the input of the Input.
+   * @param {object} ref - The reference
+   */
+  setActualInputRef = (ref) => {
+    this.actualInput = ref
+    if (this.props.inputRef) {
+      this.props.inputRef(ref)
+    }
+  }
+
   render () {
     const {
-      allowDuplicates, // eslint-disable-line no-unused-vars
+      allowDuplicates,
       blurBehavior,
       children,
       chipRenderer = defaultChipRenderer,
       classes,
       className,
-      defaultValue = [], // eslint-disable-line no-unused-vars
+      clearInputValueOnChange,
+      defaultValue,
       dataSource,
       dataSourceConfig,
       disabled,
@@ -413,21 +405,21 @@ class ChipInput extends React.Component {
       fullWidth,
       fullWidthInput,
       helperText,
-      helperTextClassName,
       id,
       inputRef,
       InputLabelProps,
       label,
-      labelClassName,
-      newChipKeyCodes, // eslint-disable-line no-unused-vars
+      newChipKeyCodes,
       onBeforeAdd,
-      onAdd, // eslint-disable-line no-unused-vars
-      onDelete, // eslint-disable-line no-unused-vars
-      onBlur, // eslint-disable-line no-unused-vars
-      onChange, // eslint-disable-line no-unused-vars
-      onFocus, // eslint-disable-line no-unused-vars
-      onUpdateInput, // eslint-disable-line
-      // openOnFocus, // eslint-disable-line
+      onAdd,
+      onBlur,
+      onDelete,
+      onChange,
+      onFocus,
+      onKeyDown,
+      onKeyPress,
+      onKeyUp,
+      onUpdateInput,
       placeholder,
       required,
       rootRef,
@@ -460,7 +452,6 @@ class ChipInput extends React.Component {
         {label && (
           <InputLabel
             htmlFor={id}
-            className={labelClassName}
             classes={{ root: classes.label, shrink: classes.labelShrink }}
             shrink={shrinkFloatingLabel}
             focused={this.state.isFocused}
@@ -504,7 +495,7 @@ class ChipInput extends React.Component {
             onKeyUp={this.handleKeyUp}
             onFocus={this.handleInputFocus}
             onBlur={this.handleInputBlur}
-            inputRef={(ref) => { this.actualInput = ref; inputRef(ref) }}
+            inputRef={this.setActualInputRef}
             disabled={disabled}
             disableUnderline
             fullWidth={fullWidthInput}
@@ -513,7 +504,10 @@ class ChipInput extends React.Component {
           />
         </div>
         {helperText && (
-          <FormHelperText className={cx(helperTextClassName, classes.helperText)} {...FormHelperTextProps}>
+          <FormHelperText
+            {...FormHelperTextProps}
+            className={FormHelperTextProps ? cx(FormHelperTextProps.className, classes.helperText) : classes.helperText}
+          >
             {helperText}
           </FormHelperText>
         )}
@@ -523,36 +517,62 @@ class ChipInput extends React.Component {
 }
 
 ChipInput.propTypes = {
-  style: PropTypes.object,
-  chipContainerStyle: PropTypes.object,
+  /** Allows duplicate chips if set to true. */
+  allowDuplicates: PropTypes.bool,
+  /** Behavior when the chip input is blurred: `'clear'` clears the input, `'add'` creates a chip and `'ignore'` keeps the input. */
+  blurBehavior: PropTypes.oneOf(['clear', 'add', 'ignore']),
+  /** A function of the type `({ value, text, chip, isFocused, isDisabled, handleClick, handleDelete, className }, key) => node` that returns a chip based on the given properties. This can be used to customize chip styles.  Each item in the `dataSource` array will be passed to `chipRenderer` as arguments `chip`, `value` and `text`. If `dataSource` is an array of objects and `dataSourceConfig` is present, then `value` and `text` will instead correspond to the object values defined in `dataSourceConfig`. If `dataSourceConfig` is not set and `dataSource` is an array of objects, then a custom `chipRenderer` must be set. `chip` is always the raw value from `dataSource`, either an object or a string. */
+  chipRenderer: PropTypes.func,
+  /** Whether the input value should be cleared if the `value` prop is changed. */
+  clearInputValueOnChange: PropTypes.bool,
+  /** Data source for auto complete. This should be an array of strings or objects. */
+  dataSource: PropTypes.array,
+  /** Config for objects list dataSource, e.g. `{ text: 'text', value: 'value' }`. If not specified, the `dataSource` must be a flat array of strings or a custom `chipRenderer` must be set to handle the objects. */
   dataSourceConfig: PropTypes.shape({
     text: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired
   }),
-  disabled: PropTypes.bool,
+  /** The chips to display by default (for uncontrolled mode). */
   defaultValue: PropTypes.array,
-  onChange: PropTypes.func,
-  value: PropTypes.array,
-  onBeforeAdd: PropTypes.func,
-  onAdd: PropTypes.func,
-  onDelete: PropTypes.func,
-  dataSource: PropTypes.array,
-  onUpdateInput: PropTypes.func,
-  // openOnFocus: PropTypes.bool,
-  chipRenderer: PropTypes.func,
-  newChipKeyCodes: PropTypes.arrayOf(PropTypes.number),
-  allowDuplicates: PropTypes.bool,
+  /** Disables the chip input if set to true. */
+  disabled: PropTypes.bool,
+  /** Props to pass through to the `FormHelperText` component. */
+  FormHelperTextProps: PropTypes.object,
+  /** If true, the chip input will fill the available width. */
   fullWidth: PropTypes.bool,
+  /** If true, the input field will always be below the chips and fill the available space. By default, it will try to be beside the chips. */
   fullWidthInput: PropTypes.bool,
+  /** Helper text that is displayed below the input. */
+  helperText: PropTypes.node,
+  /** Props to pass through to the `InputLabel`. */
+  InputLabelProps: PropTypes.object,
+  /** Use this property to pass a ref callback to the native input component. */
   inputRef: PropTypes.func,
-  blurBehavior: PropTypes.oneOf(['clear', 'add', 'ignore'])
+  /* The content of the floating label. */
+  label: PropTypes.node,
+  /** The key codes used to determine when to create a new chip. */
+  newChipKeyCodes: PropTypes.arrayOf(PropTypes.number),
+  /** Callback function that is called when a new chip was added (in controlled mode). */
+  onAdd: PropTypes.func,
+  /** Callback function that is called with the chip to be added and should return true to add the chip or false to prevent the chip from being added without clearing the text input. */
+  onBeforeAdd: PropTypes.func,
+  /** Callback function that is called when the chips change (in uncontrolled mode). */
+  onChange: PropTypes.func,
+  /** Callback function that is called when a new chip was removed (in controlled mode). */
+  onDelete: PropTypes.func,
+  /** Callback function that is called when the input changes. */
+  onUpdateInput: PropTypes.func,
+  /** A placeholder that is displayed if the input has no values. */
+  placeholder: PropTypes.string,
+  /** The chips to display (enables controlled mode if set). */
+  value: PropTypes.array
 }
 
 ChipInput.defaultProps = {
-  newChipKeyCodes: [13],
-  blurBehavior: 'clear',
   allowDuplicates: false,
-  inputRef: () => {}
+  blurBehavior: 'clear',
+  clearInputValueOnChange: false,
+  newChipKeyCodes: [13]
 }
 
 export default withStyles(styles)(ChipInput)

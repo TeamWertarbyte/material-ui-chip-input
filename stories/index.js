@@ -6,9 +6,10 @@ import Chip from '@material-ui/core/Chip'
 // import AutoComplete from '@material-ui/core/AutoComplete'
 import { green } from '@material-ui/core/colors'
 import ChipInput from '../src/ChipInput'
-import CustomizedChipInput from './CustomizedChipInput'
+import CustomizedChipInput from './examples/CustomizedChipInput'
 // import ControlledChipInput from './ControlledChipInput'
-// import ClipboardExample from './ClipboardExample'
+// import ClipboardExample from './examples/ClipboardExample'
+import { ReactAutosuggestExample, ReactAutosuggestRemoteExample } from './examples/react-autosuggest'
 
 storiesOf('ChipInput', module)
   .addDecorator((story) =>
@@ -258,3 +259,25 @@ storiesOf('ChipInput', module)
     </form>
   )
   */
+  .add('with react-autosuggest', () =>
+    <ReactAutosuggestExample
+      label='Country search'
+      placeholder='Search a country'
+      fullWidth
+    />
+  )
+  .add('with react-autosuggest and remote data', () =>
+    <ReactAutosuggestRemoteExample
+      label='Remote country search.'
+      placeholder='Search a country'
+      fullWidth
+    />
+  )
+  .add('with react-autosuggest and add on blur', () =>
+    <ReactAutosuggestRemoteExample
+      label='Remote country search.'
+      placeholder='Search a country'
+      blurBehavior='add'
+      fullWidth
+    />
+  )

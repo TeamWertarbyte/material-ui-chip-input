@@ -17,6 +17,8 @@
     "lint": "standard",
     "prepublish": "babel src -d lib",
     "storybook": "start-storybook -p 6006",
+    "storybook:build": "build-storybook -c stories",
+    "storybook:install": "cd stories && npm install",
     "deploy-storybook": "build-storybook -o storybook && gh-pages -d storybook && rm -r storybook"
   },
   "repository": {

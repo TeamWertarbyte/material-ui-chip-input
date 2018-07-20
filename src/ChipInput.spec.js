@@ -124,7 +124,11 @@ describe('uncontrolled mode', () => {
 
     tree.find('input').getDOMNode().value = 'foo'
     tree.find('input').simulate('change', { target: tree.find('input').getDOMNode() })
-    expect(handleUpdateInput).toBeCalledWith('foo')
+    expect(handleUpdateInput).toBeCalledWith(
+     expect.objectContaining({
+       target: expect.anything()
+     })
+    )
   })
 })
 
@@ -371,5 +375,101 @@ describe('blurBehavior modes', () => {
     setTimeout(_ => {
       expect(tree.find('Chip').map((chip) => chip.text())).toEqual(['a', 'b', 'blur'])
     })
+  })
+})
+
+describe('keys', () => {
+  it('calls onKeyDown prop', () => {
+    let keyPressed = null
+    const tree = mount(
+      <ChipInput value={['a', 'b']}
+        onKeyDown={(e) => {
+          keyPressed = e.keyCode
+        }}
+      />
+    )
+    tree.find('input').simulate('keyDown', {
+      keyCode: 40, // down
+      metaKey: false,
+      ctrlKey: false,
+      altKey: false
+    })
+    expect(keyPressed).toBe(40)
+  })
+
+  it('calls onKeyUp prop', () => {
+    let keyPressed = null
+    const tree = mount(
+      <ChipInput value={['a', 'b']}
+        onKeyUp={(e) => {
+          keyPressed = e.keyCode
+        }}
+      />
+    )
+    tree.find('input').simulate('keyUp', {
+      keyCode: 123,
+      metaKey: false,
+      ctrlKey: false,
+      altKey: false
+    })
+    expect(keyPressed).toBe(123)
+  })
+
+  it('calls onKeyPress prop', () => {
+    let keyPressed = null
+    const tree = mount(
+      <ChipInput value={['a', 'b']}
+        onKeyPress={(e) => {
+          keyPressed = e.keyCode
+        }}
+      />
+    )
+    tree.find('input').simulate('keyPress', {
+      keyCode: 321,
+      metaKey: false,
+      ctrlKey: false,
+      altKey: false
+    })
+    expect(keyPressed).toBe(321)
+  })
+
+  it('stops when onKeyDown prevents the default', () => {
+    let preventDefault = false
+
+    function handleKeyDown (e) {
+      if (preventDefault) {
+        e.preventDefault()
+      }
+    }
+
+    const tree = mount(
+      <ChipInput
+        onKeyDown={handleKeyDown}
+        newChipKeyCodes={null} /> // This will raise an exception if the code reaches that part
+    )
+    let input = tree.find('input')
+
+    expect(() => input.simulate('keyDown', {})).toThrow()
+
+    preventDefault = true
+    expect(() => input.simulate('keyDown', {})).toBeDefined()
+  })
+
+  it('prevents default when chip is added', () => {
+    const tree = mount(
+      <ChipInput />
+    )
+    let prevented = false
+    tree.find('input').simulate('keyDown', {
+      keyCode: 13,
+      metaKey: false,
+      ctrlKey: false,
+      altKey: false,
+      target: {value: 'non-empty'},
+      preventDefault: () => {
+        prevented = true
+      }
+    })
+    expect(prevented).toBe(true)
   })
 })

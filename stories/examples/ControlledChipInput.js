@@ -1,7 +1,7 @@
 /* global alert */
 import React from 'react'
 import PropTypes from 'prop-types'
-import ChipInput from '../src/ChipInput'
+import ChipInput from '../../src/ChipInput'
 
 class ControlledChipInput extends React.Component {
   constructor (props) {

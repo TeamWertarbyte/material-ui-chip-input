@@ -36,31 +36,31 @@ import ChipInput from 'material-ui-chip-input'
 ```
 
 ## Properties
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| allowDuplicates | `bool` | `false` | Allows duplicate chips if set to true. |
-| chipRenderer | `function` | | A function of the type `({ value, text, chip, isFocused, isDisabled, handleClick, handleDelete, className }, key) => node` that returns a chip based on the given properties. This can be used to customize chip styles.  Each item in the `dataSource` array will be passed to `chipRenderer` as arguments `chip`, `value` and `text`. If `dataSource` is an array of objects and `dataSourceConfig` is present, then `value` and `text` will instead correspond to the object values defined in `dataSourceConfig`. If `dataSourceConfig` is not set and `dataSource` is an array of objects, then a custom `chipRenderer` must be set. `chip` is always the raw value from `dataSource`, either an object or a string.|
-| classes | `object` | | Extends the styles applied to this component. |
-| clearOnBlur | `bool` | `true` | If true, clears the input value after the component loses focus. |
-| dataSource | `array` | | Data source for auto complete. This should be an array of strings or objects.|
-| dataSourceConfig | `object` | | Config for objects list dataSource, e.g. `{ text: 'text', value: 'value' }`. If not specified, the `dataSource` must be a flat array of strings or a custom `chipRenderer` must be set to handle the objects. |
-| defaultValue | `string[]` | | The chips to display by default (for uncontrolled mode). |
-| disabled | `bool` | `false` | Disables the chip input if set to true. |
-| helperText | `node` | | The helper text to display. |
-| inputRef | `function` | | Use that property to pass a ref callback to the native input component. |
-| fullWidth | `bool` | `false` | If true, the chip input will fill the available width. |
-| fullWidthInput | `bool` | `false` | If true, the input field will always be below the chips and fill the available space. By default, it will try to be beside the chips. |
-| label | `node` | | The content of the floating label. |
-| newChipKeyCodes | `number[]` | `[13]` (enter key) | The key codes used to determine when to create a new chip. |
-| onBeforeAdd | `function` | | Callback function that is called with the chip to be added and should return true to add the chip or false to prevent the chip from being added without clearing the text input. |
-| onBlur | `function` | | Callback function that is called with `event` when the input loses focus, where `event.target.value` is the current value of the text input. |
-| onChange | `function` | | Callback function that is called when the chips change (in uncontrolled mode). |
-| onAdd | `function` | | Callback function that is called when a new chip was added (in controlled mode). |
-| onDelete | `function` | | Callback function that is called when a new chip was removed (in controlled mode). |
-| onUpdateInput | `function` | | Callback function that is called when the input changes. |
-| placeholder | `node` | | A short placeholder that is displayed if the input has no values. |
-| value | `string[]` | | The chips to display (enables controlled mode if set). |
-
+|Name|Type|Default|Description|
+|---|---|---|---|
+|allowDuplicates|`bool`|`false`|Allows duplicate chips if set to true.|
+|blurBehavior|`enum`|`'clear'`|Behavior when the chip input is blurred: `'clear'` clears the input, `'add'` creates a chip and `'ignore'` keeps the input.|
+|chipRenderer|`func`||A function of the type `({ value, text, chip, isFocused, isDisabled, handleClick, handleDelete, className }, key) => node` that returns a chip based on the given properties. This can be used to customize chip styles.  Each item in the `dataSource` array will be passed to `chipRenderer` as arguments `chip`, `value` and `text`. If `dataSource` is an array of objects and `dataSourceConfig` is present, then `value` and `text` will instead correspond to the object values defined in `dataSourceConfig`. If `dataSourceConfig` is not set and `dataSource` is an array of objects, then a custom `chipRenderer` must be set. `chip` is always the raw value from `dataSource`, either an object or a string.|
+|clearInputValueOnChange|`bool`|`false`|Whether the input value should be cleared if the `value` prop is changed.|
+|dataSource|`array`||Data source for auto complete. This should be an array of strings or objects.|
+|dataSourceConfig|`shape`||Config for objects list dataSource, e.g. `{ text: 'text', value: 'value' }`. If not specified, the `dataSource` must be a flat array of strings or a custom `chipRenderer` must be set to handle the objects.|
+|defaultValue|`array`||The chips to display by default (for uncontrolled mode).|
+|disabled|`bool`||Disables the chip input if set to true.|
+|FormHelperTextProps|`object`||Props to pass through to the `FormHelperText` component.|
+|fullWidth|`bool`||If true, the chip input will fill the available width.|
+|fullWidthInput|`bool`||If true, the input field will always be below the chips and fill the available space. By default, it will try to be beside the chips.|
+|helperText|`node`||Helper text that is displayed below the input.|
+|InputLabelProps|`object`||Props to pass through to the `InputLabel`.|
+|inputRef|`func`||Use this property to pass a ref callback to the native input component.|
+|label|`node`|||
+|newChipKeyCodes|`arrayOf`|`[13]`|The key codes used to determine when to create a new chip.|
+|onAdd|`func`||Callback function that is called when a new chip was added (in controlled mode).|
+|onBeforeAdd|`func`||Callback function that is called with the chip to be added and should return true to add the chip or false to prevent the chip from being added without clearing the text input.|
+|onChange|`func`||Callback function that is called when the chips change (in uncontrolled mode).|
+|onDelete|`func`||Callback function that is called when a new chip was removed (in controlled mode).|
+|onUpdateInput|`func`||Callback function that is called when the input changes.|
+|placeholder|`string`||A placeholder that is displayed if the input has no values.|
+|value|`array`||The chips to display (enables controlled mode if set).|
 
 Any other properties supplied will be [spread to the root element](https://material-ui-next.com/guides/api/#spread). The properties of [&lt;FormControl /&gt;](https://material-ui-next.com/api/form-control/) are also available.
 
