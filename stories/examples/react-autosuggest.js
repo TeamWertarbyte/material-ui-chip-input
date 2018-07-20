@@ -51,7 +51,7 @@ function renderInput (inputProps) {
 
   return (
     <ChipInput
-      clearInputValueOnAdd
+      clearInputValueOnChange
       onUpdateInput={onChange}
       onAdd={onAdd}
       onDelete={onDelete}
