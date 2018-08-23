@@ -52,6 +52,7 @@ import ChipInput from 'material-ui-chip-input'
 |helperText|`node`||Helper text that is displayed below the input.|
 |InputLabelProps|`object`||Props to pass through to the `InputLabel`.|
 |inputRef|`func`||Use this property to pass a ref callback to the native input component.|
+|inputProps|`shape`||Attributes applied to the input element.|
 |label|`node`|||
 |newChipKeyCodes|`arrayOf`|`[13]`|The key codes used to determine when to create a new chip.|
 |onAdd|`func`||Callback function that is called when a new chip was added (in controlled mode).|
