@@ -408,7 +408,7 @@ class ChipInput extends React.Component {
       id,
       InputProps,
       inputRef,
-      InputLabelProps,
+      InputLabelProps = {},
       label,
       newChipKeyCodes,
       onBeforeAdd,
@@ -437,7 +437,9 @@ class ChipInput extends React.Component {
 
     const hasInput = (this.props.value || this.state.chips).length > 0 || this.state.inputValue.length > 0
     // const showPlaceholder = placeholder && !hasInput
-    const shrinkFloatingLabel = label != null && (hasInput || this.state.isFocused)
+    const shrinkFloatingLabel = InputLabelProps.shrink != null
+      ? InputLabelProps.shrink
+      : (label != null && (hasInput || this.state.isFocused))
 
     return (
       <FormControl

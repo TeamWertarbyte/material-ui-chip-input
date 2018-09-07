@@ -280,6 +280,14 @@ describe('placeholder', () => {
     expect(tree.find('InputLabel').prop('shrink')).toBe(true)
     expect(tree.find('input').getDOMNode().getAttribute('placeholder')).toBe('Placeholder')
   })
+
+  it('is visible if the floating label is explicitly floating with shrink=true', () => {
+    const tree = mount(
+      <ChipInput placeholder='Placeholder' label='Floating label' InputLabelProps={{ shrink: true }} />
+    )
+    expect(tree.find('InputLabel').prop('shrink')).toBe(true)
+    expect(tree.find('input').getDOMNode().getAttribute('placeholder')).toBe('Placeholder')
+  })
 })
 
 describe('floating label', () => {

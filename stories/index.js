@@ -40,32 +40,6 @@ storiesOf('ChipInput', module)
       fullWidth
     />
   )
-  /*
-  .add('with auto complete', () =>
-    <ChipInput
-      fullWidth
-      dataSource={['alpha', 'beta']}
-      hintText='Try typing a...'
-    />
-  )
-  .add('with auto complete, open on focus', () =>
-    <ChipInput
-      fullWidth
-      openOnFocus
-      dataSource={['alpha', 'beta']}
-      hintText='Try typing a...'
-    />
-  )
-  .add('with auto complete, custom filter, open on focus', () =>
-    <ChipInput
-      fullWidth
-      openOnFocus
-      filter={AutoComplete.fuzzyFilter}
-      dataSource={['alpha', 'beta']}
-      hintText='Try typing apha...'
-    />
-  )
-  */
   .add('with floating label', () =>
     <ChipInput
       label='Floating label'
@@ -77,6 +51,13 @@ storiesOf('ChipInput', module)
       label='Floating label'
       placeholder='Placeholder'
       fullWidth
+    />
+  )
+  .add('with non-shrinking floating label and placeholder', () =>
+    <ChipInput
+      label='Floating label'
+      placeholder='Placeholder'
+      InputLabelProps={{ shrink: true }}
     />
   )
   .add('disabled', () =>
