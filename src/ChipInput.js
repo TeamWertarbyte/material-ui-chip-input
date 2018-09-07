@@ -100,7 +100,7 @@ const styles = (theme) => {
     },
     error: {
       '&:after': {
-        backgroundColor: theme.palette.error.A400,
+        backgroundColor: theme.palette.error.main,
         transform: 'scaleX(1)' // error is always underlined in red
       }
     },
