@@ -89,16 +89,32 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                 className="ChipInput-chip-14"
                 classes={
                   Object {
-                    "avatar": "MuiChip-avatar-22",
-                    "avatarChildren": "MuiChip-avatarChildren-23",
-                    "clickable": "MuiChip-clickable-20",
-                    "deletable": "MuiChip-deletable-21",
-                    "deleteIcon": "MuiChip-deleteIcon-25",
-                    "label": "MuiChip-label-24",
+                    "avatar": "MuiChip-avatar-31",
+                    "avatarChildren": "MuiChip-avatarChildren-34",
+                    "avatarColorPrimary": "MuiChip-avatarColorPrimary-32",
+                    "avatarColorSecondary": "MuiChip-avatarColorSecondary-33",
+                    "clickable": "MuiChip-clickable-22",
+                    "clickableColorPrimary": "MuiChip-clickableColorPrimary-23",
+                    "clickableColorSecondary": "MuiChip-clickableColorSecondary-24",
+                    "colorPrimary": "MuiChip-colorPrimary-20",
+                    "colorSecondary": "MuiChip-colorSecondary-21",
+                    "deletable": "MuiChip-deletable-25",
+                    "deletableColorPrimary": "MuiChip-deletableColorPrimary-26",
+                    "deletableColorSecondary": "MuiChip-deletableColorSecondary-27",
+                    "deleteIcon": "MuiChip-deleteIcon-36",
+                    "deleteIconColorPrimary": "MuiChip-deleteIconColorPrimary-37",
+                    "deleteIconColorSecondary": "MuiChip-deleteIconColorSecondary-38",
+                    "deleteIconOutlinedColorPrimary": "MuiChip-deleteIconOutlinedColorPrimary-39",
+                    "deleteIconOutlinedColorSecondary": "MuiChip-deleteIconOutlinedColorSecondary-40",
+                    "label": "MuiChip-label-35",
+                    "outlined": "MuiChip-outlined-28",
+                    "outlinedPrimary": "MuiChip-outlinedPrimary-29",
+                    "outlinedSecondary": "MuiChip-outlinedSecondary-30",
                     "root": "MuiChip-root-19",
                   }
                 }
                 clickable={false}
+                color="default"
                 component="div"
                 label="foo"
                 onClick={[Function]}
@@ -109,11 +125,13 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                     "pointerEvents": undefined,
                   }
                 }
+                variant="default"
               >
                 <div
-                  className="MuiChip-root-19 MuiChip-clickable-20 MuiChip-deletable-21 ChipInput-chip-14"
+                  className="MuiChip-root-19 MuiChip-clickable-22 MuiChip-deletable-25 ChipInput-chip-14"
                   onClick={[Function]}
                   onKeyDown={[Function]}
+                  onKeyUp={[Function]}
                   role="button"
                   style={
                     Object {
@@ -124,33 +142,33 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                   tabIndex={0}
                 >
                   <span
-                    className="MuiChip-label-24"
+                    className="MuiChip-label-35"
                   >
                     foo
                   </span>
                   <pure(Cancel)
-                    className="MuiChip-deleteIcon-25"
+                    className="MuiChip-deleteIcon-36"
                     onClick={[Function]}
                   >
                     <Cancel
-                      className="MuiChip-deleteIcon-25"
+                      className="MuiChip-deleteIcon-36"
                       onClick={[Function]}
                     >
                       <WithStyles(SvgIcon)
-                        className="MuiChip-deleteIcon-25"
+                        className="MuiChip-deleteIcon-36"
                         onClick={[Function]}
                       >
                         <SvgIcon
-                          className="MuiChip-deleteIcon-25"
+                          className="MuiChip-deleteIcon-36"
                           classes={
                             Object {
-                              "colorAction": "MuiSvgIcon-colorAction-29",
-                              "colorDisabled": "MuiSvgIcon-colorDisabled-31",
-                              "colorError": "MuiSvgIcon-colorError-30",
-                              "colorPrimary": "MuiSvgIcon-colorPrimary-27",
-                              "colorSecondary": "MuiSvgIcon-colorSecondary-28",
-                              "fontSizeInherit": "MuiSvgIcon-fontSizeInherit-32",
-                              "root": "MuiSvgIcon-root-26",
+                              "colorAction": "MuiSvgIcon-colorAction-44",
+                              "colorDisabled": "MuiSvgIcon-colorDisabled-46",
+                              "colorError": "MuiSvgIcon-colorError-45",
+                              "colorPrimary": "MuiSvgIcon-colorPrimary-42",
+                              "colorSecondary": "MuiSvgIcon-colorSecondary-43",
+                              "fontSizeInherit": "MuiSvgIcon-fontSizeInherit-47",
+                              "root": "MuiSvgIcon-root-41",
                             }
                           }
                           color="inherit"
@@ -161,7 +179,7 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                         >
                           <svg
                             aria-hidden="true"
-                            className="MuiSvgIcon-root-26 MuiChip-deleteIcon-25"
+                            className="MuiSvgIcon-root-41 MuiChip-deleteIcon-36"
                             focusable="false"
                             onClick={[Function]}
                             viewBox="0 0 24 24"
@@ -194,16 +212,32 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                 className="ChipInput-chip-14"
                 classes={
                   Object {
-                    "avatar": "MuiChip-avatar-22",
-                    "avatarChildren": "MuiChip-avatarChildren-23",
-                    "clickable": "MuiChip-clickable-20",
-                    "deletable": "MuiChip-deletable-21",
-                    "deleteIcon": "MuiChip-deleteIcon-25",
-                    "label": "MuiChip-label-24",
+                    "avatar": "MuiChip-avatar-31",
+                    "avatarChildren": "MuiChip-avatarChildren-34",
+                    "avatarColorPrimary": "MuiChip-avatarColorPrimary-32",
+                    "avatarColorSecondary": "MuiChip-avatarColorSecondary-33",
+                    "clickable": "MuiChip-clickable-22",
+                    "clickableColorPrimary": "MuiChip-clickableColorPrimary-23",
+                    "clickableColorSecondary": "MuiChip-clickableColorSecondary-24",
+                    "colorPrimary": "MuiChip-colorPrimary-20",
+                    "colorSecondary": "MuiChip-colorSecondary-21",
+                    "deletable": "MuiChip-deletable-25",
+                    "deletableColorPrimary": "MuiChip-deletableColorPrimary-26",
+                    "deletableColorSecondary": "MuiChip-deletableColorSecondary-27",
+                    "deleteIcon": "MuiChip-deleteIcon-36",
+                    "deleteIconColorPrimary": "MuiChip-deleteIconColorPrimary-37",
+                    "deleteIconColorSecondary": "MuiChip-deleteIconColorSecondary-38",
+                    "deleteIconOutlinedColorPrimary": "MuiChip-deleteIconOutlinedColorPrimary-39",
+                    "deleteIconOutlinedColorSecondary": "MuiChip-deleteIconOutlinedColorSecondary-40",
+                    "label": "MuiChip-label-35",
+                    "outlined": "MuiChip-outlined-28",
+                    "outlinedPrimary": "MuiChip-outlinedPrimary-29",
+                    "outlinedSecondary": "MuiChip-outlinedSecondary-30",
                     "root": "MuiChip-root-19",
                   }
                 }
                 clickable={false}
+                color="default"
                 component="div"
                 label="bar"
                 onClick={[Function]}
@@ -214,11 +248,13 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                     "pointerEvents": undefined,
                   }
                 }
+                variant="default"
               >
                 <div
-                  className="MuiChip-root-19 MuiChip-clickable-20 MuiChip-deletable-21 ChipInput-chip-14"
+                  className="MuiChip-root-19 MuiChip-clickable-22 MuiChip-deletable-25 ChipInput-chip-14"
                   onClick={[Function]}
                   onKeyDown={[Function]}
+                  onKeyUp={[Function]}
                   role="button"
                   style={
                     Object {
@@ -229,33 +265,33 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                   tabIndex={0}
                 >
                   <span
-                    className="MuiChip-label-24"
+                    className="MuiChip-label-35"
                   >
                     bar
                   </span>
                   <pure(Cancel)
-                    className="MuiChip-deleteIcon-25"
+                    className="MuiChip-deleteIcon-36"
                     onClick={[Function]}
                   >
                     <Cancel
-                      className="MuiChip-deleteIcon-25"
+                      className="MuiChip-deleteIcon-36"
                       onClick={[Function]}
                     >
                       <WithStyles(SvgIcon)
-                        className="MuiChip-deleteIcon-25"
+                        className="MuiChip-deleteIcon-36"
                         onClick={[Function]}
                       >
                         <SvgIcon
-                          className="MuiChip-deleteIcon-25"
+                          className="MuiChip-deleteIcon-36"
                           classes={
                             Object {
-                              "colorAction": "MuiSvgIcon-colorAction-29",
-                              "colorDisabled": "MuiSvgIcon-colorDisabled-31",
-                              "colorError": "MuiSvgIcon-colorError-30",
-                              "colorPrimary": "MuiSvgIcon-colorPrimary-27",
-                              "colorSecondary": "MuiSvgIcon-colorSecondary-28",
-                              "fontSizeInherit": "MuiSvgIcon-fontSizeInherit-32",
-                              "root": "MuiSvgIcon-root-26",
+                              "colorAction": "MuiSvgIcon-colorAction-44",
+                              "colorDisabled": "MuiSvgIcon-colorDisabled-46",
+                              "colorError": "MuiSvgIcon-colorError-45",
+                              "colorPrimary": "MuiSvgIcon-colorPrimary-42",
+                              "colorSecondary": "MuiSvgIcon-colorSecondary-43",
+                              "fontSizeInherit": "MuiSvgIcon-fontSizeInherit-47",
+                              "root": "MuiSvgIcon-root-41",
                             }
                           }
                           color="inherit"
@@ -266,7 +302,7 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                         >
                           <svg
                             aria-hidden="true"
-                            className="MuiSvgIcon-root-26 MuiChip-deleteIcon-25"
+                            className="MuiSvgIcon-root-41 MuiChip-deleteIcon-36"
                             focusable="false"
                             onClick={[Function]}
                             viewBox="0 0 24 24"
@@ -303,23 +339,24 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
               <Input
                 classes={
                   Object {
-                    "disabled": "MuiInput-disabled-36",
-                    "error": "MuiInput-error-38",
-                    "focused": "MuiInput-focused-35",
-                    "formControl": "MuiInput-formControl-34",
-                    "fullWidth": "MuiInput-fullWidth-40",
-                    "input": "MuiInput-input-41 ChipInput-input-3",
-                    "inputMarginDense": "MuiInput-inputMarginDense-42",
-                    "inputMultiline": "MuiInput-inputMultiline-43",
-                    "inputType": "MuiInput-inputType-44",
-                    "inputTypeSearch": "MuiInput-inputTypeSearch-45",
-                    "multiline": "MuiInput-multiline-39",
-                    "root": "MuiInput-root-33 ChipInput-inputRoot-2",
-                    "underline": "MuiInput-underline-37",
+                    "disabled": "MuiInput-disabled-51",
+                    "error": "MuiInput-error-53",
+                    "focused": "MuiInput-focused-50",
+                    "formControl": "MuiInput-formControl-49",
+                    "fullWidth": "MuiInput-fullWidth-55",
+                    "input": "MuiInput-input-56 ChipInput-input-3",
+                    "inputMarginDense": "MuiInput-inputMarginDense-57",
+                    "inputMultiline": "MuiInput-inputMultiline-58",
+                    "inputType": "MuiInput-inputType-59",
+                    "inputTypeSearch": "MuiInput-inputTypeSearch-60",
+                    "multiline": "MuiInput-multiline-54",
+                    "root": "MuiInput-root-48 ChipInput-inputRoot-2",
+                    "underline": "MuiInput-underline-52",
                   }
                 }
                 disableUnderline={true}
                 fullWidth={false}
+                inputComponent="input"
                 inputRef={[Function]}
                 multiline={false}
                 onBlur={[Function]}
@@ -333,12 +370,12 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                 value=""
               >
                 <div
-                  className="MuiInput-root-33 ChipInput-inputRoot-2 MuiInput-formControl-34"
+                  className="MuiInput-root-48 ChipInput-inputRoot-2 MuiInput-formControl-49"
                   onKeyPress={[Function]}
                 >
                   <input
                     aria-invalid={false}
-                    className="MuiInput-input-41 ChipInput-input-3"
+                    className="MuiInput-input-56 ChipInput-input-3"
                     disabled={false}
                     onBlur={[Function]}
                     onChange={[Function]}
@@ -346,6 +383,7 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                     onKeyDown={[Function]}
                     onKeyUp={[Function]}
                     placeholder={null}
+                    required={false}
                     type="text"
                     value=""
                   />
