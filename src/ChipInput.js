@@ -169,9 +169,6 @@ class ChipInput extends React.Component {
    */
   focus = () => {
     this.actualInput.focus()
-    // this.getInputNode().focus()
-    // if (this.props.openOnFocus && !this.props.disabled) {
-    // }
     if (this.state.focusedChip != null) {
       this.setState({ focusedChip: null })
     }
@@ -429,14 +426,8 @@ class ChipInput extends React.Component {
     } = this.props
 
     const chips = this.props.value || this.state.chips
-    // const autoCompleteData = dataSourceConfig
-    //   ? (dataSource || []).filter((value) => !chips.some((c) => c[dataSourceConfig.value] === value[dataSourceConfig.value]))
-    //   : (dataSource || []).filter((value) => chips.indexOf(value) < 0)
-
-    // const actualFilter = openOnFocus ? (search, key) => (search === '' || filter(search, key)) : filter
 
     const hasInput = (this.props.value || this.state.chips).length > 0 || this.state.inputValue.length > 0
-    // const showPlaceholder = placeholder && !hasInput
     const shrinkFloatingLabel = InputLabelProps.shrink != null
       ? InputLabelProps.shrink
       : (label != null && (hasInput || this.state.isFocused))
