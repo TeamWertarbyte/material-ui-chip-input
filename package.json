@@ -19,7 +19,9 @@
     "storybook": "start-storybook -p 6006",
     "storybook:build": "build-storybook -c stories",
     "storybook:install": "cd stories && npm install",
-    "deploy-storybook": "build-storybook -o storybook && gh-pages -d storybook && rm -r storybook"
+    "deploy-storybook": "build-storybook -o storybook && gh-pages -d storybook && rm -r storybook",
+    "styleguide": "mui-styleguidist server",
+    "styleguide:build": "mui-styleguidist build"
   },
   "repository": {
     "type": "git",
@@ -42,6 +44,7 @@
     "@material-ui/core": "^3.0.2",
     "@storybook/addon-actions": "^3.4.4",
     "@storybook/react": "^3.4.4",
+    "@wertarbyte/mui-styleguidist-wrapper": "^0.1.3",
     "babel-cli": "^6.14.0",
     "babel-core": "^6.8.0",
     "babel-eslint": "^7.2.3",

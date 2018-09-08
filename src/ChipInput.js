@@ -111,17 +111,6 @@ const styles = (theme) => {
   }
 }
 
-export const defaultChipRenderer = ({ value, text, isFocused, isDisabled, handleClick, handleDelete, className }, key) => (
-  <Chip
-    key={key}
-    className={className}
-    style={{ pointerEvents: isDisabled ? 'none' : undefined, backgroundColor: isFocused ? blue[300] : undefined }}
-    onClick={handleClick}
-    onDelete={handleDelete}
-    label={text}
-  />
-)
-
 class ChipInput extends React.Component {
   state = {
     isFocused: false,
@@ -572,3 +561,14 @@ ChipInput.defaultProps = {
 }
 
 export default withStyles(styles)(ChipInput)
+
+export const defaultChipRenderer = ({ value, text, isFocused, isDisabled, handleClick, handleDelete, className }, key) => (
+  <Chip
+    key={key}
+    className={className}
+    style={{ pointerEvents: isDisabled ? 'none' : undefined, backgroundColor: isFocused ? blue[300] : undefined }}
+    onClick={handleClick}
+    onDelete={handleDelete}
+    label={text}
+  />
+)
