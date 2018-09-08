@@ -67,7 +67,11 @@ function renderSuggestion (suggestion, { query, isHighlighted }) {
   const parts = parse(suggestion.name, matches)
 
   return (
-    <MenuItem selected={isHighlighted} component='div'>
+    <MenuItem
+      selected={isHighlighted}
+      component='div'
+      onMouseDown={(e) => e.preventDefault()} // prevent the click causing the input to be blurred
+    >
       <div>
         {parts.map((part, index) => {
           return part.highlight ? (
