@@ -110,6 +110,25 @@ storiesOf('ChipInput', module)
       disableUnderline
     />
   )
+  .add('with different margins', () =>
+    <div>
+      <ChipInput
+        label='normal'
+        margin='normal'
+        style={{ float: 'left' }}
+      />
+      <ChipInput
+        label='dense'
+        margin='dense'
+        style={{ float: 'left' }}
+      />
+      <ChipInput
+        label='none'
+        margin='none'
+        style={{ float: 'left' }}
+      />
+    </div>
+  )
   /*
   .add('create tags with comma, space and enter', () =>
     <ChipInput
