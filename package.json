@@ -6,6 +6,7 @@
   "main": "lib/ChipInput.js",
   "files": [
     "lib/**/*.js",
+    "typings/*.d.ts",
     "README.md",
     "LICENSE",
     "demo.gif"
