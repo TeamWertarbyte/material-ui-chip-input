@@ -30,5 +30,5 @@ interface Props {
   value?: any[];
 }
 
-declare const ChipInput: React.Component<Props>;
+declare const ChipInput: React.ComponentType<Props>;
 export default ChipInput;
