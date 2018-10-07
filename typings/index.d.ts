@@ -28,6 +28,7 @@ interface Props {
   onUpdateInput?: (...args: any[]) => any;
   placeholder?: string;
   value?: any[];
+  error?: boolean;
 }
 
 declare const ChipInput: React.ComponentType<Props>;
