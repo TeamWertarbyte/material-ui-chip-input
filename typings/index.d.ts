@@ -4,7 +4,7 @@ import { FormHelperTextProps } from '@material-ui/core/FormHelperText'
 export interface ChipRendererArgs {
   value: string;
   text: string;
-  chip: string;
+  chip: any;
   isFocused: boolean;
   isDisabled: boolean;
   handleClick: React.EventHandler<any>;
@@ -38,10 +38,10 @@ export interface Props {
   inputRef?: (ref: React.Ref<HTMLInputElement>) => any;
   label?: React.ReactNode;
   newChipKeyCodes?: number[];
-  onAdd?: (chip: string) => any;
-  onBeforeAdd?: (chip: string) => boolean;
-  onChange?: (chips: string[]) => any;
-  onDelete?: (chip:string, index: number) => any;
+  onAdd?: (chip: any) => any;
+  onBeforeAdd?: (chip: any) => boolean;
+  onChange?: (chips: any[]) => any;
+  onDelete?: (chip:any, index: number) => any;
   onUpdateInput?: React.EventHandler<any>
   placeholder?: string;
   value?: any[];
