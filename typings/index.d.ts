@@ -1,9 +1,26 @@
 import * as React from 'react';
+import { FormHelperTextProps } from '@material-ui/core/FormHelperText'
 
-interface Props {
+export interface ChipRendererArgs {
+  value: string;
+  text: string;
+  chip: string;
+  isFocused: boolean;
+  isDisabled: boolean;
+  handleClick: React.EventHandler<any>;
+  handleDelete: React.EventHandler<any>;
+  className: string;
+}
+
+export type ChipRenderer = (
+  args: ChipRendererArgs,
+  key: number
+) => React.ReactNode;
+
+export interface Props {
   allowDuplicates?: boolean;
   blurBehavior?: 'clear' | 'add' | 'ignore';
-  chipRenderer?: (...args: any[]) => any;
+  chipRenderer?: ChipRenderer;
   clearInputValueOnChange?: boolean;
   dataSource?: any[];
   dataSourceConfig?: {
@@ -12,20 +29,20 @@ interface Props {
   };
   defaultValue?: any[];
   disabled?: boolean;
-  FormHelperTextProps?: object;
+  FormHelperTextProps?: FormHelperTextProps;
   fullWidth?: boolean;
   fullWidthInput?: boolean;
   helperText?: React.ReactNode;
   InputLabelProps?: object;
   InputProps?: object;
-  inputRef?: (...args: any[]) => any;
+  inputRef?: (ref: React.Ref<HTMLInputElement>) => any;
   label?: React.ReactNode;
   newChipKeyCodes?: number[];
-  onAdd?: (...args: any[]) => any;
-  onBeforeAdd?: (...args: any[]) => any;
-  onChange?: (...args: any[]) => any;
-  onDelete?: (...args: any[]) => any;
-  onUpdateInput?: (...args: any[]) => any;
+  onAdd?: (chip: string) => any;
+  onBeforeAdd?: (chip: string) => boolean;
+  onChange?: (chips: string[]) => any;
+  onDelete?: (chip:string, index: number) => any;
+  onUpdateInput?: React.EventHandler<any>
   placeholder?: string;
   value?: any[];
   error?: boolean;
