@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { FormHelperTextProps } from '@material-ui/core/FormHelperText'
+import {InputProps} from '@material-ui/core/Input'
+import {InputLabelProps} from '@material-ui/core/InputLabel'
 
 export interface ChipRendererArgs {
   value: string;
@@ -14,7 +16,7 @@ export interface ChipRendererArgs {
 
 export type ChipRenderer = (
   args: ChipRendererArgs,
-  key: number
+  key: any
 ) => React.ReactNode;
 
 export interface Props {
@@ -33,8 +35,8 @@ export interface Props {
   fullWidth?: boolean;
   fullWidthInput?: boolean;
   helperText?: React.ReactNode;
-  InputLabelProps?: object;
-  InputProps?: object;
+  InputLabelProps?: InputLabelProps;
+  InputProps?: InputProps;
   inputRef?: (ref: React.Ref<HTMLInputElement>) => any;
   label?: React.ReactNode;
   newChipKeyCodes?: number[];
