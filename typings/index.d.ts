@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { FormHelperTextProps } from '@material-ui/core/FormHelperText'
-import {InputProps} from '@material-ui/core/Input'
-import {InputLabelProps} from '@material-ui/core/InputLabel'
+import { FormHelperTextProps } from '@material-ui/core/FormHelperText';
+import { InputProps } from '@material-ui/core/Input';
+import { InputLabelProps } from '@material-ui/core/InputLabel';
 
 export interface ChipRendererArgs {
   value: string;
@@ -44,7 +44,7 @@ export interface Props {
   onBeforeAdd?: (chip: any) => boolean;
   onChange?: (chips: any[]) => any;
   onDelete?: (chip:any, index: number) => any;
-  onUpdateInput?: React.EventHandler<any>
+  onUpdateInput?: React.EventHandler<any>;
   placeholder?: string;
   value?: any[];
   error?: boolean;
