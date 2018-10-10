@@ -1,10 +1,12 @@
 {
-  "name": "material-ui-chip-input",
-  "version": "1.0.0-beta.7",
+  "name": "@harshitpant/material-ui-chip-input",
+  "version": "2.0.5",
+  "typings": "typings/index.d.ts",
   "description": "A chip input field using Material-UI.",
   "main": "lib/ChipInput.js",
   "files": [
     "lib/**/*.js",
+    "typings/*.d.ts",
     "README.md",
     "LICENSE",
     "demo.gif"
