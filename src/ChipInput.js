@@ -658,8 +658,8 @@ ChipInput.propTypes = {
 ChipInput.defaultProps = {
   allowDuplicates: false,
   blurBehavior: 'clear',
-  disableUnderline: false,
   clearInputValueOnChange: false,
+  disableUnderline: false,
   newChipKeyCodes: [13],
   variant: 'standard'
 }
