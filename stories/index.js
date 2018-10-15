@@ -9,80 +9,83 @@ import ChipInput from '../src/ChipInput'
 import CustomizedChipInput from './examples/CustomizedChipInput'
 // import ControlledChipInput from './ControlledChipInput'
 // import ClipboardExample from './examples/ClipboardExample'
-import { ReactAutosuggestExample, ReactAutosuggestRemoteExample } from './examples/react-autosuggest'
+import {
+  ReactAutosuggestExample,
+  ReactAutosuggestRemoteExample
+} from './examples/react-autosuggest'
 
 storiesOf('ChipInput', module)
-  .addDecorator((story) =>
-    <div style={{ fontFamily: 'Roboto, sans-serif' }}>
-      {story()}
-    </div>
-  )
-  .add('with some chips', () =>
+  .addDecorator(story => (
+    <div style={{ fontFamily: 'Roboto, sans-serif' }}>{story()}</div>
+  ))
+  .add('with some chips', () => (
     <ChipInput
       defaultValue={['foo', 'bar']}
       fullWidth
       onChange={action('onChange')}
     />
-  )
-  .add('with many chips', () =>
+  ))
+  .add('with many chips', () => (
     <ChipInput
-      defaultValue={[...Array(25).keys()].map((c) => `Chip ${c}`)}
+      defaultValue={[...Array(25).keys()].map(c => `Chip ${c}`)}
       onChange={action('onChange')}
       fullWidth
     />
-  )
-  .add('with custom styles', () =>
-    <CustomizedChipInput />
-  )
-  .add('with placeholder', () =>
-    <ChipInput
-      placeholder='Placeholder'
-      fullWidth
-    />
-  )
-  .add('with floating label', () =>
-    <ChipInput
-      label='Floating label'
-      fullWidth
-    />
-  )
-  .add('with label and placeholder', () =>
-    <ChipInput
-      label='Floating label'
-      placeholder='Placeholder'
-      fullWidth
-    />
-  )
-  .add('with non-shrinking floating label and placeholder', () =>
+  ))
+  .add('with custom styles', () => <CustomizedChipInput />)
+  .add('with placeholder', () => (
+    <ChipInput placeholder='Placeholder' fullWidth />
+  ))
+  .add('with floating label', () => (
+    <ChipInput label='Floating label' fullWidth />
+  ))
+  .add('with label and placeholder', () => (
+    <ChipInput label='Floating label' placeholder='Placeholder' fullWidth />
+  ))
+  .add('with non-shrinking floating label and placeholder', () => (
     <ChipInput
       label='Floating label'
       placeholder='Placeholder'
       InputLabelProps={{ shrink: true }}
     />
-  )
-  .add('disabled', () =>
+  ))
+  .add('disabled', () => (
     <ChipInput
       defaultValue={['foo', 'bar']}
       label='Disabled input'
       disabled
       fullWidth
     />
-  )
-  .add('with custom width', () =>
+  ))
+  .add('with custom width', () => (
     <ChipInput
       defaultValue={['foo', 'bar']}
       label='A chip input with a width of 321px'
       style={{ width: 321 }}
     />
-  )
-  .add('with custom chips', () =>
+  ))
+  .add('with custom chips', () => (
     <ChipInput
       defaultValue={['foo', 'bar']}
       fullWidth
-      chipRenderer={({ value, isFocused, isDisabled, handleClick, handleDelete, defaultStyle }, key) => (
+      chipRenderer={(
+        {
+          value,
+          isFocused,
+          isDisabled,
+          handleClick,
+          handleDelete,
+          defaultStyle
+        },
+        key
+      ) => (
         <Chip
           key={key}
-          style={{ ...defaultStyle, pointerEvents: isDisabled ? 'none' : undefined, backgroundColor: isFocused ? green[800] : green[300] }}
+          style={{
+            ...defaultStyle,
+            pointerEvents: isDisabled ? 'none' : undefined,
+            backgroundColor: isFocused ? green[800] : green[300]
+          }}
           onClick={handleClick}
           onDelete={handleDelete}
           label={value}
@@ -90,45 +93,27 @@ storiesOf('ChipInput', module)
         />
       )}
     />
-  )
-  .add('with helperText', () =>
-    <ChipInput
-      helperText='This text is here to help you.'
-    />
-  )
-  .add('with error style', () =>
+  ))
+  .add('with helperText', () => (
+    <ChipInput helperText='This text is here to help you.' />
+  ))
+  .add('with error style', () => (
     <ChipInput
       value={['One', 'Two']}
       helperText='At least three chips required.'
       error
     />
-  )
-  .add('without underline', () =>
-    <ChipInput
-      defaultValue={['foo', 'bar']}
-      fullWidth
-      disableUnderline
-    />
-  )
-  .add('with different margins', () =>
+  ))
+  .add('without underline', () => (
+    <ChipInput defaultValue={['foo', 'bar']} fullWidth disableUnderline />
+  ))
+  .add('with different margins', () => (
     <div>
-      <ChipInput
-        label='normal'
-        margin='normal'
-        style={{ float: 'left' }}
-      />
-      <ChipInput
-        label='dense'
-        margin='dense'
-        style={{ float: 'left' }}
-      />
-      <ChipInput
-        label='none'
-        margin='none'
-        style={{ float: 'left' }}
-      />
+      <ChipInput label='normal' margin='normal' style={{ float: 'left' }} />
+      <ChipInput label='dense' margin='dense' style={{ float: 'left' }} />
+      <ChipInput label='none' margin='none' style={{ float: 'left' }} />
     </div>
-  )
+  ))
   /*
   .add('create tags with comma, space and enter', () =>
     <ChipInput
@@ -190,13 +175,13 @@ storiesOf('ChipInput', module)
     />
   )
   */
-  .add('with fullWidthInput', () =>
+  .add('with fullWidthInput', () => (
     <ChipInput
       label='The input is always full-width here'
       fullWidth
       fullWidthInput
     />
-  )
+  ))
   /*
   .add('with clipboard manipulation', () =>
     <ClipboardExample
@@ -209,20 +194,13 @@ storiesOf('ChipInput', module)
     />
   )
   */
-  .add('add text input value on blur', () =>
-    <ChipInput
-      blurBehavior='add'
-    />
-  )
-  .add('clear text input value on blur ', () =>
-    <ChipInput
-      blurBehavior='clear'
-    />
-  ).add('keep text input value on blur ', () =>
-    <ChipInput
-      blurBehavior='none'
-    />
-  )
+  .add('add text input value on blur', () => <ChipInput blurBehavior='add' />)
+  .add('clear text input value on blur ', () => (
+    <ChipInput blurBehavior='clear' />
+  ))
+  .add('keep text input value on blur ', () => (
+    <ChipInput blurBehavior='none' />
+  ))
   /*
   .add('in a form', () =>
     <form onSubmit={e => { e.preventDefault(); action('onSubmit')() }}>
@@ -234,12 +212,9 @@ storiesOf('ChipInput', module)
     </form>
   )
   */
-  .add('with duplicates allowed', () =>
-    <ChipInput
-      defaultValue={['foo', 'bar', 'foo', 'bar']}
-      allowDuplicates
-    />
-  )
+  .add('with duplicates allowed', () => (
+    <ChipInput defaultValue={['foo', 'bar', 'foo', 'bar']} allowDuplicates />
+  ))
   /*
   .add('with onBeforeAdd returning false', () =>
     <ChipInput
@@ -259,25 +234,54 @@ storiesOf('ChipInput', module)
     </form>
   )
   */
-  .add('with react-autosuggest', () =>
+  .add('with react-autosuggest', () => (
     <ReactAutosuggestExample
       label='Country search'
       placeholder='Search a country'
       fullWidth
     />
-  )
-  .add('with react-autosuggest and remote data', () =>
+  ))
+  .add('with react-autosuggest and remote data', () => (
     <ReactAutosuggestRemoteExample
       label='Remote country search.'
       placeholder='Search a country'
       fullWidth
     />
-  )
-  .add('with react-autosuggest and add on blur', () =>
+  ))
+  .add('with react-autosuggest and add on blur', () => (
     <ReactAutosuggestRemoteExample
       label='Remote country search.'
       placeholder='Search a country'
       blurBehavior='add'
       fullWidth
     />
-  )
+  ))
+  .add('with "outline" variant', () => (
+    <div>
+      <ChipInput variant='outlined' label='Add Tags' />
+      <h2>Different Margins</h2>
+      <div>
+        <ChipInput variant='outlined' label='normal' margin='normal' style={{ float: 'left' }} />
+        <ChipInput variant='outlined' label='dense' margin='dense' style={{ float: 'left' }} />
+        <ChipInput variant='outlined' label='none' margin='none' style={{ float: 'left' }} />
+      </div>
+
+    </div>
+  ))
+
+  .add('with "outline" variant fullWidth', () => (
+    <ChipInput defaultValue={['foo', 'bar']} variant='outlined' label='Add Tags' fullWidth fullWidthInput />
+  ))
+  .add('with "filled" variant', () => (
+    <div><ChipInput variant='filled' label='Add Tags' />
+      <h2>Different Margins</h2>
+      <div>
+        <ChipInput variant='filled' label='normal' margin='normal' style={{ float: 'left' }} />
+        <ChipInput variant='filled' label='dense' margin='dense' style={{ float: 'left' }} />
+        <ChipInput variant='filled' label='none' margin='none' style={{ float: 'left' }} />
+      </div>
+    </div>
+  ))
+  .add('with "filled" variant full width', () => (
+    <ChipInput defaultValue={['foo', 'bar']} variant='filled' label='Add Tags' fullWidth fullWidthInput />
+  ))

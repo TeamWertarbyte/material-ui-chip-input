@@ -3,8 +3,11 @@
  *         Copyright (c) 2014 Call-Em-All (https://github.com/callemall/material-ui)
  */
 import React from 'react'
+import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import Input from '@material-ui/core/Input'
+import FilledInput from '@material-ui/core/FilledInput/FilledInput'
+import OutlinedInput from '@material-ui/core/OutlinedInput'
 import InputLabel from '@material-ui/core/InputLabel'
 import Chip from '@material-ui/core/Chip'
 import withStyles from '@material-ui/core/styles/withStyles'
@@ -13,33 +16,62 @@ import FormControl from '@material-ui/core/FormControl'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import cx from 'classnames'
 
-const styles = (theme) => {
+const variantComponent = {
+  standard: Input,
+  filled: FilledInput,
+  outlined: OutlinedInput
+}
+
+const styles = theme => {
   const light = theme.palette.type === 'light'
-  const bottomLineColor = light ? 'rgba(0, 0, 0, 0.42)' : 'rgba(255, 255, 255, 0.7)'
+  const bottomLineColor = light
+    ? 'rgba(0, 0, 0, 0.42)'
+    : 'rgba(255, 255, 255, 0.7)'
 
   return {
     root: {},
     inputRoot: {
       display: 'inline-block',
-      marginTop: 0
+      marginTop: 0,
+      '&$outlined,&$filled': {
+        boxSizing: 'border-box'
+      },
+      '&$outlined': {
+        paddingTop: 14
+      },
+      '&$filled': {
+        paddingTop: 28
+      }
     },
     input: {
       display: 'inline-block',
       appearance: 'none', // Remove border in Safari, doesn't seem to break anything in other browsers
       WebkitTapHighlightColor: 'rgba(0,0,0,0)', // Remove mobile color flashing (deprecated style).
-      float: 'left'
+      float: 'left',
+      '&:not($standard)': {
+        paddingTop: 0
+      }
     },
     chipContainer: {
       cursor: 'text',
       marginBottom: -2,
       minHeight: 40,
-      '&$labeled': {
+      '&$labeled&$standard': {
         marginTop: 18
       }
     },
+    outlined: {},
+    standard: {},
+    filled: {},
     labeled: {},
     label: {
-      top: 4
+      top: 4,
+      '&$outlined&:not($labelShrink)': {
+        top: -4
+      },
+      '&$filled&:not($labelShrink)': {
+        top: 0
+      }
     },
     labelShrink: {
       top: 0
@@ -119,12 +151,20 @@ class ChipInput extends React.Component {
     chips: [],
     focusedChip: null,
     inputValue: ''
-  }
+  };
 
   constructor (props) {
     super(props)
     if (props.defaultValue) {
       this.state.chips = props.defaultValue
+    }
+    this.labelRef = React.createRef()
+  }
+
+  componentDidMount () {
+    if (this.props.variant === 'outlined') {
+      this.labelNode = ReactDOM.findDOMNode(this.labelRef.current)
+      this.forceUpdate()
     }
   }
 
@@ -139,7 +179,11 @@ class ChipInput extends React.Component {
 
     // Lets assume that if the chips have changed, the inputValue should be empty
     // otherwise, we would need to make inputValue a controlled value. which is quite messy
-    if (nextProps.value && this.props.clearInputValueOnChange && nextProps.value.length !== this.props.value.length) {
+    if (
+      nextProps.value &&
+      this.props.clearInputValueOnChange &&
+      nextProps.value.length !== this.props.value.length
+    ) {
       this.setState({ inputValue: '' })
     }
   }
@@ -161,9 +205,9 @@ class ChipInput extends React.Component {
     if (this.state.focusedChip != null) {
       this.setState({ focusedChip: null })
     }
-  }
+  };
 
-  handleInputBlur = (event) => {
+  handleInputBlur = event => {
     if (this.props.onBlur) {
       this.props.onBlur(event)
     }
@@ -188,16 +232,16 @@ class ChipInput extends React.Component {
     } else if (this.props.blurBehavior === 'clear') {
       this.clearInput()
     }
-  }
+  };
 
-  handleInputFocus = (event) => {
+  handleInputFocus = event => {
     this.setState({ isFocused: true })
     if (this.props.onFocus) {
       this.props.onFocus(event)
     }
-  }
+  };
 
-  handleKeyDown = (event) => {
+  handleKeyDown = event => {
     const { focusedChip } = this.state
     this.setState({ keyPressed: false, preventChipCreation: false })
     if (this.props.onKeyDown) {
@@ -249,29 +293,37 @@ class ChipInput extends React.Component {
     } else {
       this.setState({ focusedChip: null })
     }
-  }
+  };
 
-  handleKeyUp = (event) => {
-    if (!this.state.preventChipCreation && this.props.newChipKeyCodes.indexOf(event.keyCode) > 0 && this.state.keyPressed) {
+  handleKeyUp = event => {
+    if (
+      !this.state.preventChipCreation &&
+      this.props.newChipKeyCodes.indexOf(event.keyCode) > 0 &&
+      this.state.keyPressed
+    ) {
       this.clearInput()
     } else {
       this.setState({ inputValue: event.target.value })
     }
-    if (this.props.onKeyUp) { this.props.onKeyUp(event) }
-  }
+    if (this.props.onKeyUp) {
+      this.props.onKeyUp(event)
+    }
+  };
 
-  handleKeyPress = (event) => {
+  handleKeyPress = event => {
     this.setState({ keyPressed: true })
-    if (this.props.onKeyPress) { this.props.onKeyPress(event) }
-  }
+    if (this.props.onKeyPress) {
+      this.props.onKeyPress(event)
+    }
+  };
 
-  handleUpdateInput = (e) => {
+  handleUpdateInput = e => {
     this.setState({ inputValue: e.target.value })
 
     if (this.props.onUpdateInput) {
       this.props.onUpdateInput(e)
     }
-  }
+  };
 
   /**
    * Handles adding a chip.
@@ -294,13 +346,20 @@ class ChipInput extends React.Component {
         }
       }
 
-      if (this.props.allowDuplicates || !chips.some((c) => c[this.props.dataSourceConfig.value] === chip[this.props.dataSourceConfig.value])) {
+      if (
+        this.props.allowDuplicates ||
+        !chips.some(
+          c =>
+            c[this.props.dataSourceConfig.value] ===
+            chip[this.props.dataSourceConfig.value]
+        )
+      ) {
         if (this.props.value && this.props.onAdd) {
           this.props.onAdd(chip)
         } else {
-          this.setState({ chips: [ ...this.state.chips, chip ] })
+          this.setState({ chips: [...this.state.chips, chip] })
           if (this.props.onChange) {
-            this.props.onChange([ ...this.state.chips, chip ])
+            this.props.onChange([...this.state.chips, chip])
           }
         }
       }
@@ -309,9 +368,9 @@ class ChipInput extends React.Component {
         if (this.props.value && this.props.onAdd) {
           this.props.onAdd(chip)
         } else {
-          this.setState({ chips: [ ...this.state.chips, chip ] })
+          this.setState({ chips: [...this.state.chips, chip] })
           if (this.props.onChange) {
-            this.props.onChange([ ...this.state.chips, chip ])
+            this.props.onChange([...this.state.chips, chip])
           }
         }
       }
@@ -356,20 +415,20 @@ class ChipInput extends React.Component {
    * Sets a reference to the Material-UI Input component.
    * @param {object} input - The Input reference
    */
-  setInputRef = (input) => {
+  setInputRef = input => {
     this.input = input
-  }
+  };
 
   /**
    * Set the reference to the actual input, that is the input of the Input.
    * @param {object} ref - The reference
    */
-  setActualInputRef = (ref) => {
+  setActualInputRef = ref => {
     this.actualInput = ref
     if (this.props.inputRef) {
       this.props.inputRef(ref)
     }
-  }
+  };
 
   render () {
     const {
@@ -411,15 +470,56 @@ class ChipInput extends React.Component {
       required,
       rootRef,
       value,
+      variant,
       ...other
     } = this.props
 
     const chips = this.props.value || this.state.chips
 
-    const hasInput = (this.props.value || this.state.chips).length > 0 || this.state.inputValue.length > 0
-    const shrinkFloatingLabel = InputLabelProps.shrink != null
-      ? InputLabelProps.shrink
-      : (label != null && (hasInput || this.state.isFocused))
+    const hasInput =
+      (this.props.value || this.state.chips).length > 0 ||
+      this.state.inputValue.length > 0
+    const shrinkFloatingLabel =
+      InputLabelProps.shrink != null
+        ? InputLabelProps.shrink
+        : label != null && (hasInput || this.state.isFocused)
+
+    const InputMore = {}
+
+    const chipComponents = chips.map((tag, i) => {
+      const value = dataSourceConfig ? tag[dataSourceConfig.value] : tag
+      return chipRenderer(
+        {
+          value,
+          text: dataSourceConfig ? tag[dataSourceConfig.text] : tag,
+          chip: tag,
+          isDisabled: !!disabled,
+          isFocused: this.state.focusedChip === i,
+          handleClick: () => this.setState({ focusedChip: i }),
+          handleDelete: () => this.handleDeleteChip(value, i),
+          className: classes.chip
+        },
+        i
+      )
+    })
+
+    if (variant === 'outlined') {
+      if (InputLabelProps && typeof InputLabelProps.shrink !== 'undefined') {
+        InputMore.notched = InputLabelProps.shrink
+      }
+
+      InputMore.labelWidth =
+        (shrinkFloatingLabel && this.labelNode && this.labelNode.offsetWidth) ||
+        0
+    }
+
+    if (variant !== 'standard') {
+      InputMore.startAdornment = (
+        <React.Fragment>{chipComponents}</React.Fragment>
+      )
+    }
+
+    const InputComponent = variantComponent[variant]
 
     return (
       <FormControl
@@ -430,46 +530,42 @@ class ChipInput extends React.Component {
         required={required}
         onClick={this.focus}
         disabled={disabled}
+        variant={variant}
         {...other}
       >
         {label && (
           <InputLabel
             htmlFor={id}
-            classes={{ root: classes.label, shrink: classes.labelShrink }}
+            classes={{
+              root: cx(classes[variant], classes.label),
+              shrink: classes.labelShrink
+            }}
             shrink={shrinkFloatingLabel}
             focused={this.state.isFocused}
+            variant={variant}
+            ref={this.labelRef}
             {...InputLabelProps}
           >
             {label}
           </InputLabel>
         )}
-        <div className={cx(
-          classes.chipContainer,
-          {
-            [classes.inkbar]: !disableUnderline,
+        <div
+          className={cx(classes[variant], classes.chipContainer, {
+            [classes.inkbar]: !disableUnderline && variant === 'standard',
             [classes.focused]: this.state.isFocused,
-            [classes.underline]: !disableUnderline,
+            [classes.underline]: !disableUnderline && variant === 'standard',
             [classes.disabled]: disabled,
             [classes.labeled]: label != null,
             [classes.error]: error
           })}
         >
-          {chips.map((tag, i) => {
-            const value = dataSourceConfig ? tag[dataSourceConfig.value] : tag
-            return chipRenderer({
-              value,
-              text: dataSourceConfig ? tag[dataSourceConfig.text] : tag,
-              chip: tag,
-              isDisabled: !!disabled,
-              isFocused: this.state.focusedChip === i,
-              handleClick: () => this.setState({ focusedChip: i }),
-              handleDelete: () => this.handleDeleteChip(value, i),
-              className: classes.chip
-            }, i)
-          })}
-          <Input
+          {variant === 'standard' && chipComponents}
+          <InputComponent
             ref={this.setInputRef}
-            classes={{ input: classes.input, root: classes.inputRoot }}
+            classes={{
+              input: cx(classes.input, classes[variant]),
+              root: cx(classes.inputRoot, classes[variant])
+            }}
             id={id}
             value={this.state.inputValue}
             onChange={this.handleUpdateInput}
@@ -482,14 +578,23 @@ class ChipInput extends React.Component {
             disabled={disabled}
             disableUnderline
             fullWidth={fullWidthInput}
-            placeholder={!hasInput && (shrinkFloatingLabel || label == null) ? placeholder : null}
+            placeholder={
+              !hasInput && (shrinkFloatingLabel || label == null)
+                ? placeholder
+                : null
+            }
             {...InputProps}
+            {...InputMore}
           />
         </div>
         {helperText && (
           <FormHelperText
             {...FormHelperTextProps}
-            className={FormHelperTextProps ? cx(FormHelperTextProps.className, classes.helperText) : classes.helperText}
+            className={
+              FormHelperTextProps
+                ? cx(FormHelperTextProps.className, classes.helperText)
+                : classes.helperText
+            }
           >
             {helperText}
           </FormHelperText>
@@ -550,23 +655,32 @@ ChipInput.propTypes = {
   /** A placeholder that is displayed if the input has no values. */
   placeholder: PropTypes.string,
   /** The chips to display (enables controlled mode if set). */
-  value: PropTypes.array
+  value: PropTypes.array,
+  /** The variant of the Input component */
+  variant: PropTypes.oneOf(['outlined', 'standard', 'filled'])
 }
 
 ChipInput.defaultProps = {
   allowDuplicates: false,
   blurBehavior: 'clear',
   clearInputValueOnChange: false,
-  newChipKeyCodes: [13]
+  newChipKeyCodes: [13],
+  variant: 'standard'
 }
 
 export default withStyles(styles)(ChipInput)
 
-export const defaultChipRenderer = ({ value, text, isFocused, isDisabled, handleClick, handleDelete, className }, key) => (
+export const defaultChipRenderer = (
+  { value, text, isFocused, isDisabled, handleClick, handleDelete, className },
+  key
+) => (
   <Chip
     key={key}
     className={className}
-    style={{ pointerEvents: isDisabled ? 'none' : undefined, backgroundColor: isFocused ? blue[300] : undefined }}
+    style={{
+      pointerEvents: isDisabled ? 'none' : undefined,
+      backgroundColor: isFocused ? blue[300] : undefined
+    }}
     onClick={handleClick}
     onDelete={handleDelete}
     label={text}
