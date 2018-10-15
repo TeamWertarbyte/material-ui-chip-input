@@ -4,6 +4,12 @@ import { mount } from 'enzyme'
 import Chip from '@material-ui/core/Chip'
 import ChipInput from './ChipInput'
 
+/*
+  Since the tests do use a theme, we want to disable typography warnings
+  per https://material-ui.com/style/typography/#migration-to-typography-v2.
+ */
+window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true
+
 describe('uncontrolled mode', () => {
   it('matches the snapshot', () => {
     const tree = mount(
@@ -351,7 +357,7 @@ describe('blurBehavior modes', () => {
   it('clears the input on blur', () => {
     const tree = mount(
       <ChipInput value={['a', 'b']} />
-      )
+    )
     tree.find('input').simulate('change', { target: { value: 'foo' } })
     tree.find('input').simulate('blur')
     expect(tree.find('input').getDOMNode().value).toBe('')
@@ -360,7 +366,7 @@ describe('blurBehavior modes', () => {
   it('does not clear the input on blur with blurBehavior set to ignore', () => {
     const tree = mount(
       <ChipInput value={['a', 'b']} blurBehavior='ignore' />
-      )
+    )
     tree.find('input').simulate('change', { target: { value: 'foo' } })
     tree.find('input').simulate('blur')
     expect(tree.find('input').getDOMNode().value).toBe('foo')
@@ -371,7 +377,7 @@ describe('blurBehavior modes', () => {
     jest.useFakeTimers()
     const tree = mount(
       <ChipInput defaultValue={['a', 'b']} blurBehavior='add' onChange={handleChange} />
-      )
+    )
     tree.find('input').getDOMNode().value = 'blur'
     tree.find('input').simulate('blur')
 
