@@ -4,6 +4,8 @@ import { mount } from 'enzyme'
 import Chip from '@material-ui/core/Chip'
 import ChipInput from './ChipInput'
 
+window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true
+
 describe('uncontrolled mode', () => {
   it('matches the snapshot', () => {
     const tree = mount(

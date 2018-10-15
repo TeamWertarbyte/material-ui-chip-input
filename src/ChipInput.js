@@ -114,7 +114,7 @@ const styles = theme => {
         right: 0,
         transition: theme.transitions.create('background-color', {
           duration: theme.transitions.duration.shorter,
-          easing: theme.transitions.easing.ease
+          easing: theme.transitions.easing.easeIn
         }),
         pointerEvents: 'none' // Transparent to the hover style.
       },
