@@ -4,6 +4,12 @@ import { mount } from 'enzyme'
 import Chip from '@material-ui/core/Chip'
 import ChipInput from './ChipInput'
 
+/*
+  Since the tests do use a theme, we want to disable typography warnings
+  per https://material-ui.com/style/typography/#migration-to-typography-v2.
+ */
+window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true
+
 describe('uncontrolled mode', () => {
   it('matches the snapshot', () => {
     const tree = mount(
