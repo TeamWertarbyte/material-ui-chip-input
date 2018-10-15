@@ -145,13 +145,13 @@ const styles = theme => {
 
 class ChipInput extends React.Component {
   state = {
-    isFocused: false,
-    errorText: undefined,
-    isClean: true,
     chips: [],
+    errorText: undefined,
     focusedChip: null,
-    inputValue: ''
-  };
+    inputValue: '',
+    isClean: true,
+    isFocused: false
+  }
 
   constructor (props) {
     super(props)
