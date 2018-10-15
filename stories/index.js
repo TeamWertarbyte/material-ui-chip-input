@@ -256,7 +256,7 @@ storiesOf('ChipInput', module)
       fullWidth
     />
   ))
-  .add('with "outline" variant', () => (
+  .add('with "outlined" variant', () => (
     <div>
       <ChipInput variant='outlined' label='Add Tags' />
       <h2>Different Margins</h2>
@@ -269,7 +269,7 @@ storiesOf('ChipInput', module)
     </div>
   ))
 
-  .add('with "outline" variant fullWidth', () => (
+  .add('with "outlined" variant fullWidth', () => (
     <ChipInput defaultValue={['foo', 'bar']} variant='outlined' label='Add Tags' fullWidth fullWidthInput />
   ))
   .add('with "filled" variant', () => (
