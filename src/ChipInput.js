@@ -159,6 +159,7 @@ class ChipInput extends React.Component {
       this.state.chips = props.defaultValue
     }
     this.labelRef = React.createRef()
+    this.input = React.createRef()
   }
 
   componentDidMount () {
@@ -412,14 +413,6 @@ class ChipInput extends React.Component {
   }
 
   /**
-   * Sets a reference to the Material-UI Input component.
-   * @param {object} input - The Input reference
-   */
-  setInputRef = input => {
-    this.input = input
-  };
-
-  /**
    * Set the reference to the actual input, that is the input of the Input.
    * @param {object} ref - The reference
    */
@@ -451,7 +444,7 @@ class ChipInput extends React.Component {
       fullWidthInput,
       helperText,
       id,
-      InputProps,
+      InputProps = {},
       inputRef,
       InputLabelProps = {},
       label,
@@ -517,6 +510,8 @@ class ChipInput extends React.Component {
       InputMore.startAdornment = (
         <React.Fragment>{chipComponents}</React.Fragment>
       )
+    } else {
+      InputProps.disableUnderline = true
     }
 
     const InputComponent = variantComponent[variant]
@@ -561,7 +556,7 @@ class ChipInput extends React.Component {
         >
           {variant === 'standard' && chipComponents}
           <InputComponent
-            ref={this.setInputRef}
+            ref={this.input}
             classes={{
               input: cx(classes.input, classes[variant]),
               root: cx(classes.inputRoot, classes[variant])
@@ -576,7 +571,6 @@ class ChipInput extends React.Component {
             onBlur={this.handleInputBlur}
             inputRef={this.setActualInputRef}
             disabled={disabled}
-            disableUnderline
             fullWidth={fullWidthInput}
             placeholder={
               !hasInput && (shrinkFloatingLabel || label == null)
@@ -624,6 +618,8 @@ ChipInput.propTypes = {
   defaultValue: PropTypes.array,
   /** Disables the chip input if set to true. */
   disabled: PropTypes.bool,
+  /** Disable the input underline. Only valid for 'standard' variant */
+  disableUnderline: PropTypes.bool,
   /** Props to pass through to the `FormHelperText` component. */
   FormHelperTextProps: PropTypes.object,
   /** If true, the chip input will fill the available width. */
@@ -663,6 +659,7 @@ ChipInput.propTypes = {
 ChipInput.defaultProps = {
   allowDuplicates: false,
   blurBehavior: 'clear',
+  disableUnderline: false,
   clearInputValueOnChange: false,
   newChipKeyCodes: [13],
   variant: 'standard'
