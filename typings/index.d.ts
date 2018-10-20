@@ -23,6 +23,7 @@ export interface Props {
   allowDuplicates?: boolean;
   blurBehavior?: 'clear' | 'add' | 'ignore';
   chipRenderer?: ChipRenderer;
+  classes: Record<string, string>;
   clearInputValueOnChange?: boolean;
   dataSource?: any[];
   dataSourceConfig?: {
@@ -39,6 +40,7 @@ export interface Props {
   InputProps?: InputProps;
   inputRef?: (ref: React.Ref<HTMLInputElement>) => any;
   label?: React.ReactNode;
+  margin?: 'none' | 'dense' | 'normal';
   newChipKeyCodes?: number[];
   onAdd?: (chip: any) => any;
   onBeforeAdd?: (chip: any) => boolean;
