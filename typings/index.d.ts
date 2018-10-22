@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { FormControlProps } from '@material-ui/core/FormControl';
 import { FormHelperTextProps } from '@material-ui/core/FormHelperText';
 import { InputProps } from '@material-ui/core/Input';
 import { InputLabelProps } from '@material-ui/core/InputLabel';
@@ -19,10 +20,15 @@ export type ChipRenderer = (
   key: any
 ) => React.ReactNode;
 
-export interface Props {
+
+type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
+
+// omitting onChange from FormControlProps as we use a custom onChange
+export interface Props extends Omit<FormControlProps, 'onChange'> {
   allowDuplicates?: boolean;
   blurBehavior?: 'clear' | 'add' | 'ignore';
   chipRenderer?: ChipRenderer;
+  classes: Record<string, string>;
   clearInputValueOnChange?: boolean;
   dataSource?: any[];
   dataSourceConfig?: {
