@@ -123,7 +123,6 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                     "root": "MuiChip-root-22",
                   }
                 }
-                clickable={false}
                 color="default"
                 component="div"
                 label="foo"
@@ -252,7 +251,6 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                     "root": "MuiChip-root-22",
                   }
                 }
-                clickable={false}
                 color="default"
                 component="div"
                 label="bar"
@@ -384,7 +382,7 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                 placeholder={null}
                 value=""
               >
-                <WithStyles(InputBase)
+                <WithStyles(WithFormControlContext(InputBase))
                   classes={
                     Object {
                       "disabled": "MuiInput-disabled-59",
@@ -416,7 +414,7 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                   type="text"
                   value=""
                 >
-                  <InputBase
+                  <WithFormControlContext(InputBase)
                     classes={
                       Object {
                         "adornedEnd": "MuiInputBase-adornedEnd-74",
@@ -452,28 +450,81 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                     type="text"
                     value=""
                   >
-                    <div
-                      className="MuiInputBase-root-69 MuiInput-root-56 ChipInput-inputRoot-2 ChipInput-standard-6 MuiInputBase-formControl-70 MuiInput-formControl-57"
-                      onClick={[Function]}
+                    <InputBase
+                      classes={
+                        Object {
+                          "adornedEnd": "MuiInputBase-adornedEnd-74",
+                          "adornedStart": "MuiInputBase-adornedStart-73",
+                          "disabled": "MuiInputBase-disabled-72 MuiInput-disabled-59",
+                          "error": "MuiInputBase-error-75 MuiInput-error-61",
+                          "focused": "MuiInputBase-focused-71 MuiInput-focused-58",
+                          "formControl": "MuiInputBase-formControl-70 MuiInput-formControl-57",
+                          "fullWidth": "MuiInputBase-fullWidth-78 MuiInput-fullWidth-63",
+                          "input": "MuiInputBase-input-79 MuiInput-input-64 ChipInput-input-3 ChipInput-standard-6",
+                          "inputAdornedEnd": "MuiInputBase-inputAdornedEnd-85",
+                          "inputAdornedStart": "MuiInputBase-inputAdornedStart-84",
+                          "inputMarginDense": "MuiInputBase-inputMarginDense-80 MuiInput-inputMarginDense-65",
+                          "inputMultiline": "MuiInputBase-inputMultiline-81 MuiInput-inputMultiline-66",
+                          "inputType": "MuiInputBase-inputType-82 MuiInput-inputType-67",
+                          "inputTypeSearch": "MuiInputBase-inputTypeSearch-83 MuiInput-inputTypeSearch-68",
+                          "marginDense": "MuiInputBase-marginDense-76",
+                          "multiline": "MuiInputBase-multiline-77 MuiInput-multiline-62",
+                          "root": "MuiInputBase-root-69 MuiInput-root-56 ChipInput-inputRoot-2 ChipInput-standard-6",
+                        }
+                      }
+                      fullWidth={false}
+                      inputComponent="input"
+                      inputRef={[Function]}
+                      muiFormControl={
+                        Object {
+                          "adornedStart": false,
+                          "disabled": false,
+                          "error": false,
+                          "filled": false,
+                          "focused": false,
+                          "margin": "none",
+                          "onBlur": [Function],
+                          "onEmpty": [Function],
+                          "onFilled": [Function],
+                          "onFocus": [Function],
+                          "required": false,
+                          "variant": "standard",
+                        }
+                      }
+                      multiline={false}
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      onKeyDown={[Function]}
                       onKeyPress={[Function]}
+                      onKeyUp={[Function]}
+                      placeholder={null}
+                      type="text"
+                      value=""
                     >
-                      <input
-                        aria-invalid={false}
-                        className="MuiInputBase-input-79 MuiInput-input-64 ChipInput-input-3 ChipInput-standard-6"
-                        disabled={false}
-                        onBlur={[Function]}
-                        onChange={[Function]}
-                        onFocus={[Function]}
-                        onKeyDown={[Function]}
-                        onKeyUp={[Function]}
-                        placeholder={null}
-                        required={false}
-                        type="text"
-                        value=""
-                      />
-                    </div>
-                  </InputBase>
-                </WithStyles(InputBase)>
+                      <div
+                        className="MuiInputBase-root-69 MuiInput-root-56 ChipInput-inputRoot-2 ChipInput-standard-6 MuiInputBase-formControl-70 MuiInput-formControl-57"
+                        onClick={[Function]}
+                        onKeyPress={[Function]}
+                      >
+                        <input
+                          aria-invalid={false}
+                          className="MuiInputBase-input-79 MuiInput-input-64 ChipInput-input-3 ChipInput-standard-6"
+                          disabled={false}
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          onFocus={[Function]}
+                          onKeyDown={[Function]}
+                          onKeyUp={[Function]}
+                          placeholder={null}
+                          required={false}
+                          type="text"
+                          value=""
+                        />
+                      </div>
+                    </InputBase>
+                  </WithFormControlContext(InputBase)>
+                </WithStyles(WithFormControlContext(InputBase))>
               </Input>
             </WithStyles(Input)>
           </div>
