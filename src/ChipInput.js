@@ -337,10 +337,7 @@ class ChipInput extends React.Component {
         if (this.props.value && this.props.onAdd) {
           this.props.onAdd(chip)
         } else {
-          this.setState({ chips: [ ...this.state.chips, chip ] })
-          if (this.props.onChange) {
-            this.props.onChange([ ...this.state.chips, chip ])
-          }
+          this.updateChips([ ...this.state.chips, chip ])
         }
       }
     } else if (chip.trim().length > 0) {
@@ -348,10 +345,7 @@ class ChipInput extends React.Component {
         if (this.props.value && this.props.onAdd) {
           this.props.onAdd(chip)
         } else {
-          this.setState({ chips: [ ...this.state.chips, chip ] })
-          if (this.props.onChange) {
-            this.props.onChange([ ...this.state.chips, chip ])
-          }
+          this.updateChips([ ...this.state.chips, chip ])
         }
       }
     } else {
@@ -375,11 +369,15 @@ class ChipInput extends React.Component {
         } else if (this.state.focusedChip > i) {
           focusedChip = this.state.focusedChip - 1
         }
-        this.setState({ chips, focusedChip })
-        if (this.props.onChange) {
-          this.props.onChange(chips)
-        }
+        this.updateChips(chips, { focusedChip })
       }
+    }
+  }
+
+  updateChips (chips, additionalUpdates = {}) {
+    this.setState({ chips, ...additionalUpdates })
+    if (this.props.onChange) {
+      this.props.onChange(chips)
     }
   }
 

@@ -386,9 +386,10 @@ describe('blurBehavior modes', () => {
     expect(tree.find('input').getDOMNode().value).toBe('')
     expect(setTimeout).toHaveBeenCalledTimes(1)
 
-    setTimeout(_ => {
-      expect(tree.find('Chip').map((chip) => chip.text())).toEqual(['a', 'b', 'blur'])
-    })
+    expect(handleChange.mock.calls[0][0]).toEqual(['a', 'b', 'blur'])
+
+    tree.update()
+    expect(tree.find('Chip').map((chip) => chip.text())).toEqual(['a', 'b', 'blur'])
   })
 })
 
