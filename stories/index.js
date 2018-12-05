@@ -10,14 +10,14 @@ import CustomizedChipInput from './examples/CustomizedChipInput'
 // import ControlledChipInput from './ControlledChipInput'
 // import ClipboardExample from './examples/ClipboardExample'
 
-const formatValue = (value) => {
- return value && value.replace(' ', '');
-}
-
 import {
   ReactAutosuggestExample,
   ReactAutosuggestRemoteExample
 } from './examples/react-autosuggest'
+
+const formatValue = (value) => {
+  return value && value.replace(' ', '')
+}
 
 storiesOf('ChipInput', module)
   .addDecorator(story => (
