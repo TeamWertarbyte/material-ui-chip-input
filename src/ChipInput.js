@@ -305,10 +305,15 @@ class ChipInput extends React.Component {
   }
 
   handleUpdateInput = (e) => {
-    this.setState({ inputValue: e.target.value })
+    let value = e.target.value;
+    if (this.props.format) {
+      value = this.props.format(value);
+    }
+    this.setState({ inputValue: value })
 
     if (this.props.onUpdateInput) {
-      this.props.onUpdateInput(e)
+      e.target.value = value;
+      this.props.onUpdateInput(e);
     }
   }
 
@@ -618,7 +623,7 @@ ChipInput.propTypes = {
   /** The chips to display (enables controlled mode if set). */
   value: PropTypes.array,
   /** The variant of the Input component */
-  variant: PropTypes.oneOf(['outlined', 'standard', 'filled'])
+  variant: PropTypes.oneOf(['outlined', 'standard', 'filled']),
 }
 
 ChipInput.defaultProps = {

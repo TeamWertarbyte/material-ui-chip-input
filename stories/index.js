@@ -9,6 +9,11 @@ import ChipInput from '../src/ChipInput'
 import CustomizedChipInput from './examples/CustomizedChipInput'
 // import ControlledChipInput from './ControlledChipInput'
 // import ClipboardExample from './examples/ClipboardExample'
+
+const formatValue = (value) => {
+ return value && value.replace(' ', '');
+}
+
 import {
   ReactAutosuggestExample,
   ReactAutosuggestRemoteExample
@@ -30,6 +35,14 @@ storiesOf('ChipInput', module)
       defaultValue={[...Array(25).keys()].map(c => `Chip ${c}`)}
       onChange={action('onChange')}
       fullWidth
+    />
+  ))
+  .add('with format no space', () => (
+    <ChipInput
+      defaultValue={['foo', 'bar']}
+      fullWidth
+      onChange={action('onChange')}
+      format={formatValue}
     />
   ))
   .add('with custom styles', () => <CustomizedChipInput />)
