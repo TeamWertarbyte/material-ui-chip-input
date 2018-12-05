@@ -63,6 +63,7 @@ import ChipInput from 'material-ui-chip-input'
 |placeholder|`string`||A placeholder that is displayed if the input has no values.|
 |value|`array`||The chips to display (enables controlled mode if set).|
 |variant | `enum` | `'standard'` | Sets the variant for the input. Values `'standard'`, `'outlined'`, `'filled'`|
+|format | `func` || Callback function that is called when the input value change, you must return the formatted value,parameter is the current value|
 
 Any other properties supplied will be [spread to the root element](https://material-ui-next.com/guides/api/#spread). The properties of [&lt;FormControl /&gt;](https://material-ui-next.com/api/form-control/) are also available.
 
