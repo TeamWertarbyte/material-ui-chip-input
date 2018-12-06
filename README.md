@@ -61,6 +61,7 @@ import ChipInput from 'material-ui-chip-input'
 |onDelete|`func`||Callback function that is called when a new chip was removed (in controlled mode).|
 |onUpdateInput|`func`||Callback function that is called when the input changes.|
 |placeholder|`string`||A placeholder that is displayed if the input has no values.|
+|alwaysShowPlaceholder|`bool`||If true, the placeholder will always appear after inserting new chips.|
 |value|`array`||The chips to display (enables controlled mode if set).|
 |variant | `enum` | `'standard'` | Sets the variant for the input. Values `'standard'`, `'outlined'`, `'filled'`|
 

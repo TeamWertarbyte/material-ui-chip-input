@@ -437,6 +437,7 @@ class ChipInput extends React.Component {
       onKeyUp,
       onUpdateInput,
       placeholder,
+      alwaysShowPlaceholder,
       required,
       rootRef,
       value,
@@ -545,7 +546,7 @@ class ChipInput extends React.Component {
             inputRef={this.setActualInputRef}
             disabled={disabled}
             fullWidth={fullWidthInput}
-            placeholder={!hasInput && (shrinkFloatingLabel || label == null) ? placeholder : null}
+            placeholder={!hasInput && (shrinkFloatingLabel || label == null) || alwaysShowPlaceholder ? placeholder : null}
             {...InputProps}
             {...InputMore}
           />
@@ -615,6 +616,8 @@ ChipInput.propTypes = {
   onUpdateInput: PropTypes.func,
   /** A placeholder that is displayed if the input has no values. */
   placeholder: PropTypes.string,
+  /** If true, the placeholder will always be visible. */
+  alwaysShowPlaceholder: PropTypes.bool,
   /** The chips to display (enables controlled mode if set). */
   value: PropTypes.array,
   /** The variant of the Input component */
