@@ -204,7 +204,7 @@ class ChipInput extends React.Component {
 
   handleInputBlur = (event) => {
     if (this.props.onBlur) {
-      this.props.onBlur(event)
+      this.props.onBlur(event, this)
     }
     this.setState({ isFocused: false })
     if (this.state.focusedChip != null) {
@@ -232,7 +232,7 @@ class ChipInput extends React.Component {
   handleInputFocus = (event) => {
     this.setState({ isFocused: true })
     if (this.props.onFocus) {
-      this.props.onFocus(event)
+      this.props.onFocus(event, this)
     }
   }
 
@@ -241,7 +241,7 @@ class ChipInput extends React.Component {
     this.setState({ keyPressed: false, preventChipCreation: false })
     if (this.props.onKeyDown) {
       // Needed for arrow controls on menu in autocomplete scenario
-      this.props.onKeyDown(event)
+      this.props.onKeyDown(event, this)
       // Check if the callback marked the event as isDefaultPrevented() and skip further actions
       // enter key for example should not always add the current value of the inputField
       if (event.isDefaultPrevented()) {
@@ -250,7 +250,7 @@ class ChipInput extends React.Component {
     }
 
     if (this.props.newChipKeyCodes.indexOf(event.keyCode) >= 0) {
-      let result = this.handleAddChip(event.target.value)
+      let result = this.handleAddChip(event.target.value, this)
       if (result !== false) {
         event.preventDefault()
       }
@@ -296,12 +296,12 @@ class ChipInput extends React.Component {
     } else {
       this.setState({ inputValue: event.target.value })
     }
-    if (this.props.onKeyUp) { this.props.onKeyUp(event) }
+    if (this.props.onKeyUp) { this.props.onKeyUp(event, this) }
   }
 
   handleKeyPress = (event) => {
     this.setState({ keyPressed: true })
-    if (this.props.onKeyPress) { this.props.onKeyPress(event) }
+    if (this.props.onKeyPress) { this.props.onKeyPress(event, this) }
   }
 
   handleUpdateInput = (e) => {
@@ -318,7 +318,7 @@ class ChipInput extends React.Component {
    * @returns True if the chip was added (or at least `onAdd` was called), false if adding the chip was prevented
    */
   handleAddChip (chip) {
-    if (this.props.onBeforeAdd && !this.props.onBeforeAdd(chip)) {
+    if (this.props.onBeforeAdd && !this.props.onBeforeAdd(chip, this)) {
       this.setState({ preventChipCreation: true })
       return false
     }
@@ -335,7 +335,7 @@ class ChipInput extends React.Component {
 
       if (this.props.allowDuplicates || !chips.some((c) => c[this.props.dataSourceConfig.value] === chip[this.props.dataSourceConfig.value])) {
         if (this.props.value && this.props.onAdd) {
-          this.props.onAdd(chip)
+          this.props.onAdd(chip, this)
         } else {
           this.updateChips([ ...this.state.chips, chip ])
         }
@@ -343,7 +343,7 @@ class ChipInput extends React.Component {
     } else if (chip.trim().length > 0) {
       if (this.props.allowDuplicates || chips.indexOf(chip) === -1) {
         if (this.props.value && this.props.onAdd) {
-          this.props.onAdd(chip)
+          this.props.onAdd(chip, this)
         } else {
           this.updateChips([ ...this.state.chips, chip ])
         }
@@ -357,7 +357,7 @@ class ChipInput extends React.Component {
   handleDeleteChip (chip, i) {
     if (this.props.value) {
       if (this.props.onDelete) {
-        this.props.onDelete(chip, i)
+        this.props.onDelete(chip, i, this)
       }
     } else {
       const chips = this.state.chips.slice()
@@ -377,7 +377,7 @@ class ChipInput extends React.Component {
   updateChips (chips, additionalUpdates = {}) {
     this.setState({ chips, ...additionalUpdates })
     if (this.props.onChange) {
-      this.props.onChange(chips)
+      this.props.onChange(chips, this)
     }
   }
 
