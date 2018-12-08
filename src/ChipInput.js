@@ -403,6 +403,7 @@ class ChipInput extends React.Component {
   render () {
     const {
       allowDuplicates,
+      alwaysShowPlaceholder,
       blurBehavior,
       children,
       chipRenderer = defaultChipRenderer,
@@ -545,7 +546,7 @@ class ChipInput extends React.Component {
             inputRef={this.setActualInputRef}
             disabled={disabled}
             fullWidth={fullWidthInput}
-            placeholder={!hasInput && (shrinkFloatingLabel || label == null) ? placeholder : null}
+            placeholder={(!hasInput && (shrinkFloatingLabel || label == null)) || alwaysShowPlaceholder ? placeholder : null}
             {...InputProps}
             {...InputMore}
           />
@@ -566,6 +567,8 @@ class ChipInput extends React.Component {
 ChipInput.propTypes = {
   /** Allows duplicate chips if set to true. */
   allowDuplicates: PropTypes.bool,
+  /** If true, the placeholder will always be visible. */
+  alwaysShowPlaceholder: PropTypes.bool,
   /** Behavior when the chip input is blurred: `'clear'` clears the input, `'add'` creates a chip and `'ignore'` keeps the input. */
   blurBehavior: PropTypes.oneOf(['clear', 'add', 'ignore']),
   /** A function of the type `({ value, text, chip, isFocused, isDisabled, handleClick, handleDelete, className }, key) => node` that returns a chip based on the given properties. This can be used to customize chip styles.  Each item in the `dataSource` array will be passed to `chipRenderer` as arguments `chip`, `value` and `text`. If `dataSource` is an array of objects and `dataSourceConfig` is present, then `value` and `text` will instead correspond to the object values defined in `dataSourceConfig`. If `dataSourceConfig` is not set and `dataSource` is an array of objects, then a custom `chipRenderer` must be set. `chip` is always the raw value from `dataSource`, either an object or a string. */
