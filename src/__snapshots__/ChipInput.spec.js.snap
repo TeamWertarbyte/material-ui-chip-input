@@ -352,7 +352,6 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
               onKeyDown={[Function]}
               onKeyPress={[Function]}
               onKeyUp={[Function]}
-              placeholder={null}
               value=""
             >
               <Input
@@ -381,7 +380,6 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                 onKeyDown={[Function]}
                 onKeyPress={[Function]}
                 onKeyUp={[Function]}
-                placeholder={null}
                 value=""
               >
                 <WithStyles(InputBase)
@@ -412,7 +410,6 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                   onKeyDown={[Function]}
                   onKeyPress={[Function]}
                   onKeyUp={[Function]}
-                  placeholder={null}
                   type="text"
                   value=""
                 >
@@ -448,7 +445,6 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                     onKeyDown={[Function]}
                     onKeyPress={[Function]}
                     onKeyUp={[Function]}
-                    placeholder={null}
                     type="text"
                     value=""
                   >
@@ -466,7 +462,6 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                         onFocus={[Function]}
                         onKeyDown={[Function]}
                         onKeyUp={[Function]}
-                        placeholder={null}
                         required={false}
                         type="text"
                         value=""

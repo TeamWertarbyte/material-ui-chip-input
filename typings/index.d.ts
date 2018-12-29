@@ -46,6 +46,7 @@ export interface Props extends Omit<FormControlProps, 'onChange'> {
   InputLabelProps?: InputLabelProps;
   InputProps?: InputProps;
   inputRef?: (ref: React.Ref<HTMLInputElement>) => any;
+  inputValue?: string;
   label?: React.ReactNode;
   newChipKeyCodes?: number[];
   onAdd?: (chip: any) => any;
