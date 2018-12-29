@@ -26,6 +26,7 @@ type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 // omitting onChange from FormControlProps as we use a custom onChange
 export interface Props extends Omit<FormControlProps, 'onChange'> {
   allowDuplicates?: boolean;
+  alwaysShowPlaceholder?: boolean;
   blurBehavior?: 'clear' | 'add' | 'ignore';
   chipRenderer?: ChipRenderer;
   classes: Record<string, string>;
@@ -53,6 +54,7 @@ export interface Props extends Omit<FormControlProps, 'onChange'> {
   onDelete?: (chip:any, index: number) => any;
   onUpdateInput?: React.EventHandler<any>;
   placeholder?: string;
+  alwaysShowPlaceholder?: boolean;
   value?: any[];
   error?: boolean;
   variant?: 'outlined' | 'standard' | 'filled';
