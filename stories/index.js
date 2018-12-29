@@ -8,7 +8,7 @@ import { green } from '@material-ui/core/colors'
 import ChipInput from '../src/ChipInput'
 import CustomizedChipInput from './examples/CustomizedChipInput'
 import CustomInputFormatting from './examples/CustomInputFormatting'
-// import ControlledChipInput from './examples/ControlledChipInput'
+import ControlledChipInput from './examples/ControlledChipInput'
 // import ClipboardExample from './examples/ClipboardExample'
 
 import {
@@ -116,15 +116,15 @@ storiesOf('ChipInput', module)
       <ChipInput label='none' margin='none' style={{ float: 'left' }} />
     </div>
   ))
+  .add('controlled input', () =>
+    <ControlledChipInput />
+  )
   .add('with controlled text input', () => <CustomInputFormatting />)
   /*
   .add('create tags with comma, space and enter', () =>
     <ChipInput
       newChipKeyCodes={[13, 188, 32]}
     />
-  )
-  .add('controlled input', () =>
-    <ControlledChipInput />
   )
   .add('uncontrolled verbose log', () =>
     <ChipInput
