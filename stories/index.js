@@ -7,17 +7,14 @@ import Chip from '@material-ui/core/Chip'
 import { green } from '@material-ui/core/colors'
 import ChipInput from '../src/ChipInput'
 import CustomizedChipInput from './examples/CustomizedChipInput'
-// import ControlledChipInput from './ControlledChipInput'
+import CustomInputFormatting from './examples/CustomInputFormatting'
+// import ControlledChipInput from './examples/ControlledChipInput'
 // import ClipboardExample from './examples/ClipboardExample'
 
 import {
   ReactAutosuggestExample,
   ReactAutosuggestRemoteExample
 } from './examples/react-autosuggest'
-
-const formatValue = (value) => {
-  return value && value.replace(' ', '')
-}
 
 storiesOf('ChipInput', module)
   .addDecorator(story => (
@@ -35,14 +32,6 @@ storiesOf('ChipInput', module)
       defaultValue={[...Array(25).keys()].map(c => `Chip ${c}`)}
       onChange={action('onChange')}
       fullWidth
-    />
-  ))
-  .add('with format no space', () => (
-    <ChipInput
-      defaultValue={['foo', 'bar']}
-      fullWidth
-      onChange={action('onChange')}
-      format={formatValue}
     />
   ))
   .add('with custom styles', () => <CustomizedChipInput />)
@@ -127,6 +116,7 @@ storiesOf('ChipInput', module)
       <ChipInput label='none' margin='none' style={{ float: 'left' }} />
     </div>
   ))
+  .add('with controlled text input', () => <CustomInputFormatting />)
   /*
   .add('create tags with comma, space and enter', () =>
     <ChipInput

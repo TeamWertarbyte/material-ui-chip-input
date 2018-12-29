@@ -53,7 +53,8 @@ import ChipInput from 'material-ui-chip-input'
 |InputLabelProps|`object`||Props to pass through to the `InputLabel`.|
 |InputProps|`object`||Props to pass through to the [`Input`](https://material-ui.com/api/input/).|
 |inputRef|`func`||Use this property to pass a ref callback to the native input component.|
-|label|`node`|||
+|inputValue|`string`||The input value (enables controlled mode for the text input if set).|
+|label|`node`||The content of the floating label.|
 |newChipKeyCodes|`arrayOf`|`[13]`|The key codes used to determine when to create a new chip.|
 |onAdd|`func`||Callback function that is called when a new chip was added (in controlled mode).|
 |onBeforeAdd|`func`||Callback function that is called with the chip to be added and should return true to add the chip or false to prevent the chip from being added without clearing the text input.|
@@ -63,7 +64,6 @@ import ChipInput from 'material-ui-chip-input'
 |placeholder|`string`||A placeholder that is displayed if the input has no values.|
 |value|`array`||The chips to display (enables controlled mode if set).|
 |variant | `enum` | `'standard'` | Sets the variant for the input. Values `'standard'`, `'outlined'`, `'filled'`|
-|format | `func` || Callback function that is called when the input value change, you must return the formatted value,parameter is the current value|
 
 Any other properties supplied will be [spread to the root element](https://material-ui-next.com/guides/api/#spread). The properties of [&lt;FormControl /&gt;](https://material-ui-next.com/api/form-control/) are also available.
 
