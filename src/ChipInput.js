@@ -359,7 +359,9 @@ class ChipInput extends React.Component {
   }
 
   handleUpdateInput = (e) => {
-    this.setState({ inputValue: e.target.value })
+    if (this.props.inputValue == null) {
+      this.setState({ inputValue: e.target.value })
+    }
 
     if (this.props.onUpdateInput) {
       this.props.onUpdateInput(e)
@@ -437,6 +439,7 @@ class ChipInput extends React.Component {
 
   /**
    * Clears the text field for adding new chips.
+   * This only works in uncontrolled input mode, i.e. if the inputValue prop is not used.
    * @public
    */
   clearInput () {
@@ -482,6 +485,7 @@ class ChipInput extends React.Component {
       inputAdornmentRender = defaultInputAdornmentRenderer,
       inputRef,
       InputLabelProps = {},
+      inputValue,
       label,
       newChipKeyCodes,
       onBeforeAdd,
@@ -503,8 +507,10 @@ class ChipInput extends React.Component {
       ...other
     } = this.props
 
-    const chips = this.props.value || this.state.chips
-    const hasInput = (this.props.value || this.state.chips).length > 0 || this.state.inputValue.length > 0
+    const chips = value || this.state.chips
+    const actualInputValue = inputValue != null ? inputValue : this.state.inputValue
+
+    const hasInput = (this.props.value || actualInputValue).length > 0 || actualInputValue.length > 0
     const shrinkFloatingLabel = InputLabelProps.shrink != null
       ? InputLabelProps.shrink
       : (label != null && (hasInput || this.state.isFocused))
@@ -613,7 +619,7 @@ class ChipInput extends React.Component {
                 })
             }}
             id={id}
-            value={this.state.inputValue}
+            value={actualInputValue}
             onChange={this.handleUpdateInput}
             onKeyDown={this.handleKeyDown}
             onKeyPress={this.handleKeyPress}
@@ -682,6 +688,8 @@ ChipInput.propTypes = {
   InputProps: PropTypes.object,
   /** Use this property to pass a ref callback to the native input component. */
   inputRef: PropTypes.func,
+  /** The input value (enables controlled mode for the text input if set). */
+  inputValue: PropTypes.string,
   /* The content of the floating label. */
   label: PropTypes.node,
   /** The key codes used to determine when to create a new chip. */

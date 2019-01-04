@@ -7,7 +7,7 @@ class ControlledChipInput extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      chips: ['js']
+      chips: ['react']
     }
   }
 
@@ -22,12 +22,12 @@ class ControlledChipInput extends React.Component {
   }
 
   handleDelete (deletedChip) {
-    if (deletedChip !== 'js') {
+    if (deletedChip !== 'react') {
       this.setState({
         chips: this.state.chips.filter((c) => c !== deletedChip)
       })
     } else {
-      alert('Why would you delete JS?')
+      alert('Why would you delete React?')
     }
   }
 
@@ -44,7 +44,7 @@ class ControlledChipInput extends React.Component {
         }
       }}
       fullWidth
-      floatingLabelText='Some chips with at least three characters'
+      label='Some chips with at least three characters'
     />
   }
 }

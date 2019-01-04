@@ -488,3 +488,17 @@ describe('keys', () => {
     expect(prevented).toBe(true)
   })
 })
+
+describe('controlled text input', () => {
+  it('uses the input value provided by the inputValue prop', () => {
+    const tree = mount(<ChipInput inputValue='hello world' />)
+    expect(tree.find('input').getDOMNode().value).toEqual('hello world')
+  })
+
+  it('uses the input value provided by the inputValue prop', () => {
+    const handleUpdateInput = jest.fn()
+    const tree = mount(<ChipInput onUpdateInput={handleUpdateInput} />)
+    tree.find('input').simulate('change', { target: { value: 'hello world!' } })
+    expect(handleUpdateInput).toHaveBeenCalled()
+  })
+})

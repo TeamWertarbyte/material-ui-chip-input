@@ -46,6 +46,7 @@ export interface Props extends Omit<FormControlProps, 'onChange'> {
   InputLabelProps?: InputLabelProps;
   InputProps?: InputProps;
   inputRef?: (ref: React.Ref<HTMLInputElement>) => any;
+  inputValue?: string;
   label?: React.ReactNode;
   newChipKeyCodes?: number[];
   onAdd?: (chip: any) => any;
@@ -54,9 +55,7 @@ export interface Props extends Omit<FormControlProps, 'onChange'> {
   onDelete?: (chip:any, index: number) => any;
   onUpdateInput?: React.EventHandler<any>;
   placeholder?: string;
-  alwaysShowPlaceholder?: boolean;
   value?: any[];
-  error?: boolean;
   variant?: 'outlined' | 'standard' | 'filled';
 }
 
