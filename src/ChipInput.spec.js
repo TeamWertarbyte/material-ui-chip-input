@@ -345,6 +345,7 @@ describe('custom chips', () => {
       text: 'a',
       chip: 'a',
       className: expect.any(String),
+      color: 'default',
       isDisabled: false,
       isFocused: false,
       handleClick: expect.any(Function),

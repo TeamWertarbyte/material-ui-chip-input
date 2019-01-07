@@ -36,11 +36,15 @@ const styles = (theme) => {
         boxSizing: 'border-box'
       },
       '&$outlined': {
-        paddingTop: 14
+        paddingTop: 8
       },
       '&$filled': {
-        paddingTop: 28
+        paddingTop: 22,
+        '&$hasChips': {
+          paddingTop: 16
+        }
       },
+
       '&:not($adornmentRoot)': {
         flexGrow: 1,
         display: 'flex',
@@ -63,8 +67,23 @@ const styles = (theme) => {
       WebkitTapHighlightColor: 'rgba(0,0,0,0)', // Remove mobile color flashing (deprecated style).
       float: 'left',
       minWidth: 'min-content',
-      paddingTop: 0
+      paddingTop: 0,
+      '&$outlined': {
+        paddingTop: 6,
+        paddingBottom: 15,
+        '&$hasChips': {
+          paddingTop: 0,
+          paddingBottom: 7
+        }
+      },
+      '&$filled': {
+        paddingBottom: 15,
+        '&$hasChips': {
+          paddingBottom: 10
+        }
+      }
     },
+    hasChips: {},
     chipContainer: {
       cursor: 'text',
       marginBottom: -2,
@@ -81,14 +100,30 @@ const styles = (theme) => {
     label: {
       top: 4,
       '&$outlined&:not($labelShrink)': {
-        top: -4
+        top: -6
       },
       '&$filled&:not($labelShrink)': {
         top: 0
+      },
+      '&$adornedStart': {
+        left: 24
       }
     },
     labelShrink: {
-      top: 0
+      top: 0,
+      '&$filled': {
+        marginTop: -8,
+        '&$adornedStart': {
+          marginLeft: -8
+        }
+      },
+      '&$adornedStart': {
+        left: 0,
+        '&$outlined': {
+          marginLeft: -8,
+          marginTop: -4
+        }
+      }
     },
     helperText: {
       marginBottom: -20
@@ -154,42 +189,33 @@ const styles = (theme) => {
       margin: '0 8px 8px 0',
       float: 'left'
     },
-    adornedStart: {
-      '&:first-child': {
-        paddingLeft: '8px'
-      }
-    },
+    adornedStart: {},
     adornedEnd: {},
     adornmentRoot: {
       '&$standard': {
         marginTop: '8px'
       },
       '&$outlined': {
-        paddingTop: '14px'
+        paddingTop: '14px',
+        paddingBottom: 0
       },
       '&$filled': {
-        paddingTop: '28px'
+        paddingTop: '22px'
       },
       '& > *:first-child': {
         marginTop: '-3.5px'
       }
     },
-    adornmentRootHasInput: {
-      '&$adornmentRoot': {
-        marginTop: '8px',
-        '& + *': {
-          marginBottom: '11px'
-        }
-      }
-    },
     inputAdornedStart: {
       '&:not($standard)': {
-        paddingLeft: 0
+        paddingLeft: 34,
+        marginLeft: -38
       }
     },
     inputAdornedEnd: {
       '&:not($standard)': {
-        paddingRight: 0
+        paddingRight: 30,
+        marginRight: -38
       }
     }
   }
@@ -482,7 +508,7 @@ class ChipInput extends React.Component {
       helperText,
       id,
       InputProps = {},
-      inputAdornmentRender = defaultInputAdornmentRenderer,
+      inputAdornmentRenderer = defaultInputAdornmentRenderer,
       inputRef,
       InputLabelProps = {},
       inputValue,
@@ -508,9 +534,10 @@ class ChipInput extends React.Component {
     } = this.props
 
     const chips = value || this.state.chips
-    const actualInputValue = inputValue != null ? inputValue : this.state.inputValue
+    const actualInputValue = inputValue || this.state.inputValue
 
-    const hasInput = (this.props.value || actualInputValue).length > 0 || actualInputValue.length > 0
+    const hasInput = (value || chips).length > 0 || actualInputValue.length > 0
+    const hasChips = chips.length > 0
     const shrinkFloatingLabel = InputLabelProps.shrink != null
       ? InputLabelProps.shrink
       : (label != null && (hasInput || this.state.isFocused))
@@ -559,13 +586,12 @@ class ChipInput extends React.Component {
         classes.inputRoot,
         classes[variant],
         {
-          [classes.adornmentRoot]: hasAdornment,
-          [classes.adornmentRootHasInput]: variant !== 'standard' && hasAdornment && (this.props.value || this.state.chips).length > 0
+          [classes.adornmentRoot]: hasAdornment
         }
       )
     }
-    const startAdornmentRender = (InputProps.startAdornment || startAdornment) ? inputAdornmentRender(InputProps.startAdornment || startAdornment, adornmentClasses) : null
-    const endAdornmentRender = (InputProps.endAdornment || endAdornment) ? inputAdornmentRender(InputProps.endAdornment || endAdornment, adornmentClasses) : null
+    const renderedStartAdornment = (InputProps.startAdornment || startAdornment) ? inputAdornmentRenderer(InputProps.startAdornment || startAdornment, adornmentClasses) : null
+    const renderedEndAdornment = (InputProps.endAdornment || endAdornment) ? inputAdornmentRenderer(InputProps.endAdornment || endAdornment, adornmentClasses) : null
 
     return (
       <FormControl
@@ -582,7 +608,14 @@ class ChipInput extends React.Component {
         {label && (
           <InputLabel
             htmlFor={id}
-            classes={{root: cx(classes[variant], classes.label), shrink: classes.labelShrink}}
+            classes={{
+              root: cx(
+                classes[variant],
+                classes.label,
+                {
+                  [classes.adornedStart]: renderedStartAdornment
+                }),
+              shrink: classes.labelShrink}}
             shrink={shrinkFloatingLabel}
             focused={this.state.isFocused}
             variant={variant}
@@ -603,19 +636,23 @@ class ChipInput extends React.Component {
               [classes.disabled]: disabled,
               [classes.labeled]: label != null,
               [classes.error]: error,
-              [classes.adornedStart]: startAdornmentRender,
-              [classes.adornedEnd]: endAdornmentRender
+              [classes.adornedStart]: renderedStartAdornment,
+              [classes.adornedEnd]: renderedEndAdornment
             })}
         >
-          {startAdornmentRender}
+          {renderedStartAdornment}
           <InputComponent
             ref={this.input}
             classes={{
-              input: cx(classes.input, classes[variant]),
+              input: cx(classes.input, classes[variant],
+                {
+                  [classes.hasChips]: hasChips
+                }),
               root: cx(classes.inputRoot, classes[variant],
                 {
-                  [classes.inputAdornedStart]: startAdornmentRender,
-                  [classes.inputAdornedEnd]: endAdornmentRender
+                  [classes.inputAdornedStart]: renderedStartAdornment,
+                  [classes.inputAdornedEnd]: renderedEndAdornment,
+                  [classes.hasChips]: hasChips
                 })
             }}
             id={id}
@@ -633,7 +670,7 @@ class ChipInput extends React.Component {
             {...InputProps}
             {...InputMore}
           />
-          {endAdornmentRender}
+          {renderedEndAdornment}
         </div>
         {helperText && (
           <FormHelperText
@@ -674,6 +711,8 @@ ChipInput.propTypes = {
   disabled: PropTypes.bool,
   /** Disable the input underline. Only valid for 'standard' variant */
   disableUnderline: PropTypes.bool,
+  /** End `InputAdornment` for this component. */
+  endAdornment: PropTypes.node,
   /** Props to pass through to the `FormHelperText` component. */
   FormHelperTextProps: PropTypes.object,
   /** If true, the chip input will fill the available width. */
@@ -682,6 +721,8 @@ ChipInput.propTypes = {
   fullWidthInput: PropTypes.bool,
   /** Helper text that is displayed below the input. */
   helperText: PropTypes.node,
+  /** A function of the type `({ inputAdornment, additionalClasses }) => node` that returns an Input Adornment to render within the input. This can be used to overwrite the default element used to wrap the input adornment or to overwrite how the styles are applied to the input adornment. */
+  inputAdornmentRenderer: PropTypes.func,
   /** Props to pass through to the `InputLabel`. */
   InputLabelProps: PropTypes.object,
   /** Props to pass through to the `Input`. */
@@ -706,6 +747,8 @@ ChipInput.propTypes = {
   onUpdateInput: PropTypes.func,
   /** A placeholder that is displayed if the input has no values. */
   placeholder: PropTypes.string,
+  /** Start `InputAdornment` for this component. */
+  startAdornment: PropTypes.node,
   /** The chips to display (enables controlled mode if set). */
   value: PropTypes.array,
   /** The variant of the Input component */
@@ -716,6 +759,7 @@ ChipInput.defaultProps = {
   allowDuplicates: false,
   blurBehavior: 'clear',
   clearInputValueOnChange: false,
+  color: 'default',
   disableUnderline: false,
   newChipKeyCodes: [13],
   variant: 'standard'

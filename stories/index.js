@@ -4,6 +4,7 @@ import { action } from '@storybook/addon-actions'
 import Avatar from '@material-ui/core/Avatar'
 import Chip from '@material-ui/core/Chip'
 // import AutoComplete from '@material-ui/core/AutoComplete'
+import { InputAdornment, Icon } from '@material-ui/core'
 import { green } from '@material-ui/core/colors'
 import ChipInput from '../src/ChipInput'
 import CustomizedChipInput from './examples/CustomizedChipInput'
@@ -287,4 +288,50 @@ storiesOf('ChipInput', module)
   ))
   .add('with "filled" variant full width', () => (
     <ChipInput defaultValue={['foo', 'bar']} variant='filled' label='Add Tags' fullWidth fullWidthInput />
+  ))
+  .add('with start adornment', () => (
+    <ChipInput
+      label='normal'
+      margin='normal'
+      startAdornment={<InputAdornment position='start'><Icon color='primary'>search</Icon></InputAdornment>}
+    />
+  ))
+  .add('with start adornment and "outlined" variant', () => (
+    <ChipInput
+      label='normal'
+      margin='normal'
+      variant='outlined'
+      startAdornment={<InputAdornment position='start'><Icon color='primary'>search</Icon></InputAdornment>}
+    />
+  ))
+  .add('with start adornment and "filled" variant', () => (
+    <ChipInput
+      label='normal'
+      margin='normal'
+      variant='filled'
+      startAdornment={<InputAdornment position='start'><Icon color='primary'>search</Icon></InputAdornment>}
+    />
+  ))
+  .add('with end adornment', () => (
+    <ChipInput
+      label='normal'
+      margin='normal'
+      endAdornment={<InputAdornment position='end'><Icon color='primary'>search</Icon></InputAdornment>}
+    />
+  ))
+  .add('with end adornment and "outlined" variant', () => (
+    <ChipInput
+      label='normal'
+      margin='normal'
+      variant='outlined'
+      endAdornment={<InputAdornment position='end'><Icon color='primary'>search</Icon></InputAdornment>}
+    />
+  ))
+  .add('with end adornment and "filled" variant', () => (
+    <ChipInput
+      label='normal'
+      margin='normal'
+      variant='filled'
+      endAdornment={<InputAdornment position='end'><Icon color='primary'>search</Icon></InputAdornment>}
+    />
   ))
