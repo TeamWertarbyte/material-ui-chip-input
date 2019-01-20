@@ -148,7 +148,8 @@ class ChipInput extends React.Component {
     focusedChip: null,
     inputValue: '',
     isClean: true,
-    isFocused: false
+    isFocused: false,
+    prevPropsValue: []
   }
 
   constructor (props) {
@@ -171,16 +172,22 @@ class ChipInput extends React.Component {
     clearTimeout(this.inputBlurTimeout)
   }
 
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.disabled) {
-      this.setState({ focusedChip: null })
+  static getDerivedStateFromProps (props, state) {
+    let newState = null
+
+    if (props.value && props.value.length !== state.prevPropsValue.length) {
+      if (props.clearInputValueOnChange) {
+        newState = { inputValue: '' }
+      } else {
+        newState = { prevPropsValue: props.value }
+      }
     }
 
-    // Lets assume that if the chips have changed, the inputValue should be empty
-    // otherwise, we would need to make inputValue a controlled value. which is quite messy
-    if (nextProps.value && this.props.clearInputValueOnChange && nextProps.value.length !== this.props.value.length) {
-      this.setState({ inputValue: '' })
+    if (props.disabled) {
+      newState = { ...newState, focusedChip: null }
     }
+
+    return newState
   }
 
   /**

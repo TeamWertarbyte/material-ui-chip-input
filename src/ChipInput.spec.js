@@ -138,6 +138,26 @@ describe('uncontrolled mode', () => {
   })
 })
 
+describe('controlled mode', () => {
+  it('clears the input when the value changes if clearInputValueOnChange is set', () => {
+    const tree = mount(
+      <ChipInput value={['foo']} clearInputValueOnChange />
+    )
+    tree.find('input').simulate('change', { target: { value: 'bar' } })
+    tree.setProps({ value: ['foo', 'bar'] })
+    expect(tree.find('input').getDOMNode().value).toBe('')
+  })
+
+  it('keeps the input when the value changes if clearInputValueOnChange is not set', () => {
+    const tree = mount(
+      <ChipInput value={['foo']} />
+    )
+    tree.find('input').simulate('change', { target: { value: 'bar' } })
+    tree.setProps({ value: ['foo', 'bar'] })
+    expect(tree.find('input').getDOMNode().value).toBe('bar')
+  })
+})
+
 describe('chip focusing', () => {
   function getFocusedChip (tree) {
     return tree.find('Chip').filterWhere((chip) => chip.getDOMNode().style.backgroundColor !== '')
