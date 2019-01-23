@@ -327,7 +327,7 @@ describe('floating label', () => {
 
   it('shrinks if there are chips', () => {
     const tree = mount(
-      <ChipInput label='Floating label' value={['foo']} />
+      <ChipInput label='Floating label' defaultValue={['asdf']} />
     )
     expect(tree.find('InputLabel').prop('shrink')).toBe(true)
   })

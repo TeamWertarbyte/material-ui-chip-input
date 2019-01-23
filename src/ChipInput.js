@@ -469,7 +469,7 @@ class ChipInput extends React.Component {
     const hasInput = (this.props.value || actualInputValue).length > 0 || actualInputValue.length > 0
     const shrinkFloatingLabel = InputLabelProps.shrink != null
       ? InputLabelProps.shrink
-      : (label != null && (hasInput || this.state.isFocused))
+      : (label != null && (hasInput || this.state.isFocused || chips.length > 0))
 
     const chipComponents = chips.map((tag, i) => {
       const value = dataSourceConfig ? tag[dataSourceConfig.value] : tag
@@ -490,10 +490,7 @@ class ChipInput extends React.Component {
 
     const InputMore = {}
     if (variant === 'outlined') {
-      if (InputLabelProps && typeof InputLabelProps.shrink !== 'undefined') {
-        InputMore.notched = InputLabelProps.shrink
-      }
-
+      InputMore.notched = shrinkFloatingLabel
       InputMore.labelWidth =
         (shrinkFloatingLabel && this.labelNode && this.labelNode.offsetWidth) ||
         0
