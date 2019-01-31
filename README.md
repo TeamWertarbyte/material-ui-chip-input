@@ -47,6 +47,7 @@ import ChipInput from 'material-ui-chip-input'
 |dataSourceConfig|`shape`||Config for objects list dataSource, e.g. `{ text: 'text', value: 'value' }`. If not specified, the `dataSource` must be a flat array of strings or a custom `chipRenderer` must be set to handle the objects.|
 |defaultValue|`array`||The chips to display by default (for uncontrolled mode).|
 |disabled|`bool`||Disables the chip input if set to true.|
+|delayBeforeAdd|`bool`|`false`|Use `setTimeout` 150ms delay before adding chips in case other input callbacks like `onSelection` need to fire first.|
 |FormHelperTextProps|`object`||Props to pass through to the `FormHelperText` component.|
 |fullWidth|`bool`||If true, the chip input will fill the available width.|
 |fullWidthInput|`bool`||If true, the input field will always be below the chips and fill the available space. By default, it will try to be beside the chips.|

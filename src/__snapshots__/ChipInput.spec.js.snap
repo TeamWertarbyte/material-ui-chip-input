@@ -40,6 +40,7 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
         "bar",
       ]
     }
+    delayBeforeAdd={false}
     disableUnderline={false}
     newChipKeyCodes={
       Array [

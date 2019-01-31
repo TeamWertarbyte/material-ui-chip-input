@@ -58,7 +58,7 @@ function renderInput (inputProps) {
       value={chips}
       inputRef={ref}
       {...other}
-  />
+    />
   )
 }
 
@@ -183,7 +183,7 @@ class ReactAutosuggestExample extends React.Component {
   handleDeleteChip (chip, index) {
     let temp = this.state.value
     temp.splice(index, 1)
-    this.setState({value: temp})
+    this.setState({ value: temp })
   }
 
   render () {
@@ -204,7 +204,7 @@ class ReactAutosuggestExample extends React.Component {
         renderSuggestionsContainer={renderSuggestionsContainer}
         getSuggestionValue={getSuggestionValue}
         renderSuggestion={renderSuggestion}
-        onSuggestionSelected={(e, {suggestionValue}) => { this.handleAddChip(suggestionValue); e.preventDefault() }}
+        onSuggestionSelected={(e, { suggestionValue }) => { this.handleAddChip(suggestionValue); e.preventDefault() }}
         focusInputOnSuggestionClick={false}
         inputProps={{
           classes,
@@ -259,12 +259,12 @@ class ReactAutosuggestRemoteExample extends React.Component {
   };
 
   handleAddChip (chip) {
-    this.setState({value: this.state.value.concat([chip])})
+    this.setState({ value: this.state.value.concat([chip]) })
   }
   handleDeleteChip (chip, index) {
     let temp = this.state.value
     temp.splice(index, 1)
-    this.setState({value: temp})
+    this.setState({ value: temp })
   }
 
   render () {
@@ -285,7 +285,7 @@ class ReactAutosuggestRemoteExample extends React.Component {
         renderSuggestionsContainer={renderSuggestionsContainer}
         getSuggestionValue={getSuggestionValue}
         renderSuggestion={renderSuggestion}
-        onSuggestionSelected={(e, {suggestionValue}) => { this.handleAddChip(suggestionValue); e.preventDefault() }}
+        onSuggestionSelected={(e, { suggestionValue }) => { this.handleAddChip(suggestionValue); e.preventDefault() }}
         focusInputOnSuggestionClick={false}
         inputProps={{
           classes,
