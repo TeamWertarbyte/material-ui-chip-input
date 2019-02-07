@@ -46,6 +46,7 @@ import ChipInput from 'material-ui-chip-input'
 |dataSource|`array`||Data source for auto complete. This should be an array of strings or objects.|
 |dataSourceConfig|`shape`||Config for objects list dataSource, e.g. `{ text: 'text', value: 'value' }`. If not specified, the `dataSource` must be a flat array of strings or a custom `chipRenderer` must be set to handle the objects.|
 |defaultValue|`array`||The chips to display by default (for uncontrolled mode).|
+|delayBeforeAdd|`bool`|`false`|Use `setTimeout` 150ms delay before adding chips in case other input callbacks like `onSelection` need to fire first.|
 |disabled|`bool`||Disables the chip input if set to true.|
 |FormHelperTextProps|`object`||Props to pass through to the `FormHelperText` component.|
 |fullWidth|`bool`||If true, the chip input will fill the available width.|

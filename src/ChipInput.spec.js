@@ -131,9 +131,9 @@ describe('uncontrolled mode', () => {
     tree.find('input').getDOMNode().value = 'foo'
     tree.find('input').simulate('change', { target: tree.find('input').getDOMNode() })
     expect(handleUpdateInput).toBeCalledWith(
-     expect.objectContaining({
-       target: expect.anything()
-     })
+      expect.objectContaining({
+        target: expect.anything()
+      })
     )
   })
 })
@@ -392,7 +392,27 @@ describe('blurBehavior modes', () => {
     expect(tree.find('input').getDOMNode().value).toBe('foo')
   })
 
-  it('adds the input on blur with blurBehavior set to add', () => {
+  it('adds the input on blur with blurBehavior set to add with timeout', () => {
+    const handleChange = jest.fn()
+    jest.useFakeTimers()
+    const tree = mount(
+      <ChipInput defaultValue={['a', 'b']} blurBehavior='add' delayBeforeAdd onChange={handleChange} />
+    )
+    tree.find('input').getDOMNode().value = 'blur'
+    tree.find('input').simulate('blur')
+
+    jest.runAllTimers()
+
+    expect(tree.find('input').getDOMNode().value).toBe('')
+    expect(setTimeout).toHaveBeenCalledTimes(1)
+
+    expect(handleChange.mock.calls[0][0]).toEqual(['a', 'b', 'blur'])
+
+    tree.update()
+    expect(tree.find('Chip').map((chip) => chip.text())).toEqual(['a', 'b', 'blur'])
+  })
+
+  it('adds the input on blur with blurBehavior set to add without timeout', () => {
     const handleChange = jest.fn()
     jest.useFakeTimers()
     const tree = mount(
@@ -404,7 +424,7 @@ describe('blurBehavior modes', () => {
     jest.runAllTimers()
 
     expect(tree.find('input').getDOMNode().value).toBe('')
-    expect(setTimeout).toHaveBeenCalledTimes(1)
+    expect(setTimeout).toHaveBeenCalledTimes(0)
 
     expect(handleChange.mock.calls[0][0]).toEqual(['a', 'b', 'blur'])
 
@@ -500,7 +520,7 @@ describe('keys', () => {
       metaKey: false,
       ctrlKey: false,
       altKey: false,
-      target: {value: 'non-empty'},
+      target: { value: 'non-empty' },
       preventDefault: () => {
         prevented = true
       }

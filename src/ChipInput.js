@@ -147,6 +147,13 @@ const styles = (theme) => {
   }
 }
 
+const keyCodes = {
+  BACKSPACE: 8,
+  DELETE: 46,
+  LEFT_ARROW: 37,
+  RIGHT_ARROW: 39
+}
+
 class ChipInput extends React.Component {
   state = {
     chips: [],
@@ -223,22 +230,29 @@ class ChipInput extends React.Component {
     if (this.state.focusedChip != null) {
       this.setState({ focusedChip: null })
     }
-    if (this.props.blurBehavior === 'add') {
-      // Lets assume that we only want to add the existing content as chip, when
-      // another event has not added a chip within 200ms .
-      // e.g. onSelection Callback in Autocomplete case
-      let numChipsBefore = (this.props.value || this.state.chips).length
-      let value = event.target.value
-      this.inputBlurTimeout = setTimeout(() => {
-        let numChipsAfter = (this.props.value || this.state.chips).length
-        if (numChipsBefore === numChipsAfter) {
-          this.handleAddChip(value)
+    const value = event.target.value
+    switch (this.props.blurBehavior) {
+      case 'add':
+        if (this.props.delayBeforeAdd) {
+          // Lets assume that we only want to add the existing content as chip, when
+          // another event has not added a chip within 200ms .
+          // e.g. onSelection Callback in Autocomplete case
+          let numChipsBefore = (this.props.value || this.state.chips).length
+          this.inputBlurTimeout = setTimeout(() => {
+            let numChipsAfter = (this.props.value || this.state.chips).length
+            if (numChipsBefore === numChipsAfter) {
+              this.handleAddChip(value)
+            } else {
+              this.clearInput()
+            }
+          }, 150)
         } else {
-          this.clearInput()
+          this.handleAddChip(value)
         }
-      }, 150)
-    } else if (this.props.blurBehavior === 'clear') {
-      this.clearInput()
+        break
+      case 'clear':
+        this.clearInput()
+        break
     }
   }
 
@@ -262,45 +276,53 @@ class ChipInput extends React.Component {
         return
       }
     }
-
+    const chips = this.props.value || this.state.chips
     if (this.props.newChipKeyCodes.indexOf(event.keyCode) >= 0) {
-      let result = this.handleAddChip(event.target.value)
+      const result = this.handleAddChip(event.target.value)
       if (result !== false) {
         event.preventDefault()
       }
-    } else if (event.keyCode === 8 || event.keyCode === 46) {
-      if (event.target.value === '') {
-        const chips = this.props.value || this.state.chips
-        if (focusedChip == null && event.keyCode === 8) {
-          this.setState({ focusedChip: chips.length - 1 })
-        } else if (focusedChip != null) {
-          const chips = this.props.value || this.state.chips
-          const value = chips[focusedChip]
-          this.handleDeleteChip(value, focusedChip)
-          if (event.keyCode === 8 && focusedChip > 0) {
-            this.setState({ focusedChip: focusedChip - 1 })
-          } else if (event.keyCode === 46 && focusedChip <= chips.length - 1) {
+      return
+    }
+
+    switch (event.keyCode) {
+      case keyCodes.BACKSPACE:
+        if (event.target.value === '') {
+          if (focusedChip != null) {
+            this.handleDeleteChip(chips[focusedChip], focusedChip)
+            if (focusedChip > 0) {
+              this.setState({ focusedChip: focusedChip - 1 })
+            }
+          } else {
+            this.setState({ focusedChip: chips.length - 1 })
+          }
+        }
+        break
+      case keyCodes.DELETE:
+        if (event.target.value === '' && focusedChip != null) {
+          this.handleDeleteChip(chips[focusedChip], focusedChip)
+          if (focusedChip <= chips.length - 1) {
             this.setState({ focusedChip })
           }
         }
-      }
-    } else if (event.keyCode === 37) {
-      const chips = this.props.value || this.state.chips
-      if (focusedChip == null && event.target.value === '' && chips.length) {
-        return this.setState({ focusedChip: chips.length - 1 })
-      }
-      if (focusedChip != null && focusedChip > 0) {
-        this.setState({ focusedChip: focusedChip - 1 })
-      }
-    } else if (event.keyCode === 39) {
-      const chips = this.props.value || this.state.chips
-      if (focusedChip != null && focusedChip < chips.length - 1) {
-        this.setState({ focusedChip: focusedChip + 1 })
-      } else {
+        break
+      case keyCodes.LEFT_ARROW:
+        if (focusedChip == null && event.target.value === '' && chips.length) {
+          this.setState({ focusedChip: chips.length - 1 })
+        } else if (focusedChip != null && focusedChip > 0) {
+          this.setState({ focusedChip: focusedChip - 1 })
+        }
+        break
+      case keyCodes.RIGHT_ARROW:
+        if (focusedChip != null && focusedChip < chips.length - 1) {
+          this.setState({ focusedChip: focusedChip + 1 })
+        } else {
+          this.setState({ focusedChip: null })
+        }
+        break
+      default:
         this.setState({ focusedChip: null })
-      }
-    } else {
-      this.setState({ focusedChip: null })
+        break
     }
   }
 
@@ -308,7 +330,7 @@ class ChipInput extends React.Component {
     if (!this._preventChipCreation && this.props.newChipKeyCodes.indexOf(event.keyCode) > 0 && this._keyPressed) {
       this.clearInput()
     } else {
-      this.setState({ inputValue: event.target.value })
+      this.updateInput(event.target.value)
     }
     if (this.props.onKeyUp) { this.props.onKeyUp(event) }
   }
@@ -320,7 +342,7 @@ class ChipInput extends React.Component {
 
   handleUpdateInput = (e) => {
     if (this.props.inputValue == null) {
-      this.setState({ inputValue: e.target.value })
+      this.updateInput(e.target.value)
     }
 
     if (this.props.onUpdateInput) {
@@ -338,7 +360,7 @@ class ChipInput extends React.Component {
       this._preventChipCreation = true
       return false
     }
-    this.setState({ inputValue: '' })
+    this.clearInput()
     const chips = this.props.value || this.state.chips
 
     if (this.props.dataSourceConfig) {
@@ -356,7 +378,10 @@ class ChipInput extends React.Component {
           this.updateChips([ ...this.state.chips, chip ])
         }
       }
-    } else if (chip.trim().length > 0) {
+      return true
+    }
+
+    if (chip.trim().length > 0) {
       if (this.props.allowDuplicates || chips.indexOf(chip) === -1) {
         if (this.props.value && this.props.onAdd) {
           this.props.onAdd(chip)
@@ -364,18 +389,13 @@ class ChipInput extends React.Component {
           this.updateChips([ ...this.state.chips, chip ])
         }
       }
-    } else {
-      return false
+      return true
     }
-    return true
+    return false
   }
 
   handleDeleteChip (chip, i) {
-    if (this.props.value) {
-      if (this.props.onDelete) {
-        this.props.onDelete(chip, i)
-      }
-    } else {
+    if (!this.props.value) {
       const chips = this.state.chips.slice()
       const changed = chips.splice(i, 1) // remove the chip at index i
       if (changed) {
@@ -387,6 +407,8 @@ class ChipInput extends React.Component {
         }
         this.updateChips(chips, { focusedChip })
       }
+    } else if (this.props.onDelete) {
+      this.props.onDelete(chip, i)
     }
   }
 
@@ -403,7 +425,11 @@ class ChipInput extends React.Component {
    * @public
    */
   clearInput () {
-    this.setState({ inputValue: '' })
+    this.updateInput('')
+  }
+
+  updateInput (value) {
+    this.setState({ inputValue: value })
   }
 
   /**
@@ -427,9 +453,10 @@ class ChipInput extends React.Component {
       classes,
       className,
       clearInputValueOnChange,
-      defaultValue,
       dataSource,
       dataSourceConfig,
+      defaultValue,
+      delayBeforeAdd,
       disabled,
       disableUnderline,
       error,
@@ -521,7 +548,7 @@ class ChipInput extends React.Component {
         {label && (
           <InputLabel
             htmlFor={id}
-            classes={{root: cx(classes[variant], classes.label), shrink: classes.labelShrink}}
+            classes={{ root: cx(classes[variant], classes.label), shrink: classes.labelShrink }}
             shrink={shrinkFloatingLabel}
             focused={this.state.isFocused}
             variant={variant}
@@ -600,6 +627,8 @@ ChipInput.propTypes = {
   }),
   /** The chips to display by default (for uncontrolled mode). */
   defaultValue: PropTypes.array,
+  /** Whether to use `setTimeout` to delay adding chips in case other input events like `onSelection` need to fire first */
+  delayBeforeAdd: PropTypes.bool,
   /** Disables the chip input if set to true. */
   disabled: PropTypes.bool,
   /** Disable the input underline. Only valid for 'standard' variant */
@@ -646,6 +675,7 @@ ChipInput.defaultProps = {
   allowDuplicates: false,
   blurBehavior: 'clear',
   clearInputValueOnChange: false,
+  delayBeforeAdd: false,
   disableUnderline: false,
   newChipKeyCodes: [13],
   variant: 'standard'
