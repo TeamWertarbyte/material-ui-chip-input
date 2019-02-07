@@ -453,10 +453,10 @@ class ChipInput extends React.Component {
       classes,
       className,
       clearInputValueOnChange,
-      defaultValue,
-      delayBeforeAdd,
       dataSource,
       dataSourceConfig,
+      defaultValue,
+      delayBeforeAdd,
       disabled,
       disableUnderline,
       error,
@@ -627,12 +627,12 @@ ChipInput.propTypes = {
   }),
   /** The chips to display by default (for uncontrolled mode). */
   defaultValue: PropTypes.array,
+  /** Whether to use `setTimeout` to delay adding chips in case other input events like `onSelection` need to fire first */
+  delayBeforeAdd: PropTypes.bool,
   /** Disables the chip input if set to true. */
   disabled: PropTypes.bool,
   /** Disable the input underline. Only valid for 'standard' variant */
   disableUnderline: PropTypes.bool,
-  /** Whether to use `setTimeout` to delay adding chips in case other input events like `onSelection` need to fire first */
-  delayBeforeAdd: PropTypes.bool,
   /** Props to pass through to the `FormHelperText` component. */
   FormHelperTextProps: PropTypes.object,
   /** If true, the chip input will fill the available width. */
@@ -675,8 +675,8 @@ ChipInput.defaultProps = {
   allowDuplicates: false,
   blurBehavior: 'clear',
   clearInputValueOnChange: false,
-  disableUnderline: false,
   delayBeforeAdd: false,
+  disableUnderline: false,
   newChipKeyCodes: [13],
   variant: 'standard'
 }
