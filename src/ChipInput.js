@@ -189,11 +189,15 @@ class ChipInput extends React.Component {
     let newState = null
 
     if (props.value && props.value.length !== state.prevPropsValue.length) {
+      newState = { prevPropsValue: props.value }
       if (props.clearInputValueOnChange) {
-        newState = { inputValue: '' }
-      } else {
-        newState = { prevPropsValue: props.value }
+        newState.inputValue = ''
       }
+    }
+
+    // if change detection is only needed for clearInputValueOnChange
+    if (props.clearInputValueOnChange && props.value && props.value.length !== state.prevPropsValue.length) {
+      newState = { prevPropsValue: props.value, inputValue: '' }
     }
 
     if (props.disabled) {
