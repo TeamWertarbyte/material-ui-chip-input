@@ -233,7 +233,7 @@ class ChipInput extends React.Component {
     const value = event.target.value
     switch (this.props.blurBehavior) {
       case 'add':
-        if (this.props.delayBeforeAdd === true) {
+        if (this.props.delayBeforeAdd) {
           // Lets assume that we only want to add the existing content as chip, when
           // another event has not added a chip within 200ms .
           // e.g. onSelection Callback in Autocomplete case
