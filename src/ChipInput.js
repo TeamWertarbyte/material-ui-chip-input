@@ -685,7 +685,7 @@ ChipInput.defaultProps = {
   variant: 'standard'
 }
 
-export default withStyles(styles)(ChipInput)
+export default withStyles(styles, { name: 'WAMuiChipInput' })(ChipInput)
 
 export const defaultChipRenderer = ({ value, text, isFocused, isDisabled, handleClick, handleDelete, className }, key) => (
   <Chip

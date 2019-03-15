@@ -14,23 +14,23 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
     blurBehavior="clear"
     classes={
       Object {
-        "chip": "ChipInput-chip-17",
-        "chipContainer": "ChipInput-chipContainer-4",
-        "disabled": "ChipInput-disabled-14",
-        "error": "ChipInput-error-16",
-        "filled": "ChipInput-filled-7",
-        "focused": "ChipInput-focused-13",
-        "helperText": "ChipInput-helperText-11",
-        "inkbar": "ChipInput-inkbar-12",
-        "input": "ChipInput-input-3",
-        "inputRoot": "ChipInput-inputRoot-2",
-        "label": "ChipInput-label-9",
-        "labelShrink": "ChipInput-labelShrink-10",
-        "labeled": "ChipInput-labeled-8",
-        "outlined": "ChipInput-outlined-5",
-        "root": "ChipInput-root-1",
-        "standard": "ChipInput-standard-6",
-        "underline": "ChipInput-underline-15",
+        "chip": "WAMuiChipInput-chip-17",
+        "chipContainer": "WAMuiChipInput-chipContainer-4",
+        "disabled": "WAMuiChipInput-disabled-14",
+        "error": "WAMuiChipInput-error-16",
+        "filled": "WAMuiChipInput-filled-7",
+        "focused": "WAMuiChipInput-focused-13",
+        "helperText": "WAMuiChipInput-helperText-11",
+        "inkbar": "WAMuiChipInput-inkbar-12",
+        "input": "WAMuiChipInput-input-3",
+        "inputRoot": "WAMuiChipInput-inputRoot-2",
+        "label": "WAMuiChipInput-label-9",
+        "labelShrink": "WAMuiChipInput-labelShrink-10",
+        "labeled": "WAMuiChipInput-labeled-8",
+        "outlined": "WAMuiChipInput-outlined-5",
+        "root": "WAMuiChipInput-root-1",
+        "standard": "WAMuiChipInput-standard-6",
+        "underline": "WAMuiChipInput-underline-15",
       }
     }
     clearInputValueOnChange={false}
@@ -50,12 +50,12 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
     variant="standard"
   >
     <WithStyles(FormControl)
-      className="ChipInput-root-1"
+      className="WAMuiChipInput-root-1"
       onClick={[Function]}
       variant="standard"
     >
       <FormControl
-        className="ChipInput-root-1"
+        className="WAMuiChipInput-root-1"
         classes={
           Object {
             "fullWidth": "MuiFormControl-fullWidth-21",
@@ -74,14 +74,14 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
         variant="standard"
       >
         <div
-          className="MuiFormControl-root-18 ChipInput-root-1"
+          className="MuiFormControl-root-18 WAMuiChipInput-root-1"
           onClick={[Function]}
         >
           <div
-            className="ChipInput-standard-6 ChipInput-chipContainer-4 ChipInput-inkbar-12 ChipInput-underline-15"
+            className="WAMuiChipInput-standard-6 WAMuiChipInput-chipContainer-4 WAMuiChipInput-inkbar-12 WAMuiChipInput-underline-15"
           >
             <WithStyles(Chip)
-              className="ChipInput-chip-17"
+              className="WAMuiChipInput-chip-17"
               key="0"
               label="foo"
               onClick={[Function]}
@@ -94,7 +94,7 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
               }
             >
               <Chip
-                className="ChipInput-chip-17"
+                className="WAMuiChipInput-chip-17"
                 classes={
                   Object {
                     "avatar": "MuiChip-avatar-34",
@@ -138,7 +138,7 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                 variant="default"
               >
                 <div
-                  className="MuiChip-root-22 MuiChip-clickable-25 MuiChip-deletable-28 ChipInput-chip-17"
+                  className="MuiChip-root-22 MuiChip-clickable-25 MuiChip-deletable-28 WAMuiChipInput-chip-17"
                   onClick={[Function]}
                   onKeyDown={[Function]}
                   onKeyUp={[Function]}
@@ -209,7 +209,7 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
               </Chip>
             </WithStyles(Chip)>
             <WithStyles(Chip)
-              className="ChipInput-chip-17"
+              className="WAMuiChipInput-chip-17"
               key="1"
               label="bar"
               onClick={[Function]}
@@ -222,7 +222,7 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
               }
             >
               <Chip
-                className="ChipInput-chip-17"
+                className="WAMuiChipInput-chip-17"
                 classes={
                   Object {
                     "avatar": "MuiChip-avatar-34",
@@ -266,7 +266,7 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                 variant="default"
               >
                 <div
-                  className="MuiChip-root-22 MuiChip-clickable-25 MuiChip-deletable-28 ChipInput-chip-17"
+                  className="MuiChip-root-22 MuiChip-clickable-25 MuiChip-deletable-28 WAMuiChipInput-chip-17"
                   onClick={[Function]}
                   onKeyDown={[Function]}
                   onKeyUp={[Function]}
@@ -339,8 +339,8 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
             <WithStyles(Input)
               classes={
                 Object {
-                  "input": "ChipInput-input-3 ChipInput-standard-6",
-                  "root": "ChipInput-inputRoot-2 ChipInput-standard-6",
+                  "input": "WAMuiChipInput-input-3 WAMuiChipInput-standard-6",
+                  "root": "WAMuiChipInput-inputRoot-2 WAMuiChipInput-standard-6",
                 }
               }
               disableUnderline={true}
@@ -361,13 +361,13 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                     "focused": "MuiInput-focused-58",
                     "formControl": "MuiInput-formControl-57",
                     "fullWidth": "MuiInput-fullWidth-63",
-                    "input": "MuiInput-input-64 ChipInput-input-3 ChipInput-standard-6",
+                    "input": "MuiInput-input-64 WAMuiChipInput-input-3 WAMuiChipInput-standard-6",
                     "inputMarginDense": "MuiInput-inputMarginDense-65",
                     "inputMultiline": "MuiInput-inputMultiline-66",
                     "inputType": "MuiInput-inputType-67",
                     "inputTypeSearch": "MuiInput-inputTypeSearch-68",
                     "multiline": "MuiInput-multiline-62",
-                    "root": "MuiInput-root-56 ChipInput-inputRoot-2 ChipInput-standard-6",
+                    "root": "MuiInput-root-56 WAMuiChipInput-inputRoot-2 WAMuiChipInput-standard-6",
                     "underline": "MuiInput-underline-60",
                   }
                 }
@@ -389,13 +389,13 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                       "focused": "MuiInput-focused-58",
                       "formControl": "MuiInput-formControl-57",
                       "fullWidth": "MuiInput-fullWidth-63",
-                      "input": "MuiInput-input-64 ChipInput-input-3 ChipInput-standard-6",
+                      "input": "MuiInput-input-64 WAMuiChipInput-input-3 WAMuiChipInput-standard-6",
                       "inputMarginDense": "MuiInput-inputMarginDense-65",
                       "inputMultiline": "MuiInput-inputMultiline-66",
                       "inputType": "MuiInput-inputType-67",
                       "inputTypeSearch": "MuiInput-inputTypeSearch-68",
                       "multiline": "MuiInput-multiline-62",
-                      "root": "MuiInput-root-56 ChipInput-inputRoot-2 ChipInput-standard-6",
+                      "root": "MuiInput-root-56 WAMuiChipInput-inputRoot-2 WAMuiChipInput-standard-6",
                       "underline": null,
                     }
                   }
@@ -422,7 +422,7 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                         "focused": "MuiInputBase-focused-71 MuiInput-focused-58",
                         "formControl": "MuiInputBase-formControl-70 MuiInput-formControl-57",
                         "fullWidth": "MuiInputBase-fullWidth-78 MuiInput-fullWidth-63",
-                        "input": "MuiInputBase-input-79 MuiInput-input-64 ChipInput-input-3 ChipInput-standard-6",
+                        "input": "MuiInputBase-input-79 MuiInput-input-64 WAMuiChipInput-input-3 WAMuiChipInput-standard-6",
                         "inputAdornedEnd": "MuiInputBase-inputAdornedEnd-85",
                         "inputAdornedStart": "MuiInputBase-inputAdornedStart-84",
                         "inputMarginDense": "MuiInputBase-inputMarginDense-80 MuiInput-inputMarginDense-65",
@@ -431,7 +431,7 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                         "inputTypeSearch": "MuiInputBase-inputTypeSearch-83 MuiInput-inputTypeSearch-68",
                         "marginDense": "MuiInputBase-marginDense-76",
                         "multiline": "MuiInputBase-multiline-77 MuiInput-multiline-62",
-                        "root": "MuiInputBase-root-69 MuiInput-root-56 ChipInput-inputRoot-2 ChipInput-standard-6",
+                        "root": "MuiInputBase-root-69 MuiInput-root-56 WAMuiChipInput-inputRoot-2 WAMuiChipInput-standard-6",
                       }
                     }
                     fullWidth={false}
@@ -457,7 +457,7 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                           "focused": "MuiInputBase-focused-71 MuiInput-focused-58",
                           "formControl": "MuiInputBase-formControl-70 MuiInput-formControl-57",
                           "fullWidth": "MuiInputBase-fullWidth-78 MuiInput-fullWidth-63",
-                          "input": "MuiInputBase-input-79 MuiInput-input-64 ChipInput-input-3 ChipInput-standard-6",
+                          "input": "MuiInputBase-input-79 MuiInput-input-64 WAMuiChipInput-input-3 WAMuiChipInput-standard-6",
                           "inputAdornedEnd": "MuiInputBase-inputAdornedEnd-85",
                           "inputAdornedStart": "MuiInputBase-inputAdornedStart-84",
                           "inputMarginDense": "MuiInputBase-inputMarginDense-80 MuiInput-inputMarginDense-65",
@@ -466,7 +466,7 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                           "inputTypeSearch": "MuiInputBase-inputTypeSearch-83 MuiInput-inputTypeSearch-68",
                           "marginDense": "MuiInputBase-marginDense-76",
                           "multiline": "MuiInputBase-multiline-77 MuiInput-multiline-62",
-                          "root": "MuiInputBase-root-69 MuiInput-root-56 ChipInput-inputRoot-2 ChipInput-standard-6",
+                          "root": "MuiInputBase-root-69 MuiInput-root-56 WAMuiChipInput-inputRoot-2 WAMuiChipInput-standard-6",
                         }
                       }
                       fullWidth={false}
@@ -499,13 +499,13 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                       value=""
                     >
                       <div
-                        className="MuiInputBase-root-69 MuiInput-root-56 ChipInput-inputRoot-2 ChipInput-standard-6 MuiInputBase-formControl-70 MuiInput-formControl-57"
+                        className="MuiInputBase-root-69 MuiInput-root-56 WAMuiChipInput-inputRoot-2 WAMuiChipInput-standard-6 MuiInputBase-formControl-70 MuiInput-formControl-57"
                         onClick={[Function]}
                         onKeyPress={[Function]}
                       >
                         <input
                           aria-invalid={false}
-                          className="MuiInputBase-input-79 MuiInput-input-64 ChipInput-input-3 ChipInput-standard-6"
+                          className="MuiInputBase-input-79 MuiInput-input-64 WAMuiChipInput-input-3 WAMuiChipInput-standard-6"
                           disabled={false}
                           onBlur={[Function]}
                           onChange={[Function]}

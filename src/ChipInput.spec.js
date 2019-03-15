@@ -542,3 +542,7 @@ describe('controlled text input', () => {
     expect(handleUpdateInput).toHaveBeenCalled()
   })
 })
+
+it('should have a className prefix', () => {
+  expect(ChipInput.options.name).toBe('WAMuiChipInput')
+})
