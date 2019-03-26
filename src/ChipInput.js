@@ -502,17 +502,17 @@ class ChipInput extends React.Component {
       ? InputLabelProps.shrink
       : (label != null && (hasInput || this.state.isFocused || chips.length > 0))
 
-    const chipComponents = chips.map((tag, i) => {
-      const value = dataSourceConfig ? tag[dataSourceConfig.value] : tag
+    const chipComponents = chips.map((chip, i) => {
+      const value = dataSourceConfig ? chip[dataSourceConfig.value] : chip
       return chipRenderer(
         {
           value,
-          text: dataSourceConfig ? tag[dataSourceConfig.text] : tag,
-          chip: tag,
+          text: dataSourceConfig ? chip[dataSourceConfig.text] : chip,
+          chip,
           isDisabled: !!disabled,
           isFocused: this.state.focusedChip === i,
           handleClick: () => this.setState({ focusedChip: i }),
-          handleDelete: () => this.handleDeleteChip(value, i),
+          handleDelete: () => this.handleDeleteChip(chip, i),
           className: classes.chip
         },
         i
