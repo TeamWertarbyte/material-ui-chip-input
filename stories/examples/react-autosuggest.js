@@ -75,13 +75,13 @@ function renderSuggestion (suggestion, { query, isHighlighted }) {
       <div>
         {parts.map((part, index) => {
           return part.highlight ? (
-            <span key={String(index)} style={{ fontWeight: 300 }}>
+            <span key={String(index)} style={{ fontWeight: 500 }}>
               {part.text}
             </span>
           ) : (
-            <strong key={String(index)} style={{ fontWeight: 500 }}>
+            <span key={String(index)}>
               {part.text}
-            </strong>
+            </span>
           )
         })}
       </div>
@@ -148,7 +148,7 @@ const styles = theme => ({
   }
 })
 
-class ReactAutosuggestExample extends React.Component {
+class ReactAutosuggest extends React.Component {
   state = {
     // value: '',
     suggestions: [],
@@ -175,19 +175,24 @@ class ReactAutosuggestExample extends React.Component {
   };
 
   handleAddChip (chip) {
-    this.setState({
-      value: [...this.state.value, chip],
+    this.setState(({ value }) => ({
+      value: [...value, chip],
       textFieldInput: ''
-    })
-  }
-  handleDeleteChip (chip, index) {
-    let temp = this.state.value
-    temp.splice(index, 1)
-    this.setState({ value: temp })
+    }))
   }
 
+  handleDeleteChip (chip, index) {
+    this.setState(({ value }) => {
+      const temp = value.slice()
+      temp.splice(index, 1)
+      return {
+        value: temp
+      }
+    })
+  };
+
   render () {
-    const { classes, ...rest } = this.props
+    const { classes, ...other } = this.props
 
     return (
       <Autosuggest
@@ -209,24 +214,24 @@ class ReactAutosuggestExample extends React.Component {
         inputProps={{
           classes,
           chips: this.state.value,
-          onChange: this.handletextFieldInputChange,
           value: this.state.textFieldInput,
+          onChange: this.handletextFieldInputChange,
           onAdd: (chip) => this.handleAddChip(chip),
           onDelete: (chip, index) => this.handleDeleteChip(chip, index),
-          ...rest
+          ...other
         }}
       />
     )
   }
 }
 
-ReactAutosuggestExample.propTypes = {
+ReactAutosuggest.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-exports.ReactAutosuggestExample = withStyles(styles)(ReactAutosuggestExample)
+export const ReactAutosuggestExample = withStyles(styles)(ReactAutosuggest)
 
-class ReactAutosuggestRemoteExample extends React.Component {
+class ReactAutosuggestRemote extends React.Component {
   state = {
     // value: '',
     suggestions: [],
@@ -301,7 +306,7 @@ class ReactAutosuggestRemoteExample extends React.Component {
   }
 }
 
-ReactAutosuggestRemoteExample.propTypes = {
+ReactAutosuggestRemote.propTypes = {
   classes: PropTypes.object.isRequired
 }
-exports.ReactAutosuggestRemoteExample = withStyles(styles)(ReactAutosuggestRemoteExample)
+exports.ReactAutosuggestRemote = withStyles(styles)(ReactAutosuggestRemote)
