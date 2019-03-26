@@ -47,14 +47,12 @@ const suggestions = [
 ]
 
 function renderInput (inputProps) {
-  const { classes, autoFocus, value, onChange, onAdd, onDelete, chips, ref, ...other } = inputProps
+  const { value, onChange, chips, ref, ...other } = inputProps
 
   return (
     <ChipInput
       clearInputValueOnChange
       onUpdateInput={onChange}
-      onAdd={onAdd}
-      onDelete={onDelete}
       value={chips}
       inputRef={ref}
       {...other}
@@ -125,15 +123,15 @@ function getSuggestions (value) {
 const styles = theme => ({
   container: {
     flexGrow: 1,
-    position: 'relative',
-    height: 200
+    position: 'relative'
   },
   suggestionsContainerOpen: {
     position: 'absolute',
     marginTop: theme.spacing.unit,
     marginBottom: theme.spacing.unit * 3,
     left: 0,
-    right: 0
+    right: 0,
+    zIndex: 1
   },
   suggestion: {
     display: 'block'
@@ -175,10 +173,12 @@ class ReactAutosuggest extends React.Component {
   };
 
   handleAddChip (chip) {
-    this.setState(({ value }) => ({
-      value: [...value, chip],
-      textFieldInput: ''
-    }))
+    if (this.props.allowDuplicates || this.state.value.indexOf(chip) < 0) {
+      this.setState(({ value }) => ({
+        value: [...value, chip],
+        textFieldInput: ''
+      }))
+    }
   }
 
   handleDeleteChip (chip, index) {
@@ -212,7 +212,6 @@ class ReactAutosuggest extends React.Component {
         onSuggestionSelected={(e, { suggestionValue }) => { this.handleAddChip(suggestionValue); e.preventDefault() }}
         focusInputOnSuggestionClick={false}
         inputProps={{
-          classes,
           chips: this.state.value,
           value: this.state.textFieldInput,
           onChange: this.handletextFieldInputChange,
@@ -226,6 +225,7 @@ class ReactAutosuggest extends React.Component {
 }
 
 ReactAutosuggest.propTypes = {
+  allowDuplicates: PropTypes.bool,
   classes: PropTypes.object.isRequired
 }
 
