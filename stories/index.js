@@ -77,14 +77,14 @@ storiesOf('ChipInput', module)
           isDisabled,
           handleClick,
           handleDelete,
-          defaultStyle
+          className
         },
         key
       ) => (
         <Chip
           key={key}
+          className={className}
           style={{
-            ...defaultStyle,
             pointerEvents: isDisabled ? 'none' : undefined,
             backgroundColor: isFocused ? green[800] : green[300]
           }}
