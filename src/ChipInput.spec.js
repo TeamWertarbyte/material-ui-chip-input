@@ -156,6 +156,69 @@ describe('controlled mode', () => {
     tree.setProps({ value: ['foo', 'bar'] })
     expect(tree.find('input').getDOMNode().value).toBe('bar')
   })
+
+  it('calls onAdd when adding new chips', () => {
+    // using object chips to test that too
+    const handleAdd = jest.fn()
+    const tree = mount(
+      <ChipInput
+        onAdd={handleAdd}
+        value={[{ text: 'a', value: 1 }, { text: 'b', value: 2 }]}
+        dataSourceConfig={{ text: 'text', value: 'value' }}
+      />
+    )
+
+    tree.find('input').getDOMNode().value = 'foo'
+    tree.find('input').simulate('keyDown', { keyCode: 13 }) // press enter
+    expect(handleAdd).toBeCalledWith({ text: 'foo', value: 'foo' })
+  })
+
+  it('calls onDelete when deleting chips with backspace key', () => {
+    // using object chips to test that too
+    const handleDelete = jest.fn()
+    const tree = mount(
+      <ChipInput
+        onDelete={handleDelete}
+        value={[{ text: 'a', value: 1 }, { text: 'b', value: 2 }]}
+        dataSourceConfig={{ text: 'text', value: 'value' }}
+      />
+    )
+
+    tree.find('input').simulate('keyDown', { keyCode: 8 }) // backspace (to focus the chip)
+    tree.find('input').simulate('keyDown', { keyCode: 8 }) // backspace (to remove the chip)
+    expect(handleDelete).toBeCalledWith({ text: 'b', value: 2 }, 1) // chip value (object if dataSourceConfig is used) and index
+  })
+
+  it('calls onChange when deleting chips with delete key', () => {
+    // using object chips to test that too
+    const handleDelete = jest.fn()
+    const tree = mount(
+      <ChipInput
+        onDelete={handleDelete}
+        value={[{ text: 'a', value: 1 }, { text: 'b', value: 2 }]}
+        dataSourceConfig={{ text: 'text', value: 'value' }}
+      />
+    )
+
+    tree.find('input').simulate('keyDown', { keyCode: 8 }) // backspace (to focus the chip)
+    tree.find('input').simulate('keyDown', { keyCode: 46 }) // del (to remove the chip)
+    expect(handleDelete).toBeCalledWith({ text: 'b', value: 2 }, 1) // chip value (object if dataSourceConfig is used) and index
+  })
+
+  it('calls onChange when deleting chips by clicking on the remove button', () => {
+    // using object chips to test that too (this is a test for issue #112)
+    const handleDelete = jest.fn()
+    const tree = mount(
+      <ChipInput
+        onDelete={handleDelete}
+        value={[{ text: 'a', value: 1 }, { text: 'b', value: 2 }]}
+        dataSourceConfig={{ text: 'text', value: 'value' }}
+      />
+    )
+
+    tree.find('Cancel').first().simulate('click')
+    expect(handleDelete).toBeCalledWith({ text: 'a', value: 1 }, 0) // chip value (object if dataSourceConfig is used) and index
+  })
 })
 
 describe('chip focusing', () => {
