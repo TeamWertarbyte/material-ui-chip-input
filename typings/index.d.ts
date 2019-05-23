@@ -29,7 +29,7 @@ export interface Props extends Omit<FormControlProps, 'onChange'> {
   alwaysShowPlaceholder?: boolean;
   blurBehavior?: 'clear' | 'add' | 'ignore';
   chipRenderer?: ChipRenderer;
-  classes: Record<string, string>;
+  classes?: Record<string, string>;
   clearInputValueOnChange?: boolean;
   dataSource?: any[];
   dataSourceConfig?: {
