@@ -29,7 +29,7 @@ const styles = (theme) => {
   return {
     root: {},
     inputRoot: {
-      display: 'inline-block',
+      display: 'inline-flex',
       flex: 1,
       marginTop: 0,
       minWidth: 70,
