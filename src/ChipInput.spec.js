@@ -565,7 +565,7 @@ describe('keys', () => {
         onKeyDown={handleKeyDown}
         newChipKeyCodes={null} /> // This will raise an exception if the code reaches that part
     )
-    let input = tree.find('input')
+    const input = tree.find('input')
 
     expect(() => input.simulate('keyDown', {})).toThrow()
 

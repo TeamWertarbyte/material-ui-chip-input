@@ -266,8 +266,9 @@ class ReactAutosuggestRemote extends React.Component {
   handleAddChip (chip) {
     this.setState({ value: this.state.value.concat([chip]) })
   }
+
   handleDeleteChip (chip, index) {
-    let temp = this.state.value
+    const temp = this.state.value
     temp.splice(index, 1)
     this.setState({ value: temp })
   }
