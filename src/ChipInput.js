@@ -164,6 +164,7 @@ class ChipInput extends React.Component {
     inputValue: '',
     isClean: true,
     isFocused: false,
+    chipsUpdated: false,
     prevPropsValue: []
   }
 
@@ -204,6 +205,10 @@ class ChipInput extends React.Component {
 
     if (props.disabled) {
       newState = { ...newState, focusedChip: null }
+    }
+
+    if(!state.chipsUpdated && props.defaultValue) {
+      newState = { ...newState, chips: props.defaultValue };
     }
 
     return newState
@@ -419,7 +424,7 @@ class ChipInput extends React.Component {
   }
 
   updateChips (chips, additionalUpdates = {}) {
-    this.setState({ chips, ...additionalUpdates })
+    this.setState({ chips, chipsUpdated: true, ...additionalUpdates })
     if (this.props.onChange) {
       this.props.onChange(chips)
     }
