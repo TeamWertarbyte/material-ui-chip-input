@@ -69,7 +69,16 @@ const styles = (theme) => {
     },
     outlined: {},
     standard: {},
-    filled: {},
+    filled: {
+      '& input': {
+        height: 22,
+        marginBottom: 4,
+        marginTop: 4
+      },
+      '$marginDense & input': {
+        height: 26
+      }
+    },
     labeled: {},
     label: {
       top: 4,
@@ -77,7 +86,10 @@ const styles = (theme) => {
         top: -4
       },
       '&$filled&:not($labelShrink)': {
-        top: 0
+        top: 15,
+        '$marginDense &': {
+          top: 20
+        }
       }
     },
     labelShrink: {
@@ -146,7 +158,8 @@ const styles = (theme) => {
     chip: {
       margin: '0 8px 8px 0',
       float: 'left'
-    }
+    },
+    marginDense: {}
   }
 }
 
@@ -549,7 +562,9 @@ class ChipInput extends React.Component {
       <FormControl
         ref={rootRef}
         fullWidth={fullWidth}
-        className={cx(className, classes.root)}
+        className={cx(className, classes.root, {
+          [classes.marginDense]: other.margin === 'dense'
+        })}
         error={error}
         required={required}
         onClick={this.focus}
