@@ -53,9 +53,6 @@ const styles = (theme) => {
       WebkitTapHighlightColor: 'rgba(0,0,0,0)', // Remove mobile color flashing (deprecated style).
       float: 'left',
       flex: 1,
-      '&:not($standard)': {
-        paddingTop: 0
-      }
     },
     chipContainer: {
       display: 'flex',
@@ -67,13 +64,22 @@ const styles = (theme) => {
         marginTop: 18
       }
     },
-    outlined: {},
+    outlined: {
+      '& input': {
+        height: 16,
+        paddingTop: 4,
+        paddingBottom: 12,
+        marginTop: 4,
+        marginBottom: 4
+      }
+    },
     standard: {},
     filled: {
       '& input': {
         height: 22,
         marginBottom: 4,
-        marginTop: 4
+        marginTop: 4,
+        paddingTop: 0
       },
       '$marginDense & input': {
         height: 26
@@ -83,7 +89,10 @@ const styles = (theme) => {
     label: {
       top: 4,
       '&$outlined&:not($labelShrink)': {
-        top: -4
+        top: 2,
+        '$marginDense &': {
+          top: 5
+        }
       },
       '&$filled&:not($labelShrink)': {
         top: 15,
