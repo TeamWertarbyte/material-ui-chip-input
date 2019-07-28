@@ -52,7 +52,7 @@ const styles = (theme) => {
       appearance: 'none', // Remove border in Safari, doesn't seem to break anything in other browsers
       WebkitTapHighlightColor: 'rgba(0,0,0,0)', // Remove mobile color flashing (deprecated style).
       float: 'left',
-      flex: 1,
+      flex: 1
     },
     chipContainer: {
       display: 'flex',
