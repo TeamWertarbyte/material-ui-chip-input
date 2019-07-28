@@ -309,4 +309,4 @@ class ReactAutosuggestRemote extends React.Component {
 ReactAutosuggestRemote.propTypes = {
   classes: PropTypes.object.isRequired
 }
-exports.ReactAutosuggestRemote = withStyles(styles)(ReactAutosuggestRemote)
+export const ReactAutosuggestRemoteExample = withStyles(styles)(ReactAutosuggestRemote)

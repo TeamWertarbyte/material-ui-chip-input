@@ -5,20 +5,20 @@ class AsynchronousDefaultValue extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      chips: null,
+      chips: null
     }
   }
 
   componentDidMount () {
-      setTimeout(() => this.setState({ chips: ['Foo', 'Bar']}), 1000);
+    setTimeout(() => this.setState({ chips: ['Foo', 'Bar']}), 1000)
   }
 
   render () {
     return (
-        <ChipInput
-            defaultValue={this.state.chips}
-            fullWidth
-            onChange={()=>{}}
+      <ChipInput
+        defaultValue={this.state.chips}
+        fullWidth
+        onChange={() => {}}
         />
     )
   }
