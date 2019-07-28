@@ -272,7 +272,6 @@ storiesOf('ChipInput', module)
         <ChipInput variant='outlined' label='dense' margin='dense' style={{ float: 'left' }} />
         <ChipInput variant='outlined' label='none' margin='none' style={{ float: 'left' }} />
       </div>
-
     </div>
   ))
 
