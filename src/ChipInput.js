@@ -29,7 +29,8 @@ const styles = (theme) => {
   return {
     root: {},
     inputRoot: {
-      display: 'inline-block',
+      display: 'inline-flex',
+      flexWrap: 'wrap',
       flex: 1,
       marginTop: 0,
       minWidth: 70,
@@ -51,7 +52,7 @@ const styles = (theme) => {
       appearance: 'none', // Remove border in Safari, doesn't seem to break anything in other browsers
       WebkitTapHighlightColor: 'rgba(0,0,0,0)', // Remove mobile color flashing (deprecated style).
       float: 'left',
-      width: '100%',
+      flex: 1,
       '&:not($standard)': {
         paddingTop: 0
       }
