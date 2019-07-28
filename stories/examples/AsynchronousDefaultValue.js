@@ -10,7 +10,7 @@ class AsynchronousDefaultValue extends React.Component {
   }
 
   componentDidMount () {
-    setTimeout(() => this.setState({ chips: ['Foo', 'Bar']}), 1000)
+    setTimeout(() => this.setState({ chips: ['Foo', 'Bar'] }), 1000)
   }
 
   render () {
@@ -19,7 +19,7 @@ class AsynchronousDefaultValue extends React.Component {
         defaultValue={this.state.chips}
         fullWidth
         onChange={() => {}}
-        />
+      />
     )
   }
 }

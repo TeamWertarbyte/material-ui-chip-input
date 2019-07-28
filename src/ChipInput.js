@@ -208,8 +208,8 @@ class ChipInput extends React.Component {
       newState = { ...newState, focusedChip: null }
     }
 
-    if(!state.chipsUpdated && props.defaultValue) {
-      newState = { ...newState, chips: props.defaultValue };
+    if (!state.chipsUpdated && props.defaultValue) {
+      newState = { ...newState, chips: props.defaultValue }
     }
 
     return newState
@@ -249,9 +249,9 @@ class ChipInput extends React.Component {
           // Lets assume that we only want to add the existing content as chip, when
           // another event has not added a chip within 200ms .
           // e.g. onSelection Callback in Autocomplete case
-          let numChipsBefore = (this.props.value || this.state.chips).length
+          const numChipsBefore = (this.props.value || this.state.chips).length
           this.inputBlurTimeout = setTimeout(() => {
-            let numChipsAfter = (this.props.value || this.state.chips).length
+            const numChipsAfter = (this.props.value || this.state.chips).length
             if (numChipsBefore === numChipsAfter) {
               this.handleAddChip(value)
             } else {
@@ -387,7 +387,7 @@ class ChipInput extends React.Component {
         if (this.props.value && this.props.onAdd) {
           this.props.onAdd(chip)
         } else {
-          this.updateChips([ ...this.state.chips, chip ])
+          this.updateChips([...this.state.chips, chip])
         }
       }
       return true
@@ -398,7 +398,7 @@ class ChipInput extends React.Component {
         if (this.props.value && this.props.onAdd) {
           this.props.onAdd(chip)
         } else {
-          this.updateChips([ ...this.state.chips, chip ])
+          this.updateChips([...this.state.chips, chip])
         }
       }
       return true
