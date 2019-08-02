@@ -292,7 +292,7 @@ class ReactAutosuggestRemote extends React.Component {
         getSuggestionValue={getSuggestionValue}
         renderSuggestion={renderSuggestion}
         onSuggestionSelected={(e, { suggestionValue }) => { this.handleAddChip(suggestionValue); e.preventDefault() }}
-        focusInputOnSuggestionClick={false}
+        focusInputOnSuggestionClick
         inputProps={{
           classes,
           chips: this.state.value,
@@ -310,4 +310,4 @@ class ReactAutosuggestRemote extends React.Component {
 ReactAutosuggestRemote.propTypes = {
   classes: PropTypes.object.isRequired
 }
-exports.ReactAutosuggestRemote = withStyles(styles)(ReactAutosuggestRemote)
+export const ReactAutosuggestRemoteExample = withStyles(styles)(ReactAutosuggestRemote)

@@ -27,6 +27,7 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
         "label": "WAMuiChipInput-label-9",
         "labelShrink": "WAMuiChipInput-labelShrink-10",
         "labeled": "WAMuiChipInput-labeled-8",
+        "marginDense": "WAMuiChipInput-marginDense-18",
         "outlined": "WAMuiChipInput-outlined-5",
         "root": "WAMuiChipInput-root-1",
         "standard": "WAMuiChipInput-standard-6",

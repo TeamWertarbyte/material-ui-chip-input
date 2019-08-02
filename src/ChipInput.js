@@ -29,7 +29,8 @@ const styles = (theme) => {
   return {
     root: {},
     inputRoot: {
-      display: 'inline-block',
+      display: 'inline-flex',
+      flexWrap: 'wrap',
       flex: 1,
       marginTop: 0,
       minWidth: 70,
@@ -51,10 +52,7 @@ const styles = (theme) => {
       appearance: 'none', // Remove border in Safari, doesn't seem to break anything in other browsers
       WebkitTapHighlightColor: 'rgba(0,0,0,0)', // Remove mobile color flashing (deprecated style).
       float: 'left',
-      width: '100%',
-      '&:not($standard)': {
-        paddingTop: 0
-      }
+      flex: 1
     },
     chipContainer: {
       display: 'flex',
@@ -66,17 +64,41 @@ const styles = (theme) => {
         marginTop: 18
       }
     },
-    outlined: {},
+    outlined: {
+      '& input': {
+        height: 16,
+        paddingTop: 4,
+        paddingBottom: 12,
+        marginTop: 4,
+        marginBottom: 4
+      }
+    },
     standard: {},
-    filled: {},
+    filled: {
+      '& input': {
+        height: 22,
+        marginBottom: 4,
+        marginTop: 4,
+        paddingTop: 0
+      },
+      '$marginDense & input': {
+        height: 26
+      }
+    },
     labeled: {},
     label: {
       top: 4,
       '&$outlined&:not($labelShrink)': {
-        top: -4
+        top: 2,
+        '$marginDense &': {
+          top: 5
+        }
       },
       '&$filled&:not($labelShrink)': {
-        top: 0
+        top: 15,
+        '$marginDense &': {
+          top: 20
+        }
       }
     },
     labelShrink: {
@@ -145,7 +167,8 @@ const styles = (theme) => {
     chip: {
       margin: '0 8px 8px 0',
       float: 'left'
-    }
+    },
+    marginDense: {}
   }
 }
 
@@ -164,6 +187,7 @@ class ChipInput extends React.Component {
     inputValue: '',
     isClean: true,
     isFocused: false,
+    chipsUpdated: false,
     prevPropsValue: []
   }
 
@@ -204,6 +228,10 @@ class ChipInput extends React.Component {
 
     if (props.disabled) {
       newState = { ...newState, focusedChip: null }
+    }
+
+    if (!state.chipsUpdated && props.defaultValue) {
+      newState = { ...newState, chips: props.defaultValue }
     }
 
     return newState
@@ -419,7 +447,7 @@ class ChipInput extends React.Component {
   }
 
   updateChips (chips, additionalUpdates = {}) {
-    this.setState({ chips, ...additionalUpdates })
+    this.setState({ chips, chipsUpdated: true, ...additionalUpdates })
     if (this.props.onChange) {
       this.props.onChange(chips)
     }
@@ -543,7 +571,9 @@ class ChipInput extends React.Component {
       <FormControl
         ref={rootRef}
         fullWidth={fullWidth}
-        className={cx(className, classes.root)}
+        className={cx(className, classes.root, {
+          [classes.marginDense]: other.margin === 'dense'
+        })}
         error={error}
         required={required}
         onClick={this.focus}

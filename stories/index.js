@@ -9,6 +9,7 @@ import ChipInput from '../src/ChipInput'
 import CustomizedChipInput from './examples/CustomizedChipInput'
 import CustomInputFormatting from './examples/CustomInputFormatting'
 import ControlledChipInput from './examples/ControlledChipInput'
+import AsynchronousDefaultValue from './examples/AsynchronousDefaultValue'
 // import ClipboardExample from './examples/ClipboardExample'
 
 import {
@@ -116,6 +117,9 @@ storiesOf('ChipInput', module)
       <ChipInput label='none' margin='none' style={{ float: 'left' }} />
     </div>
   ))
+  .add('with asynchronous default value', () =>
+    <AsynchronousDefaultValue />
+  )
   .add('controlled input', () =>
     <ControlledChipInput />
   )
@@ -268,7 +272,6 @@ storiesOf('ChipInput', module)
         <ChipInput variant='outlined' label='dense' margin='dense' style={{ float: 'left' }} />
         <ChipInput variant='outlined' label='none' margin='none' style={{ float: 'left' }} />
       </div>
-
     </div>
   ))
 
