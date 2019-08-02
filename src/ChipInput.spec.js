@@ -145,7 +145,7 @@ describe('uncontrolled mode', () => {
     // in order to trigger a componentDidUpdate with Jest
     // see: https://github.com/airbnb/enzyme/issues/34#issuecomment-437284281
     tree.find('input').simulate('click')
-    expect(tree.find('Chip').map((chip) => chip.text())).toEqual(['Foo', 'Bar'])
+    expect(tree.find('ForwardRef(Chip)').map((chip) => chip.text())).toEqual(['Foo', 'Bar'])
   })
 
   it('try to set defaultValue after a user input', () => {
@@ -159,7 +159,7 @@ describe('uncontrolled mode', () => {
     // in order to trigger a componentDidUpdate with Jest
     // see: https://github.com/airbnb/enzyme/issues/34#issuecomment-437284281
     tree.find('input').simulate('click')
-    expect(tree.find('Chip').map((chip) => chip.text())).toEqual(['Foo'])
+    expect(tree.find('ForwardRef(Chip)').map((chip) => chip.text())).toEqual(['Foo'])
   })
 })
 
@@ -492,8 +492,6 @@ describe('blurBehavior modes', () => {
     jest.runAllTimers()
 
     expect(tree.find('input').getDOMNode().value).toBe('')
-    /* expect(setTimeout).toHaveBeenCalledTimes(1) */
-
     expect(handleChange.mock.calls[0][0]).toEqual(['a', 'b', 'blur'])
 
     tree.update()
@@ -512,7 +510,6 @@ describe('blurBehavior modes', () => {
     jest.runAllTimers()
 
     expect(tree.find('input').getDOMNode().value).toBe('')
-    /* expect(setTimeout).toHaveBeenCalledTimes(0) */
 
     expect(handleChange.mock.calls[0][0]).toEqual(['a', 'b', 'blur'])
 
