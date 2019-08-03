@@ -70,7 +70,7 @@
     "react-dom": "^16.8.6"
   },
   "dependencies": {
-    "classnames": "^2.2.5",
+    "clsx": "^1.0.4",
     "prop-types": "^15.6.1"
   },
   "jest": {

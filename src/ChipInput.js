@@ -14,7 +14,7 @@ import withStyles from '@material-ui/core/styles/withStyles'
 import blue from '@material-ui/core/colors/blue'
 import FormControl from '@material-ui/core/FormControl'
 import FormHelperText from '@material-ui/core/FormHelperText'
-import cx from 'classnames'
+import cx from 'clsx'
 
 const variantComponent = {
   standard: Input,
