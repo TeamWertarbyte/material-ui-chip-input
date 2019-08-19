@@ -107,14 +107,15 @@ const styles = (theme) => {
     helperText: {
       marginBottom: -20
     },
-    inkbar: {
+    focused: {},
+    disabled: {},
+    underline: {
       '&:after': {
-        backgroundColor: theme.palette.primary[light ? 'dark' : 'light'],
+        borderBottom: `2px solid ${theme.palette.primary[light ? 'dark' : 'light']}`,
         left: 0,
         bottom: 0,
-        // Doing the other way around crash on IE11 "''" https://github.com/cssinjs/jss/issues/242
+        // Doing the other way around crash on IE 11 "''" https://github.com/cssinjs/jss/issues/242
         content: '""',
-        height: 2,
         position: 'absolute',
         right: 0,
         transform: 'scaleX(0)',
@@ -126,36 +127,33 @@ const styles = (theme) => {
       },
       '&$focused:after': {
         transform: 'scaleX(1)'
-      }
-    },
-    focused: {},
-    disabled: {},
-    underline: {
+      },
+      '&$error:after': {
+        borderBottomColor: theme.palette.error.main,
+        transform: 'scaleX(1)' // error is always underlined in red
+      },
       '&:before': {
-        backgroundColor: bottomLineColor,
+        borderBottom: `1px solid ${bottomLineColor}`,
         left: 0,
         bottom: 0,
-        // Doing the other way around crash on IE11 "''" https://github.com/cssinjs/jss/issues/242
-        content: '""',
-        height: 1,
+        // Doing the other way around crash on IE 11 "''" https://github.com/cssinjs/jss/issues/242
+        content: '"\\00a0"',
         position: 'absolute',
         right: 0,
-        transition: theme.transitions.create('background-color', {
-          duration: theme.transitions.duration.shorter,
-          easing: theme.transitions.easing.easeIn
+        transition: theme.transitions.create('border-bottom-color', {
+          duration: theme.transitions.duration.shorter
         }),
         pointerEvents: 'none' // Transparent to the hover style.
       },
       '&:hover:not($disabled):before': {
-        backgroundColor: theme.palette.text.primary,
-        height: 2
+        borderBottom: `2px solid ${theme.palette.text.primary}`,
+        // Reset on touch devices, it doesn't add specificity
+        '@media (hover: none)': {
+          borderBottom: `1px solid ${bottomLineColor}`
+        }
       },
       '&$disabled:before': {
-        background: 'transparent',
-        backgroundImage: `linear-gradient(to right, ${bottomLineColor} 33%, transparent 0%)`,
-        backgroundPosition: 'left top',
-        backgroundRepeat: 'repeat-x',
-        backgroundSize: '5px 1px'
+        borderBottomStyle: 'dotted'
       }
     },
     error: {
@@ -599,7 +597,6 @@ class ChipInput extends React.Component {
             classes[variant],
             classes.chipContainer,
             {
-              [classes.inkbar]: !disableUnderline && variant === 'standard',
               [classes.focused]: this.state.isFocused,
               [classes.underline]: !disableUnderline && variant === 'standard',
               [classes.disabled]: disabled,
