@@ -359,7 +359,7 @@ class ChipInput extends React.Component {
   }
 
   handleKeyUp = (event) => {
-    if (!this._preventChipCreation && this.props.newChipKeyCodes.indexOf(event.keyCode) > 0 && this._keyPressed) {
+    if (!this._preventChipCreation && this.props.newChipKeyCodes.indexOf(event.keyCode) >= 0 && this._keyPressed) {
       this.clearInput()
     } else {
       this.updateInput(event.target.value)
