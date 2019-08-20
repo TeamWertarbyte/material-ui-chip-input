@@ -14,24 +14,23 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
     blurBehavior="clear"
     classes={
       Object {
-        "chip": "WAMuiChipInput-chip-17",
+        "chip": "WAMuiChipInput-chip-16",
         "chipContainer": "WAMuiChipInput-chipContainer-4",
-        "disabled": "WAMuiChipInput-disabled-14",
-        "error": "WAMuiChipInput-error-16",
+        "disabled": "WAMuiChipInput-disabled-13",
+        "error": "WAMuiChipInput-error-15",
         "filled": "WAMuiChipInput-filled-7",
-        "focused": "WAMuiChipInput-focused-13",
+        "focused": "WAMuiChipInput-focused-12",
         "helperText": "WAMuiChipInput-helperText-11",
-        "inkbar": "WAMuiChipInput-inkbar-12",
         "input": "WAMuiChipInput-input-3",
         "inputRoot": "WAMuiChipInput-inputRoot-2",
         "label": "WAMuiChipInput-label-9",
         "labelShrink": "WAMuiChipInput-labelShrink-10",
         "labeled": "WAMuiChipInput-labeled-8",
-        "marginDense": "WAMuiChipInput-marginDense-18",
+        "marginDense": "WAMuiChipInput-marginDense-17",
         "outlined": "WAMuiChipInput-outlined-5",
         "root": "WAMuiChipInput-root-1",
         "standard": "WAMuiChipInput-standard-6",
-        "underline": "WAMuiChipInput-underline-15",
+        "underline": "WAMuiChipInput-underline-14",
       }
     }
     clearInputValueOnChange={false}
@@ -46,6 +45,11 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
     newChipKeyCodes={
       Array [
         13,
+      ]
+    }
+    newChipKeys={
+      Array [
+        "Enter",
       ]
     }
     variant="standard"
@@ -73,10 +77,10 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
           onClick={[Function]}
         >
           <div
-            className="WAMuiChipInput-standard-6 WAMuiChipInput-chipContainer-4 WAMuiChipInput-inkbar-12 WAMuiChipInput-underline-15"
+            className="WAMuiChipInput-standard-6 WAMuiChipInput-chipContainer-4 WAMuiChipInput-underline-14"
           >
             <WithStyles(ForwardRef(Chip))
-              className="WAMuiChipInput-chip-17"
+              className="WAMuiChipInput-chip-16"
               key="0"
               label="foo"
               onClick={[Function]}
@@ -89,7 +93,7 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
               }
             >
               <ForwardRef(Chip)
-                className="WAMuiChipInput-chip-17"
+                className="WAMuiChipInput-chip-16"
                 classes={
                   Object {
                     "avatar": "MuiChip-avatar",
@@ -135,7 +139,7 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                 }
               >
                 <div
-                  className="MuiChip-root WAMuiChipInput-chip-17 MuiChip-clickable MuiChip-deletable"
+                  className="MuiChip-root WAMuiChipInput-chip-16 MuiChip-clickable MuiChip-deletable"
                   onClick={[Function]}
                   onKeyDown={[Function]}
                   onKeyUp={[Function]}
@@ -197,7 +201,7 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
               </ForwardRef(Chip)>
             </WithStyles(ForwardRef(Chip))>
             <WithStyles(ForwardRef(Chip))
-              className="WAMuiChipInput-chip-17"
+              className="WAMuiChipInput-chip-16"
               key="1"
               label="bar"
               onClick={[Function]}
@@ -210,7 +214,7 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
               }
             >
               <ForwardRef(Chip)
-                className="WAMuiChipInput-chip-17"
+                className="WAMuiChipInput-chip-16"
                 classes={
                   Object {
                     "avatar": "MuiChip-avatar",
@@ -256,7 +260,7 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
                 }
               >
                 <div
-                  className="MuiChip-root WAMuiChipInput-chip-17 MuiChip-clickable MuiChip-deletable"
+                  className="MuiChip-root WAMuiChipInput-chip-16 MuiChip-clickable MuiChip-deletable"
                   onClick={[Function]}
                   onKeyDown={[Function]}
                   onKeyUp={[Function]}
