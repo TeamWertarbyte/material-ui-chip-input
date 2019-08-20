@@ -121,16 +121,16 @@ const styles = (theme) => {
         transform: 'scaleX(0)',
         transition: theme.transitions.create('transform', {
           duration: theme.transitions.duration.shorter,
-          easing: theme.transitions.easing.easeOut,
+          easing: theme.transitions.easing.easeOut
         }),
-        pointerEvents: 'none', // Transparent to the hover style.
+        pointerEvents: 'none' // Transparent to the hover style.
       },
       '&$focused:after': {
-        transform: 'scaleX(1)',
+        transform: 'scaleX(1)'
       },
       '&$error:after': {
         borderBottomColor: theme.palette.error.main,
-        transform: 'scaleX(1)', // error is always underlined in red
+        transform: 'scaleX(1)' // error is always underlined in red
       },
       '&:before': {
         borderBottom: `1px solid ${bottomLineColor}`,
@@ -141,20 +141,20 @@ const styles = (theme) => {
         position: 'absolute',
         right: 0,
         transition: theme.transitions.create('border-bottom-color', {
-          duration: theme.transitions.duration.shorter,
+          duration: theme.transitions.duration.shorter
         }),
-        pointerEvents: 'none', // Transparent to the hover style.
+        pointerEvents: 'none' // Transparent to the hover style.
       },
       '&:hover:not($disabled):not($focused):not($error):before': {
         borderBottom: `2px solid ${theme.palette.text.primary}`,
         // Reset on touch devices, it doesn't add specificity
         '@media (hover: none)': {
-          borderBottom: `1px solid ${bottomLineColor}`,
-        },
+          borderBottom: `1px solid ${bottomLineColor}`
+        }
       },
       '&$disabled:before': {
-        borderBottomStyle: 'dotted',
-      },
+        borderBottomStyle: 'dotted'
+      }
     },
     error: {
       '&:after': {
@@ -309,7 +309,7 @@ class ChipInput extends React.Component {
       }
     }
     const chips = this.props.value || this.state.chips
-    if (this.props.newChipKeyCodes.indexOf(event.keyCode) >= 0) {
+    if (this.props.newChipKeyCodes.indexOf(event.keyCode) >= 0 || this.props.newChipKeys.indexOf(event.key) >= 0) {
       const result = this.handleAddChip(event.target.value)
       if (result !== false) {
         event.preventDefault()
@@ -359,7 +359,7 @@ class ChipInput extends React.Component {
   }
 
   handleKeyUp = (event) => {
-    if (!this._preventChipCreation && this.props.newChipKeyCodes.indexOf(event.keyCode) >= 0 && this._keyPressed) {
+    if (!this._preventChipCreation && (this.props.newChipKeyCodes.indexOf(event.keyCode) >= 0 || this.props.newChipKeys.indexOf(event.key) >= 0) && this._keyPressed) {
       this.clearInput()
     } else {
       this.updateInput(event.target.value)
@@ -504,6 +504,7 @@ class ChipInput extends React.Component {
       inputValue,
       label,
       newChipKeyCodes,
+      newChipKeys,
       onBeforeAdd,
       onAdd,
       onBlur,
@@ -684,8 +685,10 @@ ChipInput.propTypes = {
   inputValue: PropTypes.string,
   /* The content of the floating label. */
   label: PropTypes.node,
-  /** The key codes used to determine when to create a new chip. */
+  /** The key codes (`KeyboardEvent.keyCode`) used to determine when to create a new chip. */
   newChipKeyCodes: PropTypes.arrayOf(PropTypes.number),
+  /** The keys (`KeyboardEvent.key`) used to determine when to create a new chip. */
+  newChipKeys: PropTypes.arrayOf(PropTypes.string),
   /** Callback function that is called when a new chip was added (in controlled mode). */
   onAdd: PropTypes.func,
   /** Callback function that is called with the chip to be added and should return true to add the chip or false to prevent the chip from being added without clearing the text input. */
@@ -711,6 +714,7 @@ ChipInput.defaultProps = {
   delayBeforeAdd: false,
   disableUnderline: false,
   newChipKeyCodes: [13],
+  newChipKeys: ['Enter'],
   variant: 'standard'
 }
 

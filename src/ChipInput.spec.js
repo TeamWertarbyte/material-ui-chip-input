@@ -49,6 +49,32 @@ describe('uncontrolled mode', () => {
     expect(handleChange).toBeCalledWith(['foo', 'bar'])
   })
 
+  it('can use key instead of keyCode', () => {
+    const handleChange = jest.fn()
+    const tree = mount(
+      <ChipInput onChange={handleChange} />
+    )
+
+    tree.find('input').getDOMNode().value = 'foo'
+    tree.find('input').simulate('keyDown', { key: 'Enter' })
+    expect(handleChange).toBeCalledWith(['foo'])
+  })
+
+  it('can use custom keys to add chips', () => {
+    const handleChange = jest.fn()
+    const tree = mount(
+      <ChipInput onChange={handleChange} newChipKeys={['Enter', 'Tab']} />
+    )
+
+    tree.find('input').getDOMNode().value = 'foo'
+    tree.find('input').simulate('keyDown', { key: 'Tab' })
+    expect(handleChange).toBeCalledWith(['foo'])
+
+    tree.find('input').getDOMNode().value = 'bar'
+    tree.find('input').simulate('keyDown', { key: 'Enter' })
+    expect(handleChange).toBeCalledWith(['foo', 'bar'])
+  })
+
   it('calls onChange when deleting chips with backspace key', () => {
     const handleChange = jest.fn()
     const tree = mount(
