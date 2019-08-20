@@ -57,7 +57,8 @@ import ChipInput from 'material-ui-chip-input'
 |inputRef|`func`||Use this property to pass a ref callback to the native input component.|
 |inputValue|`string`||The input value (enables controlled mode for the text input if set).|
 |label|`node`||The content of the floating label.|
-|newChipKeyCodes|`arrayOf`|`[13]`|The key codes used to determine when to create a new chip.|
+|newChipKeyCodes|`arrayOf`|`[13]`|The key codes (`KeyboardEvent.keyCode`) used to determine when to create a new chip.|
+|newChipKeys|`arrayOf`|`['Enter']`|The keys (`KeyboardEvent.key`) used to determine when to create a new chip.|
 |onAdd|`func`||Callback function that is called when a new chip was added (in controlled mode).|
 |onBeforeAdd|`func`||Callback function that is called with the chip to be added and should return true to add the chip or false to prevent the chip from being added without clearing the text input.|
 |onChange|`func`||Callback function that is called when the chips change (in uncontrolled mode).|
