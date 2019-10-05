@@ -516,6 +516,7 @@ class ChipInput extends React.Component {
       onKeyUp,
       onUpdateInput,
       placeholder,
+      readOnly,
       required,
       rootRef,
       value,
@@ -539,6 +540,7 @@ class ChipInput extends React.Component {
           text: dataSourceConfig ? chip[dataSourceConfig.text] : chip,
           chip,
           isDisabled: !!disabled,
+          isReadOnly: readOnly,
           isFocused: this.state.focusedChip === i,
           handleClick: () => this.setState({ focusedChip: i }),
           handleDelete: () => this.handleDeleteChip(chip, i),
@@ -624,6 +626,7 @@ class ChipInput extends React.Component {
             disabled={disabled}
             fullWidth={fullWidthInput}
             placeholder={(!hasInput && (shrinkFloatingLabel || label == null)) || alwaysShowPlaceholder ? placeholder : null}
+            readOnly={readOnly}
             {...InputProps}
             {...InputMore}
           />
@@ -648,7 +651,7 @@ ChipInput.propTypes = {
   alwaysShowPlaceholder: PropTypes.bool,
   /** Behavior when the chip input is blurred: `'clear'` clears the input, `'add'` creates a chip and `'ignore'` keeps the input. */
   blurBehavior: PropTypes.oneOf(['clear', 'add', 'ignore']),
-  /** A function of the type `({ value, text, chip, isFocused, isDisabled, handleClick, handleDelete, className }, key) => node` that returns a chip based on the given properties. This can be used to customize chip styles.  Each item in the `dataSource` array will be passed to `chipRenderer` as arguments `chip`, `value` and `text`. If `dataSource` is an array of objects and `dataSourceConfig` is present, then `value` and `text` will instead correspond to the object values defined in `dataSourceConfig`. If `dataSourceConfig` is not set and `dataSource` is an array of objects, then a custom `chipRenderer` must be set. `chip` is always the raw value from `dataSource`, either an object or a string. */
+  /** A function of the type `({ value, text, chip, isFocused, isDisabled, isReadOnly, handleClick, handleDelete, className }, key) => node` that returns a chip based on the given properties. This can be used to customize chip styles.  Each item in the `dataSource` array will be passed to `chipRenderer` as arguments `chip`, `value` and `text`. If `dataSource` is an array of objects and `dataSourceConfig` is present, then `value` and `text` will instead correspond to the object values defined in `dataSourceConfig`. If `dataSourceConfig` is not set and `dataSource` is an array of objects, then a custom `chipRenderer` must be set. `chip` is always the raw value from `dataSource`, either an object or a string. */
   chipRenderer: PropTypes.func,
   /** Whether the input value should be cleared if the `value` prop is changed. */
   clearInputValueOnChange: PropTypes.bool,
@@ -701,6 +704,8 @@ ChipInput.propTypes = {
   onUpdateInput: PropTypes.func,
   /** A placeholder that is displayed if the input has no values. */
   placeholder: PropTypes.string,
+  /** Makes the chip input read-only if set to true. */
+  readOnly: PropTypes.bool,
   /** The chips to display (enables controlled mode if set). */
   value: PropTypes.array,
   /** The variant of the Input component */
@@ -720,11 +725,14 @@ ChipInput.defaultProps = {
 
 export default withStyles(styles, { name: 'WAMuiChipInput' })(ChipInput)
 
-export const defaultChipRenderer = ({ value, text, isFocused, isDisabled, handleClick, handleDelete, className }, key) => (
+export const defaultChipRenderer = ({ value, text, isFocused, isDisabled, isReadOnly, handleClick, handleDelete, className }, key) => (
   <Chip
     key={key}
     className={className}
-    style={{ pointerEvents: isDisabled ? 'none' : undefined, backgroundColor: isFocused ? blue[300] : undefined }}
+    style={{
+      pointerEvents: isDisabled || isReadOnly ? 'none' : undefined,
+      backgroundColor: isFocused ? blue[300] : undefined
+    }}
     onClick={handleClick}
     onDelete={handleDelete}
     label={text}

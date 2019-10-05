@@ -10,6 +10,7 @@ export interface ChipRendererArgs {
   chip: any;
   isFocused: boolean;
   isDisabled: boolean;
+  isReadOnly: boolean;
   handleClick: React.EventHandler<any>;
   handleDelete: React.EventHandler<any>;
   className: string;
@@ -55,6 +56,7 @@ export interface Props extends Omit<FormControlProps, 'onChange'> {
   onDelete?: (chip:any, index: number) => any;
   onUpdateInput?: React.EventHandler<any>;
   placeholder?: string;
+  readOnly?: boolean;
   value?: any[];
   variant?: 'outlined' | 'standard' | 'filled';
 }
