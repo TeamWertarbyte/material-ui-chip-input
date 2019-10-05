@@ -60,6 +60,14 @@ storiesOf('ChipInput', module)
       fullWidth
     />
   ))
+  .add('readOnly', () => (
+    <ChipInput
+      defaultValue={['foo', 'bar']}
+      label='Readonly input'
+      readOnly
+      fullWidth
+    />
+  ))
   .add('with custom width', () => (
     <ChipInput
       defaultValue={['foo', 'bar']}
@@ -76,6 +84,7 @@ storiesOf('ChipInput', module)
           value,
           isFocused,
           isDisabled,
+          isReadOnly,
           handleClick,
           handleDelete,
           className
@@ -86,7 +95,7 @@ storiesOf('ChipInput', module)
           key={key}
           className={className}
           style={{
-            pointerEvents: isDisabled ? 'none' : undefined,
+            pointerEvents: isDisabled || isReadOnly ? 'none' : undefined,
             backgroundColor: isFocused ? green[800] : green[300]
           }}
           onClick={handleClick}
