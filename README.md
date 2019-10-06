@@ -40,7 +40,7 @@ import ChipInput from 'material-ui-chip-input'
 |---|---|---|---|
 |allowDuplicates|`bool`|`false`|Allows duplicate chips if set to true.|
 |alwaysShowPlaceholder|`bool`||If true, the placeholder will always be visible.|
-|blurBehavior|`enum`|`'clear'`|Behavior when the chip input is blurred: `'clear'` clears the input, `'add'` creates a chip and `'ignore'` keeps the input.|
+|blurBehavior|`enum`|`'add'`|Behavior when the chip input is blurred: `'clear'` clears the input, `'add'` creates a chip and `'ignore'` keeps the input.|
 |chipRenderer|`func`||A function of the type `({ value, text, chip, isFocused, isDisabled, isReadOnly, handleClick, handleDelete, className }, key) => node` that returns a chip based on the given properties. This can be used to customize chip styles.  Each item in the `dataSource` array will be passed to `chipRenderer` as arguments `chip`, `value` and `text`. If `dataSource` is an array of objects and `dataSourceConfig` is present, then `value` and `text` will instead correspond to the object values defined in `dataSourceConfig`. If `dataSourceConfig` is not set and `dataSource` is an array of objects, then a custom `chipRenderer` must be set. `chip` is always the raw value from `dataSource`, either an object or a string.|
 |clearInputValueOnChange|`bool`|`false`|Whether the input value should be cleared if the `value` prop is changed.|
 |dataSource|`array`||Data source for auto complete. This should be an array of strings or objects.|

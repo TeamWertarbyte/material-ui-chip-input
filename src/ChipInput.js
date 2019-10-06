@@ -714,7 +714,7 @@ ChipInput.propTypes = {
 
 ChipInput.defaultProps = {
   allowDuplicates: false,
-  blurBehavior: 'clear',
+  blurBehavior: 'add',
   clearInputValueOnChange: false,
   delayBeforeAdd: false,
   disableUnderline: false,
