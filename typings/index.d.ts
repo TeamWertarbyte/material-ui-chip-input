@@ -51,6 +51,7 @@ export interface BaseTextFieldProps extends Omit<FormControlProps, 'onChange'> {
   inputValue?: string;
   label?: React.ReactNode;
   newChipKeyCodes?: number[];
+  newChipKeys?: string[];
   onAdd?: (chip: any) => any;
   onBeforeAdd?: (chip: any) => boolean;
   onChange?: (chips: any[]) => any;
