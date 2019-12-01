@@ -11,7 +11,7 @@ exports[`uncontrolled mode matches the snapshot 1`] = `
 >
   <ChipInput
     allowDuplicates={false}
-    blurBehavior="clear"
+    blurBehavior="add"
     classes={
       Object {
         "chip": "WAMuiChipInput-chip-16",
