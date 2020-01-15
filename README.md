@@ -82,10 +82,7 @@ You can customize the class names used by `ChipInput` with the `classes` propert
 * `helperText`
 * `chip`
 
-Example:
-`
-<ChipInput classes={{ helperText: classes.helperText }} />
-`
+View a complete example [here](https://github.com/TeamWertarbyte/material-ui-chip-input/blob/master/stories/examples/CustomizedChipInput.js#L32)
 
 Have a look at [this guide](https://material-ui-next.com/customization/overrides/#overriding-with-classes) for more detail.
 
