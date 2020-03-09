@@ -1,6 +1,10 @@
 node_modules
 .idea
 coverage
-lib
+src
+stories
+test
+demo.gif
+.travis.yml
 styleguide
 .storybook
