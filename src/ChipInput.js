@@ -576,7 +576,7 @@ class ChipInput extends React.Component {
           [classes.marginDense]: other.margin === 'dense'
         })}
         error={error}
-        required={required}
+        required={chips.length ? undefined : required}
         onClick={this.focus}
         disabled={disabled}
         variant={variant}
@@ -590,6 +590,7 @@ class ChipInput extends React.Component {
             focused={this.state.isFocused}
             variant={variant}
             ref={this.labelRef}
+            required={required}
             {...InputLabelProps}
           >
             {label}
