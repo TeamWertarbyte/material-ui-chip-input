@@ -576,7 +576,7 @@ class ChipInput extends React.Component {
           [classes.marginDense]: other.margin === 'dense'
         })}
         error={error}
-        required={chips.length ? undefined : required}
+        required={chips.length > 0 ? undefined : required}
         onClick={this.focus}
         disabled={disabled}
         variant={variant}
