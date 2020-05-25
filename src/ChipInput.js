@@ -597,6 +597,7 @@ class ChipInput extends React.Component {
           </InputLabel>
         )}
         <div
+          style={chipContainerStyle}
           className={cx(
             classes[variant],
             classes.chipContainer,
@@ -606,8 +607,7 @@ class ChipInput extends React.Component {
               [classes.disabled]: disabled,
               [classes.labeled]: label != null,
               [classes.error]: error
-            },
-            chipContainerStyle)}
+            })}
         >
           {variant === 'standard' && chipComponents}
           <InputComponent
