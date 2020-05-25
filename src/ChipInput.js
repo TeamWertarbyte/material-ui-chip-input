@@ -482,6 +482,7 @@ class ChipInput extends React.Component {
       blurBehavior,
       children,
       chipRenderer = defaultChipRenderer,
+      chipContainerStyle,
       classes,
       className,
       clearInputValueOnChange,
@@ -605,7 +606,8 @@ class ChipInput extends React.Component {
               [classes.disabled]: disabled,
               [classes.labeled]: label != null,
               [classes.error]: error
-            })}
+            },
+            chipContainerStyle)}
         >
           {variant === 'standard' && chipComponents}
           <InputComponent
@@ -654,6 +656,8 @@ ChipInput.propTypes = {
   /** A function of the type `({ value, text, chip, isFocused, isDisabled, isReadOnly, handleClick, handleDelete, className }, key) => node` that returns a chip based on the given properties. This can be used to customize chip styles.  Each item in the `dataSource` array will be passed to `chipRenderer` as arguments `chip`, `value` and `text`. If `dataSource` is an array of objects and `dataSourceConfig` is present, then `value` and `text` will instead correspond to the object values defined in `dataSourceConfig`. If `dataSourceConfig` is not set and `dataSource` is an array of objects, then a custom `chipRenderer` must be set. `chip` is always the raw value from `dataSource`, either an object or a string. */
   chipRenderer: PropTypes.func,
   /** Whether the input value should be cleared if the `value` prop is changed. */
+  chipContainerStyle: PropTypes.object,
+  /** Override the input and chips container style */
   clearInputValueOnChange: PropTypes.bool,
   /** Data source for auto complete. This should be an array of strings or objects. */
   dataSource: PropTypes.array,

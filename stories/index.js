@@ -300,3 +300,11 @@ storiesOf('ChipInput', module)
   .add('with "filled" variant full width', () => (
     <ChipInput defaultValue={['foo', 'bar']} variant='filled' label='Add Tags' fullWidth fullWidthInput />
   ))
+  .add('with custom container style', () => (
+    <ChipInput
+      defaultValue={['foo', 'bar']}
+      fullWidth
+      onChange={action('onChange')}
+      chipContainerStyle={{ marginTop: 0 }}
+    />
+  ))
