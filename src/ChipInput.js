@@ -6,8 +6,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import Input from '@material-ui/core/Input'
-import FilledInput from '@material-ui/core/FilledInput/FilledInput'
-import OutlinedInput from '@material-ui/core/OutlinedInput'
 import InputLabel from '@material-ui/core/InputLabel'
 import Chip from '@material-ui/core/Chip'
 import withStyles from '@material-ui/core/styles/withStyles'
@@ -17,9 +15,7 @@ import FormHelperText from '@material-ui/core/FormHelperText'
 import cx from 'clsx'
 
 const variantComponent = {
-  standard: Input,
-  filled: FilledInput,
-  outlined: OutlinedInput
+  standard: Input
 }
 
 const styles = (theme) => {
