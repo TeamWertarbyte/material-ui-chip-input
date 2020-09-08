@@ -263,7 +263,11 @@ class ChipInput extends React.Component {
       this.setState({ focusedChip: null })
     }
     const value = event.target.value
+    let addChipOptions
     switch (this.props.blurBehavior) {
+      case 'add-or-clear':
+        addChipOptions = { clearInputOnFail: true }
+        // falls through
       case 'add':
         if (this.props.delayBeforeAdd) {
           // Lets assume that we only want to add the existing content as chip, when
@@ -273,13 +277,13 @@ class ChipInput extends React.Component {
           this.inputBlurTimeout = setTimeout(() => {
             const numChipsAfter = (this.props.value || this.state.chips).length
             if (numChipsBefore === numChipsAfter) {
-              this.handleAddChip(value)
+              this.handleAddChip(value, addChipOptions)
             } else {
               this.clearInput()
             }
           }, 150)
         } else {
-          this.handleAddChip(value)
+          this.handleAddChip(value, addChipOptions)
         }
         break
       case 'clear':
@@ -385,11 +389,16 @@ class ChipInput extends React.Component {
   /**
    * Handles adding a chip.
    * @param {string|object} chip Value of the chip, either a string or an object (if dataSourceConfig is set)
+   * @param {object=} options Additional options
+   * @param {boolean=} options.clearInputOnFail If `true`, and `onBeforeAdd` returns `false`, clear the input
    * @returns True if the chip was added (or at least `onAdd` was called), false if adding the chip was prevented
    */
-  handleAddChip (chip) {
+  handleAddChip (chip, options) {
     if (this.props.onBeforeAdd && !this.props.onBeforeAdd(chip)) {
       this._preventChipCreation = true
+      if (options != null && options.clearInputOnFail) {
+        this.clearInput()
+      }
       return false
     }
     this.clearInput()
@@ -651,7 +660,7 @@ ChipInput.propTypes = {
   /** If true, the placeholder will always be visible. */
   alwaysShowPlaceholder: PropTypes.bool,
   /** Behavior when the chip input is blurred: `'clear'` clears the input, `'add'` creates a chip and `'ignore'` keeps the input. */
-  blurBehavior: PropTypes.oneOf(['clear', 'add', 'ignore']),
+  blurBehavior: PropTypes.oneOf(['clear', 'add', 'add-or-clear', 'ignore']),
   /** A function of the type `({ value, text, chip, isFocused, isDisabled, isReadOnly, handleClick, handleDelete, className }, key) => node` that returns a chip based on the given properties. This can be used to customize chip styles.  Each item in the `dataSource` array will be passed to `chipRenderer` as arguments `chip`, `value` and `text`. If `dataSource` is an array of objects and `dataSourceConfig` is present, then `value` and `text` will instead correspond to the object values defined in `dataSourceConfig`. If `dataSourceConfig` is not set and `dataSource` is an array of objects, then a custom `chipRenderer` must be set. `chip` is always the raw value from `dataSource`, either an object or a string. */
   chipRenderer: PropTypes.func,
   /** Whether the input value should be cleared if the `value` prop is changed. */

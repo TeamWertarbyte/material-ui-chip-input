@@ -211,6 +211,12 @@ storiesOf('ChipInput', module)
   )
   */
   .add('add text input value on blur', () => <ChipInput blurBehavior='add' />)
+  .add('add number input value on blur, or clear input if not a number', () =>
+    <ChipInput
+      blurBehavior='add-or-clear'
+      onBeforeAdd={(value) => !Number.isNaN(parseFloat(value))}
+    />
+  )
   .add('clear text input value on blur ', () => (
     <ChipInput blurBehavior='clear' />
   ))

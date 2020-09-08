@@ -30,7 +30,7 @@ type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 export interface BaseTextFieldProps extends Omit<FormControlProps, 'onChange'> {
   allowDuplicates?: boolean;
   alwaysShowPlaceholder?: boolean;
-  blurBehavior?: 'clear' | 'add' | 'ignore';
+  blurBehavior?: 'clear' | 'add' | 'add-or-clear' | 'ignore';
   chipRenderer?: ChipRenderer;
   classes?: Record<string, string>;
   clearInputValueOnChange?: boolean;
