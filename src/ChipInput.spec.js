@@ -545,6 +545,40 @@ describe('blurBehavior modes', () => {
     tree.update()
     expect(tree.find('Chip').map((chip) => chip.text())).toEqual(['a', 'b', 'blur'])
   })
+
+  it('adds the input on blur with blurBehavior set to add add-or-clear, if onBeforeAdd passes', () => {
+    const handleChange = jest.fn()
+    const tree = mount(
+      <ChipInput
+        defaultValue={['a', 'b']}
+        onChange={handleChange}
+        blurBehavior='add-or-clear'
+        onBeforeAdd={(value) => value === 'c'}
+      />
+    )
+    tree.find('input').getDOMNode().value = 'c'
+    tree.find('input').simulate('blur')
+
+    expect(tree.find('input').getDOMNode().value).toBe('')
+
+    expect(handleChange.mock.calls[0][0]).toEqual(['a', 'b', 'c'])
+
+    tree.update()
+    expect(tree.find('Chip').map((chip) => chip.text())).toEqual(['a', 'b', 'c'])
+  })
+
+  it('clears the input on blur with blurBehavior set to add-or-clear, if onBeforeAdd fails', () => {
+    const tree = mount(
+      <ChipInput
+        defaultValue={['a', 'b']}
+        blurBehavior='add-or-clear'
+        onBeforeAdd={(value) => value === 'c'}
+      />
+    )
+    tree.find('input').simulate('change', { target: { value: 'foo' } })
+    tree.find('input').simulate('blur')
+    expect(tree.find('input').getDOMNode().value).toBe('')
+  })
 })
 
 describe('keys', () => {
