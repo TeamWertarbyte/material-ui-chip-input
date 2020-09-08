@@ -104,9 +104,7 @@ const styles = (theme) => {
     labelShrink: {
       top: 0
     },
-    helperText: {
-      marginBottom: -20
-    },
+    helperText: {},
     focused: {},
     disabled: {},
     underline: {
