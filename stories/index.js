@@ -306,3 +306,17 @@ storiesOf('ChipInput', module)
   .add('with "filled" variant full width', () => (
     <ChipInput defaultValue={['foo', 'bar']} variant='filled' label='Add Tags' fullWidth fullWidthInput />
   ))
+  .add('tips for CJK IME user', () => (
+    <div>
+      <ChipInput
+        defaultValue={['猫', '犬']}
+        newChipKeys={[]}
+        onChange={action('onChange')}
+      />
+      <div>
+        add <code>{"newChipKeys={[]}"}</code> to property.
+        default is <code>{"newChipKeys={['Enter']}"}</code>.
+        prevent onChange event when IME is processing key input.
+      </div>
+    </div>
+  ))
