@@ -11,7 +11,7 @@ If you want to try the component yourself instead of watching a gif, head over t
 
 ## Installation
 ```shell
-npm i --save material-ui-chip-input@next
+npm i material-ui-chip-input@next
 ```
 **Note:** This is the version for Material-UI 1.0.0 or later. If you are still using Material-UI 0.x, you can use our [legacy version][legacy].
 
