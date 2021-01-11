@@ -413,7 +413,7 @@ class ChipInput extends React.Component {
       }
 
       if (this.props.allowDuplicates || !chips.some((c) => c[this.props.dataSourceConfig.value] === chip[this.props.dataSourceConfig.value])) {
-        if (this.props.value && this.props.onAdd) {
+        if (this.props.onAdd) {
           this.props.onAdd(chip)
         } else {
           this.updateChips([...this.state.chips, chip])
@@ -424,7 +424,7 @@ class ChipInput extends React.Component {
 
     if (chip.trim().length > 0) {
       if (this.props.allowDuplicates || chips.indexOf(chip) === -1) {
-        if (this.props.value && this.props.onAdd) {
+        if (this.props.onAdd) {
           this.props.onAdd(chip)
         } else {
           this.updateChips([...this.state.chips, chip])
