@@ -47,9 +47,13 @@
     "@babel/plugin-proposal-class-properties": "^7.3.0",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
-    "@material-ui/core": "^3.9.0",
+    "@emotion/react": "^11.4.1",
+    "@emotion/styled": "^11.3.0",
+    "@material-ui/core": "^5.0.0-beta.5",
+    "@material-ui/styles": "5.0.0-beta.5",
     "@storybook/addon-actions": "^5.1.9",
     "@storybook/react": "^5.1.9",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.3",
     "babel-eslint": "^10.0.2",
     "babel-loader": "^8.0.6",
     "coveralls": "^3.0.2",
@@ -58,9 +62,9 @@
     "enzyme-to-json": "^3.2.2",
     "gh-pages": "^1.2.0",
     "jest": "^24.1.0",
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
-    "react-test-renderer": "^16.2.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-test-renderer": "^17.0.2",
     "standard": "^13.1.0"
   },
   "peerDependencies": {
@@ -69,8 +73,10 @@
     "react-dom": "^16.3.0"
   },
   "dependencies": {
+    "autosuggest-highlight": "^3.1.1",
     "classnames": "^2.2.5",
-    "prop-types": "^15.6.1"
+    "prop-types": "^15.6.1",
+    "react-autosuggest": "^10.1.0"
   },
   "jest": {
     "setupFiles": [
