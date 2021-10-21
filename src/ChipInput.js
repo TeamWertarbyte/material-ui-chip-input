@@ -587,9 +587,10 @@ class ChipInput extends React.Component {
       );
     });
 
-    const InputMore = { label: required ? `${label} *` : label };
+    const InputMore = {};
     if (variant === 'outlined') {
       InputMore.notched = shrinkFloatingLabel;
+      InputMore.label = required ? `${label} *` : label;
     }
 
     if (variant !== 'standard') {
