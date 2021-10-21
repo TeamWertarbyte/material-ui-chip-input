@@ -203,15 +203,6 @@ class ChipInput extends React.Component {
     this.input = React.createRef();
   }
 
-  componentDidMount() {
-    if (this.props.variant === 'outlined') {
-      this.labelNode = ReactDOM.findDOMNode(this.labelRef.current);
-      this.inputNode = ReactDOM.findDOMNode(this.input.current);
-
-      this.forceUpdate();
-    }
-  }
-
   componentWillUnmount() {
     clearTimeout(this.inputBlurTimeout);
   }
