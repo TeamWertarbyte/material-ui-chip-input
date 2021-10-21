@@ -4,7 +4,6 @@
  * Updated to Mui v5
  */
 import React from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import Input from '@mui/material/Input';
 import FilledInput from '@mui/material/FilledInput/FilledInput';
