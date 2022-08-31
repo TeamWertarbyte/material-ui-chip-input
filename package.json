@@ -66,8 +66,8 @@
   },
   "peerDependencies": {
     "@material-ui/core": "^4.0.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react": "^16.8.6 || ^17.0.0",
+    "react-dom": "^16.8.6 || ^17.0.0"
   },
   "dependencies": {
     "clsx": "^1.0.4",
