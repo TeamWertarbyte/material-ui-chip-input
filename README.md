@@ -1,3 +1,9 @@
+# Support for MUI v4 or MUI v5
+
+After maintaining this project for over 3 years, we chose not to add support for MUI v4+ since it would require significant changes and there is already [a built-in chip input](https://v4.mui.com/components/autocomplete/#multiple-values). The same component is also [available for MUI v5](https://mui.com/material-ui/react-autocomplete/#multiple-values), and there are some alternatives like [mui-chips-input](https://github.com/viclafouch/mui-chips-input).
+
+---
+
 # material-ui-chip-input
 
 [![Build Status](https://travis-ci.org/TeamWertarbyte/material-ui-chip-input.svg?branch=next)](https://travis-ci.org/TeamWertarbyte/material-ui-chip-input)
